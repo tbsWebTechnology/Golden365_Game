@@ -2685,7 +2685,7 @@ html:lang(ar) .bet-container-lottery-note-result div h2[data-v-1d8fbc24]:after {
   line-height: 0.66667rem;
   text-align: center;
   border-radius: 0.66667rem;
-  background: url(/assets/png/numberBG-5096ec20.png) no-repeat right/contain;
+  /* background: url(/assets/png/numberBG-5096ec20.png) no-repeat right/contain; */
   font-weight: 700;
   font-size: 0.4rem;
 }

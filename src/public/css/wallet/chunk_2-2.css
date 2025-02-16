@@ -1,6 +1,6 @@
 .mian[data-v-7c8bbbf4] {
   padding-bottom: 1.86667rem;
-  background-color: #fbfcfd;
+  background-color: var(--main-color);
 }
 
 .mian .head-right[data-v-7c8bbbf4] {
@@ -39,7 +39,7 @@
 }
 
 .mian .promotion .tit[data-v-7c8bbbf4] {
-  background: #2b3270;
+  background: var(--main-color);
   padding: 0 0.4rem;
   height: 0.90667rem;
   line-height: 0.90667rem;
@@ -133,7 +133,7 @@
 
 .mian .promotion .table[data-v-7c8bbbf4] {
   margin: 0.4rem 0.4rem 0;
-  background: #2b3270;
+  background: #f3f3f3;
   /* box-shadow: 0 0.13333rem 0.29333rem 0.02667rem rgba(0, 0, 0, 0.12); */
   border-radius: 0.20667rem;
   overflow-y: auto;
@@ -148,8 +148,8 @@
 }
 
 .mian .promotion .table .hd[data-v-7c8bbbf4] {
-  background: #2b3270;
-  color: #2aaaf3;
+  background: var(--main-color);
+  color: #fff;
   border-radius: 0.10667rem;
   height: 0.93333rem;
   line-height: 0.93333rem;

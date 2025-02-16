@@ -903,7 +903,7 @@ img[data-v-7b9b9922] {
   height: 1.33333rem;
   line-height: 1.33333rem;
   background: -webkit-linear-gradient(left, #61a9ff 0%, #59b0ea 100%);
-  background: linear-gradient(90deg, #61a9ff 0%, #59b0ea 100%);
+  background: var(--main_gradient-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1166,7 +1166,7 @@ img[data-v-7b9b9922] {
   border-radius: 1.06667rem;
   /* background: -webkit-linear-gradient(top, #59b0ea 0%, #61a9ff 100%);
    background: linear-gradient(180deg, #59b0ea 0%, #61a9ff 100%); */
-  background: linear-gradient(90deg, #2b3270 0%, #2b3270 100%)
+  background: var(--main_gradient-color);
 }
 
 .mian-from .mian-btn .gradient span[data-v-a0753f48] {

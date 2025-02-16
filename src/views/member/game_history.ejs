@@ -1,24 +1,24 @@
-<html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 40px;">
+
+<html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 36px">
 
 <head>
-   <script src="/app.config.js?v=1718968461132"></script>
+   <meta charset="UTF-8" />
+   <link rel="icon" type="image/svg+xml" href="/uploads/favicon/favicon.png" />
+   <meta name="google" content="notranslate" />
+   <meta name="robots" content="noindex,nofollow" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-   <meta charset="UTF-8">
-   <link rel="icon" type="image/svg+xml"
-      href="https://ossimg.tirangaagent.com/Tiranga/other/h5setting_20231017190406lyb3.ico">
-   <meta name="google" content="notranslate">
-   <meta name="robots" content="noindex,nofollow">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <title>Lottery007</title>
 
-   <link rel="manifest">
-   <title>Indn Club</title>
-   <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css">
-   <link rel="stylesheet" href="/assets/css/page-activity-4fe5c6bf.css">
-   <link rel="stylesheet" href="/assets/css/index-2c2fee84.css">
-   <link rel="stylesheet" href="/assets/css/page-vip-896cf332.css">
-   <link rel="stylesheet" href="/assets/css/page-home-522c97b9.css">
-   <link rel="stylesheet" href="/assets/css/page-login-49518e3f.css">
-   <link rel="stylesheet" href="/assets/css/page-main-284c07ba.css">
+   <link rel="stylesheet" href="/assets/css/modules-5dd73da0.css" />
+   <link rel="stylesheet" href="/assets/css/page-activity-dd439e45.css" />
+   <link rel="stylesheet" href="/assets/css/index-f3f1dfe8.css" />
+   <link rel="stylesheet" href="/assets/css/page-home-230aa78c.css" />
+   <link rel="stylesheet" href="/assets/css/page-login-f43635fa.css" />
+   <link rel="stylesheet" href="/assets/css/page-main-3e3f0f3d.css" />
+   <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
+
+
    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
       integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
@@ -26,14 +26,56 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <script src="/js/client.js"></script>
 
+   <style id="pull-to-refresh-js-style">
+      .ptr--ptr {
+         box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.12);
+         pointer-events: none;
+         font-size: 0.85em;
+         font-weight: bold;
+         top: 0;
+         height: 0;
+         transition:
+            height 0.3s,
+            min-height 0.3s;
+         text-align: center;
+         width: 100%;
+         overflow: hidden;
+         display: flex;
+         align-items: flex-end;
+         align-content: stretch;
+      }
 
-   <link rel="stylesheet" href="/assets/css/page-test-24de9c20.css">
+      .ptr--box {
+         padding: 10px;
+         flex-basis: 100%;
+      }
 
-   <link rel="stylesheet" href="/assets/css/page-promotion-14ce89d7.css">
-   <link rel="stylesheet" href="/assets/css/page-wallet-b9af2085.css">
+      .ptr--pull {
+         transition: none;
+      }
+
+      .ptr--text {
+         margin-top: 0.33em;
+         color: rgba(0, 0, 0, 0.3);
+      }
+
+      .ptr--icon {
+         color: rgba(0, 0, 0, 0.3);
+         transition: transform 0.3s;
+      }
+
+      /* When at the top of the page, disable vertical overscroll so passive touch listeners can take over. */
+      .ptr--top {
+         touch-action: pan-x pan-down pinch-zoom;
+      }
+
+      .ptr--release .ptr--icon {
+         transform: rotate(180deg);
+      }
+   </style>
 </head>
 
-<body style="font-size: 12px;" class="">
+<body style="font-size: 12px" class="">
    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
       style="position: absolute; width: 0; height: 0">
       <symbol id="icon-privacyIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
@@ -885,7 +927,7 @@
          </g>
       </symbol>
       <symbol id="icon-anbg" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-         <mask id="mask0_186_36254" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="1" y="1" width="68"
+         <mask id="mask0_186_36254" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="1" y="1" width="68"
             height="68">
             <path
                d="M33.5569 68.5569C52.0898 69.3539 67.7599 54.9761 68.5569 36.4431C69.3539 17.9102 54.9761 2.24013 36.4431 1.44312C17.9102 0.646107 2.24012 15.0239 1.44311 33.5569C0.646096 52.0898 15.0239 67.7599 33.5569 68.5569Z"
@@ -925,7 +967,7 @@
                   d="M31.4831 61.6469C31.5333 62.5288 33.3613 63.142 35.5661 63.0166C37.7709 62.8911 39.5175 62.0745 39.4673 61.1925C39.4171 60.3106 37.5891 59.6974 35.3844 59.8229C33.1796 59.9483 31.4329 60.765 31.4831 61.6469Z"
                   fill="white"></path>
             </g>
-            <g style="mix-blend-mode:screen" filter="url(#filter3_f_186_36254)">
+            <g style="mix-blend-mode: screen" filter="url(#filter3_f_186_36254)">
                <path
                   d="M34.2076 25.4474C40.7458 26.0919 46.4148 22.8729 46.8697 18.2578C47.3245 13.6426 42.3931 9.37889 35.8549 8.73447C29.3168 8.09004 23.6478 11.309 23.193 15.9241C22.7381 20.5393 27.6695 24.803 34.2076 25.4474Z"
                   fill="#FFCFCE"></path>
@@ -1051,7 +1093,7 @@
             fill="var(--main-color)"></path>
       </symbol>
       <symbol id="icon-bankHeader" viewBox="0 0 702 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-         <mask id="mask0_10_170301" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="702"
+         <mask id="mask0_10_170301" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="702"
             height="70">
             <path d="M0 10C0 4.47715 4.47715 0 10 0H692C697.523 0 702 4.47715 702 10V70H0V10Z" fill="white"></path>
          </mask>
@@ -1189,7 +1231,7 @@
                d="M27.2127 22.7154C20.9535 27.0685 10.3928 38.0529 8.51501 54.2338C6.06343 75.3592 20.7729 99.4571 46.3545 103.385C66.8198 106.527 82.3109 94.5738 87.4983 88.2044C99.01 72.9176 97.7309 60.2849 97.7309 60.2849C97.7309 60.2849 96.5584 66.7604 92.0816 70.5822C86.5846 75.2749 82.7017 75.3593 81.849 75.3593C79.5395 73.4838 73.5989 68.6925 67.8857 65.805C60.7441 62.1956 50.1917 56.1446 50.5115 50.1999C50.8341 44.2033 56.5871 41.6011 66.7132 42.3442C67.033 42.3677 64.5814 46.8026 62.1298 48.8197C66.429 49.3859 76.2637 50.943 79.9304 53.9154C83.5971 56.8878 82.7372 59.4002 81.849 60.2849C82.9504 60.3556 85.7289 60.1362 88.0312 58.6925C90.3335 57.2487 91.4776 55.5432 91.7619 54.8708C90.8381 55.2601 88.7987 55.7201 88.0312 54.4462C87.2638 53.1723 87.4272 51.9338 87.6048 51.4738C84.4071 51.0845 78.3102 49.5842 79.504 46.6967C80.9963 43.0873 85.2599 42.9811 86.6455 43.4058C88.0312 43.8304 90.696 44.892 91.0157 50.6245C91.028 50.8438 91.3137 50.6318 91.8062 50.2665C92.9475 49.4199 95.1993 47.7495 97.7309 48.7137C99.5429 49.4037 99.2587 53.3138 97.7309 54.4462C99.5429 54.0923 104.233 51.686 105.405 45.9536C105.492 45.5296 105.076 45.4781 104.251 45.3761C102.851 45.2027 100.273 44.8837 96.9848 42.3442C92.8064 39.117 91.6197 38.1687 91.5487 38.0979L91.7619 34.17C91.328 33.8937 90.8607 33.5972 90.3688 33.2851C86.3885 30.76 80.798 27.2134 78.3315 25.0405C75.8009 22.8111 70.4438 16.4416 68.9516 3.91506C68.6652 1.51115 67.6725 17.1848 71.0205 23.7666C71.6774 25.0581 57.5901 12.7262 55.7781 7.20595C55.7093 6.99642 56.9069 15.0616 62.4496 22.3865C63.0004 23.1144 62.0893 22.9956 60.1669 22.7449C56.2017 22.2277 47.9341 21.1493 39.3195 25.7836C24.7167 33.6393 23.5442 47.8644 24.7167 54.4462C25.5677 59.2233 27.2749 65.9112 36.1218 74.6162C38.0053 76.4694 32.6044 81.3041 23.4376 75.3593C18.1081 71.903 12.2457 66.3358 13.3116 51.4738C14.4387 35.7572 24.0384 25.2296 27.2127 22.7154ZM80.7831 32.8961L88.0312 36.2931L85.3665 37.8855C84.8335 37.1424 83.5971 35.4863 82.9149 34.8069C82.2327 34.1275 81.2094 33.2499 80.7831 32.8961Z"
                fill="url(#paint0_linear_234_67307)"></path>
          </g>
-         <mask id="mask0_234_67307" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="3" width="98"
+         <mask id="mask0_234_67307" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="8" y="3" width="98"
             height="101">
             <path fill-rule="evenodd" clip-rule="evenodd"
                d="M27.2127 22.7154C20.9535 27.0685 10.3928 38.0529 8.51501 54.2338C6.06343 75.3592 20.7729 99.4571 46.3545 103.385C66.8198 106.527 82.3109 94.5738 87.4983 88.2044C99.01 72.9176 97.7309 60.2849 97.7309 60.2849C97.7309 60.2849 96.5584 66.7604 92.0816 70.5822C86.5846 75.2749 82.7017 75.3593 81.849 75.3593C79.5395 73.4838 73.5989 68.6925 67.8857 65.805C60.7441 62.1956 50.1917 56.1446 50.5115 50.1999C50.8341 44.2033 56.5871 41.6011 66.7132 42.3442C67.033 42.3677 64.5814 46.8026 62.1298 48.8197C66.429 49.3859 76.2637 50.943 79.9304 53.9154C83.5971 56.8878 82.7372 59.4002 81.849 60.2849C82.9504 60.3556 85.7289 60.1362 88.0312 58.6925C90.3335 57.2487 91.4776 55.5432 91.7619 54.8708C90.8381 55.2601 88.7987 55.7201 88.0312 54.4462C87.2638 53.1723 87.4272 51.9338 87.6048 51.4738C84.4071 51.0845 78.3102 49.5842 79.504 46.6967C80.9963 43.0873 85.2599 42.9811 86.6455 43.4058C88.0312 43.8304 90.696 44.892 91.0157 50.6245C91.028 50.8438 91.3137 50.6318 91.8062 50.2665C92.9475 49.4199 95.1993 47.7495 97.7309 48.7137C99.5429 49.4037 99.2587 53.3138 97.7309 54.4462C99.5429 54.0923 104.233 51.686 105.405 45.9536C105.492 45.5296 105.076 45.4781 104.251 45.3761C102.851 45.2027 100.273 44.8837 96.9848 42.3442C92.8064 39.117 91.6197 38.1687 91.5487 38.0979L91.7619 34.17C91.328 33.8937 90.8607 33.5972 90.3688 33.2851C86.3885 30.76 80.798 27.2134 78.3315 25.0405C75.8009 22.8111 70.4438 16.4416 68.9516 3.91506C68.6652 1.51115 67.6725 17.1848 71.0205 23.7666C71.6774 25.0581 57.5901 12.7262 55.7781 7.20595C55.7093 6.99642 56.9069 15.0616 62.4496 22.3865C63.0004 23.1144 62.0893 22.9956 60.1669 22.7449C56.2017 22.2277 47.9341 21.1493 39.3195 25.7836C24.7167 33.6393 23.5442 47.8644 24.7167 54.4462C25.5677 59.2233 27.2749 65.9112 36.1218 74.6162C38.0053 76.4694 32.6044 81.3041 23.4376 75.3593C18.1081 71.903 12.2457 66.3358 13.3116 51.4738C14.4387 35.7572 24.0384 25.2296 27.2127 22.7154ZM80.7831 32.8961L88.0312 36.2931L85.3665 37.8855C84.8335 37.1424 83.5971 35.4863 82.9149 34.8069C82.2327 34.1275 81.2094 33.2499 80.7831 32.8961Z"
@@ -1301,7 +1343,7 @@
          <path
             d="M6.40816 20.1019C6.25952 20.054 6.17679 19.8977 6.22441 19.7482C6.38965 19.2295 6.81106 18.0011 7.5467 16.445C8.28233 14.8888 8.96491 13.7819 9.26132 13.3241C9.34673 13.1921 9.52082 13.1552 9.65301 13.2379L12.7396 15.1683C12.8488 15.2366 12.8994 15.3684 12.8612 15.4922C12.7178 15.9577 12.3308 17.1384 11.7377 18.393C11.1446 19.6476 10.4769 20.6979 10.2079 21.105C10.1363 21.2133 10.0018 21.2591 9.87898 21.2195L6.40816 20.1019Z"
             fill="#B8DBC8"></path>
-         <mask id="mask0_2094_41589" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="11" y="11" width="26"
+         <mask id="mask0_2094_41589" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="11" y="11" width="26"
             height="26">
             <path fill-rule="evenodd" clip-rule="evenodd"
                d="M23.9978 36.7541C31.0986 36.7541 36.8549 31.0461 36.8549 24.005C36.8549 16.9638 31.0986 11.2559 23.9978 11.2559C16.897 11.2559 11.1406 16.9638 11.1406 24.005C11.1406 31.0461 16.897 36.7541 23.9978 36.7541ZM23.9978 35.7342C30.5305 35.7342 35.8263 30.4828 35.8263 24.005C35.8263 17.5271 30.5305 12.2758 23.9978 12.2758C17.465 12.2758 12.1692 17.5271 12.1692 24.005C12.1692 30.4828 17.465 35.7342 23.9978 35.7342Z"
@@ -1475,7 +1517,8 @@
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
          <path d="M42 37H6" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
          <path d="M34 44H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-      </symbol><!-- #FB5755 -->
+      </symbol>
+      <!-- #FB5755 -->
       <symbol id="icon-downArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
          <path fill-rule="evenodd" clip-rule="evenodd"
             d="M25.7416 11.694C26.4622 10.8819 25.8857 9.59961 24.8 9.59961L15.8872 9.59961L6.8 9.59961C5.72151 9.59961 5.15333 10.8777 5.87586 11.6783L14.4434 21.1724C15.2295 21.9855 16.5448 21.9855 17.331 21.1724L25.7416 11.694Z"
@@ -1648,7 +1691,8 @@
             d="M15 23.125C15.8629 23.125 16.5625 22.4254 16.5625 21.5625C16.5625 20.6996 15.8629 20 15 20C14.1371 20 13.4375 20.6996 13.4375 21.5625C13.4375 22.4254 14.1371 23.125 15 23.125Z"
             fill="#FF7172"></path>
          <path d="M15 7.5V17.5" stroke="#FE6868" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-      </symbol><!--?xml version="1.0" standalone="no"?-->
+      </symbol>
+      <!--?xml version="1.0" standalone="no"?-->
       <symbol id="icon-eye" t="1503993826520" class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
          xmlns="http://www.w3.org/2000/svg" p-id="7878" xmlns:xlink="http://www.w3.org/1999/xlink">
          <defs>
@@ -1659,7 +1703,7 @@
             p-id="7879"></path>
       </symbol>
       <symbol id="icon-fish" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
-         <mask id="mask0_2094_41544" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="6" y="6" width="36"
+         <mask id="mask0_2094_41544" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="6" y="6" width="36"
             height="36">
             <circle cx="24" cy="24" r="18" fill="#D9D9D9"></circle>
          </mask>
@@ -2129,7 +2173,7 @@
          <path fill-rule="evenodd" clip-rule="evenodd"
             d="M24.735 14.9028C25.1553 14.9028 25.5714 14.9204 25.9827 14.9549V17.6766C25.5725 17.6343 25.1563 17.6127 24.735 17.6127C18.0937 17.6127 12.7098 22.9965 12.7098 29.6378C12.7098 36.2791 18.0937 41.6629 24.735 41.6629C27.1847 41.6629 29.4633 40.9304 31.3638 39.6725C31.6654 39.4728 31.9576 39.2599 32.2394 39.0345L33.4181 40.6524L33.8366 41.2267C33.5518 41.4507 33.2585 41.6644 32.9573 41.8673C32.7049 42.0374 32.4468 42.1998 32.1836 42.3544C29.9981 43.6373 27.4525 44.3729 24.735 44.3729C16.5971 44.3729 10 37.7758 10 29.6379C10 21.4999 16.5971 14.9028 24.735 14.9028ZM32.6407 20.5765C31.1721 19.2942 29.389 18.363 27.4223 17.9141V15.1473C31.322 15.8659 34.6838 18.1199 36.8576 21.2591L36.3249 21.7377L34.8216 23.0881C34.5821 22.7201 34.3231 22.366 34.0459 22.0274L34.197 21.7252L32.8421 20.1162L32.6407 20.5765Z"
             fill="currentColor"></path>
-         <mask id="mask0_6245_8860" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="10" y="14" width="27"
+         <mask id="mask0_6245_8860" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="10" y="14" width="27"
             height="31">
             <path fill-rule="evenodd" clip-rule="evenodd"
                d="M33.8366 41.2267C31.3308 43.1974 28.1702 44.3729 24.735 44.3729C16.5971 44.3729 10 37.7758 10 29.6379C10 21.4999 16.5971 14.9028 24.735 14.9028C29.7603 14.9028 34.1981 17.4185 36.8576 21.2591L34.8216 23.0881C32.6769 19.7921 28.9605 17.6127 24.735 17.6127C18.0937 17.6127 12.7098 22.9965 12.7098 29.6378C12.7098 36.2791 18.0937 41.6629 24.735 41.6629C27.5736 41.6629 30.1824 40.6794 32.2394 39.0345L33.8366 41.2267Z"
@@ -2178,7 +2222,7 @@
          <path fill-rule="evenodd" clip-rule="evenodd"
             d="M24.735 14.9028C25.1553 14.9028 25.5714 14.9204 25.9827 14.9549V17.6766C25.5725 17.6343 25.1563 17.6127 24.735 17.6127C18.0937 17.6127 12.7098 22.9965 12.7098 29.6378C12.7098 36.2791 18.0937 41.6629 24.735 41.6629C27.1847 41.6629 29.4633 40.9304 31.3638 39.6725C31.6654 39.4728 31.9576 39.2599 32.2394 39.0345L33.4181 40.6524L33.8366 41.2267C33.5518 41.4507 33.2585 41.6644 32.9573 41.8673C32.7049 42.0374 32.4468 42.1998 32.1836 42.3544C29.9981 43.6373 27.4525 44.3729 24.735 44.3729C16.5971 44.3729 10 37.7758 10 29.6379C10 21.4999 16.5971 14.9028 24.735 14.9028ZM32.6407 20.5765C31.1721 19.2942 29.389 18.363 27.4223 17.9141V15.1473C31.322 15.8659 34.6838 18.1199 36.8576 21.2591L36.3249 21.7377L34.8216 23.0881C34.5821 22.7201 34.3231 22.366 34.0459 22.0274L34.197 21.7252L32.8421 20.1162L32.6407 20.5765Z"
             fill="currentColor"></path>
-         <mask id="mask0_6245_8860" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="10" y="14" width="27"
+         <mask id="mask0_6245_8860" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="10" y="14" width="27"
             height="31">
             <path fill-rule="evenodd" clip-rule="evenodd"
                d="M33.8366 41.2267C31.3308 43.1974 28.1702 44.3729 24.735 44.3729C16.5971 44.3729 10 37.7758 10 29.6379C10 21.4999 16.5971 14.9028 24.735 14.9028C29.7603 14.9028 34.1981 17.4185 36.8576 21.2591L34.8216 23.0881C32.6769 19.7921 28.9605 17.6127 24.735 17.6127C18.0937 17.6127 12.7098 22.9965 12.7098 29.6378C12.7098 36.2791 18.0937 41.6629 24.735 41.6629C27.5736 41.6629 30.1824 40.6794 32.2394 39.0345L33.8366 41.2267Z"
@@ -2362,19 +2406,6 @@
             d="M33.4993 12.1825L32.4543 13.4451C29.6519 16.8197 23.9995 14.9143 23.9995 10.5756V3C23.9995 3 5 12.1825 5 28.252C5 34.9552 8.7049 40.8091 14.2385 44C12.9085 42.1865 12.1248 39.9597 12.1248 37.5722C12.1248 34.542 13.3598 31.6954 15.616 29.5375L23.9995 21.5946L32.383 29.5605C34.6392 31.6954 35.8742 34.542 35.8742 37.5952C35.8742 39.9367 35.138 42.0946 33.8555 43.9082C38.3441 41.2682 41.669 36.8835 42.6665 31.7413C44.234 23.5918 40.1253 15.9015 33.4993 12.1825Z"
             fill="currentColor"></path>
       </symbol>
-      <symbol id="icon-hotIcon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-         <g id="Frame" clip-path="url(#clip0_621_12387)">
-            <path id="Vector" d="M24.0001 0H0.000106812V24H24.0001V0Z" fill="currentColor" fill-opacity="0.01"></path>
-            <path id="Vector_2"
-               d="M12.0001 22C16.1175 22 19.5 18.7371 19.5 14.5491C19.5 13.5209 19.4478 12.4187 18.8779 10.7058C18.308 8.9929 18.1932 8.7718 17.5906 7.71395C17.3331 9.8727 15.9556 10.7724 15.6057 11.0413C15.6057 10.7615 14.7724 7.66795 13.5089 5.81695C12.2686 4 10.5818 2.80796 9.59276 2C9.59276 3.53489 9.16106 5.81695 8.54281 6.9797C7.92456 8.14245 7.80846 8.1848 7.03621 9.0501C6.26401 9.9154 5.90956 10.1826 5.26381 11.2325C4.61809 12.2825 4.50011 13.6809 4.50011 14.7091C4.50011 18.8971 7.88276 22 12.0001 22Z"
-               fill="currentColor"></path>
-         </g>
-         <defs>
-            <clipPath id="clip0_621_12387">
-               <rect width="24" height="24" fill="currentColor"></rect>
-            </clipPath>
-         </defs>
-      </symbol>
       <symbol id="icon-howpay" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
          <path opacity="0.4"
             d="M45 12.5V35.5C45 42.4 41.5 47 33.3333 47H14.6667C6.5 47 3 42.4 3 35.5V12.5C3 5.6 6.5 1 14.6667 1H33.3333C41.5 1 45 5.6 45 12.5Z"
@@ -2425,7 +2456,7 @@
          </g>
       </symbol>
       <symbol id="icon-lottery" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
-         <mask id="mask0_2094_41544" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="6" y="6" width="36"
+         <mask id="mask0_2094_41544" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="6" y="6" width="36"
             height="36">
             <circle cx="24" cy="24" r="18" fill="#D9D9D9"></circle>
          </mask>
@@ -2514,7 +2545,7 @@
             fill="var(--main-color)"></path>
       </symbol>
       <symbol id="icon-nbg" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-         <mask id="mask0_186_36273" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="1" y="1" width="68"
+         <mask id="mask0_186_36273" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="1" y="1" width="68"
             height="68">
             <path
                d="M33.5569 68.5569C52.0898 69.3539 67.7599 54.9761 68.5569 36.4431C69.3539 17.9102 54.9761 2.24013 36.4431 1.44312C17.9102 0.646107 2.24012 15.0239 1.44311 33.5569C0.646096 52.0898 15.0239 67.7599 33.5569 68.5569Z"
@@ -2839,23 +2870,23 @@
          <defs>
             <linearGradient id="paint0_linear_6071_102691" x1="20.7696" y1="1.49027" x2="20.7696" y2="37.4069"
                gradientUnits="userSpaceOnUse">
-               <stop stop-color="var(--tab1)"></stop>
-               <stop offset="0.985" stop-color="var(--tab2)"></stop>
+               <stop stop-color="#21D9CC"></stop>
+               <stop offset="0.985" stop-color="#BED921"></stop>
             </linearGradient>
             <linearGradient id="paint1_linear_6071_102691" x1="20.7696" y1="1.49027" x2="20.7696" y2="37.4069"
                gradientUnits="userSpaceOnUse">
-               <stop stop-color="var(--tab1)"></stop>
-               <stop offset="0.985" stop-color="var(--tab2)"></stop>
+               <stop stop-color="#21D9CC"></stop>
+               <stop offset="0.985" stop-color="#BED921"></stop>
             </linearGradient>
             <linearGradient id="paint2_linear_6071_102691" x1="20.7696" y1="1.49027" x2="20.7696" y2="37.4069"
                gradientUnits="userSpaceOnUse">
-               <stop stop-color="var(--tab1)"></stop>
-               <stop offset="0.985" stop-color="var(--tab2)"></stop>
+               <stop stop-color="#21D9CC"></stop>
+               <stop offset="0.985" stop-color="#BED921"></stop>
             </linearGradient>
             <linearGradient id="paint3_linear_6071_102691" x1="20.7696" y1="1.49027" x2="20.7696" y2="37.4069"
                gradientUnits="userSpaceOnUse">
-               <stop stop-color="var(--tab1)"></stop>
-               <stop offset="0.985" stop-color="var(--tab2)"></stop>
+               <stop stop-color="#21D9CC"></stop>
+               <stop offset="0.985" stop-color="#BED921"></stop>
             </linearGradient>
          </defs>
       </symbol>
@@ -2899,8 +2930,8 @@
          </defs>
          <linearGradient id="paint0_linear_6131_4729" x1="23.077" y1="3.88199" x2="23.077" y2="37.7282"
             gradientUnits="userSpaceOnUse">
-            <stop stop-color="var(--tab1)"></stop>
-            <stop offset="0.985" stop-color="var(--tab2)"></stop>
+            <stop stop-color="var(--bgColor-6)"></stop>
+            <stop offset="0.985" stop-color="var(--bgColor-6)"></stop>
          </linearGradient>
       </symbol>
       <symbol id="icon-p3_main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
@@ -2921,13 +2952,13 @@
          <defs>
             <linearGradient id="paint0_linear_6079_60206" x1="22.6126" y1="1.7943" x2="22.6126" y2="38.2056"
                gradientUnits="userSpaceOnUse">
-               <stop stop-color="var(--tab1)"></stop>
-               <stop offset="0.985" stop-color="var(--tab2)"></stop>
+               <stop stop-color="#21D9CC"></stop>
+               <stop offset="0.985" stop-color="#BED921"></stop>
             </linearGradient>
             <linearGradient id="paint1_linear_6079_60206" x1="22.6126" y1="1.7943" x2="22.6126" y2="38.2056"
                gradientUnits="userSpaceOnUse">
-               <stop stop-color="var(--tab1)"></stop>
-               <stop offset="0.985" stop-color="var(--tab2)"></stop>
+               <stop stop-color="#21D9CC"></stop>
+               <stop offset="0.985" stop-color="#BED921"></stop>
             </linearGradient>
          </defs>
       </symbol>
@@ -2952,8 +2983,8 @@
          <defs>
             <linearGradient id="paint0_linear_6079_60199" x1="23.077" y1="3.0773" x2="23.077" y2="36.9235"
                gradientUnits="userSpaceOnUse">
-               <stop stop-color="var(--tab1)"></stop>
-               <stop offset="0.985" stop-color="var(--tab2)"></stop>
+               <stop stop-color="#21D9CC"></stop>
+               <stop offset="0.985" stop-color="#BED921"></stop>
             </linearGradient>
             <clipPath id="clip0_6079_60199">
                <rect width="40" height="40" fill="white"></rect>
@@ -2974,8 +3005,8 @@
          <defs>
             <linearGradient id="paint0_linear_6079_60201" x1="22.7562" y1="3.25598" x2="22.7562" y2="36.7439"
                gradientUnits="userSpaceOnUse">
-               <stop stop-color="var(--tab1)"></stop>
-               <stop offset="0.985" stop-color="var(--tab2)"></stop>
+               <stop stop-color="#21D9CC"></stop>
+               <stop offset="0.985" stop-color="#BED921"></stop>
             </linearGradient>
          </defs>
       </symbol>
@@ -3195,7 +3226,7 @@
             fill="#A3A3A3"></path>
       </symbol>
       <symbol id="icon-resultanbg" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-         <mask id="mask0_1148_26793" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="1" y="1" width="58"
+         <mask id="mask0_1148_26793" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="1" y="1" width="58"
             height="58">
             <path
                d="M28.7628 58.763C44.6481 59.4462 58.0796 47.1223 58.7628 31.237C59.4459 15.3516 47.1221 1.92012 31.2367 1.23696C15.3513 0.553806 1.91983 12.8777 1.23667 28.763C0.553518 44.6484 12.8774 58.0799 28.7628 58.763Z"
@@ -3235,7 +3266,7 @@
                   d="M26.9853 52.8402C27.0283 53.5961 28.5951 54.1217 30.4849 54.0142C32.3748 53.9067 33.8719 53.2067 33.8289 52.4508C33.7858 51.6948 32.219 51.1692 30.3292 51.2768C28.4394 51.3843 26.9422 52.0843 26.9853 52.8402Z"
                   fill="white"></path>
             </g>
-            <g style="mix-blend-mode:screen" filter="url(#filter3_f_1148_26793)">
+            <g style="mix-blend-mode: screen" filter="url(#filter3_f_1148_26793)">
                <path
                   d="M29.3201 21.8121C34.9243 22.3645 39.7834 19.6054 40.1733 15.6495C40.5632 11.6937 36.3362 8.03906 30.7321 7.48669C25.128 6.93432 20.2689 9.69339 19.879 13.6492C19.4891 17.6051 23.716 21.2597 29.3201 21.8121Z"
                   fill="#FFCFCE"></path>
@@ -3620,7 +3651,7 @@
       </symbol>
       <symbol id="icon-uploadIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42" fill="none">
          <g clip-path="url(#clip0_2238_60810)">
-            <mask id="mask0_2238_60810" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="42"
+            <mask id="mask0_2238_60810" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="42"
                height="42">
                <path d="M42 0H0V42H42V0Z" fill="#333333"></path>
             </mask>
@@ -3876,7 +3907,7 @@
          </g>
       </symbol>
       <symbol id="icon-weeklyType3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="none">
-         <mask id="mask0_6140_40993" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="36"
+         <mask id="mask0_6140_40993" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="36"
             height="36">
             <circle cx="18" cy="18" r="18" fill="#D9D9D9"></circle>
          </mask>
@@ -3954,7 +3985,7 @@
          <path
             d="M6.40816 20.1019C6.25952 20.054 6.17679 19.8977 6.22441 19.7482C6.38965 19.2295 6.81106 18.0011 7.5467 16.445C8.28233 14.8888 8.96491 13.7819 9.26132 13.3241C9.34673 13.1921 9.52082 13.1552 9.65301 13.2379L12.7396 15.1683C12.8488 15.2366 12.8994 15.3684 12.8612 15.4922C12.7178 15.9577 12.3308 17.1384 11.7377 18.393C11.1446 19.6476 10.4769 20.6979 10.2079 21.105C10.1363 21.2133 10.0018 21.2591 9.87898 21.2195L6.40816 20.1019Z"
             fill="white"></path>
-         <mask id="mask0_6140_37956" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="11" y="11" width="26"
+         <mask id="mask0_6140_37956" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="11" y="11" width="26"
             height="26">
             <path fill-rule="evenodd" clip-rule="evenodd"
                d="M23.9978 36.7541C31.0986 36.7541 36.8549 31.0461 36.8549 24.005C36.8549 16.9638 31.0986 11.2559 23.9978 11.2559C16.897 11.2559 11.1406 16.9638 11.1406 24.005C11.1406 31.0461 16.897 36.7541 23.9978 36.7541ZM23.9978 35.7342C30.5305 35.7342 35.8263 30.4828 35.8263 24.005C35.8263 17.5271 30.5305 12.2758 23.9978 12.2758C17.465 12.2758 12.1692 17.5271 12.1692 24.005C12.1692 30.4828 17.465 35.7342 23.9978 35.7342Z"
@@ -4012,83 +4043,93 @@
 
    <div id="app" data-v-app="">
       <div data-v-647954c7="" class="ar-loading-view"
-         style="--f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif; display: none;">
-         <div data-v-647954c7="" class="loading-wrapper"><!-- <VanLoading /> -->
-            <div data-v-647954c7="" class="loading-animat"><svg xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200" width="200" height="200"
-                  preserveAspectRatio="xMidYMid meet"
-                  style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px); content-visibility: visible;">
+         style="display: none; --f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif">
+         <div data-v-647954c7="" class="loading-wrapper">
+            <!-- <VanLoading /> -->
+            <div data-v-647954c7="" class="loading-animat">
+               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200"
+                  width="200" height="200" preserveAspectRatio="xMidYMid meet"
+                  style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px); content-visibility: visible">
                   <defs>
                      <clipPath id="__lottie_element_2">
                         <rect width="200" height="200" x="0" y="0"></rect>
                      </clipPath>
-                     <image xlink:href="/logo_loading.png">
+                     <image
+                        xlink:href="data:image/png;base64,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">
                      </image>
                      <image
-                        xlink:href="data:image/png;base64,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">
+                        xlink:href="data:image/png;base64,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">
                      </image>
                   </defs>
                   <g clip-path="url(#__lottie_element_2)">
-                     <g class="ai" transform="matrix(1,0,0,1,0,0)" opacity="1" style="display: block;">
+                     <g class="ai"
+                        transform="matrix(-0.5585653781890869,-0.8294605016708374,0.8294605016708374,-0.5585653781890869,72.91048431396484,238.80258178710938)"
+                        opacity="1" style="display: block">
                         <image width="200px" height="200px" preserveAspectRatio="xMidYMid slice"
-                           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAAACXBIWXMAAAABAAAAAQBPJcTWAAAATlBMVEVHcExWtthewtlUstddwdpcvthYttZdv9lYtdtSsNhVs9ZWtNddwdlcwdlIn9NcwNlFmtJHntNEltBDlNBfxNldwdlDks9ZutlDm9JLptXm8Yi6AAAAFHRSTlMAMPBhmsBAexD/IFDQ4KCw2/CExn9LFu4AAAWJSURBVHja7Vxpe7MqEBVBQHBfiv7/P3oBTatX82YzhpknfGrT2HA4ywyYJIq+4+6hOMcAQ7Y/Pz81xYHDDg1dVs2E46cCOX3Cm6ZtZy7mQYApiTfFGsBlADK8os0+Bj8kEBR8DaJqi6bhnBM1P1CAQKGLegGh0Us/UP9oC4AQ/ofCYlA7wdUW4ZcR1VQXJgotI6iDFxcUDYngDtpiQBHRWVMF7OZjhlE3CjQMPcGogPe0xHljAA9DNg7FAB1GROthGOBvlFQ7ODoaCRxH4+gYWgUchiwsGUMNfdMacU8HeFVFjYMBnw7ZOhwFeDpI5WUFHUaknT0qAh4H9aELXlZR4e0R4cBBceCAn7pT7NbwbS4rHDisrsahUjj8UUkkfCDA0YzjiMEfdBxQ4CBIcKjaCgtBPZcVDhxRMY4Y+kRr9HHEELzEGqRWSAyicRhkxGAQ7gwS4RAWhkrohYWhghCLo0WAI3KJhSB5fSlsMDi9xpFY3ukY3kqpLI4ECyEKCSEFDkJSNIQ0KAhJ01piICQd0wIJISkGh8g6xUEItYRg2IZEWYqjqBNLCEVi9RoDjsgSwjDg0FisXqZpjgGHxGJ1jaSqu8zKsGQWivaEYMksYYGgUFaSpiUWi6AIX44lfK1FYhTKKrFYJE9TgaXR4li8LpF4HUULH7HUoDh2cHUdhdejGAuQ1BgUoUVMalD08NwYg0JZ2jKCAogwSNIXEZAUST00hmEBIr5AvkC+QDaNSSJRAFGxyVAAWTRYXyBfIF8gO4MaczklZaCbxkXLK75AwgMC+Cx+0bvD3rMvosoBgXv0my8y10A+11pO3v4M9g6ispMnGPr4lcFLY8DeebORmy9/AftGlFVbogHn78oWBHBsrYPK9FDdTpahBfmIjq5dIUyfIfD65HaYTUq+1pK0JgH5sW9pGVhNPANqEmoZkP+TWg7UImtz677vFXyLWK31pgdYSXYqedn3APtG0ffx5iHTwwvgrN9klLImAbe5cpPWW3DwtGWVtZWRAJhbed+zXZqA5RbZU5bPLWA1kW0zy1d7iw/U7krGe8qy49rjwfZZ11zN9jIgbKsnV1MZkN359cpn7R7DoSS5Hk4cUnXn/9JPAiiB2b/ko+FQcsPQORhKbviZQgkufmuiCZDgujlPDoMSfXuaCYhuPr8tHNcaB7/BEvekK9tv8oOKXtve3j6qds1xHrbfy/s2HC6CWehOv2uC1u9dwDssJ5n7SoQKW1zl/Sa2odAFKy76SKwm4SaXih/pPfyzwyyL2WNr7PgL8qYiezRSWZg28Qv8UA7JLMQ9FnGSJ49f0wf2mT5XQR4PIVc/46CQeJU8oXfxsB5PMHr57IUBIWF99+x0HJVJSHw8uwuXWdeFEsL0JcuGg4S+GD0kDgMJtdPoXur+wkAiHI4Xy7NH8uHsYgfgCAHJMThsT+8cn3+sxsvEvvwxLYbPrvhDu3iSHYZjXpTuIyep3AubHCtTdr5RfFwdatDpP55sFFl2x4e/5zg+davF87co2odXV8pzZfWWjPFGiU86JvJp1SXvWTcdn0aKp+N9QTm5LxbnuOOt2SI8Kclbq6MquxPq1kRKx952DimntToh6nU+LZh8I+XxKW2EvLzY8VDotEin9RDKJ3EXHyswKSYYyZn9qfJ9pF07ctzieJ677Ow2m89QMnqEDvSUIV3+ifNmMgnMKoy8SsakqXNFtSeHLn8eixJZN8v0k3dgJb1MI2dPdGGc/V4uPn6HjFxosdIQDywqEeXvhSyQO5b6D0uXMXoTDdEi+b2gK2lIZ/76YthJKIkQnG/mJzkXoswWT4yZDu+OvqLlEsyM6Hds/haXItyvuVSUJd0dI2MCwHd1Ki7YloCZhoQJDe37RrmzxN/gO675js34DxGidN2D9/DoAAAAAElFTkSuQmCC">
+                           xlink:href="data:image/png;base64,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">
                         </image>
                      </g>
-                     <g class="png" transform="matrix(0.8999999761581421,0,0,0.8999999761581421,31.150001525878906,82)"
-                        opacity="1" style="display: block;">
-                        <image width="163px" height="60px" preserveAspectRatio="xMidYMid slice"
-                           xlink:href="/logo_loading.png">
+                     <g class="png"
+                        transform="matrix(1.0377296209335327,0,0,1.0377296209335327,48.11351776123047,48.11351776123047)"
+                        opacity="1" style="display: block">
+                        <image width="100px" height="100px" preserveAspectRatio="xMidYMid slice"
+                           xlink:href="data:image/png;base64,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">
                         </image>
                      </g>
                   </g>
-               </svg></div>
-            <div data-v-647954c7="" class="com__box" style="display: none;"><!-- loading -->
+               </svg>
+            </div>
+            <div data-v-647954c7="" class="com__box" style="display: none">
+               <!-- loading -->
                <div class="loading" data-v-647954c7="">
                   <div class="shape shape-1" data-v-647954c7=""></div>
                   <div class="shape shape-2" data-v-647954c7=""></div>
                   <div class="shape shape-3" data-v-647954c7=""></div>
                   <div class="shape shape-4" data-v-647954c7=""></div>
-               </div><!-- 说明：组件名 -->
-            </div><!-- <div class="animation"></div> -->
+               </div>
+               <!-- 说明：组件名 -->
+            </div>
+            <!-- <div class="animation"></div> -->
          </div>
-         <div data-v-647954c7="" class="skeleton-wrapper" style="display: none;">
-            <div data-v-647954c7="" class="van-skeleton van-skeleton--animate"><!---->
-               <div class="van-skeleton__content"><!---->
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 60%;"></div>
+         <div data-v-647954c7="" class="skeleton-wrapper" style="display: none">
+            <div data-v-647954c7="" class="van-skeleton van-skeleton--animate">
+               <div class="van-skeleton__content">
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 60%"></div>
                </div>
             </div>
             <div data-v-647954c7="" class="van-skeleton van-skeleton--animate">
                <div class="van-skeleton-avatar van-skeleton-avatar--round"></div>
                <div class="van-skeleton__content">
                   <h3 class="van-skeleton-title"></h3>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 60%;"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 60%"></div>
                </div>
             </div>
-            <div data-v-647954c7="" class="van-skeleton van-skeleton--animate"><!---->
+            <div data-v-647954c7="" class="van-skeleton van-skeleton--animate">
                <div class="van-skeleton__content">
                   <h3 class="van-skeleton-title"></h3>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 100%;"></div>
-                  <div class="van-skeleton-paragraph" style="width: 60%;"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 100%"></div>
+                  <div class="van-skeleton-paragraph" style="width: 60%"></div>
                </div>
             </div>
          </div>
-      </div><!--v-if-->
+      </div>
+
       <div data-v-1d8fbc24="" class="bet-container" style="--f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif">
          <div data-v-12a80a3e="" data-v-1d8fbc24="" class="navbar">
             <div data-v-12a80a3e="" class="navbar-fixed">
@@ -4192,7 +4233,7 @@
                         <div id="game_selector_btn" data-v-fa757a88="" data-v-1d8fbc24=""
                            class="ar-searchbar__selector">
                            <div data-v-fa757a88="">
-                              <span data-v-fa757a88="" class="ar-searchbar__selector-default">Trx Win Go</span>
+                              <span data-v-fa757a88="" class="ar-searchbar__selector-default">Win Go</span>
                               <i data-v-fa757a88="" class="van-badge__wrapper van-icon van-icon-arrow-down"></i>
                            </div>
                         </div>
@@ -4202,6 +4243,7 @@
                               <i data-v-fa757a88="" class="van-badge__wrapper van-icon van-icon-arrow-down">
                               </i> -->
                               <input type="date" id="date_picker" value="moment().formate('yyyy-MM-DD')" />
+
                            </div>
                         </div>
                      </div>
@@ -4209,89 +4251,642 @@
 
                   <style>
                      #date_picker {
-                        background: #2B3270;
+                        width: 100%;
+                        height: 100%;
+                        border: none;
+                        background: transparent;
+                        color: #000;
+                        font-size: 14px;
+                        text-align: center;
+                        outline: none;
+                        box-shadow: none;
                      }
                   </style>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
-   integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
-   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="/lib/moment.min.js"></script>
-<script>
-   let swiper = new Swiper(".swiper", {
-      slidesPerView: 3.5,
-      clickable: true,
-   });
 
-   let selectedTab = "Lottery";
-   let selectedGame = "Win Go";
-   let currentDate = null;
 
-   const initBottomBarContent = () => {
-      switch (selectedTab) {
-         case "Lottery":
-            $("#game_selector_bottom_bar .list").html(`
-         <div data-v-0a298b45="" class="list"><div data-v-0a298b45="" class="item active"><div data-v-0a298b45=""><img data-v-0a298b45="" class="img" data-origin="/assets/png/-1-eebe8111.png" src="/assets/png/-1-eebe8111.png"> All</div></div><div data-v-0a298b45="" class="item"><div data-v-0a298b45=""><img data-v-0a298b45="" class="img" data-origin="/assets/png/16-2bd4085f.png" src="/assets/png/16-2bd4085f.png"> EVO_Video</div></div><div data-v-0a298b45="" class="item"><div data-v-0a298b45=""><img data-v-0a298b45="" class="img" data-origin="/assets/png/7-0fc3263c.png" src="/assets/png/7-0fc3263c.png"> DG</div></div><div data-v-0a298b45="" class="item"><div data-v-0a298b45=""><img data-v-0a298b45="" class="img" data-origin="/assets/png/10-da12a6c6.png" src="/assets/png/10-da12a6c6.png"> AG_Video</div></div><div data-v-0a298b45="" class="item"><div data-v-0a298b45=""><img data-v-0a298b45="" class="img" data-origin="/assets/png/38-12492e70.png" src="/assets/png/38-12492e70.png"> MG_Video</div></div></div>
-         `);
-            break;
-         case "Casino":
-            $("#game_selector_bottom_bar .list").html(``);
-            break;
-         case "Fishing":
-            $("#game_selector_bottom_bar .list").html(``);
-            break;
-         case "Rummy":
-            $("#game_selector_bottom_bar .list").html(``);
-            break;
-         case "Original":
-            $("#game_selector_bottom_bar .list").html(``);
-            break;
-         case "Slots":
-            $("#game_selector_bottom_bar .list").html(``);
-            break;
-         case "Rummy":
-            $("#game_selector_bottom_bar .list").html(``);
-            break;
+
+                  <div data-v-1d8fbc24="">
+                     <!-- 日期选择 -->
+                     <div class="van-overlay" role="button" tabindex="0" data-v-1d8fbc24=""
+                        style="z-index: 2003; display: none"></div>
+                     <div role="dialog" tabindex="0" class="van-popup van-popup--round van-popup--bottom"
+                        data-v-1d8fbc24="" style="z-index: 2003; display: none">
+                        <div data-v-1d8fbc24="" class="van-picker">
+                           <div class="van-picker__toolbar">
+                              <button type="button" class="van-picker__cancel van-haptics-feedback">Cancel</button>
+                              <div class="van-picker__title van-ellipsis">Choose a date</div>
+                              <button type="button" class="van-picker__confirm van-haptics-feedback">Confirm</button>
+                           </div>
+
+                           <div class="van-picker__columns" style="height: 264px">
+                              <div class="van-picker-column">
+                                 <ul class="van-picker-column__wrapper"
+                                    style="transform: translate3d(0px, 22px, 0px); transition-duration: 0ms; transition-property: none">
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">2022</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">2023</div>
+                                    </li>
+                                    <li role="button" tabindex="0"
+                                       class="van-picker-column__item van-picker-column__item--selected"
+                                       style="height: 44px">
+                                       <div class="van-ellipsis">2024</div>
+                                    </li>
+                                 </ul>
+                              </div>
+                              <div class="van-picker-column">
+                                 <ul class="van-picker-column__wrapper"
+                                    style="transform: translate3d(0px, -110px, 0px); transition-duration: 0ms; transition-property: none">
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">01</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">02</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">03</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">04</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">05</div>
+                                    </li>
+                                    <li role="button" tabindex="0"
+                                       class="van-picker-column__item van-picker-column__item--selected"
+                                       style="height: 44px">
+                                       <div class="van-ellipsis">06</div>
+                                    </li>
+                                 </ul>
+                              </div>
+                              <div class="van-picker-column">
+                                 <ul class="van-picker-column__wrapper"
+                                    style="transform: translate3d(0px, -594px, 0px); transition-duration: 0ms; transition-property: none">
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">01</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">02</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">03</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">04</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">05</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">06</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">07</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">08</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">09</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">10</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">11</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">12</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">13</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">14</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">15</div>
+                                    </li>
+                                    <li role="button" tabindex="0" class="van-picker-column__item" style="height: 44px">
+                                       <div class="van-ellipsis">16</div>
+                                    </li>
+                                    <li role="button" tabindex="0"
+                                       class="van-picker-column__item van-picker-column__item--selected"
+                                       style="height: 44px">
+                                       <div class="van-ellipsis">17</div>
+                                    </li>
+                                 </ul>
+                              </div>
+                              <div class="van-picker__mask" style="background-size: 100% 110px"></div>
+                              <div class="van-hairline-unset--top-bottom van-picker__frame" style="height: 44px"></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div data-v-1d8fbc24="" class="bet-content__box">
+            <div data-v-61888f52="" data-v-1d8fbc24="" class="infiniteScroll"
+               id="refresh2f29ce5b80b5440f9768da0922695d55">
+               <!-- 彩票 -->
+
+
+
+               <div data-v-3966082f="" class="list m-b-20">
+                  <div data-v-3966082f="" role="feed" class="van-list">
+                      <div class="lisys">
+                          <!-- Game history items will be loaded here -->
+                      </div>
+                  </div>
+              </div>
+
+
+
+
+
+              
+               <!-- 捕鱼 -->
+
+               <!-- 小游戏 -->
+
+               <!-- 视讯 -->
+
+               <!-- 棋牌 -->
+
+               <!-- 电子 -->
+
+               <div data-v-61888f52="" class="infiniteScroll__loading">
+                  <div data-v-61888f52="">No more</div>
+               </div>
+            </div>
+         </div>
+         <div id="game_selector_bottom_bar_backdrop" class="van-overlay" role="button" tabindex="0" data-v-0a298b45=""
+            style="z-index: 2002; display: none"></div>
+         <div id="game_selector_bottom_bar" role="dialog" tabindex="0"
+            class="van-popup van-popup--round van-popup--bottom" data-v-0a298b45=""
+            style="z-index: 2005; display: none">
+            <div data-v-0a298b45="" class="list">
+               <div data-v-0a298b45="" class="item active">
+                  <div data-v-0a298b45="">
+                     <img data-v-0a298b45="" class="img"
+                        data-origin="https://ossimg.Big-Mumadmin888.com/bigmumbai/lotterycategory/lotterycategory_20230828120518e7ml.png"
+                        src="https://ossimg.Big-Mumadmin888.com/bigmumbai/lotterycategory/lotterycategory_20230828120518e7ml.png" />
+                     Win Go
+                  </div>
+               </div>
+               <div data-v-0a298b45="" class="item">
+                  <div data-v-0a298b45="">
+                     <img data-v-0a298b45="" class="img"
+                        data-origin="https://ossimg.Big-Mumadmin888.com/bigmumbai/lotterycategory/lotterycategory_20230724173608dkuw.png"
+                        src="https://ossimg.Big-Mumadmin888.com/bigmumbai/lotterycategory/lotterycategory_20230724173608dkuw.png" />
+                     Trx Win Go
+                  </div>
+               </div>
+               <div data-v-0a298b45="" class="item">
+                  <div data-v-0a298b45="">
+                     <img data-v-0a298b45="" class="img"
+                        data-origin="https://ossimg.Big-Mumadmin888.com/bigmumbai/lotterycategory/lotterycategory_20230724173604d3yo.png"
+                        src="https://ossimg.Big-Mumadmin888.com/bigmumbai/lotterycategory/lotterycategory_20230724173604d3yo.png" />
+                     5D
+                  </div>
+               </div>
+               <div data-v-0a298b45="" class="item">
+                  <div data-v-0a298b45="">
+                     <img data-v-0a298b45="" class="img"
+                        data-origin="https://ossimg.Big-Mumadmin888.com/bigmumbai/lotterycategory/lotterycategory_20230724173558svol.png"
+                        src="https://ossimg.Big-Mumadmin888.com/bigmumbai/lotterycategory/lotterycategory_20230724173558svol.png" />
+                     K3
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--online custom service-->
+      <div class="customer" id="customerId"
+         style="--f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif; --f6a705e1-currentFontFamily: bahnschrift">
+         <img class="" data-origin="/assets/png/icon_sevice-af9dd176.png" src="/assets/png/icon_sevice-af9dd176.png" />
+      </div>
+   </div>
+
+
+
+
+
+
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
+      integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script src="/lib/moment.min.js"></script>
+   <script>
+      let swiper = new Swiper(".swiper", {
+         slidesPerView: 3.5,
+         clickable: true,
+      });
+
+      let selectedTab = "Lottery";
+      let selectedGame = "Win Go";
+      let currentDate = null;
+
+      const initBottomBarContent = () => {
+         switch (selectedTab) {
+            case "Lottery":
+               $("#game_selector_bottom_bar .list").html(``);
+               break;
+            case "Casino":
+               $("#game_selector_bottom_bar .list").html(`
+               <div data-v-0a298b45="" class="list">
+                     <div data-v-0a298b45="" class="item active">
+                     <div data-v-0a298b45="">
+                        <img data-v-0a298b45="" class="img" data-origin="/assets/png/-1-eebe8111.png"
+                        src="/assets/png/-1-eebe8111.png">
+                        All
+                     </div>
+                  </div>
+                  <div data-v-0a298b45="" class="item">
+                     <div data-v-0a298b45="">
+                        <img data-v-0a298b45="" class="img" data-origin="/assets/png/16-2bd4085f.png"
+                        src="/assets/png/16-2bd4085f.png">
+                        EVO_Video
+                     </div>
+                  </div>
+                  <div data-v-0a298b45="" class="item">
+                     <div data-v-0a298b45="">
+                        <img data-v-0a298b45="" class="img" data-origin="/assets/png/7-0fc3263c.png"
+                        src="/assets/png/7-0fc3263c.png">
+                        DG
+                     </div>
+                  </div>
+                  <div data-v-0a298b45="" class="item">
+                     <div data-v-0a298b45="">
+                        <img data-v-0a298b45="" class="img" data-origin="/assets/png/10-da12a6c6.png"
+                        src="/assets/png/10-da12a6c6.png">
+                        AG_Video
+                     </div>
+                  </div>
+                  <div data-v-0a298b45="" class="item">
+                     <div data-v-0a298b45="">
+                        <img data-v-0a298b45="" class="img" data-origin="/assets/png/38-12492e70.png"
+                        src="/assets/png/38-12492e70.png">
+                        MG_Video
+                     </div>
+                  </div>
+                  </div>
+               `);
+               break;
+            case "Fishing":
+               $("#game_selector_bottom_bar .list").html(``);
+               break;
+            case "Rummy":
+               $("#game_selector_bottom_bar .list").html(``);
+               break;
+            case "Original":
+               $("#game_selector_bottom_bar .list").html(``);
+               break;
+            case "Slots":
+               $("#game_selector_bottom_bar .list").html(``);
+               break;
+            case "Rummy":
+               $("#game_selector_bottom_bar .list").html(``);
+               break;
+         }
+
       }
 
-   }
+
+      $(".fun-tab-item.funtab_item.swiper-slide").click(function () {
+         $(this).addClass("activeClassName").siblings().removeClass("activeClassName");
+         $('.fun-tab-item.funtab_item.swiper-slide').find(".tab_item").removeClass("tab_active")
+         $(this).find(".tab_item").addClass("tab_active")
+         selectedTab = $(this).find(".tab_item").text().trim();
+         console.log(selectedTab)
+      });
+
+      $("#game_selector_btn").click(function () {
+         $("#game_selector_bottom_bar_backdrop").fadeIn();
+         $("#game_selector_bottom_bar").fadeIn();
+      });
+
+      $("#game_selector_bottom_bar_backdrop").click(function () {
+         $("#game_selector_bottom_bar_backdrop").fadeOut();
+         $("#game_selector_bottom_bar").fadeOut();
+      });
+
+      $("#game_selector_bottom_bar .list .item").click(function () {
+         $("#game_selector_bottom_bar_backdrop").fadeOut();
+         $("#game_selector_bottom_bar").fadeOut();
+         $(this).addClass("active").siblings().removeClass("active");
+         const game = $(this).find("div").text().trim();
+         $("#game_selector_btn .ar-searchbar__selector-default").text(game);
+         selectedGame = game;
+      });
+
+      const initCurrentSettings = async () => {
+         try {
+            if (selectedTab === "Lottery" && selectedGame === "Win Go") {
+               const res = await axios.get("/api/member/game_history?game=Win Go");
+            }
+         } catch (error) { }
+      };
+   </script>
 
 
-   $(".fun-tab-item.funtab_item.swiper-slide").click(function () {
-      $(this).addClass("activeClassName").siblings().removeClass("activeClassName");
-      $('.fun-tab-item.funtab_item.swiper-slide').find(".tab_item").removeClass("tab_active")
-      $(this).find(".tab_item").addClass("tab_active")
-      selectedTab = $(this).find(".tab_item").text().trim();
-      console.log(selectedTab)
-   });
 
-   $("#game_selector_btn").click(function () {
-      $("#game_selector_bottom_bar_backdrop").fadeIn();
-      $("#game_selector_bottom_bar").fadeIn();
-   });
 
-   $("#game_selector_bottom_bar_backdrop").click(function () {
-      $("#game_selector_bottom_bar_backdrop").fadeOut();
-      $("#game_selector_bottom_bar").fadeOut();
-   });
 
-   $("#game_selector_bottom_bar .list .item").click(function () {
-      $("#game_selector_bottom_bar_backdrop").fadeOut();
-      $("#game_selector_bottom_bar").fadeOut();
-      $(this).addClass("active").siblings().removeClass("active");
-      const game = $(this).find("div").text().trim();
-      $("#game_selector_btn .ar-searchbar__selector-default").text(game);
-      selectedGame = game;
-   });
 
-   const initCurrentSettings = async () => {
-      try {
-         if (selectedTab === "Lottery" && selectedGame === "Win Go") {
-            const res = await axios.get("/api/member/game_history?game=Win Go");
-         }
-      } catch (error) { }
-   };
-</script>
+    <!-- Add jQuery or any other necessary scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/client.js"></script>
+    <script>
+    $(document).ready(function () {
+        function formateT(params) {
+            let result = (params < 10) ? "0" + params : params;
+            return result;
+        }
+
+        function timerJoin(params = '', addHours = 0) {
+            let date = '';
+            if (params) {
+                date = new Date(Number(params));
+            } else {
+                date = new Date();
+            }
+
+            date.setHours(date.getHours() + addHours);
+
+            let years = formateT(date.getFullYear());
+            let months = formateT(date.getMonth() + 1);
+            let days = formateT(date.getDate());
+
+            let hours = date.getHours() % 12;
+            hours = hours === 0 ? 12 : hours;
+            let ampm = date.getHours() < 12 ? "AM" : "PM";
+
+            let minutes = formateT(date.getMinutes());
+            let seconds = formateT(date.getSeconds());
+
+            return years + '-' + months + '-' + days + ' ' + hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+        }
+
+
+        function getGameName(game) {
+    switch (game) {
+        case 'wingo':
+            return 'Wingo 1 Min';
+        case 'wingo3':
+            return 'Wingo 3 Min';
+        case 'wingo5':
+            return 'Wingo 5 Min';
+        case 'wingo10':
+            return 'Wingo 10 Min';
+        default:
+            return 'Unknown Game';
+    }
+}
+
+
+
+
+
+function getBetName(bet) {
+    switch (bet) {
+        case 'l':
+            return 'Big';
+        case 'n':
+            return 'Small';
+        case 't':
+            return 'Violet';
+        case 'd':
+            return 'Red';
+        case 'x':
+            return 'Green';
+        case '0':
+            return 'Red-Violet';
+        case '5':
+            return 'Green-Violet';
+
+
+            case '1':
+            return '1';
+
+            case '2':
+            return '2';
+
+            case '3':
+            return '3';
+
+            case '4':
+            return '4';
+            
+            case '6':
+            return '6';
+
+            case '7':
+            return '7';
+
+            case '8':
+            return '8';
+
+            case '9':
+            return '9';
+
+        default:
+            return 'Unknown';
+    }
+}
+
+
+
+
+        function loadsGameHistory(datas) {
+            let html = datas.map((data) => {
+                return `
+
+
+<div data-v-1d8fbc24="" class="bet-container-items">
+  <div data-v-1d8fbc24="" class="bet-container-lottery">
+    <div data-v-1d8fbc24="" class="bet-container-lottery-items">
+      <div data-v-1d8fbc24="" class="bet-container-lottery-card">
+        <div data-v-1d8fbc24="" class="bet-container-lottery-card-header ar-1px-b">
+          <h1 data-v-1d8fbc24="">
+            <!-- Dynamic Game Name and Status -->
+            <h2 data-v-1d8fbc24="">Wingo</h2>
+            <span data-v-1d8fbc24="" style="color: ${(data.status == 1) ? 'green' : (data.status == 0) ? 'red' : 'red'};">
+              ${(data.status == 1) ? 'Win' : (data.status == 2) ? 'Lose' : 'Processing'}
+            </span>
+          </h1>
+          <!-- Dynamic Time -->
+          <p data-v-1d8fbc24="">${timerJoin(data.time)}</p>
+        </div>
+        <div data-v-1d8fbc24="" class="bet-container-lottery-card-info">
+          <ul data-v-1d8fbc24="">
+            <!-- Dynamic Type -->
+            <li data-v-1d8fbc24="">
+              <span data-v-1d8fbc24="">
+                <svg data-v-1d8fbc24="" class="svg-icon icon-round">
+                  <use xlink:href="#icon-round"></use>
+                </svg>
+                <h2 data-v-1d8fbc24="">Type</h2>
+              </span>
+              <span data-v-1d8fbc24="">
+               ${getGameName(data.game)}
+               </span>
+            </li>
+            <!-- Dynamic Period -->
+            <li data-v-1d8fbc24="">
+              <span data-v-1d8fbc24="">
+                <svg data-v-1d8fbc24="" class="svg-icon icon-round">
+                  <use xlink:href="#icon-round"></use>
+                </svg>
+                <h2 data-v-1d8fbc24="">Period</h2>
+              </span>
+              <span data-v-1d8fbc24="">${data.stage}</span>
+            </li>
+            <!-- Dynamic Order Number -->
+            <li data-v-1d8fbc24="">
+              <span data-v-1d8fbc24="">
+                <svg data-v-1d8fbc24="" class="svg-icon icon-round">
+                  <use xlink:href="#icon-round"></use>
+                </svg>
+                <h2 data-v-1d8fbc24="">Order number</h2>
+              </span>
+              <span data-v-1d8fbc24="">${data.id_product}</span>
+            </li>
+            <!-- Dynamic Selection -->
+            <li data-v-1d8fbc24="">
+              <span data-v-1d8fbc24="">
+                <svg data-v-1d8fbc24="" class="svg-icon icon-round">
+                  <use xlink:href="#icon-round"></use>
+                </svg>
+                <h2 data-v-1d8fbc24="">Select</h2>
+              </span>
+              <p data-v-1d8fbc24="">
+               
+               ${getBetName(data.bet)}
+               
+               </p>
+            </li>
+            <!-- Dynamic Total Bet -->
+            <li data-v-1d8fbc24="">
+              <span data-v-1d8fbc24="">
+                <svg data-v-1d8fbc24="" class="svg-icon icon-round">
+                  <use xlink:href="#icon-round"></use>
+                </svg>
+                <h2 data-v-1d8fbc24="">Total bet</h2>
+              </span>
+              <span data-v-1d8fbc24="">
+               ₹${parseFloat(data.fee + data.money).toFixed(2)}
+               </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <img data-v-1d8fbc24="" src="/assets/png/moonBar-f80ac733.png" />
+      <div data-v-1d8fbc24="" class="bet-container-lottery-note">
+        <div data-v-1d8fbc24="" class="bet-container-lottery-note-result">
+          <div data-v-1d8fbc24="">
+            <h1 data-v-1d8fbc24="">
+              <svg data-v-1d8fbc24="" class="svg-icon icon-round">
+                <use xlink:href="#icon-round"></use>
+              </svg>
+              Lottery results
+            </h1>
+            <h2 data-v-1d8fbc24="">
+              <svg data-v-1d8fbc24="" class="svg-icon icon-round">
+                <use xlink:href="#icon-round"></use>
+              </svg>
+              <p data-v-1d8fbc24="">${data.result}</p>
+
+              <span data-v-1d8fbc24="" class="small">${data.result}</span>
+              <span data-v-1d8fbc24="" class="${data.lottery_color === 'Green' ? 'green' : 'red'}">${data.result}</span>
+            </h2>
+          </div>
+        </div>
+        <div data-v-1d8fbc24="" class="bet-container-lottery-note-box">
+          <!-- Dynamic Actual Amount -->
+          <div data-v-1d8fbc24="">
+            <div data-v-1d8fbc24="" class="bet-container-lottery-note-box-para">
+              <h3 data-v-1d8fbc24="">₹${data.money}</h3>
+              <span data-v-1d8fbc24="">Actual amount</span>
+            </div>
+          </div>
+          <!-- Dynamic Winnings -->
+          <div data-v-1d8fbc24="">
+            <div data-v-1d8fbc24="" class="bet-container-lottery-note-box-para">
+              <h3 data-v-1d8fbc24="">₹${data.get}</h3>
+              <span data-v-1d8fbc24="">Winnings</span>
+            </div>
+          </div>
+          <!-- Dynamic Handling Fee -->
+          <div data-v-1d8fbc24="">
+            <div data-v-1d8fbc24="" class="bet-container-lottery-note-box-para">
+              <h3 data-v-1d8fbc24="">₹${data.fee}</h3>
+              <span data-v-1d8fbc24="">Handling fee</span>
+            </div>
+          </div>
+          <!-- Dynamic Profit/Loss -->
+          <div data-v-1d8fbc24="">
+            <div data-v-1d8fbc24="" class="bet-container-lottery-note-box-para">
+
+
+
+               <h4 
+    data-v-1d8fbc24="" 
+    class="h4_red" 
+    style="color: ${data.status == 1 ? 'green' : data.status == 2 ? 'red' : 'red'};"
+>
+    ${data.status == 1 ? `+₹${data.get}` : data.status == 2 ? `-₹${data.money}` : 'Processing'}
+</h4>
+
+              <span data-v-1d8fbc24="">Profit/loss</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+   
+              
+                `;
+            }).join('');
+            $(".lisys").html(html);
+        }
+
+        // Fetch and load game history data
+        $.ajax({
+            type: "GET",
+            url: "/api/webapi/game/list", // Update to your actual API endpoint
+            dataType: "json",
+            success: function (response) {
+                if (response.datas.length > 0) {
+                    loadsGameHistory(response.datas);
+                }
+            }
+        });
+    });
+    </script>
+
+    <script>
+      $('.fun-tab-item').on('click', function () {
+    // Remove active class from all tabs
+    $('.fun-tab-item').removeClass('tab_active');
+    // Add active class to the clicked tab
+    $(this).addClass('tab_active');
+    
+    // Optionally: Load corresponding data for the selected tab
+    let selectedTab = $(this).find('span').text().toLowerCase();
+    loadTabData(selectedTab); // function to load content based on selected tab
+});
+
+    </script>
+
+
+</body>
 
 </html>

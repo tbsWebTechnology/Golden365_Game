@@ -1,0 +1,824 @@
+<html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 41px;">
+  
+  <head>
+    
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/uploads/favicon/favicon.png" />
+    <meta name="google" content="notranslate">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="manifest" href="/manifest.ar062.json?version=1.1">
+    <title id="app-title"></title>
+  <script src="/js/app.js"></script>
+   
+    <link rel="modulepreload" crossorigin="" href="/assets/js/modules-ead0d7bb.js">
+    <link rel="modulepreload" crossorigin="" href="/assets/js/native/index-b84712e6.js">
+    
+    <link rel="modulepreload" crossorigin="" href="/assets/js/page-activity-f2c08e98.js">
+    <link rel="modulepreload" crossorigin="" href="/assets/js/page-home-1e473ea9.js">
+    <link rel="modulepreload" crossorigin="" href="/assets/js/page-login-2337107a.js">
+    <link rel="stylesheet" href="/assets/css/modules-02878b09.css">
+    <link rel="stylesheet" href="/assets/css/page-activity-93a8910e.css">
+    <link rel="stylesheet" href="/assets/css/page-home-789c992f.css">
+    <link rel="stylesheet" href="/assets/css/page-login-13ee2916.css">
+    <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
+    <link rel="stylesheet" href="/assets/css/page-wallet-b9af2085.css">
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/js/page-main-5082a1a7.js">
+    <link rel="stylesheet" href="/assets/css/page-main-ec5a8e8e.css">
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/js/errorTip-de9c44b9.js">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  </head>
+
+  <style>
+    /* Add your styles for the popup here */
+    .van-popup {
+        display: none; /* Hidden by default */
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 2008;
+        background-color: #fff;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .van-popup--show {
+        display: block; /* Display when active */
+    }
+    /* Style other elements like .popup__header, .popup__container, etc., as needed */
+
+    .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 2000; /* Ensure it appears below the popup but above other content */
+    display: none; /* Initially hidden */
+    }
+
+    .rechargeh__container-content__item {
+    margin-bottom: 0.3rem;
+}
+
+</style>
+  
+  <body style="font-size: 12px;" class="">
+   
+    <div id="app" data-v-app="">
+      
+      <!--v-if-->
+      <div data-v-002ff529="" class="StrongBox__container" style="--f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif;">
+        <div data-v-12a80a3e="" data-v-5bd44e74="" class="navbar main" style="">
+            <div data-v-12a80a3e="" class="navbar-fixed">
+               <div data-v-12a80a3e="" class="navbar__content">
+                  <div data-v-12a80a3e="" class="navbar__content-left" onclick="history.back()"><img width="20px" height="20px" src="/assets/png/arrow_back.png"></div>
+                  <div data-v-12a80a3e="" class="navbar__content-center"><!--v-if-->
+                     <div data-v-12a80a3e="" class="navbar__content-title">Safe</div>
+                  </div>
+                  <div data-v-12a80a3e="" class="navbar__content-right"></div>
+               </div>
+            </div>
+         </div>
+        <div data-v-002ff529="" class="StrongBox__container-dailyRate">
+          Interest rate 0.50%
+        </div>
+        <div data-v-d24f0506="" data-v-002ff529="" class="TotalAssets__container">
+          <div data-v-d24f0506="" class="TotalAssets__container-header">
+            <div data-v-d24f0506="" class="TotalAssets__container-header__left" style="font-size: ;">
+                <img width="20px" height="20px" src="/assets/png/weal4-109d3cf6.png"> Safe Wallet Balance
+            </div>
+            <div data-v-d24f0506="" class="TotalAssets__container-header__right">
+                <img width="17px" height="17px" src="/assets/png/safe_secure.png">
+              Financial security
+            </div>
+          </div>
+          <div data-v-d24f0506="" class="TotalAssets__container-main">
+            ₹0.00
+          </div>
+          <div data-v-d24f0506="" class="TotalAssets__container-tip">
+            24-hour estimated revenue
+            <span data-v-d24f0506="">
+              ₹0.00
+            </span>
+          </div>
+          <!--v-if-->
+        </div>
+        <div data-v-002ff529="" class="StrongBox__container-income">
+          <div data-v-002ff529="" class="StrongBox__container-income-header">
+            <div data-v-002ff529="" class="StrongBox__container-income-header-left">
+              <div data-v-002ff529="" class="StrongBox__container-income-header-left-num">
+                ₹0.00
+              </div>
+              <div data-v-002ff529="" class="StrongBox__container-income-header-left-text">
+                Generated revenue till now
+              </div>
+              <div data-v-002ff529="" class="StrongBox__container-income-header-left-myrale">
+                My interest rate 0.5
+              </div>
+            </div>
+            
+          </div>
+          <div data-v-002ff529="" class="StrongBox__container-income-buttom">
+            <div data-v-002ff529=""  id="transfer-out-button">
+              Withdraw
+            </div>
+            <div data-v-002ff529=""  id="transferInButton">
+              Invest Now
+            </div>
+
+           
+
+
+          </div>
+          <div data-v-002ff529="" class="StrongBox__container-income-tip">
+            <svg data-v-002ff529="" width="30" height="30" viewBox="0 0 30 30" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="StrongBox__container-errorTip">
+              <path d="M15 27.5C18.4517 27.5 21.5768 26.1009 23.8388 23.8388C26.1009 21.5768 27.5 18.4517 27.5 15C27.5 11.5482 26.1009 8.42325 23.8388 6.16116C21.5768 3.89911 18.4517 2.5 15 2.5C11.5482 2.5 8.42325 3.89911 6.16116 6.16116C3.89911 8.42325 2.5 11.5482 2.5 15C2.5 18.4517 3.89911 21.5768 6.16116 23.8388C8.42325 26.1009 11.5482 27.5 15 27.5Z"
+              stroke="#FE6868" stroke-linejoin="round">
+              </path>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M15 23.125C15.8629 23.125 16.5625 22.4254 16.5625 21.5625C16.5625 20.6996 15.8629 20 15 20C14.1371 20 13.4375 20.6996 13.4375 21.5625C13.4375 22.4254 14.1371 23.125 15 23.125Z"
+              fill="#FF7172">
+              </path>
+              <path d="M15 7.5V17.5" stroke="#FE6868" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              </path>
+            </svg>
+            Funds are safe and secure, and can be transferred at any time
+          </div>
+          <!--v-if-->
+        
+        </div>
+        <div data-v-002ff529="" class="StrongBox__container-record">
+            <img width="22px" height="22px" src="/assets/png/tradeHistory-dd8caea2.png">
+          Historical Records
+        </div>
+       
+
+        <div id="filter-container" class="filter-container"></div>
+        
+        <div id="transfer-history-container" class="transfer-history-container">
+          <p>Loading transfer-in history...</p>
+        </div>
+
+        
+        
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+      </div>
+
+
+
+
+     
+      <div id="overlay" class="overlay" style="display:none;"></div>
+      <div data-v-002ff529 id="transferPopup" class="van-popup van-popup--round van-popup--bottom" style="display:none; z-index:2008; font-family: sans-serif;">
+        <form id="transferForm" onsubmit="handleSubmit(event)">
+          <div data-v-002ff529 class="popup__header">Invest Now</div>
+
+          <div data-v-002ff529="" class="popup__amount"><div data-v-002ff529="">Each amount</div><div data-v-002ff529="">1000</div></div>
+      
+          <div data-v-002ff529 class="popup__container">
+            <label style="display:none;" for="phone">Phone:</label>
+            <input type="text" style="display:none;" id="phone" name="phone" required placeholder="Enter phone number" readonly>
+      
+            <label style="display:none;" for="amount">Amount:</label>
+            <input style="display:none;" type="number" id="amount" name="amount" value="100" readonly placeholder="Enter amount"/>
+
+
+            <div data-v-002ff529="" class="van-cell van-field popup__container-input"><!----><!---->
+                <div class="van-cell__value van-field__value"><div class="van-field__body">
+                    <input type="tel" inputmode="numeric" id="van-field-1-input" class="van-field__control" placeholder="Please enter Quantity" data-allow-mismatch="attribute" style="height: 0.8rem; border: 0px solid;"><!----><!---->
+                    
+                </div><!----><!---->
+            </div><!----><!---->
+            </div>
+
+
+
+      
+            <div data-v-002ff529 class="popup__container-multiple">
+              <div data-v-002ff529 class="multiple-option active" onclick="setMultiplier(1)">1x</div>
+              <div data-v-002ff529 class="multiple-option" onclick="setMultiplier(3)">3x</div>
+              <div data-v-002ff529 class="multiple-option" onclick="setMultiplier(5)">5x</div>
+              <div data-v-002ff529 class="multiple-option" onclick="setMultiplier(10)">10x</div>
+              <div data-v-002ff529 class="multiple-option" onclick="setMultiplier(50)">50x</div>
+              <div data-v-002ff529 class="multiple-option" onclick="setMultiplier(100)">100x</div>
+              <div data-v-002ff529 class="multiple-option" onclick="setMultiplier(200)">200x</div>
+              <div data-v-002ff529 class="multiple-option" onclick="setMultiplier(500)">500x</div>
+            </div>
+
+            <div data-v-002ff529="" class="popup__container-numLine"><div data-v-002ff529="">Amount available</div><div data-v-002ff529="" class="popup__container-numLine-num5">
+              <input type="text" id="money" readonly="" style="height: 0.8rem; border: 0px solid;"></div></div>
+
+            <div data-v-002ff529="" class="popup__container-numLine"><div data-v-002ff529="">Amount transferred</div><div data-v-002ff529="" class="popup__container-numLine-num red">₹0.00</div></div>
+
+            <div data-v-002ff529="" class="betTip">24-hour estimated revenue <span data-v-002ff529="">₹0.20</span></div>
+      
+            
+          </div>
+      
+          <button type="submit" style="width: 100%; height: 1.2rem; border: 0px solid; color: white; font-size: 0.4rem; background: var(--main-color);">Invest Now</button>
+        </form>
+      </div>
+
+
+
+
+
+
+
+      <!-- Your existing popup code -->
+
+<div id="overlay" class="overlay" style="display:none;"></div>
+<div role="dialog" tabindex="0" class="van-popup van-popup--round van-popup--bottom popupStyle" 
+data-v-002ff529="" style="z-index: 2005; display: none; font-family: sans-serif;">
+  <div data-v-002ff529="" class="popup__header">
+    Withdraw to Main Wallet
+  </div>
+  <div data-v-002ff529="" class="popup__amount" style="width:6.86667rem;">
+    <div data-v-002ff529="">
+      Minimum Withdraw
+    </div>
+    <div data-v-002ff529="">
+      1000 - 50000
+    </div>
+  </div>
+  <div data-v-002ff529="" class="popup__container">
+    <div data-v-002ff529="" class="van-cell van-field popup__container-input" style="margin-bottom:5px;">
+      <div class="van-cell__value van-field__value">
+        <div class="van-field__body">
+          <input type="tel" inputmode="numeric" id="van-field-41-input" class="van-field__control"
+          placeholder="Please enter amount" data-allow-mismatch="attribute" style="height: 0.8rem; border: 0px solid;">
+          <i class="van-badge__wrapper van-icon van-icon-close van-field__clear"></i>
+        </div>
+      </div>
+    </div>
+    
+    <div data-v-002ff529="" class="popup__container-numLine">
+      <div data-v-002ff529="">Amount available</div>
+      <div data-v-002ff529="" class="popup__container-numLine-num">₹0.00</div>
+    </div>
+    
+    <div data-v-002ff529="" class="popup__container-numLine">
+      <div data-v-002ff529="">Daily interest rate</div>
+      <div data-v-002ff529="" class="popup__container-numLine-nu3">0.5%</div>
+    </div>
+    <div data-v-002ff529="" class="popup__container-numLine">
+      <div data-v-002ff529="">Total Revenue</div>
+      <div data-v-002ff529="" class="popup__container-numLine-num4 red">₹0.00</div>
+    </div>
+  </div>
+  <div data-v-002ff529="" class="popup__container-sumbit">Withdraw Now</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+      <!--online custom service-->
+      <div class="customer" id="customerId" onclick="location.href='/support'"
+      style="--f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif; --f6a705e1-currentFontFamily: bahnschrift;">
+      <img class="" data-origin="/assets/png/icon_sevice-8a1f5628.png" src="/assets/png/icon_sevice-8a1f5628.png">
+   </div>
+      
+      <!---->
+    </div>
+    
+
+
+   
+
+  <script>
+    let multiplier = 1; // Default multiplier
+    const fixedAmount = 1000; // Fixed amount
+    let safeInterest = 0.005; // Default interest rate (0.5%)
+
+    async function fetchSafeInterest() {
+      try {
+            const response = await axios.get("/api/webapi/GetAdminConfig");
+            console.log("Safe Interest API Response:", response.data);
+
+            // Extract the safeinterest value from the response
+            if (response?.data?.status && Array.isArray(response?.data?.data) && response.data.data.length > 0) {
+                const safeInterestValue = response.data.data[0]?.safeinterest;
+
+                if (safeInterestValue !== undefined) {
+                    safeInterest = parseFloat(safeInterestValue); // Update global safeInterest variable
+                    if (isNaN(safeInterest) || safeInterest <= 0) {
+                        console.warn("Invalid safeinterest value. Using default 0.5%");
+                        safeInterest = 0.005; // Default fallback to 0.5%
+                    }
+                    console.log(`Fetched safeinterest: ${safeInterest}`); // Log the fetched value
+                    updateDailyInterestRate(safeInterest);
+                    updateMyInterestRate(safeInterest); // Update "My interest rate"
+                    updateDailyInterestRateText(safeInterest); // Update "Interest rate"
+                    updateAmountTransferred(); // Recalculate values with the fetched safeinterest
+                } else {
+                    console.error("safeinterest is missing in the response data:", response.data.data);
+                }
+            } else {
+                console.error("Invalid response structure or empty data array:", response.data);
+            }
+        } catch (error) {
+            console.error("Error fetching safeinterest:", error);
+            alert("An error occurred while fetching the interest rate.");
+        }
+      }
+
+
+    // Function to update the daily interest rate in the UI
+    function updateDailyInterestRate(interestRate) {
+        const dailyInterestElement = document.querySelector('.popup__container-numLine-nu3');
+        if (dailyInterestElement) {
+            dailyInterestElement.innerText = `${(interestRate * 100).toFixed(2)}%`; // Convert to percentage
+            console.log(`Updated daily interest rate: ${(interestRate * 100).toFixed(2)}%`); // Log the updated value
+        }
+    }
+
+
+    // Function to update "My interest rate" in the UI
+    function updateMyInterestRate(interestRate) {
+        const interestRateElement = document.querySelector('.StrongBox__container-income-header-left-myrale');
+        if (interestRateElement) {
+            interestRateElement.innerText = `My interest rate ${(interestRate * 100).toFixed(2)}%`;
+            console.log(`Updated "My interest rate" to ${(interestRate * 100).toFixed(2)}`);
+        }
+    }
+
+    // Function to update "Interest rate" in the UI
+    function updateDailyInterestRateText(interestRate) {
+        const dailyRateElement = document.querySelector('.StrongBox__container-dailyRate');
+        if (dailyRateElement) {
+            dailyRateElement.innerText = `Interest rate ${(interestRate * 100).toFixed(2)}%`;
+            console.log(`Updated "Interest rate" to ${(interestRate * 100).toFixed(2)}%`);
+        }
+    }
+
+
+
+    // Function to set the multiplier and update the displayed total
+    function setMultiplier(value) {
+        multiplier = value;
+
+        // Update active class for multiplier options
+        const options = document.querySelectorAll('.multiple-option');
+        options.forEach(option => option.classList.remove('active'));
+        options.forEach(option => {
+            if (option.innerText.includes(value + 'x')) {
+                option.classList.add('active');
+            }
+        });
+
+        // Update multiplier input value
+        const multiplierInput = document.getElementById('van-field-1-input');
+        if (multiplierInput) {
+            multiplierInput.value = value;
+        }
+
+        // Update "Amount transferred" field
+        updateAmountTransferred();
+    }
+
+    // Function to update the displayed total in the "Amount transferred" field
+    function updateAmountTransferred() {
+        const total = fixedAmount * multiplier;
+        const amountTransferredElement = document.querySelector('.popup__container-numLine-num.red');
+        if (amountTransferredElement) {
+            amountTransferredElement.innerText = `₹${total.toFixed(2)}`;
+        }
+
+        // Update "24-hour estimated revenue"
+        updateEstimatedRevenue(total);
+    }
+
+   // Function to update the "24-hour estimated revenue" field
+    function updateEstimatedRevenue(amountTransferred) {
+        const estimatedRevenue = (amountTransferred * safeInterest).toFixed(2); // Use dynamic safeinterest
+        const estimatedRevenueElement = document.querySelector('.betTip span');
+        if (estimatedRevenueElement) {
+            estimatedRevenueElement.innerText = `₹${estimatedRevenue}`;
+        }
+    }
+
+    // Initialize with default values
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchSafeInterest(); // Fetch safeinterest on page load
+        updateAmountTransferred(); // Set the initial total on page load
+    });
+
+    // Function to fetch user data
+    async function fetchUser() {
+        try {
+            const response = await axios.get("/api/webapi/GetUserInfo");
+            console.log("API Response:", response); // Log full API response for debugging
+
+            if (response?.data?.status && response?.data?.data?.phone_user) {
+                const userData = response.data.data;
+
+                // Populate user data
+                $('#phone').val(userData.phone_user);
+                $('#money').val(`₹ ${userData.money_user}`);
+                $('#thirdpartymoney').val(`₹ ${userData.third_party_money}`);
+                $('#safebonus').val(`₹ ${userData.safe_bonus}`);
+                $('#phone').prop('readonly', true);
+
+                // Update third-party money display
+                $('.TotalAssets__container-main').text(`₹ ${userData.third_party_money}`);
+
+                // Calculate and display revenue using safeinterest
+                const thirdPartyMoney = parseFloat(userData.third_party_money || 0);
+                const estimatedRevenue = (thirdPartyMoney * safeInterest).toFixed(2);
+                $('.TotalAssets__container-tip span').text(`₹ ${estimatedRevenue}`);
+
+                // Display safebonus in the specific div
+                const safeBonus = `₹ ${userData.safe_bonus}`;
+                $('.StrongBox__container-income-header-left-num').text(safeBonus);
+
+                // Update "Amount available" with third-party wallet amount
+                $('.popup__container-numLine-num').text(`₹ ${userData.third_party_money}`);
+                $('.popup__container-numLine-num4').text(`₹ ${userData.safe_bonus}`);
+                $('.popup__container-numLine-num5').text(`₹ ${userData.money_user}`);
+            } else {
+                console.error("Invalid response structure:", response);
+                alert("Failed to retrieve user information.");
+            }
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+            alert("An error occurred while fetching user data.");
+        }
+    }
+
+    $(document).ready(function () {
+        // Fetch user data on page load
+        fetchUser();
+
+        // Show the popup when the button is clicked
+        $('#transferInButton').click(function () {
+            $('#overlay').show();
+            $('#transferPopup').show();
+            updateAmountTransferred(); // Ensure total is displayed correctly when popup opens
+        });
+
+        // Handle form submission
+        $('#transferForm').submit(function (event) {
+            event.preventDefault();
+
+            const phone = $('#phone').val(); // Phone is already set
+            const total = fixedAmount * multiplier; // Calculate total amount
+
+            alert(`Transfer initiated for Total Amount: ₹${total.toFixed(2)}`);
+
+            // Perform transfer request
+            $.ajax({
+                url: '/transfer-in',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    phone: phone,
+                    amount: total, // Use total amount here
+                }),
+                success: function (response) {
+                    alert('Transfer successful!');
+                    $('#transferPopup').hide();
+                    $('#overlay').hide();
+                },
+                error: function (xhr) {
+                    console.error("Error during transfer:", xhr.responseText);
+                    alert('An error occurred: ' + xhr.responseText);
+                }
+            });
+        });
+
+        // Optional: Hide popup and overlay if the overlay itself is clicked
+        $('#overlay').click(function () {
+            $('#overlay').hide();
+            $('#transferPopup').hide();
+        });
+    });
+</script>
+
+  
+     
+  <script>
+
+// Adding filters to the UI
+document.addEventListener("DOMContentLoaded", () => {
+  // Fetch the transfer history data
+  fetchTransferInHistory();
+
+  // Add event listeners to filter inputs
+  const typeFilter = document.getElementById("type-filter");
+  const dateFilter = document.getElementById("date-filter");
+
+  if (typeFilter && dateFilter) {
+    typeFilter.addEventListener("change", applyFilters);
+    dateFilter.addEventListener("change", applyFilters);
+  } else {
+    console.error("Filter elements not found in the DOM.");
+  }
+});
+
+async function fetchTransferInHistory() {
+  try {
+    const response = await fetch("/api/transfer-in/history", {
+      method: "GET",
+      credentials: "include", // Include cookies for authentication
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Server Error: ${response.status} - ${errorText}`);
+    }
+
+    const result = await response.json();
+    if (result.status) {
+      // Store the data for filtering purposes
+      window.transferHistoryData = result.data;
+      renderTransferHistory(result.data);
+    } else {
+      console.error(result.message);
+    }
+  } catch (error) {
+    console.error("Error fetching transfer-in history:", error.message);
+
+    // Display an error message in the UI
+    const historyContainer = document.getElementById("transfer-history-container");
+    if (historyContainer) {
+      historyContainer.innerHTML = `<p class="error-message">${error.message}</p>`;
+    }
+  }
+}
+
+function formateT(params) {
+  let result = params < 10 ? "0" + params : params;
+  return result;
+}
+
+function timerJoin(params = "", addHours = 0) {
+  let date = "";
+  if (params) {
+    date = new Date(Number(params));
+  } else {
+    date = new Date();
+  }
+
+  date.setHours(date.getHours() + addHours);
+
+  let years = formateT(date.getFullYear());
+  let months = formateT(date.getMonth() + 1);
+  let days = formateT(date.getDate());
+
+  let hours = date.getHours() % 12;
+  hours = hours === 0 ? 12 : hours;
+  let ampm = date.getHours() < 12 ? "AM" : "PM";
+
+  let minutes = formateT(date.getMinutes());
+  let seconds = formateT(date.getSeconds());
+
+  return (
+    years +
+    "-" +
+    months +
+    "-" +
+    days +
+    " " +
+    hours +
+    ":" +
+    minutes +
+    ":" +
+    seconds +
+    " " +
+    ampm
+  );
+}
+
+function applyFilters() {
+  const typeFilter = document.getElementById("type-filter").value;
+  const dateFilter = document.getElementById("date-filter").value;
+
+  let filteredData = window.transferHistoryData || [];
+  console.log("Original Data:", filteredData);
+
+  // Apply type filter
+  if (typeFilter) {
+    filteredData = filteredData.filter((data) => {
+      console.log("Filtering by type:", data.type, "==", typeFilter);
+      return data.type.toString() === typeFilter;
+    });
+  }
+  console.log("After Type Filter:", filteredData);
+
+  // Apply date filter
+  if (dateFilter) {
+    const selectedDate = new Date(dateFilter);
+    filteredData = filteredData.filter((data) => {
+      const recordDate = new Date(Number(data.time));
+      console.log(
+        "Filtering by date:",
+        recordDate.toISOString().split("T")[0],
+        "==",
+        dateFilter
+      );
+      return (
+        recordDate.getFullYear() === selectedDate.getFullYear() &&
+        recordDate.getMonth() === selectedDate.getMonth() &&
+        recordDate.getDate() === selectedDate.getDate()
+      );
+    });
+  }
+  console.log("After Date Filter:", filteredData);
+
+  renderTransferHistory(filteredData);
+}
+
+function renderTransferHistory(history) {
+  const historyContainer = document.getElementById("transfer-history-container");
+
+  if (!historyContainer) {
+    console.error("History container element not found.");
+    return;
+  }
+
+  if (history.length === 0) {
+    historyContainer.innerHTML = `<p class="no-data-message">No records found for the selected filters.</p>`;
+    return;
+  }
+
+  historyContainer.innerHTML = history
+    .map(
+      (data) => `
+      <div data-v-f851bd18="" class="rechargeh__container-content__item">
+        <div data-v-f851bd18="" class="rechargeh__container-content__item-header">
+          <span data-v-f851bd18="" class="recharge_tit">${data.type}</span>
+          <div data-v-f851bd18="" style="margin-right: 10px;">
+            <span data-v-f851bd18="">Success</span>
+          </div>
+        </div>
+        <div data-v-f851bd18="" role="separator" class="van-divider van-divider--hairline divier"></div>
+        <div data-v-f851bd18="" class="rechargeh__container-content__item-body">
+          <div data-v-f851bd18=""><span data-v-f851bd18="">Balance</span><span data-v-f851bd18="" class="price">₹${data.amount}</span></div>
+          <div data-v-f851bd18=""><span data-v-f851bd18="">Type</span><span data-v-f851bd18="">${data.type}</span></div>
+          <div data-v-f851bd18=""><span data-v-f851bd18="">Time</span><span data-v-f851bd18="">${timerJoin(data.time)}</span></div>
+          <div data-v-f851bd18="" style="background: var(--sheet_detail_bg_color); height: 1.2rem; margin-bottom: 0rem; border-radius: 5px;">
+            <span data-v-f851bd18="">Order number</span>
+            <div data-v-f851bd18="" class="order">
+              <span data-v-f851bd18="">${data.id}</span>
+              <img data-v-f851bd18="" class="svg-icon icon-copy" width="20px" height="20px" src="/assets/png/copy.png">
+              <use xlink:href="#icon-copy"></use>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+    )
+    .join("");
+}
+
+// Add filters to the HTML
+const filterContainer = document.getElementById("filter-container");
+if (filterContainer) {
+  filterContainer.innerHTML = `
+    
+    <select id="type-filter" style="width: 48%; height: 1.0rem; border: 0px solid; border-radius: 5px; padding: 8px; margin-bottom: 10px;">
+      <option value="">All</option>
+      <option value="Revenue">Revenue</option>
+      <option value="Invest">Invest</option>
+      <option value="Withdraw">Withdraw</option>
+    </select>
+      
+    
+    <input type="date" id="date-filter" style="width: 48%; height: 1.0rem; border: 0px solid; border-radius: 5px; padding: 8px; margin-bottom: 10px;">
+  `;
+} else {
+  console.error("Filter container element not found.");
+}
+
+
+
+</script>    
+      
+      
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const transferOutButton = document.getElementById("transfer-out-button");
+    const transferOutPopup = document.querySelector(".van-popup[role='dialog']");
+    const overlay = document.getElementById("overlay");
+    const withdrawNowButton = document.querySelector(".popup__container-sumbit");
+    const amountInput = document.getElementById("van-field-41-input");
+    const amountAvailableElement = document.querySelector(".popup__container-numLine-num");
+    const amountTransferredElement = document.querySelector(".popup__container-numLine-num2");
+
+    let availableAmount = 0;
+
+    // Show popup and overlay on button click
+    if (transferOutButton && transferOutPopup && overlay) {
+      transferOutButton.addEventListener("click", async function () {
+        overlay.style.display = "block"; // Show overlay
+        transferOutPopup.style.display = "block"; // Show popup
+        transferOutPopup.setAttribute("aria-hidden", "false"); // Update accessibility
+
+        // Fetch available amount (e.g., from user data endpoint)
+        try {
+          const response = await fetch('/api/webapi/GetUserInfo');
+          const data = await response.json();
+          if (data.status && data.data) {
+            availableAmount = parseFloat(data.data.third_party_money || 0);
+            amountAvailableElement.textContent = `₹${availableAmount.toFixed(2)}`;
+          }
+        } catch (error) {
+          console.error("Error fetching user info:", error);
+          alert("Failed to retrieve user information.");
+        }
+      });
+    }
+
+    // Handle withdrawal logic
+    if (withdrawNowButton) {
+      withdrawNowButton.addEventListener("click", async function () {
+        const amount = parseFloat(amountInput.value);
+
+        if (isNaN(amount) || amount <= 0) {
+          alert("Please enter a valid amount.");
+          return;
+        }
+
+        if (amount > availableAmount) {
+          alert("Insufficient funds in the third-party wallet.");
+          return;
+        }
+
+        // Make API call for transfer-out
+        try {
+          const response = await fetch('/transfer-out', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              phone: document.getElementById('phone').value, // User phone
+              amount: amount,
+            }),
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            alert(result.message || "Transfer successful!");
+
+            // Update UI balances
+            availableAmount -= amount;
+            amountAvailableElement.textContent = `₹${availableAmount.toFixed(2)}`;
+            amountTransferredElement.textContent = `₹${amount.toFixed(2)}`;
+
+            // Hide the popup and overlay
+            overlay.style.display = "none";
+            transferOutPopup.style.display = "none";
+            transferOutPopup.setAttribute("aria-hidden", "true");
+          } else {
+            alert(result.message || "Transfer failed.");
+          }
+        } catch (error) {
+          console.error("Error during transfer:", error);
+          alert("An error occurred during the transfer.");
+        }
+      });
+    }
+
+    // Close popup and overlay functionality
+    const closeButton = transferOutPopup.querySelector(".van-icon-close");
+    if (closeButton) {
+      closeButton.addEventListener("click", function () {
+        overlay.style.display = "none"; // Hide overlay
+        transferOutPopup.style.display = "none"; // Hide popup
+        transferOutPopup.setAttribute("aria-hidden", "true"); // Update accessibility
+      });
+    }
+
+    // Hide popup and overlay if overlay is clicked
+    overlay.addEventListener("click", function () {
+      overlay.style.display = "none"; // Hide overlay
+      transferOutPopup.style.display = "none"; // Hide popup
+      transferOutPopup.setAttribute("aria-hidden", "true"); // Update accessibility
+    });
+  });
+</script>
+
+
+      
+
+
+  </body>
+
+</html>

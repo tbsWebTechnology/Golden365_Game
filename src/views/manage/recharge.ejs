@@ -123,107 +123,114 @@
       usdt_manual: "USDT Manual",
       usdt_manua: "USDT Manual",
       wow_pay: "WOW Pay",
-      rs_pay: "RS Pay",
+      upiauto: "DRAGON PAY",
+      rs_pay: "RS PAY",
       usdt: "USDT",
     }
 
     function show(params) {
-      if (params.length == 0) {
-        $('tbody').html(`
-            <tr class="text-center">
-              <td colspan="7">No More...</td>
-            </tr>
-          `);
-        return;
+  if (params.length == 0) {
+    $('tbody').html(`
+      <tr class="text-center">
+        <td colspan="10">No More...</td>
+      </tr>
+    `);
+    return;
+  }
+
+  // Sort the entries in descending order of time
+  params.sort(function(a, b) {
+    return b.time - a.time;
+  });
+
+  let html = params.map((data) => {
+    return `<tr class="text-center">
+              <td id="${data.id}">
+                ${data.id}
+              </td>
+              <td>
+                <b>${data.phone}</b>
+              </td>
+              <td>
+                ${(data.type == 'bank') ? '<b style="color: #3498db">BANKING</b>' : '<b style="color: #a50064">UPI</b>'}
+              </td>
+              <td>
+                <b>${data.money}</b>
+              </td>
+              <td style="min-width: 190px;">
+                <b>${data.id_order}</b>
+              </td>
+              <td style="min-width: 190px;">
+                <b>${data.utr}</b>
+              </td>
+              <td style="min-width: 190px;">
+                <b>${PaymentMethodsMap?.[data.type] ? PaymentMethodsMap?.[data.type] : data.type}</b>
+              </td>
+              <td style="min-width: 190px;">
+                <b>${timerJoin(data.time)}</b>
+              </td>
+              <td class="project-state">
+                <span class="badge badge-warning">Waiting...</span>
+              </td>
+              <td class="project-actions text-center" style="min-width: 160px;">
+                <a class="btn btn-success btn-sm confirm-btn" href="" data="${data.id}"><i class="fa fa-check"></i></a>
+                <a class="btn btn-danger btn-sm delete-btn" href="#" data="${data.id}"><i class="fas fa-trash"></i></a>
+              </td>
+            </tr>`;
+  }).join('');
+
+  $('tbody').html(html);
+
+  // Rest of your event handlers
+  $('.btn-success').off("click.success_recharge")
+  $('.btn-success').on("click.success_recharge", function (e) {
+    e.preventDefault();
+    let id = $(this).attr('data');
+    $.ajax({
+      type: "POST",
+      url: "/api/webapi/admin/recharge/status",
+      data: {
+        id: id,
+        status: PaymentStatusMap.SUCCESS
+      },
+      dataType: "json",
+      success: function (response) {
+        initRecharge()
+
+        Swal.fire(
+          'Good job!',
+          'You Accepted The Recharge!',
+          'success'
+        )
       }
+    });
+  });
 
-      let html = params.map((data) => {
-        return `<tr class="text-center">
-                  <td id="${data.id}">
-                    ${data.id}
-                  </td>
-                  <td>
-                    <b>${data.phone}</b>
-                  </td>
-                  <td>
-                    ${(data.type == 'bank') ? '<b style="color: #3498db">BANKING</b>' : '<b style="color: #a50064">UPI</b>'}
-                  </td>
-                  <td>
-                    <b>${(data.money)}</b>
-                  </td>
-                  <td style="min-width: 190px;">
-                    <b>${data.id_order}</b>
-                  </td>
-                  <td style="min-width: 190px;">
-                    <b>${data.utr}</b>
-                  </td>
-                  <td style="min-width: 190px;">
-                    <b>${PaymentMethodsMap?.[data.type] ? PaymentMethodsMap?.[data.type] : data.type}</b>
-                  </td>
-                  <td style="min-width: 190px;">
-                    <b>${timerJoin(data.time)}</b>
-                  </td>
-                  <td class="project-state">
-                    <span class="badge badge-warning">Waiting...</span>
-                  </td>
-                  <td class="project-actions text-center" style="min-width: 160px;">
-                    <a class="btn btn-success btn-sm confirm-btn" href="" data="${data.id}"><i class="fa fa-check"></i></a>
+  $('.btn-danger').off("click.cancel_recharge")
+  $('.btn-danger').on("click.cancel_recharge", function (e) {
+    e.preventDefault();
+    let id = $(this).attr('data');
+    $.ajax({
+      type: "POST",
+      url: "/api/webapi/admin/recharge/status",
+      data: {
+        id: id,
+        status: PaymentStatusMap.CANCELLED
+      },
+      dataType: "json",
+      success: function (response) {
+        initRecharge()
 
-                    <a class="btn btn-danger btn-sm delete-btn" href="#" data="${data.id}"><i class="fas fa-trash"></i></a>
-                  </td>
-                </tr>`;
-      }).join('')
+        Swal.fire(
+          'Good job!',
+          'You Rejected The Recharge!',
+          'success'
+        )
+      }
+    });
+  });
+}
 
-      $('tbody').html(html);
-
-      $('.btn-success').off("click.success_recharge")
-      $('.btn-success').on("click.success_recharge", function (e) {
-        e.preventDefault();
-        let id = $(this).attr('data');
-        $.ajax({
-          type: "POST",
-          url: "/api/webapi/admin/recharge/status",
-          data: {
-            id: id,
-            status: PaymentStatusMap.SUCCESS
-          },
-          dataType: "json",
-          success: function (response) {
-            initRecharge()
-
-            Swal.fire(
-              'Good job!',
-              'You Accepted The Recharge!',
-              'success'
-            )
-          }
-        });
-      });
-
-      $('.btn-danger').off("click.cancel_recharge")
-      $('.btn-danger').on("click.cancel_recharge", function (e) {
-        e.preventDefault();
-        let id = $(this).attr('data');
-        $.ajax({
-          type: "POST",
-          url: "/api/webapi/admin/recharge/status",
-          data: {
-            id: id,
-            status: PaymentStatusMap.CANCELLED
-          },
-          dataType: "json",
-          success: function (response) {
-            initRecharge()
-
-            Swal.fire(
-              'Good job!',
-              'You Rejected The Recharge!',
-              'success'
-            )
-          }
-        });
-      });
-    }
 
     const initRecharge = () => {
       $.ajax({

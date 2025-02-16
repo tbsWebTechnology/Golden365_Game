@@ -1,42 +1,31 @@
 <html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 37px;">
 
 <head>
-   <script src="/app.config.js?v=1718968461132"></script>
+    
 
    <meta charset="UTF-8">
-   <link rel="icon" type="image/svg+xml"
-      href="https://ossimg.tirangaagent.com/Tiranga/other/h5setting_20231017190406lyb3.ico">
+   <link rel="icon" type="image/svg+xml" href="/uploads/favicon/favicon.png" />
    <meta name="google" content="notranslate">
    <meta name="robots" content="noindex,nofollow">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
    <link rel="manifest" href="/manifest.tiranga.json?version=1.1">
-   <title>Indn Club</title>
+   <title id="app-title"></title>
+  <script src="/js/app.js"></script>
 
-   <link rel="modulepreload" crossorigin="" href="/assets/js/modules-6b0d6df4.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/native/index-7b2487e5.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/en-93cdab10.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/rus-ecb14220.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/vi-40bd560a.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/id-24cc3835.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/hd-c5b1d7e8.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/tha-330057b2.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/md-02b1fc1c.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/bra-1f3ea623.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/my-80d37f62.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/bdt-d8f19d0c.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/zh-3589f8b3.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/pak-9f46abf2.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/ar-64903102.js">
-   <link rel="modulepreload" crossorigin="" href="/assets/js/page-activity-d3ba61d1.js">
-   <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css">
-   <link rel="stylesheet" href="/assets/css/page-activity-4fe5c6bf.css">
-   <link rel="stylesheet" href="/assets/css/index-2c2fee84.css">
-   <link rel="stylesheet" href="/assets/css/page-home-482c7bbf.css" />
+  <link rel="stylesheet" href="/assets/css/index-f3f1dfe8.css">
+  <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css">
+  <link rel="stylesheet" href="/assets/css/page-activity-4fe5c6bf.css">
+  <link rel="stylesheet" href="/assets/css/index-2c2fee84.css">
+  <link rel="stylesheet" href="/assets/css/modules-5dd73da0.css">
+  <link rel="stylesheet" href="/assets/css/page-home-482c7bbf.css" />
+
+  <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
 
 
 
-   <link rel="stylesheet" href="/assets/css/page-home-522c97b9.css">
+  <link rel="stylesheet" href="/assets/css/page-home-522c97b9.css">
+  <link rel="stylesheet" href="/assets/css/page-login-49518e3f.css">
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
       integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
@@ -44,6 +33,111 @@
    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"
       integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
       crossorigin="anonymous"></script>
+
+
+
+      <style>
+         .message_alert_root {
+   
+            font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Segoe UI, Arial, Roboto, PingFang SC, Hiragino Sans GB, Microsoft Yahei, sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            max-width: 12.8rem;
+            width: 80%;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100000;
+            border-radius: 14px;
+         }
+   
+         .message_alert_text {
+            font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Segoe UI, Arial, Roboto, PingFang SC, Hiragino Sans GB, Microsoft Yahei, sans-serif;
+            margin: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            transition: opacity .5s;
+            animation: bounce-in-data-v-1dcba851 .5s;
+            position: relative;
+            padding: .32rem .66667rem;
+            text-align: center;
+            line-height: .64rem;
+            overflow: hidden;
+            font-size: .37333rem;
+            color: #fff;
+            background-color: rgba(0, 0, 0, .8);
+         }
+   
+         @keyframes bounce-in-data-v-1dcba851 {
+            0% {
+               transform: scale(.4)
+            }
+   
+            50% {
+               transform: scale(1.03)
+            }
+   
+            to {
+               transform: scale(1)
+            }
+         }
+
+
+         
+
+      /* Container for the marquee effect */
+    .noticeBar__container {
+      width: 100%;
+      background-color: #f0f0f0; /* Optional, for styling */
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Container for the text */
+    .noticeBar__container-body {
+      overflow: hidden;
+      white-space: nowrap;
+      width: 80%; /* Adjust width as needed */
+    }
+
+    /* The moving text */
+    #noticegame {
+      display: inline-block;
+      animation: marquee 30s linear infinite; /* Adjust speed with the duration (10s) */
+      padding-left: 100%; /* Start text off-screen on the right */
+    }
+
+    /* Keyframes to move text from right to left */
+    @keyframes marquee {
+      0% {
+        transform: translateX(1%); /* Starts from the right edge */
+      }
+      100% {
+        transform: translateX(-100%); /* Ends at the left edge */
+      }
+    }
+
+    /* Style for the button */
+    .hotIcon {
+      background-color: #007bff; /* Button color */
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+
+      </style>
+
+      
 </head>
 
 <body class="" style="font-size: 12px;">
@@ -4035,7 +4129,7 @@
                      <clipPath id="__lottie_element_2">
                         <rect width="200" height="200" x="0" y="0"></rect>
                      </clipPath>
-                     <image xlink:href="/logo_loading.png">
+                     <image xlink:href="/uploads/logo/logo.png">
                      </image>
                      <image
                         xlink:href="data:image/png;base64,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">
@@ -4053,7 +4147,7 @@
                         transform="matrix(1.0915199518203735,0,0,1.0915199518203735,16.49872589111328,78.16960144042969)"
                         opacity="1" style="display: block;">
                         <image width="163px" height="60px" preserveAspectRatio="xMidYMid slice"
-                           xlink:href="/logo_loading.png">
+                           xlink:href="/uploads/logo/logo.png">
                         </image>
                      </g>
                   </g>
@@ -4109,11 +4203,11 @@
          <div data-v-12a80a3e="" data-v-ac90c264="" class="navbar main">
             <div data-v-12a80a3e="" class="navbar-fixed">
                <div data-v-12a80a3e="" class="navbar__content">
-                  <div data-v-12a80a3e="" class="navbar__content-left" onclick="history.back()"><i data-v-12a80a3e=""
+                  <div data-v-12a80a3e="" class="navbar__content-left" onclick="location.href='/home'"><i data-v-12a80a3e=""
                         class="van-badge__wrapper van-icon van-icon-arrow-left"><!----><!----><!----></i></div>
                   <div data-v-12a80a3e="" class="navbar__content-center">
                      <div data-v-12a80a3e="" class="headLogo"
-                        style="background-image: url(&quot;/h5setting_202308141709544lm1.png&quot;);">
+                        style="background-image: url(&quot;/uploads/logo/logo.png&quot;);">
                      </div>
                      <div data-v-12a80a3e="" class="navbar__content-title"></div>
                   </div>
@@ -4169,6 +4263,7 @@
                   <!-- 投注内容 begin --><!----><!----><!-- 规则弹层 begin--><!----><!---->
       </div><!-- 记录导航 -->
       <div data-v-a9660e98="" class="game-list p-b-20"><%- include('element/list-order.ejs') -%></div>
+      <%- include('element/result_popup.ejs') -%>
 
       <!-- 弹窗组件 -->
       <div data-v-3e71d3da="" data-v-ac90c264="" class="dialog inactive">

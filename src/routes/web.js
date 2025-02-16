@@ -20,9 +20,16 @@ import jdbController from "../controllers/jdbController.js";
 import vipController from "../controllers/vipController.js";
 import rateLimit from "express-rate-limit";
 
+
+import { redEnvelopesHistoryAPI } from '../controllers/adminController.js';
+
+
+
+
 let router = express.Router();
 
 const initWebRouter = (app) => {
+  
   // page account
   router.post("/jili/auth", jiliGamesController.auth);
   router.post("/jili/bet", jiliGamesController.bet);
@@ -35,6 +42,83 @@ const initWebRouter = (app) => {
     middlewareController,
     jiliGamesController.getGameLink,
   );
+
+
+ // Routes for logo and favicon uploads
+router.post(
+  '/admin/manager/upload-logo',
+  adminController.middlewareAdminController,
+  adminController.uploadLogo,
+  adminController.uploadLogoHandler
+);
+
+router.post(
+  '/admin/manager/upload-favicon',
+  adminController.middlewareAdminController,
+  adminController.uploadFavicon,
+  adminController.uploadFaviconHandler
+);
+  
+
+router.post('/admin/add-notification', adminController.middlewareAdminController,  adminController.addNotification);
+router.get('/admin/get-notifications', adminController.middlewareAdminController, adminController.getNotifications);
+router.put('/admin/update-notification', adminController.middlewareAdminController, adminController.updateNotification); // Edit notification
+router.delete('/admin/delete-notification/:id', adminController.middlewareAdminController, adminController.deleteNotification); // Delete notification
+
+
+// Route to get feedbacks list
+router.get('/admin/get-feedbacks', adminController.middlewareAdminController, adminController.getFeedbacks);
+
+
+  router.post('/auth', jiliGamesController.auth);  // Ensure `auth` is correctly imported
+router.post('/bet', jiliGamesController.bet);    // Ensure `bet` is correctly imported
+router.get('/game-list', jiliGamesController.gameList); // Ensure `gameList` is correctly imported
+
+
+  router.get('/api/redenvelopes', redEnvelopesHistoryAPI);  // API to fetch data
+  router.get('/original', middlewareController, homeController.originalPage);
+  router.get('/fishing', middlewareController, homeController.fishingPage);
+  router.get('/casinos', middlewareController, homeController.casinosPage);
+  router.get('/slots', middlewareController, homeController.slotsPage);
+
+
+  router.post('/admin/manager/uploadBbanner', adminController.middlewareAdminController, adminController.uploadBanner);
+  
+  router.get('/admin/manager/getBanner', adminController.middlewareAdminController, adminController.getBanners);
+  router.post('/admin/manager/deleteBanner', adminController.middlewareAdminController, adminController.deleteBanner);
+
+
+     
+  router.post('/admin/manager/settings/app_name', adminController.middlewareAdminController, adminController.settingAppName); 
+  router.post('/admin/manager/settings/app_about', adminController.middlewareAdminController, adminController.settingAppAbout); 
+  router.post('/admin/manager/settings/app_notification', adminController.middlewareAdminController, adminController.settingAppNotification); 
+   
+  router.post('/admin/manager/settings/notice1', adminController.middlewareAdminController, adminController.settingNotice1); 
+  router.post('/admin/manager/settings/notice2', adminController.middlewareAdminController, adminController.settingNotice2); 
+  router.post('/admin/manager/settings/notice3', adminController.middlewareAdminController, adminController.settingNotice3);
+
+  router.post('/admin/manager/settings/inv_rech_bonus', adminController.middlewareAdminController, adminController.settingInvRechBonus);
+  router.post('/admin/manager/settings/usr_rech_bonus', adminController.middlewareAdminController, adminController.settingUsrRechBonus);
+  router.post('/admin/manager/settings/BONUS_MONEY_ON_REGISTER', adminController.middlewareAdminController, adminController.settingBonusMoneyOnRegister);
+  router.post('/admin/manager/settings/INVITER_BONUS_MONEY_ON_REGISTER', adminController.middlewareAdminController, adminController.settingInviterBonusMoneyOnRegister);
+
+
+  
+  router.post('/admin/manager/settings/mininrdep', adminController.middlewareAdminController, adminController.settingMinInrDep);
+  router.post('/admin/manager/settings/minusdtdep', adminController.middlewareAdminController, adminController.settingMinUsdtDep);
+  router.post('/admin/manager/settings/mininrwit', adminController.middlewareAdminController, adminController.settingMinInrWit);
+  router.post('/admin/manager/settings/minusdtwit', adminController.middlewareAdminController, adminController.settingMinUsdtWit);
+  router.post('/admin/manager/settings/inrusdtrate', adminController.middlewareAdminController, adminController.settingInrUsdRate);
+  router.post('/admin/manager/settings/minfirstrech', adminController.middlewareAdminController, adminController.settingMinFirstRech);
+  router.post('/admin/manager/settings/safeinterest', adminController.middlewareAdminController, adminController.settingSafeInterest);
+  
+
+  router.post('/admin/manager/create/ctv', adminController.middlewareAdminController, adminController.register); // get info account
+  router.post('/admin/manager/settings/get', adminController.middlewareAdminController, adminController.settingGet); // get info account
+
+  
+ 
+
   router.get(
     "/jili/slots",
     middlewareController,
@@ -78,7 +162,7 @@ const initWebRouter = (app) => {
     jdbController.gameCategoriesPage(4),
   );
   router.get(
-    "/jdb/casino",
+    "/jdb/casino",  //not found
     middlewareController,
     jdbController.gameCategoriesPage(2),
   );
@@ -101,6 +185,7 @@ const initWebRouter = (app) => {
 
   router.get("/keFuMenu", accountController.keFuMenu);
   router.get("/login", accountController.loginPage);
+  router.get("/admin", accountController.adminloginPage);
   router.get("/register", accountController.registerPage);
   router.get("/forgot", accountController.forgotPage);
   router.get("/forgot_reset", accountController.forgotResetPage);
@@ -149,6 +234,7 @@ const initWebRouter = (app) => {
   router.get("/jackpot", middlewareController, homeController.jackpotPage);
   router.get("/newGift", middlewareController, homeController.newGift);
   router.get("/vip", middlewareController, homeController.vipPage);
+  router.get("/strongbox", middlewareController, homeController.strongBoxPage);
   router.get("/newHot", middlewareController, homeController.newHot);
   router.get("/youtube", middlewareController, homeController.youtube);
   router.get("/mystery", middlewareController, homeController.mystery);
@@ -189,11 +275,23 @@ const initWebRouter = (app) => {
     homeController.jackpotWiningStarPage,
   );
   router.get("/wallet/transfer", middlewareController, homeController.transfer);
-  router.get(
-    "/game_history",
-    middlewareController,
-    homeController.gameHistoryPage,
-  );
+
+
+  router.get("/bet-history", middlewareController, homeController.betHistoryPage);
+  router.get("/wingo-bet-history", middlewareController, homeController.betwingoPage);
+  router.get("/k3-bet-history", middlewareController, homeController.betk3Page);
+  router.get("/5d-bet-history", middlewareController, homeController.bet5dPage);
+  router.get("/trx-wingo-bet-history", middlewareController, homeController.bettrxwingoPage);
+  
+
+
+
+  router.get("/casino-bet-history", middlewareController, homeController.casinoHistoryPage,);
+  router.get("/fishing-bet-history", middlewareController, homeController.fishingHistoryPage,);
+  router.get("/rummy-bet-history", middlewareController, homeController.rummyHistoryPage,);
+  router.get("/original-bet-history", middlewareController, homeController.originalHistoryPage,);
+  router.get("/slots-bet-history", middlewareController, homeController.slotsHistoryPage,);
+
 
   router.get("/promotion", middlewareController, homeController.promotionPage);
   router.get(
@@ -207,6 +305,44 @@ const initWebRouter = (app) => {
     middlewareController,
     homeController.promotion1Page,
   );
+
+  router.get(
+    "/turntable",
+    middlewareController,
+    homeController.turntablePage,
+  );
+
+  router.get(
+    "/Turntable/rules",
+    middlewareController,
+    homeController.RulesPage,
+  );
+
+  router.get(
+    "/Turntable/Introduce",
+    middlewareController,
+    homeController.IntroducePage,
+  );
+
+  router.get(
+    "/Turntable/Details",
+    middlewareController,
+    homeController.DetailsPage,
+  );
+
+  router.get(
+    "/promotion/PromotionShare",
+    middlewareController,
+    homeController.PromotionsharePage,
+  );
+  
+
+  router.get(
+    "/promotion/TeamPartner",
+    middlewareController,
+    homeController.TeamPartnerPage,
+  );5
+
   router.get(
     "/promotion/myTeam",
     middlewareController,
@@ -280,6 +416,88 @@ const initWebRouter = (app) => {
     middlewareController,
     promotionController.claimDailyRechargeReword,
   );
+
+
+
+  router.post("/transfer-in", userController.transferIn);
+
+  router.post("/transfer-out", userController.transferOut);
+
+  // Map the endpoint
+  router.post("/api/claim-bonus", userController.claimBonus);
+
+  router.get(
+    "/api/transfer-in/history",
+    middlewareController, // Middleware (if applicable)
+    userController.transferInHistory
+  );
+
+
+  router.get(
+    "/api/check-subordinate-recharge",
+    middlewareController, // Middleware (if applicable)
+    userController.checkSubordinateRecharge
+  );
+
+
+  router.get(
+    "/api/claimed-rewards",
+    middlewareController, // Middleware (if applicable)
+    userController.getClaimedRewards
+  );
+
+
+  router.get(
+    "/api/get-notifications",
+    middlewareController, // Middleware (if applicable)
+    userController.getNotifications
+  );
+
+
+
+  router.get(
+    "/api/webapi/getTotalBetAmount",
+    middlewareController, // Middleware (if applicable)
+    userController.getTotalBetAmount
+  );
+
+
+  router.get(
+    "/api/webapi/getClaimedRebates",
+    middlewareController, // Middleware (if applicable)
+    userController.getClaimedRebates
+  );
+
+
+  router.post(
+    "/api/webapi/redeemRebate",
+    middlewareController, // Middleware (if applicable)
+    userController.redeemRebate
+  );
+
+
+  router.get(
+    "/api/total-invitation-bonus",
+    middlewareController, // Middleware (if applicable)
+    userController.getTotalInvitationBonus
+  );
+
+
+  router.get(
+    "/api/activity/invitation/record",
+    middlewareController, // Middleware (if applicable)
+    userController.getInvitationRecord
+  );
+
+  router.get(
+    "/api/webapi/GetAdminConfig",
+    middlewareController, // Middleware (if applicable)
+    userController.getAdminConfig
+  );
+  
+  
+
+
   // router.post("/api/activity/daily_recharge/record", middlewareController, promotionController.claimDailyRechargeReword)
   router.get(
     "/api/activity/daily_recharge_bonus/record",
@@ -365,6 +583,8 @@ const initWebRouter = (app) => {
     homeController.transactionhistoryPage,
   );
 
+
+
   router.get(
     "/wallet/paynow/manual_upi",
     middlewareController,
@@ -385,21 +605,8 @@ const initWebRouter = (app) => {
     middlewareController,
     paymentController.addManualUSDTPaymentRequest,
   );
-  router.post(
-    "/wallet/paynow/wowpay",
-    middlewareController,
-    paymentController.initiateWowPayPayment,
-  );
-  router.post(
-    "/wallet/verify/wowpay",
-    middlewareController,
-    paymentController.verifyWowPayPayment,
-  );
-  router.get(
-    "/wallet/verify/wowpay",
-    middlewareController,
-    paymentController.verifyWowPayPayment,
-  );
+  
+  
   router.post(
     "/wallet/paynow/upi",
     middlewareController,
@@ -422,7 +629,45 @@ const initWebRouter = (app) => {
     middlewareController,
     paymentController.initiateUpayPayment,
   );
+
+
   router.post("/wallet/verify/upay", paymentController.verifyUpayPayment);
+
+
+  router.get(
+    "/wallet/paynow/mother",
+    middlewareController,
+    paymentController.initiateMotherPayment,
+  );
+
+
+  router.post(
+    "/payment/motherpay/callback",
+    
+    paymentController.rechargeCallback,
+  );
+
+
+
+
+  router.get(
+    "/wallet/paynow/lgpay",
+    middlewareController,
+    paymentController.initiateLgPayPayment,
+  );
+
+
+  router.post(
+    "/payment/lgpay/verifylgpay",
+    
+    paymentController.verifyLgPayPayment,
+  );
+
+
+
+
+
+
 
   router.get(
     "/game/statistics",
@@ -641,6 +886,12 @@ const initWebRouter = (app) => {
     userController.useRedenvelope,
   ); // register
 
+
+
+  router.post('/api/webapi/submitFeedback', userController.submitFeedback);
+
+
+
   // wallet
   router.post(
     "/api/webapi/recharge",
@@ -667,7 +918,19 @@ const initWebRouter = (app) => {
     "/api/webapi/recharge/list",
     middlewareController,
     userController.listRecharge,
-  ); // register
+  ); 
+  
+  
+  router.get('/api/webapi/game/list/wingo', middlewareController, userController.listGameswingo);
+  router.get('/api/webapi/game/list/k3', middlewareController, userController.listGamesk3); 
+  router.get('/api/webapi/game/list/5d', middlewareController, userController.listGames5d); 
+  router.get('/api/webapi/game/list/trx', middlewareController, userController.listGamestrx); 
+
+
+  
+
+  
+  // register
   router.get(
     "/api/webapi/withdraw/transactionRecord",
     middlewareController,
@@ -746,6 +1009,15 @@ const initWebRouter = (app) => {
     adminController.middlewareAdminController,
     withdrawalController.approveAndInitiateAquapayWithdrawalRequest,
   ); // register
+  
+  
+  
+  
+  router.post('/api/webapi/admin/updateApigameStatus', adminController.updateApigameStatus);
+  
+  
+  
+  
   router.post(
     "/api/withdrawal/aqua_callback",
     withdrawalController.verifyAquapayWithdrawalRequest,
@@ -970,6 +1242,46 @@ const initWebRouter = (app) => {
     adminController.middlewareAdminController,
     adminController.settings,
   ); // get info account
+
+  router.get(
+    "/admin/manager/advsettings",
+    adminController.middlewareAdminController,
+    adminController.advsettings,
+  ); // get info account
+
+  router.get(
+    "/admin/manager/appsettings",
+    adminController.middlewareAdminController,
+    adminController.appsettings,
+  ); // get info account
+
+  router.get(
+    "/admin/manager/bannersettings",
+    adminController.middlewareAdminController,
+    adminController.bannersettings,
+  ); // get info account
+
+  router.get(
+    "/admin/manager/bonussettings",
+    adminController.middlewareAdminController,
+    adminController.bonussettings,
+  ); // get info account
+
+
+  router.get(
+    "/admin/manager/notifsettings",
+    adminController.middlewareAdminController,
+    adminController.notifsettings,
+  ); // get info account
+
+  router.get(
+    "/admin/manager/feedbacks",
+    adminController.middlewareAdminController,
+    adminController.feedbacks,
+  ); // get info account
+
+
+
   router.get(
     "/admin/manager/listRedenvelops",
     adminController.middlewareAdminController,
@@ -1059,6 +1371,18 @@ const initWebRouter = (app) => {
     adminController.CreatedSalaryRecord,
   );
   router.get(
+    "/admin/manager/CreatedAdvanceRecord",
+    adminController.middlewareAdminController,
+    adminController.CreatedAdvanceRecord,
+  );
+
+  router.get(
+    "/admin/manager/CreatedBonusRecord",
+    adminController.middlewareAdminController,
+    adminController.CreatedBonusRecord,
+  );
+
+  router.get(
     "/admin/manager/DailySalaryEligibility",
     adminController.middlewareAdminController,
     adminController.DailySalaryEligibility,
@@ -1095,6 +1419,18 @@ const initWebRouter = (app) => {
   );
 
   router.get(
+    "/api/webapi/admin/getAdvance",
+    adminController.middlewareAdminController,
+    adminController.getAdvance,
+  );
+
+  router.get(
+    "/api/webapi/admin/getBonus",
+    adminController.middlewareAdminController,
+    adminController.getBonus,
+  );
+
+  router.get(
     "/api/webapi/admin/listCheckSalaryEligibility",
     adminController.middlewareAdminController,
     adminController.listCheckSalaryEligibility,
@@ -1110,6 +1446,19 @@ const initWebRouter = (app) => {
     adminController.middlewareAdminController,
     adminController.CreatedSalary,
   ); // get info account
+
+  router.post(
+    "/api/webapi/admin/CreatedAdvance",
+    adminController.middlewareAdminController,
+    adminController.CreatedAdvance,
+  ); // get info account
+
+  router.post(
+    "/api/webapi/admin/CreatedBonus",
+    adminController.middlewareAdminController,
+    adminController.CreatedBonus,
+  ); // get info account
+
   router.post(
     "/api/webapi/admin/listMember",
     adminController.middlewareAdminController,

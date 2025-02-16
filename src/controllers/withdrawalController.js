@@ -323,15 +323,43 @@ const createWithdrawalRequest = async (req, res) => {
       });
     }
 
+    // const minimumMoneyAllowed =
+    //   withdrawalMethod === WITHDRAWAL_METHODS_MAP.BANK_CARD
+    //     ? parseInt(process.env.MINIMUM_WITHDRAWAL_MONEY_INR)
+    //     : parseInt(process.env.MINIMUM_WITHDRAWAL_MONEY_USDT);
+
+    // let actualAmount =
+    //   withdrawalMethod === WITHDRAWAL_METHODS_MAP.BANK_CARD
+    //     ? parseInt(amount)
+    //     : parseInt(amount) * parseInt(process.env.USDT_INR_EXCHANGE_RATE);
+
+
+    // Fetch minimum withdrawal settings from the database
+    const [adminSettings] = await connection.query(
+      "SELECT mininrwit, minusdtwit, inrusdtrate FROM admin_ac LIMIT 1"
+    );
+
+    if (!adminSettings || adminSettings.length === 0) {
+      return res.status(500).json({
+        message: "Failed to fetch withdrawal settings from the database",
+        status: false,
+        timeStamp: timeNow,
+      });
+    }
+
+    const { mininrwit, minusdtwit, inrusdtrate } = adminSettings[0];
+
     const minimumMoneyAllowed =
       withdrawalMethod === WITHDRAWAL_METHODS_MAP.BANK_CARD
-        ? parseInt(process.env.MINIMUM_WITHDRAWAL_MONEY_INR)
-        : parseInt(process.env.MINIMUM_WITHDRAWAL_MONEY_USDT);
+        ? parseInt(mininrwit)
+        : parseInt(minusdtwit);
 
     let actualAmount =
       withdrawalMethod === WITHDRAWAL_METHODS_MAP.BANK_CARD
         ? parseInt(amount)
-        : parseInt(amount) * parseInt(process.env.USDT_INR_EXCHANGE_RATE);
+        : parseInt(amount) * parseFloat(inrusdtrate);
+
+
 
     if (amount < minimumMoneyAllowed) {
       return res.status(400).json({

@@ -1,22 +1,24 @@
 <html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 37px;">
 
 <head>
-   <script src="/app.config.js?v=1718968461132"></script>
+    
 
    <meta charset="UTF-8">
-   <link rel="icon" type="image/svg+xml"
-      href="https://ossimg.tirangaagent.com/Tiranga/other/h5setting_20231017190406lyb3.ico">
+   <link rel="icon" type="image/svg+xml" href="/uploads/favicon/favicon.png" />
    <meta name="google" content="notranslate">
    <meta name="robots" content="noindex,nofollow">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
    <link rel="manifest" href="/manifest.tiranga.json?version=1.1">
-   <title>Indn Club</title>
+   <title id="app-title"></title>
+  <script src="/js/app.js"></script>
    <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css">
    <link rel="stylesheet" href="/assets/css/page-activity-4fe5c6bf.css">
    <link rel="stylesheet" href="/assets/css/index-2c2fee84.css">
    <link rel="stylesheet" href="/assets/css/page-home-522c97b9.css">
    <link rel="stylesheet" href="/assets/css/page-login-49518e3f.css">
+   <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
+
    <style name="nordpass-fonts">
       @font-face {
          font-family: "Roboto Mono";
@@ -4059,7 +4061,7 @@
                      <clipPath id="__lottie_element_2">
                         <rect width="200" height="200" x="0" y="0"></rect>
                      </clipPath>
-                     <image xlink:href="/logo_loading.png">
+                     <image xlink:href="/uploads/logo/logo.png">
                      </image>
                      <image
                         xlink:href="data:image/png;base64,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">
@@ -4074,7 +4076,7 @@
                      <g class="png" transform="matrix(0.8999999761581421,0,0,0.8999999761581421,31.150001525878906,82)"
                         opacity="1" style="display: block;">
                         <image width="163px" height="60px" preserveAspectRatio="xMidYMid slice"
-                           xlink:href="/logo_loading.png">
+                           xlink:href="/uploads/logo/logo.png">
                         </image>
                      </g>
                   </g>
@@ -4141,238 +4143,742 @@
             </div>
          </div>
          <div data-v-99f1dd99="" class="guide-container-content">
-            <h2 style="">
-               <font color="#ffffff">1.How to Register</font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">- Fill Your Phone Number</font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">- Set Your Own Password ( 8 letters ）<br></font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">- Confirm The Password</font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">- Fill Your Recommendation Code</font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">- Click I Have Read And Agree<br></font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">- Click Register</font><br><br>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        1.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      How to Register
+                    </font>
+                  </font>
+                </font>
+              </font>
             </h2>
             <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <img src="https://ossimg.tirangaagent.com/Tiranga/editor/editor_202311032333143wnj.png"
-                  style="width: 390px;"><br>
-            </h2>
-            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <br>
-            </p>
-            <h2 style="">
-               <font color="#ffffff">2. How To Betting WinGo</font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">Click start game then choose 1 minute, 3 minute, 5 minute or 10 minute.</font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">Green : if the result shows 1,3,7,9</font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">Red : if the result shows 2,4,6,8</font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">Violet : if the result shows 0 or 5</font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">Small : if the result shows 0,1,2,3,4</font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">Big : if the result shows 5,6,7,8,9</font>
-            </h2>
-            <h2 style="">
-               <font color="#ffffff">This company not allowed to place Illegal betting<br>Exp ：Betting (Big and small
-                  together) or (Red and Green together) in the same time.</font>
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        -Fill Your Phone Number
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
             </h2>
             <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <img src="/guide/guide_2.jpg" style="width: 390px;"><br>
-            </h2>
-            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <br>
-            </p>
-            <h2 style="">
-               <font face="Times New Roman" color="#ffffff">3.How to recharge</font>
-            </h2>
-            <h2 style="">
-               <font face="Times New Roman" color="#ffffff">Click Wallet Icon, Click The Recharge Button, and we have
-                  five ways to make a recharge (BANK TRANSFER, E-WALLET, )</font>
-            </h2>
-            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <img src="https://ossimg.tirangaagent.com/Tiranga/editor/editor_20231103231915o8xp.png"
-                  style="width: 390px;"><img
-                  src="https://ossimg.tirangaagent.com/Tiranga/editor/editor_20231103231747yxeh.png"
-                  style="width: 390px;"><br>
-            </p>
-            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <br>
-            </p>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" style="" color="#ffffff">4. How to Withdraw</font>
-            </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" color="#ffffff">Click Wallet Icon, Click Withdraw Button.</font>
-            </h2>
-            <h2 style="">
-               <font face="Times New Roman" color="#ffffff">- Enter withdraw amount</font>
-            </h2>
-            <h2 style="">
-               <font face="Times New Roman" color="#ffffff">- Make Sure Your Total Bet Until Zero</font>
-            </h2>
-            <h2 style="">
-               <font face="Times New Roman" color="#ffffff">- Select Your Bank Account Or Add Your Bank Account</font>
-            </h2>
-            <h2 style="">
-               <font face="Times New Roman" color="#ffffff">- Input Amount You Want To Withdraw<br></font>
-            </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" style="" color="#ffffff">- Input Your Login Password</font>
+              <span style="font-family: &quot;Times New Roman&quot;;">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Set Your Own Password (6 letters)
+                      </font>
+                    </font>
+                  </font>
+                </font>
+                <br>
+              </span>
             </h2>
             <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <img src="https://ossimg.tirangaagent.com/Tiranga/editor/editor_202311032319323f7d.png"
-                  style="width: 390px;"><img
-                  src="https://ossimg.tirangaagent.com/Tiranga/editor/editor_20231103232010s18v.png"
-                  style="width: 390px;"><br>
-            </h2>
-            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <br>
-            </p>
-            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <br>
-            </p>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" style="" color="#ffffff">5. Orders</font>
-            </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" style="" color="#ffffff">When The Betting Complete You Can Click My Game
-                  Record To See Your Bet Record, You Can Check The Chart Trend.</font>
-            </h2>
-            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <img src="/guide/guide_5.jpg" style="width: 390px;"><br>
-            </p>
-            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <br>
-            </p>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" style="" color="#ffffff">7.Promotion</font>
-            </h2>
-            <h2 style="">
-               <font face="Times New Roman" color="#ffffff">- If you have a downline or referral member use your own
-                  link to register and if they make a recharge you can claim a reward. The agent will get a minimum
-                  commission of 0.6 % (level 1) and 0.18% (level 2) from each transaction that is done by the referral
-                  (Added every day at 00:30 AM.) If the accumulated transactions of the Referral reach a certain target,
-                  the agent will get an additional bonus with the following rebates.<br>- You Can Click The Sharing
-                  Invitation Poster To See The Barcode</font>
+              <span style="font-family: &quot;Times New Roman&quot;;">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        -Confirm The Password
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </span>
             </h2>
             <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <img src="https://ossimg.tirangaagent.com/Tiranga/editor/editor_20231103232436n88e.png"
-                  style="width: 390px;"><img
-                  src="https://ossimg.tirangaagent.com/Tiranga/editor/editor_20231103232512ce75.png"
-                  style="width: 390px;"><br>
-            </h2>
-            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <br>
-            </p>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span
-                  style="font-family: &quot;Times New Roman&quot;;">
-                  <font color="#ffffff">8. Account security</font>
-               </span></h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" color="#ffffff">Go To My Icon, Click Setting Icon.</font>
-            </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" color="#ffffff">- Click Login Password.</font>
-            </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" color="#ffffff">- Re-Enter Your Login Password.</font>
-            </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" color="#ffffff">- Enter Strongest New Password, and Confirm Your Password.
-               </font>
-            </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" style="" color="#ffffff">- Click Save Changes.</font>
+              <span style="font-family: &quot;Times New Roman&quot;;">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Fill Your Recommendation Code
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </span>
             </h2>
             <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <img src="https://ossimg.tirangaagent.com/Tiranga/editor/editor_20231103232532ccxr.png"
-                  style="width: 390px;"><img
-                  src="https://ossimg.tirangaagent.com/Tiranga/editor/editor_20231103232550a9mm.png"
-                  style="width: 390px;">
-               <font face="Times New Roman"><br></font>
-            </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font color="#ffffff">
-                  <font face="Times New Roman" style="">10</font>. Forgot Password
-               </font>
-            </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" style="">
-                  <font color="#ffffff">- If You Forget Your Login Password, Please Contact Customer Service
-                     Immediately.</font><br>
-               </font>
-            </h2>
-            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <img src="/guide/guide_10.jpg" style="width: 390px;"><br>
-            </p>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <font face="Times New Roman"><br></font>
-            </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font color="#ffffff">
-                  <font face="Times New Roman" style="">10</font>. App download
-               </font>
-            </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" style="" color="#ffffff">Click top right corner download icon, your can
-                  download the app and easy to use</font>
+              <span style="font-family: &quot;Times New Roman&quot;;">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Click I Have Read And Agree
+                      </font>
+                    </font>
+                  </font>
+                </font>
+                <br>
+              </span>
             </h2>
             <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <img src="https://ossimg.tirangaagent.com/Tiranga/editor/editor_20231103232645bmch.png"
-                  style="width: 390px;"><br>
+              <span style="font-family: &quot;Times New Roman&quot;;">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Click Register
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </span>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <img src="/guide/editor_20241012211300jtan.jpg"
+              style="width: 592px;">
+              <br>
             </h2>
             <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <br>
+              <br>
             </p>
             <h2 style="">
-               <font color="#ffffff">11.About</font>
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        2. How to betting
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
             </h2>
             <h2 style="">
-               <font color="#ffffff">Click About for more details regarding Privacy Policy and Risk Disclosure
-                  Agreement.</font>
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        Click start game then choose 1 minute, 3 minute, 5 minute or 10 minute.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        Green: if the result shows 1,3,7,9
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        Red: if the result shows 2,4,6,8
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        Violet: if the result shows 0 or 5
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        Small: if the result shows 0,1,2,3,4
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        Big: if the result shows 5,6,7,8,9
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        This company is not allowed to place Illegal betting
+                      </font>
+                    </font>
+                  </font>
+                </font>
+                <br>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        Exp: Betting (Big and small together) or (Red and Green together) in the
+                        same time.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
             </h2>
             <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <img src="https://ossimg.tirangaagent.com/Tiranga/editor/editor_20231103232704tch1.png"
-                  style="width: 390px;"><img
-                  src="https://ossimg.tirangaagent.com/Tiranga/editor/editor_20231103232710o513.png"
-                  style="width: 390px;"><br>
-               <font face="Times New Roman"><br></font>
+              <img src="/guide/editor_20241012212726i9jt.jpg"
+              style="width: 592px;">
+              <br>
             </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" style="" color="#ffffff">11. Gift</font>
+            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <br>
+            </p>
+            <h2 style="">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        3.How to recharge
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
             </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" color="#ffffff">- Click Gift Exchange<br></font>
+            <h2 style="">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        Click Wallet Icon, Click The Recharge Button, and we have five ways to
+                        make a recharge (BANK TRANSFER, E-WALLET, )
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
             </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" color="#ffffff">- Input The Unique Code To Redemption Code The Money</font>
-            </h2>
-            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
-               <font face="Times New Roman" style="" color="#ffffff">- Click Receive</font>
+            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <img src="/guide/editor_20241012212753tk5o.jpg"
+              style="width: 592px;">
+              <img src="/guide/editor_20241012213035ovq5.jpg"
+              style="width: 592px;">
+              <br>
+            </p>
+            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <br>
+            </p>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        4. How to Withdraw
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
             </h2>
             <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
-               <img src="/guide/guide_11.jpg" style="width: 390px;"><img src="/guide/guide_11_2.jpg"
-                  style="width: 390px;"><br>
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        Click Wallet Icon, Click Withdraw Button.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
             </h2>
-         </div>
+            <h2 style="color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Enter withdraw amount
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Make Sure Your Total Bet Until Zero
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Select Your Bank Account Or Add Your Bank Account
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Input Amount You Want To Withdraw
+                      </font>
+                    </font>
+                  </font>
+                </font>
+                <br>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Input Your Login Password
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <img src="/guide/editor_20241012213259ctl1.jpg"
+              style="width: 592px;">
+              <img src="/guide/editor_202410122134328ung.jpg"
+              style="width: 592px;">
+              <br>
+            </h2>
+            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <br>
+            </p>
+            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <br>
+            </p>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        5. Orders
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        When The Betting Complete You Can Click My Game Record To See Your Bet
+                        Record, You Can Check The Chart Trend.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <img src="/guide/editor_20241012213622hyxa.jpg"
+              style="width: 592px;">
+              <br>
+            </p>
+            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <br>
+            </p>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        7. Promotion
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - If you have a downline or referral member use your own link to register
+                        and if they make a recharge you can claim a reward. The agent will get
+                        a minimum commission of 0.6 % (level 1) and 0.18% (level 2) from each transaction
+                        that is done by the referral (Added every day at 00:30 AM.) If the accumulated
+                        transactions of the Referral reach a certain target, the agent will get
+                        an additional bonus with the following rebates.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+                <br>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - You Can Click The Sharing Invitation Poster To See The Barcode
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <img src="/guide/editor_20241012213908tl6c.jpg"
+              style="width: 592px;">
+              <img src="/guide/editor_20241012213955p3wn.png"
+              style="width: 401px;">
+              <br>
+            </h2>
+            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <br>
+            </p>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <span style="font-family: &quot;Times New Roman&quot;;">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        8. Account security
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </span>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        Go To My Icon, Click Setting Icon.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Click Login Password.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Re-Enter Your Login Password.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Enter Strongest New Password, and Confirm Your Password.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Click Save Changes.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <img src="/guide/editor_20241012214025jmsg.png"
+              style="width: 400px;">
+              <img src="/guide/editor_20241012214046ps6a.png"
+              style="width: 401px;">
+              <font face="Times New Roman">
+                <br>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        10.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      Forgot Password
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - If You Forget Your Login Password, Please Contact Customer Service Immediately.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+                <br>
+              </font>
+            </h2>
+            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <img src="/guide/editor_202410122141313axk.png"
+              style="width: 403px;">
+              <br>
+            </p>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <br>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        10.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      App download
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        Click top right corner download icon, your can download the app and easy
+                        to use
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <img src="/guide/editor_20241012214231t2ti.png"
+              style="width: 400px;">
+              <br>
+            </h2>
+            <p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <br>
+            </p>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        11.About
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        Click About for more details regarding Privacy Policy and Risk Disclosure
+                        Agreement.
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <img src="/guide/editor_202410122142493q5n.png"
+              style="width: 403px;">
+              <img src="/guide/editor_20241012214301gtj4.png"
+              style="width: 403px;">
+              <br>
+              <font face="Times New Roman">
+                <br>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        11. Gift
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Click Gift Exchange
+                      </font>
+                    </font>
+                  </font>
+                </font>
+                <br>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Input The Unique Code To Redemption Code The Money
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <font face="Times New Roman">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">
+                        - Click Receive
+                      </font>
+                    </font>
+                  </font>
+                </font>
+              </font>
+            </h2>
+            <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);">
+              <img src="/guide/editor_20241012214328q652.png"
+              style="width: 401px;">
+              <img src="/guide/editor_20241012214346nbme.png"
+              style="width: 402px;">
+              <br>
+            </h2>
+          </div>
       </div><!--online custom service-->
       <div class="customer" id="customerId" onclick="location.href='/support'"
          style="--f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif; --f6a705e1-currentFontFamily: bahnschrift;">

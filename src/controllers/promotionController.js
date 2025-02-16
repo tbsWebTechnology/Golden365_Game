@@ -1,5 +1,6 @@
 import moment from "moment";
 import connection from "../config/connectDB.js";
+import pool from "../config/connectDB.js";  // Ensure the correct import
 import {
   REWARD_STATUS_TYPES_MAP,
   REWARD_TYPES_MAP,
@@ -668,6 +669,8 @@ const subordinatesAPI = async (req, res) => {
 };
 
 const InvitationBonusList = [
+  
+
   {
     id: 1,
     numberOfInvitedMembers: 3,
@@ -1006,6 +1009,21 @@ const getInvitedMembers = async (req, res) => {
   }
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const DailyRechargeBonusList = [
   {
     id: 1,
@@ -1056,11 +1074,11 @@ const getDailyRechargeReword = async (req, res) => {
 
     const [claimedRewardsRow] = await connection.execute(
       "SELECT * FROM `claimed_rewards` WHERE `type` = ? AND `phone` = ? AND `time` >= ?",
-      [REWARD_TYPES_MAP.DAILY_RECHARGE_BONUS, user.phone, today],
+      [REWARD_TYPES_MAP.DAILY_MISSION_BONUS, user.phone, today],
     );
 
     console.log("claimedRewardsRow", [
-      REWARD_TYPES_MAP.DAILY_RECHARGE_BONUS,
+      REWARD_TYPES_MAP.DAILY_MISSION_BONUS,
       user.phone,
       today,
     ]);
@@ -1121,7 +1139,7 @@ const claimDailyRechargeReword = async (req, res) => {
 
     const [claimedRewardsRow] = await connection.execute(
       "SELECT * FROM `claimed_rewards` WHERE `type` = ? AND `phone` = ? AND `time` >= ?",
-      [REWARD_TYPES_MAP.DAILY_RECHARGE_BONUS, user.phone, today],
+      [REWARD_TYPES_MAP.DAILY_MISSION_BONUS, user.phone, today],
     );
 
     const dailyRechargeRewordList = DailyRechargeBonusList.map((item) => {
@@ -1156,7 +1174,7 @@ const claimDailyRechargeReword = async (req, res) => {
     const [bonusList] = await connection.query(
       "SELECT * FROM `claimed_rewards` WHERE `type` = ? AND `phone` = ? AND `time` >= ? AND `reward_id` = ?",
       [
-        REWARD_TYPES_MAP.DAILY_RECHARGE_BONUS,
+        REWARD_TYPES_MAP.DAILY_MISSION_BONUS,
         user.phone,
         today,
         claimedBonusData.id,
@@ -1181,7 +1199,7 @@ const claimDailyRechargeReword = async (req, res) => {
       "INSERT INTO `claimed_rewards` (`reward_id`, `type`, `phone`, `amount`, `status`, `time`) VALUES (?, ?, ?, ?, ?, ?)",
       [
         claimedBonusData.id,
-        REWARD_TYPES_MAP.DAILY_RECHARGE_BONUS,
+        REWARD_TYPES_MAP.DAILY_MISSION_BONUS,
         user.phone,
         claimedBonusData.bonusAmount,
         REWARD_STATUS_TYPES_MAP.SUCCESS,
@@ -1214,7 +1232,7 @@ const dailyRechargeRewordRecord = async (req, res) => {
 
     const [claimedRewardsRow] = await connection.execute(
       "SELECT * FROM `claimed_rewards` WHERE `type` = ? AND `phone` = ?",
-      [REWARD_TYPES_MAP.DAILY_RECHARGE_BONUS, user.phone],
+      [REWARD_TYPES_MAP.DAILY_MISSION_BONUS, user.phone],
     );
 
     const claimedRewardsData = claimedRewardsRow.map((claimedReward) => {
@@ -1246,49 +1264,49 @@ const firstRechargeBonusList = [
     id: 1,
     rechargeAmount: 100000,
     bonusAmount: 5888,
-    agentBonus: 9999,
+    agentBonus: 0,
   },
   {
     id: 2,
     rechargeAmount: 50000,
     bonusAmount: 2888,
-    agentBonus: 6888,
+    agentBonus: 0,
   },
   {
     id: 3,
     rechargeAmount: 10000,
     bonusAmount: 488,
-    agentBonus: 1288,
+    agentBonus: 0,
   },
   {
     id: 4,
     rechargeAmount: 5000,
     bonusAmount: 288,
-    agentBonus: 768,
+    agentBonus: 0,
   },
   {
     id: 5,
     rechargeAmount: 1000,
     bonusAmount: 188,
-    agentBonus: 208,
+    agentBonus: 0,
   },
   {
     id: 6,
     rechargeAmount: 500,
     bonusAmount: 108,
-    agentBonus: 128,
+    agentBonus: 0,
   },
   {
     id: 7,
     rechargeAmount: 200,
     bonusAmount: 48,
-    agentBonus: 58,
+    agentBonus: 0,
   },
   {
     id: 8,
     rechargeAmount: 100,
     bonusAmount: 28,
-    agentBonus: 28,
+    agentBonus: 0,
   },
 ];
 
@@ -1310,35 +1328,26 @@ const getFirstRechargeRewords = async (req, res) => {
       [REWARD_TYPES_MAP.FIRST_RECHARGE_BONUS, user.phone],
     );
     const [rechargeRow] = await connection.execute(
-      "SELECT * FROM `recharge` WHERE `phone` = ? AND `status` = ? ORDER BY id DESC LIMIT 1 ",
+      "SELECT * FROM `recharge` WHERE `phone` = ? AND `status` = ? ORDER BY id DESC LIMIT 1",
       [user.phone, PaymentStatusMap.SUCCESS],
     );
-    const firstRecharge = rechargeRow?.[0];
+    const firstRecharge = rechargeRow?.[0] || { money: 0 };
 
-    const firstRechargeRewordList = firstRechargeBonusList.map(
-      (item, index) => {
-        const currentRechargeAmount = firstRecharge?.money || 0;
-        return {
-          id: item.id,
-          currentRechargeAmount: Math.min(
-            item.rechargeAmount,
-            currentRechargeAmount,
-          ),
-          requiredRechargeAmount: item.rechargeAmount,
-          bonusAmount: item.bonusAmount,
-          agentBonus: item.agentBonus,
-          isFinished:
-            index === 0
-              ? currentRechargeAmount >= item.rechargeAmount
-              : currentRechargeAmount >= item.rechargeAmount &&
-                firstRechargeBonusList[index - 1]?.rechargeAmount >
-                  currentRechargeAmount,
-          isClaimed: claimedRewardsRow.some(
-            (claimedReward) => claimedReward.reward_id === item.id,
-          ),
-        };
-      },
-    );
+    const firstRechargeRewordList = firstRechargeBonusList.map((item, index) => ({
+      id: item.id,
+      currentRechargeAmount: Math.min(item.rechargeAmount, firstRecharge.money),
+      requiredRechargeAmount: item.rechargeAmount,
+      bonusAmount: item.bonusAmount,
+      agentBonus: item.agentBonus,
+      isFinished:
+        index === 0
+          ? firstRecharge.money >= item.rechargeAmount
+          : firstRecharge.money >= item.rechargeAmount &&
+            firstRechargeBonusList[index - 1]?.rechargeAmount > firstRecharge.money,
+      isClaimed: !!claimedRewardsRow.find(
+        (claimedReward) => claimedReward.reward_id === item.id
+      ),
+    }));
 
     return res.status(200).json({
       data: firstRechargeRewordList,
@@ -1349,113 +1358,236 @@ const getFirstRechargeRewords = async (req, res) => {
       message: "Successfully fetched first recharge bonus data",
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({ message: error.message });
   }
 };
+
+
+// const claimFirstRechargeReword = async (req, res) => {
+//   try {
+//     const authToken = req.cookies.auth;
+//     const firstRechargeRewordId = req.body.id;
+//     const [userRow] = await connection.execute(
+//       "SELECT * FROM `users` WHERE `token` = ? AND `veri` = 1",
+//       [authToken],
+//     );
+//     const user = userRow?.[0];
+
+//     if (!user) {
+//       return res.status(401).json({ message: "Unauthorized" });
+//     }
+
+//     const [claimedRewardsRow] = await connection.execute(
+//       "SELECT * FROM `claimed_rewards` WHERE `type` = ? AND `phone` = ?",
+//       [REWARD_TYPES_MAP.FIRST_RECHARGE_BONUS, user.phone],
+//     );
+//     const [rechargeRow] = await connection.execute(
+//       "SELECT * FROM `recharge` WHERE `phone` = ? AND `status` = ? ORDER BY id DESC LIMIT 1",
+//       [user.phone, PaymentStatusMap.SUCCESS],
+//     );
+//     const firstRecharge = rechargeRow?.[0];
+
+//     if (!firstRecharge) {
+//       return res.status(400).json({
+//         status: false,
+//         message: "No successful recharge found",
+//       });
+//     }
+
+//     const firstRechargeRewordList = firstRechargeBonusList.map((item, index) => ({
+//       id: item.id,
+//       currentRechargeAmount: Math.min(item.rechargeAmount, firstRecharge.money),
+//       requiredRechargeAmount: item.rechargeAmount,
+//       bonusAmount: item.bonusAmount,
+//       agentBonus: item.agentBonus,
+//       isFinished:
+//         index === 0
+//           ? firstRecharge.money >= item.rechargeAmount
+//           : firstRecharge.money >= item.rechargeAmount &&
+//             firstRechargeBonusList[index - 1]?.rechargeAmount > firstRecharge.money,
+//       isClaimed: !!claimedRewardsRow.find(
+//         (claimedReward) => claimedReward.reward_id === item.id
+//       ),
+//     }));
+
+//     const claimableBonusData = firstRechargeRewordList.filter(
+//       (item) => item.isFinished && !item.isClaimed
+//     );
+
+//     if (claimableBonusData.length === 0) {
+//       return res.status(400).json({
+//         status: false,
+//         message: "You do not meet the requirements to claim this reward!",
+//       });
+//     }
+
+//     const claimedBonusData = claimableBonusData.find(
+//       (item) => item.id === firstRechargeRewordId
+//     );
+
+//     if (!claimedBonusData) {
+//       return res.status(400).json({
+//         status: false,
+//         message: "Invalid reward ID or reward not claimable",
+//       });
+//     }
+
+//     const time = moment().valueOf();
+
+//     await connection.execute(
+//       "UPDATE `users` SET `money` = `money` + ?, `total_money` = `total_money` + ? WHERE `phone` = ?",
+//       [claimedBonusData.bonusAmount, claimedBonusData.bonusAmount, user.phone],
+//     );
+
+//     await connection.execute(
+//       "INSERT INTO `claimed_rewards` (`reward_id`, `type`, `phone`, `amount`, `status`, `time`) VALUES (?, ?, ?, ?, ?, ?)",
+//       [
+//         claimedBonusData.id,
+//         REWARD_TYPES_MAP.FIRST_RECHARGE_BONUS,
+//         user.phone,
+//         claimedBonusData.bonusAmount,
+//         REWARD_STATUS_TYPES_MAP.SUCCESS,
+//         time,
+//       ],
+//     );
+
+//     return res.status(200).json({
+//       status: true,
+//       message: "Successfully claimed first recharge bonus",
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ message: error.message });
+//   }
+// };
+
+
+
 
 const claimFirstRechargeReword = async (req, res) => {
   try {
     const authToken = req.cookies.auth;
     const firstRechargeRewordId = req.body.id;
-    const [userRow] = await connection.execute(
-      "SELECT * FROM `users` WHERE `token` = ? AND `veri` = 1",
-      [authToken],
-    );
-    const user = userRow?.[0];
 
-    if (!user) {
-      return res.status(401).json({ message: "Unauthorized" });
+    if (!firstRechargeRewordId || typeof firstRechargeRewordId !== "number") {
+      return res.status(400).json({ status: false, message: "Invalid reward ID provided" });
     }
 
-    const [claimedRewardsRow] = await connection.execute(
-      "SELECT * FROM `claimed_rewards` WHERE `type` = ? AND `phone` = ?",
-      [REWARD_TYPES_MAP.FIRST_RECHARGE_BONUS, user.phone],
-    );
-    const [rechargeRow] = await connection.execute(
-      "SELECT * FROM `recharge` WHERE `phone` = ? AND `status` = ? ORDER BY id DESC LIMIT 1 ",
-      [user.phone, PaymentStatusMap.SUCCESS],
-    );
-    const firstRecharge = rechargeRow?.[0];
+    const connection = await pool.getConnection();
+    try {
+      const [userRow] = await connection.execute(
+        "SELECT * FROM `users` WHERE `token` = ? AND `veri` = 1",
+        [authToken]
+      );
+      const user = userRow?.[0];
 
-    const firstRechargeRewordList = firstRechargeBonusList.map(
-      (item, index) => {
-        const currentRechargeAmount = firstRecharge?.money || 0;
+      if (!user) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+
+      const [claimedRewardsRow] = await connection.execute(
+        "SELECT * FROM `claimed_rewards` WHERE `type` = ? AND `phone` = ?",
+        [REWARD_TYPES_MAP.FIRST_RECHARGE_BONUS, user.phone]
+      );
+
+      const [rechargeRow] = await connection.execute(
+        "SELECT * FROM `recharge` WHERE `phone` = ? AND `status` = ? ORDER BY id DESC LIMIT 1",
+        [user.phone, PaymentStatusMap.SUCCESS]
+      );
+      const firstRecharge = rechargeRow?.[0];
+
+      if (!firstRecharge) {
+        return res.status(400).json({ status: false, message: "No successful recharge found" });
+      }
+
+      const firstRechargeRewordList = firstRechargeBonusList.map((item) => {
+        const claimedReward = claimedRewardsRow.find((reward) => parseInt(reward.reward_id) === parseInt(item.id));
+        // console.log(`Reward ID: ${item.id}, Claimed Reward:`, claimedReward);
         return {
           id: item.id,
-          currentRechargeAmount: Math.min(
-            item.rechargeAmount,
-            currentRechargeAmount,
-          ),
+          currentRechargeAmount: Math.min(item.rechargeAmount, firstRecharge.money),
           requiredRechargeAmount: item.rechargeAmount,
           bonusAmount: item.bonusAmount,
           agentBonus: item.agentBonus,
-          isFinished:
-            index === 0
-              ? currentRechargeAmount >= item.rechargeAmount
-              : currentRechargeAmount >= item.rechargeAmount &&
-                firstRechargeBonusList[index - 1]?.rechargeAmount >
-                  currentRechargeAmount,
-          isClaimed: claimedRewardsRow.some(
-            (claimedReward) => claimedReward.reward_id === item.id,
-          ),
+          isFinished: firstRecharge.money >= item.rechargeAmount,
+          isClaimed: !!claimedReward,  // This will return true if found
         };
-      },
-    );
-
-    const claimableBonusData = firstRechargeRewordList.filter(
-      (item) => item.isFinished,
-    );
-
-    if (claimableBonusData.length === 0) {
-      return res.status(400).json({
-        status: false,
-        message: "You does not meet the requirements to claim this reword!",
       });
-    }
 
-    const isExpired = firstRechargeRewordList.some(
-      (item) => item.isFinished && item.isClaimed,
-    );
 
-    if (isExpired) {
-      return res.status(400).json({
-        status: false,
-        message: "Bonus already claimed",
+      const claimableBonusData = firstRechargeRewordList.filter(
+        (item) => item.isFinished && !item.isClaimed
+      );
+
+      if (claimableBonusData.length === 0) {
+        return res.status(400).json({ status: false, message: "Reward not claimable!" });
+      }
+
+      const claimedBonusData = claimableBonusData.find((item) => item.id === firstRechargeRewordId);
+
+      if (!claimedBonusData) {
+        return res.status(400).json({ status: false, message: "Invalid reward ID or not claimable" });
+      }
+
+      const time = moment().valueOf();
+
+      await connection.beginTransaction();
+      await connection.execute(
+        "UPDATE `users` SET `money` = `money` + ?, `total_money` = `total_money` + ? WHERE `phone` = ?",
+        [claimedBonusData.bonusAmount, claimedBonusData.bonusAmount, user.phone]
+      );
+
+      await connection.execute(
+        "INSERT INTO `claimed_rewards` (`reward_id`, `type`, `phone`, `amount`, `status`, `time`) VALUES (?, ?, ?, ?, ?, ?)",
+        [
+          claimedBonusData.id,
+          REWARD_TYPES_MAP.FIRST_RECHARGE_BONUS,
+          user.phone,
+          claimedBonusData.bonusAmount,
+          REWARD_STATUS_TYPES_MAP.SUCCESS,
+          time,
+        ]
+      );
+
+      await connection.commit();
+      connection.release();
+
+      const [updatedClaimedRewardsRow] = await connection.execute(
+        "SELECT * FROM `claimed_rewards` WHERE `type` = ? AND `phone` = ?",
+        [REWARD_TYPES_MAP.FIRST_RECHARGE_BONUS, user.phone]
+      );
+
+      const updatedList = firstRechargeBonusList.map((item) => ({
+        id: item.id,
+        isClaimed: !!updatedClaimedRewardsRow.find((claimedReward) => parseInt(claimedReward.reward_id) === item.id),
+      }));
+
+      return res.status(200).json({
+        status: true,
+        message: "Successfully claimed first recharge bonus",
+        data: updatedList,
       });
+    } catch (error) {
+      await connection.rollback();
+      connection.release();
+      console.error("Transaction error:", error);
+      return res.status(500).json({ message: "Error processing reward claim" });
     }
-
-    const claimedBonusData = claimableBonusData?.find(
-      (item) => item.id === firstRechargeRewordId,
-    );
-
-    const time = moment().valueOf();
-
-    await connection.execute(
-      "UPDATE `users` SET `money` = `money` + ?, `total_money` = `total_money` + ? WHERE `phone` = ?",
-      [claimedBonusData.bonusAmount, claimedBonusData.bonusAmount, user.phone],
-    );
-
-    await connection.execute(
-      "INSERT INTO `claimed_rewards` (`reward_id`, `type`, `phone`, `amount`, `status`, `time`) VALUES (?, ?, ?, ?, ?, ?)",
-      [
-        claimedBonusData.id,
-        REWARD_TYPES_MAP.FIRST_RECHARGE_BONUS,
-        user.phone,
-        claimedBonusData.bonusAmount,
-        REWARD_STATUS_TYPES_MAP.SUCCESS,
-        time,
-      ],
-    );
-    return res.status(200).json({
-      status: true,
-      message: "Successfully claimed first recharge bonus",
-    });
   } catch (error) {
-    console.log(error);
+    console.error("Error:", error);
     return res.status(500).json({ message: error.message });
   }
 };
+
+
+
+
+
+
+
+
+
 
 const AttendanceBonusList = [
   {
@@ -1724,6 +1856,7 @@ const promotionController = {
   claimFirstRechargeReword,
   claimAttendanceBonus,
   getAttendanceBonusRecord,
+  
   getAttendanceBonus,
   subordinatesDataByTimeAPI,
 };

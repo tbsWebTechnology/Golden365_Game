@@ -166,7 +166,7 @@ fetch("/api/webapi/GetUserInfo")
       unsetCookie();
       return false;
     }
-    $("#balance_amount").text(`₹ ${data.data.money_user}.00 `);
+    $("#balance_amount").text(`₹ ${data.data.money_user} `);
   });
 
 $(".reload_money").click(function (e) {
@@ -182,7 +182,7 @@ $(".reload_money").click(function (e) {
         unsetCookie();
         return false;
       }
-      $("#balance_amount").text(`₹ ${data.data.money_user}.00 `);
+      $("#balance_amount").text(`₹ ${data.data.money_user} `);
     });
 });
 
@@ -190,7 +190,7 @@ function drawChartLineInCanvas(topBoxNumber, bottomBoxNumber, canvasId) {
   const myCanvas = document.getElementById(canvasId);
   let boxXList = [10, 40, 70, 100, 128, 157, 186, 215, 244, 273];
   const ctx0 = myCanvas.getContext("2d");
-  ctx0.strokeStyle = "#B1835A";
+  ctx0.strokeStyle = "#2b3270";
   ctx0.beginPath();
   ctx0.moveTo(boxXList[topBoxNumber], 21);
   ctx0.lineTo(boxXList[bottomBoxNumber], 128);
@@ -254,6 +254,14 @@ const getGameResultNumbers = (hash) => {
 };
 
 const displayResultHandler = ({ status, amount, period, result }) => {
+
+  console.log("Popup Trigger:", { status, amount, period, result }); // Debug log
+
+  if (!status || !result) {
+    console.error("Missing status or result for display.");
+    return;
+  }
+
   let colorDisplay = "";
   let bsDisplay = "";
 
@@ -287,14 +295,16 @@ const displayResultHandler = ({ status, amount, period, result }) => {
   );
 
   if (status === STATUS_MAP.WIN) {
-    $("#popup_win_rupees_display").html(`₹${amount}.00`);
+    $("#popup_win_rupees_display").html(`₹${amount}`);
     $("#popup_greeting_display").html(`Congratulations`);
     $("#popup_background").removeClass("isL");
     $("#popup_greeting_display").removeClass("isL");
     $("#popup_win_rupees_display").css("display", "block");
     $("#popup_win_symbol").css("display", "block");
     $("#popup_loss_symbol").css("display", "none");
-  } else if (status === STATUS_MAP.LOSS) {
+  } 
+  
+  else if (status === STATUS_MAP.LOSS) {
     $("#popup_greeting_display").html(`Sorry`);
     $("#popup_background").addClass("isL");
     $("#popup_greeting_display").addClass("isL");
@@ -302,11 +312,14 @@ const displayResultHandler = ({ status, amount, period, result }) => {
     $("#popup_win_symbol").css("display", "none");
     $("#popup_loss_symbol").css("display", "block");
   } else {
-    // $(".modal-popup__title").text("Result")
-    // $(".modal-popup__amount").text(`No Bets !`)
+     $(".modal-popup__title").text("Result")
+     $(".modal-popup__amount").text(`No Bets !`)
   }
 
-  $("#popup_modal").css("display", "block");
+  console.log("Setting popup for loss...");
+$("#popup_modal").css("display", "block");
+console.log("Popup modal display:", $("#popup_modal").css("display"));
+
 
   setTimeout(() => {
     $(".WinningTip__C").hide();
@@ -602,10 +615,8 @@ function initGameLogics({
     let money = parseInt(
       $(".Betting__Popup-body-money-main").attr("data-current-money"),
     );
-    console.log($("#van-field-1-input").val());
-    console.log(money);
     let total = value * money;
-    $("#popup_total_bet_money").text(total + ".00");
+    $("#popup_total_bet_money").text(total + "");
   }
 
   const selectPopupXData = () => {};
@@ -619,7 +630,6 @@ function initGameLogics({
     $(".popup-join > div").addClass(`Betting__Popup-${cssValueNumber}`);
 
     let activeXData = $(".Betting__C-multiple-r.active").attr("data-x");
-    console.log(activeXData);
     $("#van-field-1-input").val(activeXData);
     $("div.Betting__Popup-body-x-btn").removeClass("bgcolor");
     $(`div.Betting__Popup-body-x-btn[data-x="${activeXData}"]`).addClass(
@@ -715,7 +725,7 @@ function initGameLogics({
       success: function (response) {
         alertMessage(response.message);
         if (response.status === false) return;
-        $("#balance_amount").text("₹ " + response.money + ".00");
+        $("#balance_amount").text("₹ " + response.money + "");
 
         initMyBets();
 
@@ -1239,9 +1249,6 @@ const STATUS_MAP = {
 
 socket.on("data-server-trx-wingo", async function (msg) {
   try {
-    console.log(GAME_NAME);
-    console.log(msg.data[0].game);
-    console.log(msg);
 
     GAME_TYPE_ID = getGameType();
 
@@ -1294,14 +1301,6 @@ socket.on("data-server-trx-wingo", async function (msg) {
     const winGames = lastGameBets?.filter((game) => game.get > 0);
     const winGamesMoney = winGames?.reduce((acc, game) => acc + game.get, 0);
 
-    console.log("lastGame", lastGame);
-    console.log("lastGameHash", lastGameHash);
-    console.log("lastGameBets", lastGameBets);
-    console.log("lostGames", lostGames);
-    console.log("lostGamesMoney", lostGamesMoney);
-    console.log("winGames", winGames);
-    console.log("winGamesMoney", winGamesMoney);
-
     if (lastGameBets.length > 0) {
       if (winGamesMoney > 0) {
         displayResultHandler({
@@ -1342,7 +1341,7 @@ socket.on("data-server-trx-wingo", async function (msg) {
           unsetCookie();
           return false;
         }
-        $("#balance_amount").text(`₹ ${data.data.money_user}.00 `);
+        $("#balance_amount").text(`₹ ${data.data.money_user} `);
       });
 
     $(".Loading").fadeOut(0);

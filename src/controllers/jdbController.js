@@ -1,4 +1,5 @@
 import axios from "axios";
+import crypto from "crypto";
 import connection from "../config/connectDB.js";
 import aesUtil from "../helpers/AESEncrypt.js";
 
@@ -147,65 +148,101 @@ const gameQuickPopularList = async (req, res) => {
 };
 
 const generateGameLink = async (req, res) => {
-  try {
-    let token = req.cookies.auth;
-    let gType = req.query.g_type;
-    let mType = req.query.m_type;
+    const mType = req.query.m_type;
+    const gType = req.query.g_type; 
 
-    const [rows] = await connection.execute(
-      "SELECT `token`, `status`, `phone` , `money` FROM `users` WHERE `token` = ? AND `veri` = 1",
-      [token],
-    );
+    // Fetch the token from cookies
+    const token = req.cookies.auth;
 
-    if (rows.length === 0) {
-      return res.status(400).json({
-        message: "Login is required to access this api",
-        isAuthorized: false,
-      });
+    // Fetch iv, key, and parent from environment variables
+    const iv = process.env.JDB_IV;
+    const key = process.env.JDB_KEY;
+    const parent = process.env.PARENT;
+
+    try {
+        // Check for required parameters
+        if (!token || !iv || !key || !parent) {
+            return res.status(400).json({ error: 'Missing required parameters.' });
+        }
+
+        // Fetch uid from the database based on the token
+        const [rows] = await connection.execute(
+            "SELECT `phone` FROM `users` WHERE `token` = ? AND `veri` = 1 AND `apigame` = 1",
+            [token]
+        );
+
+        if (rows.length === 0) {
+            return res.status(400).json({ error: 'Invalid or expired token.' });
+        }
+
+        // Extract the uid (phone number) from the query result
+        const uid = rows[0].phone;
+
+        // Prepare data for API request
+        const data = {
+            action: 21,
+            parent: parent,
+            ts: Date.now(), // Current timestamp in milliseconds
+            uid: uid,
+            mType: mType || '', // Machine Type (optional)
+            gType: gType || '', // Game Type (optional)
+            activityIds: ['1234', '5678'] // Assuming activityIds is needed
+        };
+
+        // Convert data to JSON
+        const jsonData = JSON.stringify(data);
+
+        // Encrypt the data
+        const encryptedData = encryptData(jsonData, key, iv);
+
+        // Encode encrypted data
+        const encodedData = encodeURIComponent(encryptedData);
+
+        // Define the API URL
+        const apiUrl = `https://api.jdb711.com/apiRequest.do?dc=prox&x=${encodedData}`;
+
+        // Make API request
+        const response = await axios.get(apiUrl);
+
+        // Check API response
+        const responseData = response.data;
+        console.log('API Response:', responseData); // Debugging line
+
+        if (responseData.status === '0000') {
+            const gameUrl = responseData.path; // URL to launch the game
+
+            // Log the URL for debugging
+            console.log('Generated Game URL:', gameUrl);
+
+            // Validate and log the URL
+            if (!gameUrl || typeof gameUrl !== 'string') {
+                return res.status(500).json({ error: 'Invalid game URL.' });
+            }
+
+            // Ensure URL is properly encoded
+            try {
+                new URL(gameUrl); // This will throw an error if the URL is invalid
+                res.redirect(gameUrl);
+            } catch (e) {
+                console.error('Invalid URL:', e);
+                res.status(500).json({ error: 'Generated URL is invalid.' });
+            }
+        } else {
+            res.status(400).json({ error: responseData.err_text });
+        }
+
+    } catch (error) {
+        console.error('Error:', error); // Debugging line
+        res.status(500).json({ error: error.message });
     }
+}; 
 
-    if (!gType || !mType) {
-      return res.status(400).json({
-        message: "gType and mType is required!",
-        isAuthorized: true,
-      });
-    }
-
-    const response = await axios({
-      method: "GET",
-      url: "https://bytefusionapi.com/api/neo_jdb/generate_link",
-      data: {
-        parent: agentId,
-        uid: rows?.[0]?.phone,
-        balance: rows?.[0]?.money,
-        gType: gType,
-        mType: mType,
-        windowMode: "2",
-        key: key,
-        iv: iv,
-        dc: dc,
-        url: API_URL,
-      },
-    });
-
-    const status = response.data.status;
-
-    if (status === "0000") {
-      return res.redirect(response?.data?.path);
-    }
-
-    return res.status(400).json({
-      message: "Something went wrong!",
-      data: response?.data,
-      isAuthorized: true,
-    });
-  } catch (error) {
-    console.log(error);
-    console.log(error?.response?.data);
-    return res.status(500).json({
-      message: "Something went wrong!",
-    });
-  }
+//Helper function to encrypt data
+const encryptData = (data, key, iv) => {
+    const cipher = crypto.createCipheriv('aes-128-cbc', Buffer.from(key), Buffer.from(iv));
+    let encrypted = cipher.update(data, 'utf8', 'base64');
+    encrypted += cipher.final('base64');
+    return encrypted.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 };
 
 const mainFunction = async (req, res) => {

@@ -178,6 +178,7 @@
   display: block;
   height: 0.08rem;
   width: 100%;
+  background: var(--main_gradient-color2);
   background-color: #ec292a;
   position: absolute;
   top: 0;
@@ -199,11 +200,13 @@
 
 .game-betting .tab .box[data-v-03b808c2] {
   position: relative;
+  background-color: #ffffff;
+  border-radius: 0.26667rem;
 }
 
 .game-betting .tab .box[data-v-03b808c2]:after {
   content: "";
-  display: block;
+  display: none;
   height: 0.13333rem;
   width: 100%;
   background-color: #9898a8;
@@ -213,9 +216,15 @@
 }
 
 .game-betting .tab .box .item[data-v-03b808c2] {
-  flex: 0 0 25%;
-  padding: 0.85333rem 0.13333rem 0.26667rem;
-  border-radius: 0.66667rem;
+  
+  border-radius: .26667rem;
+  position: relative;
+}
+
+.game-betting .tab .box .item.action[data-v-03b808c2] {
+  background: var(--main_gradient-color2);
+  border-radius: .26667rem;
+  
   position: relative;
 }
 
@@ -258,7 +267,7 @@
 }
 
 .game-betting .tab .box .item .txt[data-v-03b808c2] {
-  color: #6abe57;
+  color: var(--text_color_L2);
   font-size: 0.37333rem;
 }
 
@@ -267,7 +276,7 @@
 }
 
 .game-betting .tab .box .item.action .txt[data-v-03b808c2] {
-  color: #fa4e46;
+  color: #ffffff;
 }
 
 .game-betting .tab .box .item.action .li[data-v-03b808c2] {
@@ -624,9 +633,7 @@
   display: inline-block;
   border-radius: 0.18667rem;
   position: relative;
-  margin-top: 0.53333rem;
-  box-shadow: 0px 1px 36px #01ad70;
-}
+ }
 
 .slot-inner[data-v-03b808c2]:before {
   left: -0.16rem;
@@ -739,26 +746,32 @@
 
 .slot-column .slot-num.bg1[data-v-03b808c2] {
   background: url(/images/bg1.png) no-repeat 50%;
+  background-size: contain;
 }
 
 .slot-column .slot-num.bg2[data-v-03b808c2] {
   background: url(/images/bg2.png) no-repeat 50%;
+  background-size: contain;
 }
 
 .slot-column .slot-num.bg3[data-v-03b808c2] {
   background: url(/images/bg3.png) no-repeat 50%;
+  background-size: contain;
 }
 
 .slot-column .slot-num.bg4[data-v-03b808c2] {
   background: url(/images/bg4.png) no-repeat 50%;
+  background-size: contain;
 }
 
 .slot-column .slot-num.bg5[data-v-03b808c2] {
   background: url(/images/bg5.png) no-repeat 50%;
+  background-size: contain;
 }
 
 .slot-column .slot-num.bg6[data-v-03b808c2] {
   background: url(/images/bg6.png) no-repeat 50%;
+  background-size: contain;
 }
 
 @-webkit-keyframes slotScroll-data-v-03b808c2 {
@@ -786,7 +799,7 @@
 }
 
 .game[data-v-03b808c2] {
-  background-color: #fbfcfd;
+  background-color: var(--bg_color_L1);
 }
 
 .game .activityBox[data-v-03b808c2] {
@@ -806,7 +819,7 @@
 }
 
 .game-betting[data-v-03b808c2] {
-  margin-top: -1.46667rem;
+  margin-top: 0rem;
 }
 
 .game .content[data-v-03b808c2] {
@@ -817,7 +830,8 @@
 .game .content .page-box[data-v-03b808c2] {
   width: 100%;
   background: #fff;
-  border-radius: 1.06667rem 1.06667rem 0 0;
+  border-radius: 0.26667rem 0.26rem 0rem 0rem;
+  padding: 15px;
   position: relative;
 }
 
@@ -869,7 +883,7 @@
 
 .game .content .page-box .period-title[data-v-03b808c2] {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
   font-size: 0.37333rem;
   font-weight: 400;
@@ -886,7 +900,7 @@
 }
 
 .game .content .page-box .period-span > span[data-v-03b808c2] {
-  font-size: 0.58667rem;
+  font-size: 0.46667rem;
 }
 
 .game .content .page-box .flex-row-end[data-v-03b808c2] {
@@ -900,7 +914,7 @@
   line-height: 0.8rem;
   background: #efeff4;
   border-radius: 0.08rem;
-  margin-left: 0.4rem;
+  margin-left: 0.1rem;
   color: #00b977;
   text-align: center;
 }
@@ -911,6 +925,9 @@
 
 .game .bet-box[data-v-03b808c2] {
   position: relative;
+  background-color: #ffffff;
+  padding: 0.266rem;
+  border-radius: 0rem 0rem 0.26667rem 0.26667rem;
 }
 
 .game .bet-box .bet-mark .mark-box[data-v-03b808c2] {
@@ -930,7 +947,7 @@
   display: inline-block;
   border-radius: 0.4rem;
   padding: 0 0.4rem;
-  background-color: #4781ff;
+  background-color: var(--main-color);
 }
 
 .game .bet-box .bet-con[data-v-03b808c2] {
@@ -950,10 +967,9 @@
 }
 
 .game .bet-box .bet-con .check-box .item .li[data-v-03b808c2] {
-  height: 1.33333rem;
-  padding: 0.26667rem 0;
+  
   border-radius: 0.13333rem;
-  background-color: #eee;
+  
   position: relative;
 }
 
@@ -967,13 +983,9 @@
 }
 
 .game .bet-box .bet-con .check-box .item .li .odds[data-v-03b808c2] {
-  font-size: 0.21333rem;
+  font-size: 0.29333rem;
   line-height: 1;
-  font-family: Bahnschrift;
-  font-variation-settings:
-    "wght" 300,
-    "wdth" 75;
-  font-weight: lighter;
+  
 }
 
 .game .bet-box .bet-con .check-box .item .li .icon[data-v-03b808c2] {
@@ -1061,13 +1073,15 @@
   background-color: #eee;
   height: 1.06667rem;
   line-height: 1.06667rem;
-  flex: 0 0 25%;
+  flex: 0 0 24%;
   font-size: 0.32rem;
+  border-radius: 0.1667rem 0.1667rem 0rem 0rem;
 }
 
 .game .bet-box .bet-tab .item.action[data-v-03b808c2] {
   color: #fff;
-  background-color: #3f9368;
+  background-color: var(--sheet_nva_color);
+  border-radius: 0.1667rem 0.1667rem 0rem 0rem;
 }
 
 .game-list[data-v-03b808c2] {
@@ -1076,7 +1090,7 @@
 }
 
 .game-list .tab[data-v-03b808c2] {
-  padding: 0 0.26667rem;
+  padding: 0 0.46667rem;
   height: 1.33333rem;
   line-height: 1.33333rem;
 }
@@ -1091,18 +1105,16 @@
   line-height: 1.06667rem;
   text-align: center;
   width: 100%;
-  background-color: #eaeefc;
-  border: 0.02667rem solid #3c5ef6;
-  box-shadow: 0.02667rem 0.02667rem 0.13333rem 0.13333rem #eaeefc;
+  background-color: #ffffff;
+  
   border-radius: 0.26667rem;
-  color: #050505;
+  color: #8e8e93;
   overflow: hidden;
 }
 
 .game-list .tab .li .txt.action[data-v-03b808c2] {
-  background-color: #fbedf3;
-  border: 0.02667rem solid #4781ff;
-  box-shadow: 0.02667rem 0.02667rem 0.13333rem 0.13333rem #fbedf3;
+  background-color: var(--main-color);
+  color: #ffffff;  
 }
 
 .game-list .con-box .con-Missing[data-v-03b808c2] {
@@ -1126,14 +1138,14 @@
 .game-list .list .wrap[data-v-03b808c2] {
   padding: 0.4rem 0.13333rem;
   /* background-color: #3f9368; */
-  background: #fff;
-  /* border-top-right-radius: .26667rem; */
-
+  background: var(--sheet_nva_color);
+  border-top-right-radius: .26667rem;
+  border-top-left-radius: .26667rem;
   /* margin-left: 10px; */
   /* margin-right: 10px; */
   font-weight: 600;
   font-size: 0.34667rem;
-  color: #77819b;
+  color: #ffffff;
 }
 
 .game-list .list .wrap .li[data-v-03b808c2] {
@@ -1151,15 +1163,15 @@
 }
 
 .game-list .list .hb .item[data-v-03b808c2] {
-  padding: 0.26667rem 0.13333rem;
+  padding: 0.26667rem 0.26667rem;
   /* border-bottom: .02667rem solid #e2e2e2; */
-  color: #77819b;
+  color: #000000;
   font-size: 0.29333rem;
   font-size: 0.3rem;
 }
 
 .game-list .list .hb .item[data-v-03b808c2]:nth-child(odd) {
-  background: rgba(63, 147, 104, 0.08);
+  background: #ffffff;
 }
 
 .game-list .list .hb .item .goItem[data-v-03b808c2] {
@@ -1306,10 +1318,16 @@
 
 .game-list .list .hb .red[data-v-03b808c2] {
   color: #d0322d;
+  border: 1px solid #d0322d;
+    border-radius: 4px;
+    padding: 0px 15px 0px 15px;
 }
 
 .game-list .list .hb .green[data-v-03b808c2] {
   color: #4eaf56;
+  border: 1px solid #4eaf56;
+    border-radius: 4px;
+    padding: 0px 15px 0px 15px;
 }
 
 .game-list .list .hb .blue[data-v-03b808c2] {
@@ -1420,16 +1438,18 @@
 }
 
 .game-list .list .hb .item .info .money[data-v-03b808c2] {
-  font-weight: 600;
-  font-size: 0.42667rem;
+  
+  font-size: 0.31333rem;
 }
 
 .game-list .list .hb .item .info .money .fail[data-v-03b808c2] {
-  color: #4781ff;
+  color: #d0322d;
+  
 }
 
 .game-list .list .hb .item .info .money .success[data-v-03b808c2] {
   color: #5cba47;
+  
 }
 
 .game-list .list .hb .details[data-v-03b808c2] {
@@ -1500,7 +1520,7 @@
 
 .game-list .list-fooder[data-v-03b808c2] {
   height: 0.53333rem;
-  background-color: #fbedf3;
+  background-color: #ffffff00;
   border-bottom-right-radius: 0.53333rem;
   border-bottom-left-radius: 0.53333rem;
 }

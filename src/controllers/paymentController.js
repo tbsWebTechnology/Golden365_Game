@@ -30,6 +30,8 @@ const PaymentMethodsMap = {
   RS_PAY: "rs_pay",
   USDT: "usdt",
   UPAY: "upay",
+  MOTHER: "mother",
+  LGPAY: "lgpay",
 };
 
 // UPI Manual Payment Integration --------------
@@ -178,7 +180,7 @@ const addManualUSDTPaymentRequest = async (req, res) => {
     const data = req.body;
     let auth = req.cookies.auth;
     let money_usdt = parseInt(data.money);
-    let money = money_usdt * 92;
+    let money = money_usdt * 93;
     let utr = parseInt(data.utr);
     const minimumMoneyAllowed = parseInt(process.env.MINIMUM_MONEY_USDT);
 
@@ -440,207 +442,7 @@ const verifyUPIPayment = async (req, res) => {
 };
 // --------------------------------------------
 
-// WOW PAY Payment Integration --------------- Deprecated
-const initiateWowPayPayment = async (req, res) => {
-  const type = PaymentMethodsMap.WOW_PAY;
-  let auth = req.cookies.auth;
-  let money = parseInt(req.query.money);
 
-  const minimumMoneyAllowed = parseInt(process.env.MINIMUM_MONEY_INR);
-
-  if (!money || !(money >= minimumMoneyAllowed)) {
-    return res.status(400).json({
-      message: `Money is Required and it should be ₹${minimumMoneyAllowed} or above!`,
-      status: false,
-      timeStamp: timeNow,
-    });
-  }
-
-  try {
-    const user = await getUserDataByAuthToken(auth);
-
-    const pendingRechargeList = await rechargeTable.getRecordByPhoneAndStatus({
-      phone: user.phone,
-      status: PaymentStatusMap.PENDING,
-      type: PaymentMethodsMap.UPI_GATEWAY,
-    });
-
-    if (pendingRechargeList.length !== 0) {
-      const deleteRechargeQueries = pendingRechargeList.map((recharge) => {
-        return rechargeTable.cancelById(recharge.id);
-      });
-
-      await Promise.all(deleteRechargeQueries);
-    }
-
-    const orderId = getRechargeOrderId();
-    const date = wowpay.getCurrentDate();
-
-    const params = {
-      version: "1.0",
-      // mch_id: 222887002,
-      mch_id: process.env.WOWPAY_MERCHANT_ID,
-      mch_order_no: orderId,
-      // pay_type: '151',
-      pay_type: "151",
-      trade_amount: money,
-      order_date: date,
-      goods_name: user.phone,
-      // notify_url: `${process.env.APP_BASE_URL}/wallet/verify/wowpay`,
-      notify_url: `https://247cashwin.cloud/wallet/verify/wowpay`,
-      mch_return_msg: user.phone,
-      // payment_key: 'TZLMQ1QWJCUSFLH02LAYRZBJ1WK7IHSG',
-    };
-
-    params.page_url = "https://247cashwin.cloud/wallet/verify/wowpay";
-
-    params.sign = wowpay.generateSign(params, process.env.WOWPAY_MERCHANT_KEY);
-    // params.sign = wowpay.generateSign(params, 'TZLMQ1QWJCUSFLH02LAYRZBJ1WK7IHSG');
-    // params.sign = wowpay.generateSign(params, 'MZBG89MDIBEDWJOJQYEZVSNP8EEVMSPM');
-    params.sign_type = "MD5";
-
-    console.log(params);
-
-    const response = await axios({
-      method: "post",
-      url: "https://pay6de1c7.wowpayglb.com/pay/web",
-      data: querystring.stringify(params),
-    });
-
-    console.log(response.data);
-
-    if (response.data.respCode === "SUCCESS" && response.data.payInfo) {
-      return res.status(200).json({
-        message: "Payment requested Successfully",
-        payment_url: response.data.payInfo,
-        status: true,
-        timeStamp: timeNow,
-      });
-    }
-
-    return res.status(400).json({
-      message: "Payment request failed. Please try again Or Wrong Details.",
-      status: false,
-      timeStamp: timeNow,
-    });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      status: false,
-      message: "Something went wrong!",
-      timestamp: timeNow,
-    });
-  }
-};
-
-const verifyWowPayPayment = async (req, res) => {
-  try {
-    const type = PaymentMethodsMap.WOW_PAY;
-    let data = req.body;
-
-    if (!req.body) {
-      data = req.query;
-    }
-
-    console.log(data);
-
-    let merchant_key = process.env.WOWPAY_MERCHANT_KEY;
-
-    const params = {
-      mchId: process.env.WOWPAY_MERCHANT_ID,
-      amount: data.amount || "",
-      mchOrderNo: data.mchOrderNo || "",
-      merRetMsg: data.merRetMsg || "",
-      orderDate: data.orderDate || "",
-      orderNo: data.orderNo || "",
-      oriAmount: data.oriAmount || "",
-      tradeResult: data.tradeResult || "",
-      signType: data.signType || "",
-      sign: data.sign || "",
-    };
-
-    let signStr = "";
-    signStr += "amount=" + params.amount + "&";
-    signStr += "mchId=" + params.mchId + "&";
-    signStr += "mchOrderNo=" + params.mchOrderNo + "&";
-    signStr += "merRetMsg=" + params.merRetMsg + "&";
-    signStr += "orderDate=" + params.orderDate + "&";
-    signStr += "orderNo=" + params.orderNo + "&";
-    signStr += "oriAmount=" + params.oriAmount + "&";
-    signStr += "tradeResult=" + params.tradeResult;
-
-    let flag = wowpay.validateSignByKey(signStr, merchant_key, params.sign);
-
-    if (!flag) {
-      console.log({
-        status: false,
-        message: "Something went wrong!",
-        flag,
-        timestamp: timeNow,
-      });
-      return res.status(400).json({
-        status: false,
-        message: "Something went wrong!",
-        flag,
-        timestamp: timeNow,
-      });
-    }
-
-    const newRechargeParams = {
-      orderId: params.mchOrderNo,
-      transactionId: "NULL",
-      utr: 0,
-      phone: params.merRetMsg,
-      money: params.amount,
-      type: type,
-      status: PaymentStatusMap.SUCCESS,
-      today: rechargeTable.getCurrentTimeForTodayField(),
-      url: "NULL",
-      time: rechargeTable.getCurrentTimeForTimeField(),
-    };
-
-    const recharge = await rechargeTable.getRechargeByOrderId({
-      orderId: newRechargeParams.orderId,
-    });
-
-    if (!!recharge) {
-      console.log({
-        message: `Recharge already verified!`,
-        status: true,
-        timeStamp: timeNow,
-      });
-      return res.status(400).json({
-        message: `Recharge already verified!`,
-        status: true,
-        timeStamp: timeNow,
-      });
-    }
-
-    const newRecharge = await rechargeTable.create(newRechargeParams);
-
-    await addUserAccountBalance({
-      phone: user.phone,
-      money: recharge.money,
-      code: user.code,
-      invite: user.invite,
-      rechargeId: recharge.id,
-    });
-
-    return res.redirect("/wallet/rechargerecord");
-  } catch (error) {
-    console.log({
-      status: false,
-      message: "Something went wrong!",
-      timestamp: timeNow,
-    });
-    return res.status(500).json({
-      status: false,
-      message: "Something went wrong!",
-      timestamp: timeNow,
-    });
-  }
-};
-// -------------------------------------------- Deprecated
 
 const initiateUpayPayment = async (req, res) => {
   try {
@@ -1036,7 +838,7 @@ const browseRechargeRecord = async (req, res) => {
     }
 
     const [recharge] = await connection.query(
-      `SELECT * FROM recharge WHERE status = 0 AND (type = '${PaymentMethodsMap.UPI_MANUAL}' OR type = '${PaymentMethodsMap.USDT_MANUAL}')`,
+      `SELECT * FROM recharge WHERE status = 0 `,
       [],
     );
 
@@ -1186,11 +988,16 @@ const setRechargeStatus = async (req, res) => {
   }
 };
 
+
+
+
+
+
+
 const walletTransfer = async (req, res) => {
   try {
     const schema = Joi.object({
-      dialCode: Joi.string().required(),
-      phone: Joi.string().required(),
+      uid: Joi.string().required(),
       amount: Joi.number().required(),
       password: Joi.string().required(),
     });
@@ -1200,26 +1007,25 @@ const walletTransfer = async (req, res) => {
       return res.status(400).json({ message: error.details[0].message });
     }
 
-    let auth = req.cookies.auth;
+    const auth = req.cookies.auth;
 
+    // Fetch logged-in user details
     const [rows] = await connection.query(
-      "SELECT phone, money, password FROM users WHERE token = ?",
-      [auth],
+      "SELECT id_user, phone, money, password FROM users WHERE token = ?",
+      [auth]
     );
 
     if (_.isEmpty(rows)) {
-      return res.status(200).json({
+      return res.status(401).json({
         message: "Unauthorized",
         status: false,
       });
     }
 
-    const user = rows[0];
+    const sender = rows[0];
 
-    const pwd = req.body.password;
-
-    const validPassword = await bcrypt.compare(pwd, user.password);
-
+    // Validate password
+    const validPassword = await bcrypt.compare(req.body.password, sender.password);
     if (!validPassword) {
       return res.status(400).json({
         status: false,
@@ -1227,76 +1033,101 @@ const walletTransfer = async (req, res) => {
       });
     }
 
-    const phone = req.body.phone;
-
-    if (phone === user.phone) {
+    // Prevent self-transfer
+    if (req.body.uid === sender.id_user.toString()) {
       return res.status(400).json({
         message: "You can't transfer money to yourself!",
         status: false,
-        timeStamp: timeNow,
       });
     }
 
     const amount = parseFloat(req.body.amount);
 
+    // Validate amount
     if (amount <= 0) {
       return res.status(400).json({
         message: "Amount should be greater than 0!",
         status: false,
-        timeStamp: timeNow,
       });
     }
 
-    if (user.money < amount) {
+    if (sender.money < amount) {
       return res.status(400).json({
         message: "Insufficient Balance!",
         status: false,
-        timeStamp: timeNow,
       });
     }
 
-    const receiver = await connection.query(
-      "SELECT * FROM users WHERE phone = ?",
-      [phone],
+    // Fetch receiver details
+    const [receiverRows] = await connection.query(
+      "SELECT id_user, phone, money FROM users WHERE id_user = ?",
+      [req.body.uid]
     );
 
-    if (receiver.length === 0) {
+    if (_.isEmpty(receiverRows)) {
       return res.status(400).json({
         message: "Receiver not found!",
         status: false,
-        timeStamp: timeNow,
       });
     }
 
+    const receiver = receiverRows[0];
+
+    // Perform the transfer
     await connection.query(
-      "UPDATE users SET money = money + ? WHERE phone = ?",
-      [amount, phone],
+      "UPDATE users SET money = money + ? WHERE id_user = ?",
+      [amount, receiver.id_user]
     );
 
     await connection.query(
-      "UPDATE users SET money = money - ? WHERE phone = ?",
-      [amount, user.phone],
+      "UPDATE users SET money = money - ? WHERE id_user = ?",
+      [amount, sender.id_user]
     );
 
+    // Record the transfer in the balance_transfer table
+    const timestamp = Date.now(); // Generate UNIX timestamp in milliseconds
     await connection.query(
-      "INSERT INTO `balance_transfer` (`sender_phone`, `receiver_phone`, `amount`, `datetime`) VALUES (?, ?, ?, ?)",
-      [user.phone, phone, amount, moment().format("YYYY-MM-DD HH:mm:ss")],
+      "INSERT INTO balance_transfer (sender_uid, receiver_uid, sender_phone, receiver_phone, amount, datetime) VALUES (?, ?, ?, ?, ?, ?)",
+      [sender.id_user, receiver.id_user, sender.phone, receiver.phone, amount, timestamp]
+    );
+
+    // Generate a 6-digit random number for reward_id
+    const rewardId = Math.floor(100000 + Math.random() * 900000);
+
+    // Insert into claimed_rewards table
+    const currentTimeMillis = Date.now();
+    await connection.query(
+      "INSERT INTO claimed_rewards (phone, reward_id, type, amount, status, time) VALUES (?, ?, ?, ?, ?, ?)",
+      [
+        receiver.phone,
+        rewardId,
+        "WALLET TRANSFER",
+        amount,
+        "1", // Status of the claim
+        currentTimeMillis,
+      ]
     );
 
     return res.status(200).json({
       message: "Money transferred successfully!",
       status: true,
-      timeStamp: timeNow,
     });
   } catch (error) {
-    console.log(error);
+    console.error("Transfer Error:", error);
     return res.status(500).json({
       message: "Something went wrong!",
       status: false,
-      timeStamp: timeNow,
     });
   }
 };
+
+
+
+
+
+
+
+
 
 // helpers ---------------
 const getUserDataByAuthToken = async (authToken) => {
@@ -1360,20 +1191,28 @@ const addUserMoney = async (phone, money) => {
   );
 };
 
+
 const addUserAccountBalance = async ({ money, phone, invite, rechargeId }) => {
   const totalRecharge = await rechargeTable.totalRechargeCount(
     PaymentStatusMap.SUCCESS,
     phone,
   );
 
-  const bonus = (money / 100) * 5;
-  const user_money = money + bonus;
 
-  const firstRechargeBonus =
-    totalRecharge === 1 ? getBonuses(money).uplineBonus : 0;
-  const dailyRechargeBonus = money >= 50000 ? bonus : 0;
-  const totalInviterMoney = firstRechargeBonus + dailyRechargeBonus;
+  const [adminData] = await connection.query("SELECT usr_rech_bonus, inv_rech_bonus FROM admin_ac LIMIT 1");
+    let usrrech = parseFloat(adminData[0]?.usr_rech_bonus || 0); // Fallback to 0 if not found
 
+
+    
+    let invrech = parseFloat(adminData[0]?.inv_rech_bonus || 0); // Fallback to 0 if not found
+
+  const userBonus = (money / 100) * usrrech; // User's bonus is 5%
+  const user_money = money + userBonus;
+
+  // Calculate user's daily recharge bonus if applicable
+  const dailyRechargeBonus = money >= 50000 ? userBonus : 0;
+
+  // Update user's balance with the recharge amount + user bonus
   await addUserMoney(phone, user_money);
 
   console.log(phone, money, rechargeId, totalRecharge);
@@ -1384,38 +1223,34 @@ const addUserAccountBalance = async ({ money, phone, invite, rechargeId }) => {
     totalRecharge,
   );
 
-  const rewardType =
-    totalRecharge === 1
-      ? REWARD_TYPES_MAP.FIRST_RECHARGE_BONUS
-      : REWARD_TYPES_MAP.DAILY_RECHARGE_BONUS;
-  await addUserRewards(phone, bonus, rewardType);
+  // Only add the bonus record for the user if the bonus is greater than 0
+  if (userBonus > 0) {
+    const rewardType = REWARD_TYPES_MAP.DAILY_RECHARGE_BONUS;
+    await addUserRewards(phone, userBonus, rewardType);
+  }
 
-  //update the inviter bonus
-
+  // Retrieve inviter details if available
   const inviter = await getUserByInviteCode(invite);
 
   if (inviter) {
-    if (firstRechargeBonus !== 0) {
-      await addUserRewards(
-        inviter.phone,
-        firstRechargeBonus,
-        REWARD_TYPES_MAP.FIRST_RECHARGE_AGENT_BONUS,
-      );
-    }
+    // Inviter's bonus is 7% of the user's recharge amount
+    const inviterBonus = (money / 100) * invrech;
 
-    if (dailyRechargeBonus !== 0) {
-      await addUserRewards(
-        inviter.phone,
-        dailyRechargeBonus,
-        REWARD_TYPES_MAP.DAILY_RECHARGE_AGENT_BONUS,
-      );
-    }
+    // Add inviter bonus as a daily recharge agent bonus
+    await addUserRewards(
+      inviter.phone,
+      inviterBonus,
+      REWARD_TYPES_MAP.DAILY_RECHARGE_AGENT_BONUS,
+    );
 
-    if (totalInviterMoney !== 0) {
-      await addUserMoney(inviter.phone, totalInviterMoney);
-    }
+    // Update inviter's balance with the inviter bonus
+    await addUserMoney(inviter.phone, inviterBonus);
   }
 };
+
+
+
+
 
 const getRechargeOrderId = () => {
   const date = new Date();
@@ -1553,22 +1388,59 @@ const rechargeTable = {
     const totalRecharge = totalRechargeRow[0].count || 0;
     return totalRecharge;
   },
+  
+  
+  
+  
+  
+  
   updateRemainingBet: async (phone, money, rechargeId, totalRecharge) => {
-    const [previousRecharge] = await connection.query(
-      `SELECT remaining_bet FROM recharge WHERE phone = ? AND status = 1 ORDER BY time_remaining_bet DESC LIMIT 2`,
-      [phone],
-    );
-
-    const previousRemainingBet = previousRecharge?.[1]?.remaining_bet || 0;
-
-    const totalRemainingBet =
-      totalRecharge === 0 ? money : previousRemainingBet + money;
-
-    await connection.query(
-      "UPDATE recharge SET remaining_bet = ? WHERE id = ?",
-      [totalRemainingBet, rechargeId],
-    );
+    try {
+      console.log(`updateRemainingBet called for Phone: ${phone}, Money: ${money}, Recharge ID: ${rechargeId}, Total Recharge: ${totalRecharge}`);
+      
+      // Fetch the previous remaining_bet value
+      const [previousRecharge] = await connection.query(
+        `SELECT remaining_bet 
+         FROM recharge 
+         WHERE phone = ? AND status = 1 
+         ORDER BY time DESC 
+         LIMIT 2`,
+        [phone]
+      );
+  
+      const previousRemainingBet = parseFloat(previousRecharge?.[0]?.remaining_bet || 0);
+      const totalRemainingBet = 
+        totalRecharge === 0 ? parseFloat(money) : previousRemainingBet + parseFloat(money);
+  
+      console.log(`Previous Remaining Bet: ${previousRemainingBet}`);
+      console.log(`Calculated Remaining Bet: ${totalRemainingBet}`);
+  
+      // Update the remaining_bet in the recharge table
+      const result = await connection.query(
+        "UPDATE recharge SET remaining_bet = ? WHERE id = ?",
+        [totalRemainingBet.toFixed(2), rechargeId]
+      );
+  
+      console.log(`Remaining bet updated for Recharge ID=${rechargeId}:`, result);
+      if (result[0].affectedRows === 0) {
+        console.error(`No rows updated for id=${rechargeId}.`);
+      }
+    } catch (error) {
+      console.error("Error in updateRemainingBet:", error.message);
+      throw error;
+    }
   },
+  
+  
+
+
+
+
+
+
+
+
+
   cancelById: async (id) => {
     if (typeof id !== "number") {
       throw Error("Invalid Recharge 'id' expected a number!");
@@ -1676,11 +1548,385 @@ const rspay = {
   },
 };
 
+
+
+const initiateMotherPayment = async (req, res) => {
+  const type = PaymentMethodsMap.MOTHER;
+  const auth = req.cookies.auth;
+
+  let amount = parseFloat(req.query.am);
+
+  if (!amount) {
+    return res.status(400).json({
+      message: `Amount is required!`,
+      status: false,
+    });
+  }
+
+  try {
+    const user = await getUserDataByAuthToken(auth);
+    const phone = user.phone;
+
+    const token = "$2y$10$uY5uCfSLBEeumTkqm8KQ2uF4HMqV9vNSktU6AvGq10U/9SQaXZOo6";
+    const userid = "MP15790";
+    const callbackUrl = `${process.env.APP_BASE_URL}/wallet/rechargerecords`;
+    const orderId = getRechargeOrderId();
+
+    const params = {
+      token,
+      userid,
+      amount: amount.toFixed(2),
+      mobile: phone,
+      name: user.username || "Testing",
+      orderid: orderId,
+      callback_url: callbackUrl,
+    };
+
+    console.log("Sending to MotherPay:", params);
+
+    const response = await axios.post("https://mothersolution.in/api/pg/phonepe/initiate", params, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log("MotherPay API Response:", response.data);
+
+    if (response.data && response.data.status === true) {
+      const paymentData = response.data;
+
+      const newRechargeParams = {
+        orderId: orderId,
+        transactionId: paymentData.transactionId || "N/A",
+        utr: 0,
+        phone: phone,
+        money: amount,
+        type: type,
+        status: PaymentStatusMap.PENDING,
+        today: rechargeTable.getCurrentTimeForTodayField(),
+        url: paymentData.url || "",
+        time: rechargeTable.getCurrentTimeForTimeField(),
+      };
+
+      console.log("Recharge Parameters:", newRechargeParams);
+
+      // Store recharge record in the database
+      try {
+        await rechargeTable.create(newRechargeParams);
+        console.log("Recharge record successfully created");
+      } catch (error) {
+        console.error("Failed to create recharge record:", error.message);
+        return res.status(500).json({
+          message: "Failed to store recharge record.",
+          status: false,
+          error: error.message,
+        });
+      }
+
+      // Redirect to the payment URL
+      return res.redirect(paymentData.url);
+    }
+
+    return res.status(400).json({
+      message: response.data.message || "Failed to initiate payment.",
+      status: false,
+    });
+  } catch (error) {
+    console.error("Error initiating MotherPay payment:", error.message);
+    return res.status(500).json({
+      status: false,
+      message: "Something went wrong! Please try again later.",
+      error: error.message,
+    });
+  }
+};
+
+
+
+
+const rechargeCallback = async (req, res) => {
+  const { status, client_txn_id: orderid } = req.body;
+
+  console.log("Callback received:", { status, orderid });
+
+  if (!status || !orderid) {
+    return res.status(400).json({
+      message: "Invalid callback data",
+      status: false,
+    });
+  }
+
+  try {
+    if (status === "success") {
+      // Fetch recharge details
+      const [recharge] = await connection.query(
+        `
+        SELECT r.phone, r.money, u.invite 
+        FROM recharge r 
+        JOIN users u ON r.phone = u.phone 
+        WHERE r.id_order = ?
+        `,
+        [orderid]
+      );
+
+      if (!recharge || recharge.length === 0) {
+        throw new Error("Recharge record not found!");
+      }
+
+      const { phone, money, invite } = recharge[0];
+
+      // Mark the recharge as successful
+      await connection.query("UPDATE recharge SET status = 1 WHERE id_order = ?", [orderid]);
+      console.log("Recharge confirmed for Order ID:", orderid);
+
+      // Calculate total recharge count
+      const totalRecharge = await rechargeTable.totalRechargeCount(PaymentStatusMap.SUCCESS, phone);
+
+      // Update the remaining_bet field
+      console.log("Updating remaining_bet...");
+      await rechargeTable.updateRemainingBet(phone, money, orderid, totalRecharge);
+
+      // Update user's account balance and bonuses
+      await addUserAccountBalance({ money, phone, invite, rechargeId: orderid });
+
+      console.log(`Callback processed successfully for Order ID: ${orderid}`);
+    } else if (status === "failure") {
+      await connection.query("UPDATE recharge SET status = 2 WHERE id_order = ?", [orderid]);
+      console.log("Recharge marked as failed for Order ID:", orderid);
+    } else {
+      console.warn("Unknown status received:", status);
+    }
+
+    return res.status(200).json({ status: true });
+  } catch (error) {
+    console.error("Error processing recharge callback:", error.message);
+    return res.status(500).json({
+      status: false,
+      message: "Failed to process callback",
+      error: error.message,
+    });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const initiateLgPayPayment = async (req, res) => {
+  try {
+      const minimumMoneyAllowed = 100; // Minimum allowed amount
+      const money = parseInt(req.query.am, 10); // Parse the amount from query params
+      const type = PaymentMethodsMap.LGPAY;
+
+      const auth = req.cookies.auth; // Retrieve auth token from cookies
+      if (!auth) {
+          return res.status(401).json({
+              message: "Unauthorized: Auth token is missing.",
+              status: false,
+              timeStamp: Date.now(),
+          });
+      }
+
+      console.log("Auth token received:", auth);
+      console.log("Received amount:", money);
+      console.log("Minimum required amount:", minimumMoneyAllowed);
+
+      if (!money || money < minimumMoneyAllowed) {
+          return res.status(400).json({
+              message: `Money is required and should be ₹${minimumMoneyAllowed} or above!`,
+              status: false,
+              timeStamp: Date.now(),
+          });
+      }
+
+
+    const user = await getUserDataByAuthToken(auth);
+    const orderId = getRechargeOrderId();
+
+    const params = {
+      app_id: "YD3335", // Hardcoded app_id
+      trade_type: "INRUPI", // Use "test" for testing
+      order_sn: orderId,
+      money: money * 100, // Convert amount to cents
+      notify_url: `${process.env.APP_BASE_URL}/payment/lgpay/verifylgpay`,
+      return_url: `${process.env.APP_BASE_URL}/wallet/rechargerecord`,
+      ip: req.ip || "127.0.0.1",
+      remark: "Test payment",
+    };
+
+    // Step 1: Generate Signature
+    const keys = Object.keys(params).sort(); // Sort keys
+    let stringA = keys
+      .map((key) => `${key}=${params[key]}`)
+      .join("&");
+    stringA += `&key=shVqn014wnbWy31z`; // Hardcoded key
+    const sign = crypto.createHash("md5").update(stringA).digest("hex").toUpperCase();
+
+    // Add the signature
+    params.sign = sign;
+
+    // Step 2: Send POST request to LG-PAY API
+    const response = await axios.post("https://www.lg-pay.com/api/order/create", params, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
+
+    const data = response.data;
+    if (data.status === 1) {
+      // Store the recharge details in the database
+      const newRecharge = {
+        orderId: orderId,
+        transactionId: "NULL",
+        phone: user.phone,
+        money: money,
+        type: type,
+        status: PaymentStatusMap.PENDING,
+        today: rechargeTable.getCurrentTimeForTodayField(),
+        url: data.data.pay_url,
+        time: rechargeTable.getCurrentTimeForTimeField(),
+      };
+
+      await rechargeTable.create(newRecharge);
+
+      return res.redirect(302, data.data.pay_url);
+    } else {
+      throw new Error(data.msg || "Payment initiation failed");
+    }
+  } catch (error) {
+    console.error("Error initiating LG-PAY payment:", error.message);
+    return res.status(500).json({
+      status: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const verifyLgPayPayment = async (req, res) => {
+  const { status, order_sn: orderid } = req.body;
+
+  console.log("Callback received:", { status, orderid });
+
+  if (!status || !orderid) {
+    return res.status(400).json({
+      message: "Invalid callback data",
+      status: false,
+    });
+  }
+
+  try {
+    // Fetch current recharge status from the database
+    const [existingRecharge] = await connection.query(
+      "SELECT status FROM recharge WHERE id_order = ?",
+      [orderid]
+    );
+
+    if (!existingRecharge || existingRecharge.length === 0) {
+      throw new Error("Recharge record not found!");
+    }
+
+    const currentStatus = existingRecharge[0].status;
+
+    // If the recharge is already successful, do nothing
+    if (currentStatus === 1) {
+      console.log(`Recharge already processed successfully for Order ID: ${orderid}`);
+      return res.status(200).json({
+        status: true,
+        message: "Recharge already processed",
+      });
+    }
+
+    if (status === "1") {
+      // Fetch recharge details
+      const [recharge] = await connection.query(
+        `
+        SELECT r.phone, r.money, u.invite 
+        FROM recharge r 
+        JOIN users u ON r.phone = u.phone 
+        WHERE r.id_order = ?
+        `,
+        [orderid]
+      );
+
+      if (!recharge || recharge.length === 0) {
+        throw new Error("Recharge record not found!");
+      }
+
+      const { phone, money, invite } = recharge[0];
+
+      // Mark the recharge as successful
+      await connection.query("UPDATE recharge SET status = 1 WHERE id_order = ?", [orderid]);
+      console.log("Recharge confirmed for Order ID:", orderid);
+
+      // Calculate total recharge count
+      const totalRecharge = await rechargeTable.totalRechargeCount(PaymentStatusMap.SUCCESS, phone);
+
+      // Update the remaining_bet field
+      console.log("Updating remaining_bet...");
+      await rechargeTable.updateRemainingBet(phone, money, orderid, totalRecharge);
+
+      // Update user's account balance and bonuses
+      await addUserAccountBalance({ money, phone, invite, rechargeId: orderid });
+
+      console.log(`Callback processed successfully for Order ID: ${orderid}`);
+    } else if (status === "2") {
+      await connection.query("UPDATE recharge SET status = 2 WHERE id_order = ?", [orderid]);
+      console.log("Recharge marked as failed for Order ID:", orderid);
+    } else {
+      console.warn("Unknown status received:", status);
+    }
+
+    return res.status(200).json({ status: true });
+  } catch (error) {
+    console.error("Error processing recharge callback:", error.message);
+    return res.status(500).json({
+      status: false,
+      message: "Failed to process callback",
+      error: error.message,
+    });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 const paymentController = {
   initiateUPIPayment,
   verifyUPIPayment,
-  initiateWowPayPayment,
-  verifyWowPayPayment,
   initiateManualUPIPayment,
   addManualUPIPaymentRequest,
   addManualUSDTPaymentRequest,
@@ -1692,6 +1938,10 @@ const paymentController = {
   initiateUpayPayment,
   verifyUpayPayment,
   walletTransfer,
+  initiateMotherPayment,
+  rechargeCallback,
+  initiateLgPayPayment,
+  verifyLgPayPayment,
 };
 
 export default paymentController;

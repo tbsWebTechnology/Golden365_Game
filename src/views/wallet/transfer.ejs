@@ -7,15 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="noindex,nofollow">
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
-    <title>Indn Club</title>
+    <title id="app-title"></title>
+  <script src="/js/app.js"></script>
     <link rel="stylesheet" href="./index_files/index-96409872.css">
     <link rel="stylesheet" href="../index_files/index-96409872.css">
     <link href="/css/wallet/main.css" rel="stylesheet" />
     <link href="/css/wallet/chunk_2-1.css" rel="stylesheet" />
     <link href="/css/wallet/chunk_2-2.css" rel="stylesheet" />
     <link href="/css/wallet/chunk_2-3.css" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml"
-        href="https://ossimg.tirangaagent.com/Tiranga/other/h5setting_20231017190406lyb3.ico">
+   <link rel="icon" type="image/svg+xml" href="/uploads/favicon/favicon.png" />
     <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css">
     <link rel="stylesheet" href="/assets/css/page-activity-4fe5c6bf.css">
     <link rel="stylesheet" href="/assets/css/index-2c2fee84.css">
@@ -25,51 +25,93 @@
     <link rel="stylesheet" href="/assets/css/page-main-284c07ba.css">
     <link rel="stylesheet" href="/assets/css/page-promotion-14ce89d7.css">
     <link rel="stylesheet" href="/assets/css/page-wallet-b9af2085.css">
+    <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
+    <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
+
+
+
+    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <style>
-        html,
-        body {
-            height: 100%;
-            width: 100%;
-            background-color: #090909;
-            padding: 0;
-            margin: 0;
-        }
-
-        .mian .wallet-box .box .balance[data-v-7b283485] {
-            background: #2b3270;
-
-        }
-
-
-        .mian .wallet-user[data-v-7b283485] {
-            background: #2b3270;
-        }
-
-        .van-row {
-            display: -webkit-box !important;
-            display: -webkit-flex !important;
-            display: flex !important;
-            -webkit-flex-wrap: wrap !important;
-            flex-wrap: wrap !important;
-        }
-
-        .navbar[data-v-106b99c8] {
-            background: #2b3270;
-        }
-
-
-        .c-tc {
-            text-align: center;
-            color: #fff;
-        }
-
-        .reload_img {
-            filter: brightness(6.5);
-        }
-    </style>
+   
 </head>
+<style>
+    .mian[data-v-7b283485] {
+    padding-bottom: 4rem;
+    background-color: #e5e5e5 !important;
+}
 
+.bd.van-row2.lisys {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    /* -webkit-box-orient: vertical; */
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    gap: .26667rem;
+    /* margin-top: 2.93333rem; */
+    /* margin-bottom: .4rem; */
+    background: #e5e5e5;
+}
+.rechargeh__container-content__item[data-v-f851bd18] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex
+;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    gap: 0.0rem !important; 
+    padding: .32rem .13333rem;
+    border-radius: .13333rem;
+    background-color: var(--darkBg, var(--bg_color_L2));
+}
+.rechargeh__container-content__item-body[data-v-f851bd18] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex
+;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    gap: 0.0rem !important;
+    font-size: .32rem;
+    color: var(--text_color_L2);
+}
+.rechargeh__container-content__item-body>div[data-v-f851bd18] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex
+;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-bottom: .19333rem !important;
+    padding: 0 .26667rem;
+}
+.van-divider {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex
+;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    margin: 5px !important;
+    color: var(--van-divider-text-color);
+    font-size: var(--van-divider-font-size);
+    line-height: var(--van-divider-line-height);
+    border-color: var(--van-divider-border-color);
+    border-style: solid;
+    border-width: 0;
+}
+</style>
 <body style="font-size: 12px;">
 
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -4098,21 +4140,20 @@
     </svg>
 
     <div id="app">
-        <div data-v-7b283485="" class="mian">
-            <div data-v-106b99c8="" data-v-7b283485="" class="navbar">
-                <div data-v-19888208="" class="navbar__content-left" onclick="history.back()">
-                    <i data-v-19888208="" class="van-badge__wrapper van-icon van-icon-arrow-left">
-                    </i>
-                </div>
-                <div data-v-106b99c8="" class="navbar-title"> Fund Transfer </div>
-                <div data-v-106b99c8="" class="navbar-right" onclick="location.href='/keFuMenu'">
-                    <div data-v-7b283485="" data-v-106b99c8="" class="c-row">
-                        <i class="fa-fade fa center" style="color: #FFF">
-                            <img data-v-7b283485="" data-v-106b99c8="" src="/images/audio.webp" class="audio">
-                        </i>
-                    </div>
-                </div>
+        <div data-v-12a80a3e="" data-v-0dabd3fc="" class="navbar main">
+            <div data-v-12a80a3e="" class="navbar-fixed">
+               <div data-v-12a80a3e="" class="navbar__content">
+                  <div data-v-12a80a3e="" class="navbar__content-left" onclick="history.back()"><i data-v-12a80a3e=""
+                        class="van-badge__wrapper van-icon van-icon-arrow-left"><!----><!----><!----></i></div>
+                  <div data-v-12a80a3e="" class="navbar__content-center"><!--v-if-->
+                     <div data-v-12a80a3e="" class="navbar__content-title">Transfer</div>
+                  </div>
+                  <div data-v-12a80a3e="" class="navbar__content-right"></div>
+               </div>
             </div>
+        </div>
+        <div data-v-7b283485="" class="mian" style="padding-top: 0px !important;">
+            
             <div data-v-7b283485="" class="wallet">
                 <div data-v-7b283485="" class="wallet-user c-tc">
                     <div data-v-7b283485="" class="c-row c-row-center img">
@@ -4162,53 +4203,28 @@
                             <div data-v-a0753f48="" class="lab">
                                 <span data-v-a0753f48=""> </span>
                             </div>
-                            <!-- <div data-v-a0753f48="" class="item c-row c-row-center first">
-                                <div data-v-a0753f48="" class="c-row number">
-                                    <span data-v-a0753f48="" class="c-row c-row-middle-center">
-                                        <img data-v-a0753f48=""
-                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGDSURBVHgB7ZnNTcNAEIXfOOGeEuiAcEFEuVBCJILELXEF0EGcDqAChxtS0gO+QMTNVID7IHgY83Mju4uyzghpPsmnfWvN8/5YmgcYxk5QqPAxv+h3iCcM9NEiUlDJ3L0dpPdVoN7P8914VjMy7BNCNpis5n6ZB5Xifwgw4TSwzi8PQZtXKNJhOj5Jl+W28cQ1mfF2DWU2qKeucacBIjqCMr4anAb+A2ZAGzOgjRnQxgxoYwa0MQPamAFtzIA2ZsDYEWdb5Sk/HxGSHlThapCuim2jXcfMpiNwJS84gy7F9/Mrdoi16SIuhWy8yiWQ7naPwCNEIpoBAi1Op8s0RLvOxwuZMEEEom2hmvklVCurUCIS8VZAbiz5st7CEnCv/rrdEIOIZ4ClFY8Hn6r+/PXEKb7BrlFt3AHHHw5mW/hq8CQ0yQLKEA5uXONOA8Mmm2J4k8K2kHBx7otbg2JWuR4zUc6wR5rih+kq8+mCg+4msSQJ/bjl3Ixkz7/L1h06kknDiMgH3mlqrSokw/4AAAAASUVORK5CYII="
-                                            class="mobile" style="height: 0.53333rem; width: 0.53333rem">
-                                    </span>
-                                    <div data-v-a0753f48="" class="p-l-5">+91</div>
-                                </div>
-                                <input data-v-a0753f48="" maxlength="16" type="text" placeholder="Phone Number"
-                                    style="background: #ffffff; outline: none">
-                            </div> -->
-                            <div data-v-50aa8bb0="" data-v-33f88764="" class="phoneInput__container">
-                                <div data-v-50aa8bb0="" class="phoneInput__container-label"><svg data-v-50aa8bb0=""
-                                        class="svg-icon icon-phone">
-                                        <use xlink:href="#icon-phone"></use>
-                                    </svg><span data-v-50aa8bb0="">Phone number</span></div>
-                                <div data-v-50aa8bb0="" class="phoneInput__container-input">
-                                    <div data-v-5067ef5e="" data-v-50aa8bb0="" class="dropdown">
-                                        <div data-v-5067ef5e="" class="dropdown__value"><span
-                                                data-v-5067ef5e="">+91</span><i data-v-5067ef5e=""
-                                                class="van-badge__wrapper van-icon van-icon-arrow-down"><!----><!----><!----></i>
-                                        </div>
-                                        <div data-v-5067ef5e="" class="dropdown__list">
-                                            <div data-v-5067ef5e="" class="dropdown__list-item active"><span
-                                                    data-v-5067ef5e="">+91</span> India (भारत)</div>
-                                        </div>
-                                    </div><input id="phone_number_inp" data-v-50aa8bb0="" type="text" name="userNumber"
-                                        placeholder="Please enter the phone number">
-                                </div>
-                            </div>
-
-                            <!-- <div data-v-a0753f48="" class="item c-row c-row-center">
-                                <span data-v-a0753f48="" class="img c-row c-row-middle-center">
-                                    <img data-v-a0753f48="" src="/images/wallet2.png" class="" width="20" height="20" />
-                                </span>
-                                <input data-v-d8986e5e="" data-v-a0753f48="" placeholder="Enter Amount"
-                                    style="background: #ffffff; outline: none">
-                            </div> -->
-
+                            
+                            
+                            
 
 
                             <div data-v-ea5b66c8="" data-v-33f88764="" class="passwordInput__container">
                                 <div data-v-ea5b66c8="" class="passwordInput__container-label">
                                     <img data-v-b59c95a7="" class="passwordInput__container-label__icon"
                                         style="filter: contrast(0.35) hue-rotate(180deg) saturate(2); width:22px; height:22px; margin-right: 12px;"
-                                        src="/images/wallet2.png" />
+                                        src="/images/my.png" />
+                                    <span data-v-b59c95a7="">Recipient UID</span>
+                                </div>
+                                <div data-v-ea5b66c8="" class="passwordInput__container-input"><input id="uid_input"
+                                        data-v-ea5b66c8="" type="text" placeholder="Enter UID" maxlength="32">
+                                </div>
+                            </div>
+
+                            <div data-v-ea5b66c8="" data-v-33f88764="" class="passwordInput__container">
+                                <div data-v-ea5b66c8="" class="passwordInput__container-label">
+                                    <img data-v-b59c95a7="" class="passwordInput__container-label__icon"
+                                        style="filter: contrast(0.35) hue-rotate(180deg) saturate(2); width:22px; height:22px; margin-right: 12px;"
+                                        src="/images/wallet.png" />
                                     <span data-v-b59c95a7="">Amount</span>
                                 </div>
                                 <div data-v-ea5b66c8="" class="passwordInput__container-input"><input id="amount_inp"
@@ -4217,10 +4233,9 @@
                             </div>
 
                             <div data-v-ea5b66c8="" data-v-33f88764="" class="passwordInput__container">
-                                <div data-v-ea5b66c8="" class="passwordInput__container-label"><svg data-v-ea5b66c8=""
-                                        class="svg-icon icon-editPswIcon passwordInput__container-label__icon passwordInput__container-label__icon">
-                                        <use xlink:href="#icon-editPswIcon"></use>
-                                    </svg><span data-v-ea5b66c8="">Password</span></div>
+                                <div data-v-ea5b66c8="" class="passwordInput__container-label"><img data-v-b59c95a7="" class="passwordInput__container-label__icon"
+                                    style="filter: contrast(0.35) hue-rotate(180deg) saturate(2); width:22px; height:22px; margin-right: 12px;"
+                                    src="/images/password.png" /><span data-v-ea5b66c8="">Password</span></div>
                                 <div data-v-ea5b66c8="" class="passwordInput__container-input"><input id="password_inp"
                                         data-v-ea5b66c8="" type="password" placeholder="Password" maxlength="32"
                                         autocomplete="new-password"><img id="password_eye_btn" data-v-ea5b66c8=""
@@ -4238,7 +4253,9 @@
                                     </div>
                                 </button>
                             </div>
+                            
 
+                            
 
                             <div class="alert-toast"></div>
                         </div>
@@ -4247,37 +4264,15 @@
                 </div>
                 <div data-v-7c8bbbf4="" class="promotion">
                     <div data-v-7c8bbbf4="" class="box">
-                        <div data-v-7c8bbbf4="" class="tit c-row c-row-between">Transferred Balance</div>
+                        <div data-v-7c8bbbf4="" class="tit c-row c-row-between">Transfer History</div>
                         <div data-v-7c8bbbf4="" class="table">
-                            <div data-v-7c8bbbf4="" class="hd van-row">
-                                <div data-v-7c8bbbf4="" class="c-tc van-ellipsis van-col van-col--8">Phone number
-                                </div>
-                                <div data-v-7c8bbbf4="" class="c-tc van-ellipsis van-col van-col--8">Amount</div>
-                                <div data-v-7c8bbbf4="" class="c-tc van-ellipsis van-col van-col--8">Status</div>
-                            </div>
+                            
                             <div class="bd van-row2 lisys">
                                 <!-- Transaction history data will be dynamically populated here -->
                             </div>
                         </div>
                     </div>
-                    <div data-v-7c8bbbf4="" class="promotion">
-                        <div data-v-7c8bbbf4="" class="box">
-                            <div data-v-7c8bbbf4="" class="tit c-row c-row-between">Received Balance</div>
-                            <div data-v-7c8bbbf4="" class="table">
-                                <div data-v-7c8bbbf4="" class="hd van-row">
-                                    <div data-v-7c8bbbf4="" class="c-tc van-ellipsis van-col van-col--8">Phone
-                                        number
-                                    </div>
-                                    <div data-v-7c8bbbf4="" class="c-tc van-ellipsis van-col van-col--8">Amount
-                                    </div>
-                                    <div data-v-7c8bbbf4="" class="c-tc van-ellipsis van-col van-col--8">Date</div>
-                                </div>
-                                <div class="bd van-row lisys-r">
-                                    <!-- Transaction history data will be dynamically populated here -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div data-v-3966082f="" class="box">
                     <div data-v-3966082f="" class="list m-b-20">
@@ -4354,158 +4349,129 @@
             }
         }
 
-        function validateForm(dialCode, phoneNumber, amount, password, text) {
-            if (!dialCode || !phoneNumber || !amount || !password) {
-                alertMess(text);
-                return false;
-            } else {
-                return true;
-            }
-        }
+        
+
+        
+        
+
 
         $('#send_money').click(async (e) => {
-            e.preventDefault();
-            let phoneNumber = $("#phone_number_inp").val().trim()
-            let password = $("#password_inp").val().trim()
-            let amount = $("#amount_inp").val().trim()
-            let dialCode = $('.dropdown__value span').text().trim()
+    e.preventDefault();
 
-            let status = validateForm(dialCode, phoneNumber, amount, password, 'Please fill in the necessary part.');
+    const uid = $("#uid_input").val().trim(); // Recipient UID
+    const password = $("#password_inp").val().trim(); // Password
+    const amount = $("#amount_inp").val().trim(); // Transfer Amount
 
-            if (status) {
-                $('.van-overlay').fadeIn(10);
-                $.ajax({
-                    type: "POST",
-                    url: "/api/wallet_transfer",
-                    data: {
-                        dialCode: dialCode,
-                        phone: phoneNumber,
-                        amount: amount,
-                        password: password,
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        alertMess(response.message);
+    // Validate form inputs
+    if (!uid || !password || !amount) {
+        alert("Please fill in all the fields.");
+        return;
+    }
 
-                        $.ajax({
-                            type: "GET",
-                            url: "/api/webapi/transfer_history",
-                            dataType: "json",
-                            success: function (response) {
-                                if (response.status === true) {
-                                    loadTransactionHistory(response.datas);
-                                }
-                            }
-                        });
+    // Make the transfer request
+    $.ajax({
+        type: "POST",
+        url: "/api/wallet_transfer",
+        data: { uid, password, amount },
+        dataType: "json",
+        success: function (response) {
+            alert(response.message);
 
-                        $.ajax({
-                            type: "GET",
-                            url: "/api/webapi/GetUserInfo",
-                            dataType: "json",
-                            success: function (response) {
-                                let user = response.data;
-                                $('.wallet-user .name').text(user.name_user);
-                                $('.money').text("₹" + user.money_user);
-                                $('.balance .item:eq(0) div:eq(1)').text("₹" + response.totalRecharge + ".00");
-                                $('.balance .item:eq(1) div:eq(1)').text("₹" + response.totalWithdraw + ".00");
-                            }
-                        });
-                    },
-                    error: function (response) {
-                        alertMess(response.data.message);
-                    }
-                });
-            }
+            // Reload user balance and transaction history
+            reloadUserInfo();
+            reloadTransactionHistory();
+        },
+        error: function (response) {
+            alert(response.responseJSON.message || "An error occurred.");
+        },
+    });
+});
 
-        });
-
-        function loadTransactionHistory(datas) {
-            let html = datas.map((data) => {
-                return `
-                                    <div data-v-7c8bbbf4="" class="bd van-row">
-                                        <div data-v-7c8bbbf4="" class="c-tc van-ellipsis van-col van-col--8">${data.receiver_phone}</div> 
-                                        <div data-v-7c8bbbf4="" class="c-tc van-col van-col--8">${data.amount}</div>
-                                        <div data-v-7c8bbbf4="" class="c-tc van-col van-col--8">${data.datetime.slice(0, 10)}</div>
-                                    </div>
-                                `;
-            }).join('');
-
-            $('.promotion .bd.lisys').html(html);
+function reloadUserInfo() {
+    $.ajax({
+        type: "GET",
+        url: "/api/webapi/GetUserInfo",
+        dataType: "json",
+        success: function (response) {
+            const user = response.data;
+            $('.money').text("₹" + user.money_user);
         }
+    });
+}
 
-        $.ajax({
-            type: "GET",
-            url: "/api/webapi/transfer_history",
-            dataType: "json",
-            success: function (response) {
-                if (response.status === true) {
-                    loadTransactionHistory(response.datas);
-                }
-            }
-        });
+function formatDateTime(unixTime) {
+    if (unixTime.toString().length === 13) {
+        unixTime = Math.floor(unixTime / 1000); // Convert milliseconds to seconds if necessary
+    }
+    const date = new Date(unixTime * 1000);
+    const options = {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
+    };
+    return date.toLocaleString("en-US", options);
+}
 
-        function loadTransactionReceiveHistory(receive) {
-            let html = receive.map((r_data) => {
-                return `
-                    <div data-v-7c8bbbf4="" class="bd van-row">
-                        <div data-v-7c8bbbf4="" class="c-tc van-ellipsis van-col van-col--8">${r_data.sender_phone}</div>
-                        <div data-v-7c8bbbf4="" class="c-tc van-col van-col--8">${r_data.amount}</div>
-                        <div data-v-7c8bbbf4="" class="c-tc van-col van-col--8">${r_data.datetime.slice(0, 10)}</div>
-                    </div>
-                    `;
-            }).join('');
+function loadCombinedTransactionHistory(datas, receives) {
+    // Combine send and receive arrays
+    let combinedData = datas.map((data) => ({
+        type: 'Sent',
+        phone: data.receiver_phone,
+        amount: data.amount,
+        datetime: data.datetime
+    })).concat(receives.map((r_data) => ({
+        type: 'Received',
+        phone: r_data.sender_phone,
+        amount: r_data.amount,
+        datetime: r_data.datetime
+    })));
 
-            $('.promotion .bd.lisys-r').html(html);
+    // Sort by datetime
+    combinedData.sort((b, a) => a.datetime - b.datetime);
+
+    let html = combinedData.map((data) => {
+        return `
+           
+
+            <div data-v-f851bd18="" class="rechargeh__container-content__item bd van-row">
+                     <div data-v-f851bd18="" class="rechargeh__container-content__item-header bd van-row">
+                        <span data-v-f851bd18="" class="recharge_tit">Transfer</span>
+                        <div data-v-f851bd18=""  style="margin-right: 10px;" class="recharge_rights">
+                        ${data.type}
+                        </div>
+                     </div>
+                     <div data-v-f851bd18="" role="separator" class="van-divider van-divider--hairline divier"></div>
+                     <div data-v-f851bd18="" class="rechargeh__container-content__item-body">
+                        <div data-v-f851bd18=""><span data-v-f851bd18="">Phone</span><span data-v-f851bd18="" class="price">${data.phone}</span></div>
+                        <div data-v-f851bd18=""><span data-v-f851bd18="">Amount</span><span data-v-f851bd18="">₹${data.amount}.00</span></div>
+                        <div data-v-f851bd18=""><span data-v-f851bd18="">Time</span><span data-v-f851bd18="">${formatDateTime(data.datetime)}</span></div>
+                        
+                     </div>
+                  </div>
+
+
+
+        `;
+    }).join('');
+
+    $('.promotion .bd.lisys').html(html);
+}
+
+$.ajax({
+    type: "GET",
+    url: "/api/webapi/transfer_history",
+    dataType: "json",
+    success: function (response) {
+        if (response.status === true) {
+            loadCombinedTransactionHistory(response.datas, response.receive);
         }
+    }
+});
 
-        $.ajax({
-            type: "GET",
-            url: "/api/webapi/transfer_history",
-            dataType: "json",
-            success: function (response) {
-                if (response.status === true) {
-
-                    loadTransactionReceiveHistory(response.receive);
-                }
-
-            }
-        });
-
-
-        $('.dropdown').click(function () {
-            $('.dropdown__list').css("opacity", $('.dropdown__list').css("opacity") === "1" ? "0" : "1");
-            $('.dropdown__list').css("height", $('.dropdown__list').css("opacity") === "1" ? ".2rem" : "6rem");
-        });
-
-        const setDialCode = (dialCode) => {
-            $('.dropdown__value span').text(dialCode);
-            $('.dropdown__list-item').removeClass('active');
-            $(`.dropdown__list-item .dial_code:contains(${dialCode})`).parent().addClass('active');
-        };
-
-
-        $.ajax({
-            url: "/country_codes.json",
-            method: "GET",
-            success: function (response) {
-                // Handle success response
-
-                const html = response.map((country) => {
-                    return `
-                             <div data-v-482b13c8="" class="dropdown__list-item" onclick="setDialCode('${country.dial_code}')">
-                                <span data-v-482b13c8="" class="dial_code">${country.dial_code}</span>
-                                ${country.name}
-                             </div>`;
-                }).join('');
-
-                $('.dropdown__list').html(html);
-
-                setDialCode("+91");
-            },
-            error: function (xhr, status, error) {
-                // Handle error response
-            }
-        });
 
 
     </script>

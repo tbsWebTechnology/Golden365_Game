@@ -1145,7 +1145,7 @@ html:lang(ar)
   padding-bottom: 0.8rem;
 }
 .vip-header[data-v-92d3d2e1] {
-  background: var(--light-main_gradient-color, var(--bg_color_L2));
+  background: var(--bg_color_L2);
   height: 4.4rem;
   width: 100%;
   color: #fff;
@@ -1253,7 +1253,7 @@ html:lang(ar)
   justify-content: space-between;
 }
 .vip-content-empirical > div[data-v-92d3d2e1] {
-  background: var(--light-bg_white, var(--bg_color_L3));
+  background: var(--bg_color_L3);
   border-radius: 0.13333rem;
   width: 4.4rem;
   text-align: center;

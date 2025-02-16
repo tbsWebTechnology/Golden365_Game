@@ -1,6 +1,6 @@
 .mian[data-v-7b283485] {
   padding-bottom: 4rem;
-  background-color: #16193b;
+  background-color: #fff;
 }
 
 .mian .head-right[data-v-7b283485] {
@@ -17,7 +17,7 @@
   padding: 0.53333rem 0.8rem 3.2rem;
   width: 100%;
   background: -webkit-linear-gradient(left, #61a9ff 0%, #59b0ea 100%);
-  background: linear-gradient(90deg, #61a9ff 0%, #59b0ea 100%);
+  background: var(--main_gradient-color);
 }
 
 .mian .wallet-user .img[data-v-7b283485] {
@@ -46,9 +46,9 @@
   position: relative;
   padding: 0.4rem;
   border-radius: 0.13333rem;
-  background: #f0f0f5;
+  background: #f2f2f1;
   border-radius: 0.26667rem;
-  background-color: #16193b;
+  background-color: #f2f2f1;
 }
 
 .mian .wallet-box .box .icon1[data-v-7b283485] {
@@ -61,12 +61,12 @@
 
 .mian .wallet-box .box .title[data-v-7b283485] {
   font-size: 0.53333rem;
-  color: #ffffff;
+  color: var(--main-color);
 }
 
 .mian .wallet-box .box .balance[data-v-7b283485] {
   padding: 0.4rem 0.4rem 0;
-  background: linear-gradient(180deg, #59b0ea 0%, #61a9ff 100%);
+  background: var(--main_gradient-color);
   /* box-shadow: 0 0rem 0.5rem #ffffff; */
   border-radius: 0.26667rem;
   background-size: 100% 100%;

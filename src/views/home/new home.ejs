@@ -1,0 +1,1891 @@
+<html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 36px;">
+
+<head>
+
+
+   <meta charset="UTF-8">
+   <link rel="icon" type="image/svg+xml" href="/uploads/favicon/favicon.png" />
+   <meta name="google" content="notranslate">
+   <meta name="robots" content="noindex,nofollow">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  
+   <title id="app-title"></title>
+  
+   
+   
+ 
+   
+
+
+
+   <link rel="stylesheet" href="/assets/css/page-activity-15aec14d.css">
+   <link rel="stylesheet" href="/assets/css/page-home-cd3ca502.css">
+   
+   <link rel="stylesheet" href="/css/page-home-a4807077.css">
+   <link rel="stylesheet" href="/css/modules-5dd73da0.css">
+   
+   <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
+   
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"
+      integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+
+
+  <style>
+    #leftBtn, #rightBtn {
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+    }
+
+    .nav-right .text[data-v-3dc40049] {
+    color: var(--text_color_L2);
+}
+
+.navbar__content-left img{
+   height: 70%;
+}
+
+
+ /* Basic popup styling */
+ #popupdeposit {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: white;
+            border: 2px solid #ccc;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Overlay for background dim */
+        #popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Close button styling */
+        .close-btn {
+            cursor: pointer;
+            color: red;
+            font-weight: bold;
+            float: right;
+        }
+
+      /* Container for the marquee effect */
+    .noticeBar__container {
+      width: 100%;
+      background-color: #f0f0f0; /* Optional, for styling */
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Container for the text */
+    .noticeBar__container-body {
+      overflow: hidden;
+      white-space: nowrap;
+      width: 80%; /* Adjust width as needed */
+    }
+
+    /* The moving text */
+    #noticehome {
+      display: inline-block;
+      animation: marquee 30s linear infinite; /* Adjust speed with the duration (10s) */
+      padding-left: 100%; /* Start text off-screen on the right */
+    }
+
+    /* Keyframes to move text from right to left */
+    @keyframes marquee {
+      0% {
+        transform: translateX(1%); /* Starts from the right edge */
+      }
+      100% {
+        transform: translateX(-100%); /* Ends at the left edge */
+      }
+    }
+
+    /* Style for the button */
+    .hotIcon {
+      background-color: #007bff; /* Button color */
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+
+
+
+<body style="font-size: 12px;" class="">
+  
+   <div id="app" data-v-app="">
+      
+      <div class="content-daman content" style="--f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif;">
+         <div data-v-12a80a3e="" class="navbar">
+            <div data-v-12a80a3e="" class="navbar-fixed">
+               <div data-v-12a80a3e="" class="navbar__content">
+                  <div data-v-12a80a3e="" class="navbar__content-left"><img src="/uploads/logo/logo.png"
+                        alt="">
+                  </div>
+                  <div data-v-12a80a3e="" class="navbar__content-center">
+                     <div data-v-12a80a3e="" class="navbar__content-title"></div>
+                  </div>
+
+
+                  <div data-v-12a80a3e="" class="navbar__content-right">
+                     <div data-v-3dc40049="" class="nav-right">
+                        
+                         <% if (isAuthenticated) { %>
+                             <!-- Show balance when the user is logged in -->
+                             <svg data-v-3dc40049="" class="svg-icon icon-lottyWallet">
+                                 <use xlink:href="#icon-lottyWallet"></use>
+                             </svg>
+                             <div data-v-3dc40049="">
+                                 <div data-v-3dc40049="" class="text">Balance</div>
+                                 <div data-v-3dc40049="" class="money">₹0.00</div>
+                             </div>
+                         <% } else { %>
+                             <!-- Show login/register when the user is not logged in -->
+                             <div data-v-3dc40049="" class="nav-btn login" onclick="location.href = '/login'">
+                                 Log in
+                             </div>
+                             <div data-v-3dc40049="" class="nav-btn" onclick="location.href = '/register'">
+                                 Register
+                             </div>
+                         <% } %>
+                     </div>
+                 </div>
+                 
+                 
+
+               </div>
+            </div>
+         </div><!-- 头部轮播图 -->      
+
+
+        <div data-v-3ad7aed7="" class="swiper_box" style="padding-top:10px; !important">
+            <div data-v-3ad7aed7="" class="swiper swiper-initialized swiper-horizontal swiper-pointer-events my-swipe">
+               <div class="swiper-wrapper" style="transform: translate3d(-3736px, 0px, 0px); transition-duration: 0ms;">
+                  <% banners.forEach(banner => { %>
+                  <div data-v-3ad7aed7="" class="swiper-slide" style="width: 447px; margin-right: 20px;">
+                     <img data-v-3ad7aed7="" src="./uploads/banners/<%= banner %>" alt="Banner Image" style="width:100%">
+                  </div>
+                  <% }) %>
+               </div>
+            </div>
+         </div> 
+
+         
+
+         <!-- 滚动通知栏 -->
+
+         
+         <div class="noticeBar__container"><svg class="svg-icon icon-noticeBarSpeaker">
+               <use xlink:href="#icon-noticeBarSpeaker"></use>
+            </svg>
+            <div class="noticeBar__container-body">
+               <div id="noticehome">Welcome</div>
+            </div><button class="hotIcon">Detail</button>
+         </div><!-- 热门、彩票、游戏选项卡 -->
+
+
+
+
+
+         <div id="Popup" class="overlay" style="z-index: 2001;position: fixed;top: 0;left: 0;/* z-index: var(--van-overlay-z-index); */width: 100%;height: 100%;background: var(--van-overlay-background);height: 16.3rem;display: none;">
+            <div data-v-84514e8e="" class="title" style="
+ height: 0.56rem; */
+ /* display: -webkit-box; */
+ /* display: -webkit-flex; */
+ display: flex;
+ /* -webkit-box-align: center; */
+ /* -webkit-align-items: center; */
+ align-items: center;
+ font-size: 0.4rem;
+ font-weight: 500;
+ margin-bottom: 0.5rem;
+ color: #fff;
+ margin-top: 1.3rem;
+ padding-top: 6rem;
+ margin-left: 0.5rem;
+ background: url(/assets/png/360_F_180044560_U73ZKLb89onRnY2j1jxjzKjHsYQuULqp-removebg-preview.png);
+ background-size: cover;
+ background-position: center;
+ background-repeat: no-repeat;
+ "><b data-v-84514e8e=""></b>Deposit Minimum ₹200 is Required to Play Games</div>
+ <img data-v-6af856c8="" class="" data-origin="/assets/png/images-removebg-preview.png" src="/assets/png/images-removebg-preview.png" onclick="location.href='/wallet/recharge'" style="
+ /* height: 100%; */
+"></div>
+
+
+
+
+
+
+
+
+
+
+
+      
+         <div data-v-0137aa14="" class="van-tabs van-tabs--line gameTypeHome">
+            <div>
+              <div class="van-sticky">
+                <div>
+                  <div class="van-tabs__wrap">
+                    <div role="tablist" class="van-tabs__nav van-tabs__nav--line van-tabs__nav--complete"
+                    aria-orientation="horizontal">
+                      <!---->
+
+
+                      <div id="van-tabs-20-2" role="tab" class="van-tab van-tab--line van-tab--active"
+                      tabindex="-1" aria-selected="false" aria-controls="van-tab-23" onclick="scrollToSection('/home#lottery')">
+                        <span class="van-tab__text">
+                          <div data-v-0137aa14="" class="tabs-btn">
+                            <img data-v-0137aa14="" alt="" data-img="/assets/png/avatar-2f23f3bd.png"
+                            class="" data-origin="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092542sh85.png"
+                            src="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092542sh85.png">
+                            Lottery
+                          </div>
+                        </span>
+                      </div>
+                      <div id="van-tabs-20-0" role="tab" class="van-tab van-tab--line van-tab--grow van-tab--grow"
+                      tabindex="0" aria-selected="true" aria-controls="van-tab-21" onclick="scrollToSection('/home#bigaward')">
+                        <span class="van-tab__text">
+                          <div data-v-0137aa14="" class="tabs-btn">
+                            <img data-v-0137aa14="" alt="" data-img="/assets/png/avatar-2f23f3bd.png"
+                            class="" data-origin="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092600jsn4.png"
+                            src="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092600jsn4.png">
+                            Super Jackpot
+                          </div>
+                        </span>
+                      </div>
+                      <div id="van-tabs-20-1" role="tab" class="van-tab van-tab--line van-tab--grow"
+                      tabindex="-1" aria-selected="false" aria-controls="van-tab-22" onclick="scrollToSection('/home#slot')">
+                        <span class="van-tab__text">
+                          <div data-v-0137aa14="" class="tabs-btn">
+                            <img data-v-0137aa14="" alt="" data-img="/assets/png/avatar-2f23f3bd.png"
+                            class="" data-origin="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092552pj7d.png"
+                            src="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092552pj7d.png">
+                            Slots
+                          </div>
+                        </span>
+                      </div>
+                      <div id="van-tabs-20-7" role="tab" class="van-tab van-tab--line van-tab--grow"
+                      tabindex="-1" aria-selected="false" aria-controls="van-tab-28" onclick="scrollToSection('/home#flash')">
+                        <span class="van-tab__text">
+                          <div data-v-0137aa14="" class="tabs-btn">
+                            <img data-v-0137aa14="" alt="" data-img="/assets/png/avatar-2f23f3bd.png"
+                            class="" data-origin="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092452swfv.png"
+                            src="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092452swfv.png">
+                            Original
+                          </div>
+                        </span>
+                      </div>
+                      <div id="van-tabs-20-3" role="tab" class="van-tab van-tab--line van-tab--grow"
+                      tabindex="-1" aria-selected="false" aria-controls="van-tab-24" onclick="scrollToSection('/home#sport')">
+                        <span class="van-tab__text">
+                          <div data-v-0137aa14="" class="tabs-btn">
+                            <img data-v-0137aa14="" alt="" data-img="/assets/png/avatar-2f23f3bd.png"
+                            class="" data-origin="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092533461f.png"
+                            src="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092533461f.png">
+                            Sports
+                          </div>
+                        </span>
+                      </div>
+                      <div id="van-tabs-20-4" role="tab" class="van-tab van-tab--line van-tab--grow"
+                      tabindex="-1" aria-selected="false" aria-controls="van-tab-25" onclick="scrollToSection('/home#video')">
+                        <span class="van-tab__text">
+                          <div data-v-0137aa14="" class="tabs-btn">
+                            <img data-v-0137aa14="" alt="" data-img="/assets/png/avatar-2f23f3bd.png"
+                            class="" data-origin="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092524eyc6.png"
+                            src="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092524eyc6.png">
+                            Casino
+                          </div>
+                        </span>
+                      </div>
+                      
+                      <div id="van-tabs-20-6" role="tab" class="van-tab van-tab--line van-tab--grow"
+                      tabindex="-1" aria-selected="false" aria-controls="van-tab-27" onclick="scrollToSection('/home#fish')">
+                        <span class="van-tab__text">
+                          <div data-v-0137aa14="" class="tabs-btn">
+                            <img data-v-0137aa14="" alt="" data-img="/assets/png/avatar-2f23f3bd.png"
+                            class="" data-origin="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092502uryl.png"
+                            src="https://ossimg.diuacting.com/DiuWin/gamecategory/gamecategory_20240722092502uryl.png">
+                            Fishing
+                          </div>
+                        </span>
+                      </div>
+                      
+                      <div class="van-tabs__line" style="transform: translateX(57px) translateX(-50%); transition-duration: 0.3s;">
+                      </div>
+                      <!---->
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+              </div>
+            </div>
+            <div class="van-tabs__content">
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+            </div>
+          </div>
+
+
+
+
+
+         
+           
+
+
+
+
+
+            <div data-v-0137aa14="" class="game-content">
+
+
+
+
+               <div data-v-5d47e2fb="" data-v-0137aa14="" class="homeNav" id="lottery" style="margin-top:20px">
+                  <div data-v-a75fb528="" class="title">
+                     <div data-v-a75fb528="">
+                       <b data-v-a75fb528=""></b>
+                       Lottery
+                       <div data-v-a75fb528="" class="allMore">More Inside</div>
+                     </div>
+                     
+                   </div>
+                   <div data-v-a75fb528="" class="tip">Fair and diverse lottery gameplay</div>
+                  <div data-v-5d47e2fb="" class="picContainer">
+                    <!--v-if-->
+                     <img data-v-a75fb528="" alt=""  class="restricted-link" src="/assets/png/lotterycategory_2024073013570787wd.png" onclick="window.location.href='/trx_wingo'">
+                     <img data-v-a75fb528="" alt=""  class="restricted-link" src="/assets/png/lotterycategory_20240730135644c9au.png" onclick="window.location.href='/wingo'">
+                     <img data-v-a75fb528="" alt=""  class="restricted-link" src="/assets/png/lotterycategory_20240730135652xdlu.png" onclick="window.location.href='/k3'">
+                     <img data-v-a75fb528="" alt=""  class="restricted-link" src="/assets/png/lotterycategory_202407301356593l49.png" onclick="window.location.href='/5d'">
+                     
+                  </div>
+                </div>
+
+
+
+
+                <div data-v-5d47e2fb="" data-v-0137aa14="" class="homeNav" id="lottery" style="margin-top:10px">
+                  <div data-v-a75fb528="" class="title">
+                     <div data-v-a75fb528="">
+                       <b data-v-a75fb528=""></b>
+                       Refer & Earn
+                       
+                     </div>
+                     
+                   </div>
+                   <div data-v-a75fb528="" class="tip">Refer your friends and earn unlimited.</div>
+                  <div data-v-5d47e2fb="">
+                    <!--v-if-->
+                    <img data-v-a75fb528="" alt="" src="/activity/referearn.jpg" style="width: 100%; border-radius: 10px;" onclick="window.location.href='/promotion/teampartner'">
+                          
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               <div data-v-164dafb9="" data-v-0137aa14="" id="slot">
+                  <div data-v-164dafb9="" class="title">
+                    <b data-v-164dafb9="">
+                    </b>
+                    Slots
+                  </div>
+                  <div data-v-164dafb9="" class="tip">
+                    Online real-time game dealers, all verified fair games
+                  </div>
+                  <div data-v-164dafb9="" class="van-tabs van-tabs--line homeNav">
+                    <div class="van-tabs__wrap">
+                      <div role="tablist" class="van-tabs__nav van-tabs__nav--line" aria-orientation="horizontal">
+                        <!-- Tab for JILI -->
+                        <div id="van-tabs-110-3" role="tab" class="van-tab van-tab--line van-tab--active" tabindex="-1" aria-selected="false" aria-controls="van-tab-115">
+                           <span class="van-tab__text van-tab__text--ellipsis">
+                             <div data-v-164dafb9="" class="tabs-btn">
+                               <svg data-v-164dafb9="" class="svg-icon icon-JILI gameIcon gameIcon">
+                                 <use xlink:href="#icon-JILI"></use>
+                               </svg>
+                               JILI
+                             </div>
+                           </span>
+                         </div>
+                        <!-- Tab for MG -->
+                        <div id="van-tabs-110-1" role="tab" class="van-tab van-tab--line" tabindex="-1" aria-selected="false" aria-controls="van-tab-113">
+                          <span class="van-tab__text van-tab__text--ellipsis">
+                            <div data-v-164dafb9="" class="tabs-btn">
+                              <svg data-v-164dafb9="" class="svg-icon icon-MG gameIcon gameIcon">
+                                <use xlink:href="#icon-MG"></use>
+                              </svg>
+                              MG
+                            </div>
+                          </span>
+                        </div>
+                        <!-- Tab for EVO_Electronic -->
+                        <div id="van-tabs-110-2" role="tab" class="van-tab van-tab--line" tabindex="-1" aria-selected="false" aria-controls="van-tab-114">
+                          <span class="van-tab__text van-tab__text--ellipsis">
+                            <div data-v-164dafb9="" class="tabs-btn">
+                              <svg data-v-164dafb9="" class="svg-icon icon-EVO_Electronic gameIcon gameIcon">
+                                <use xlink:href="#icon-EVO_Electronic"></use>
+                              </svg>
+                              EVO_Electronic
+                            </div>
+                          </span>
+                        </div>
+                        <!-- Tab for CQ9 -->
+                        <div id="van-tabs-110-0" role="tab" class="van-tab van-tab--line" tabindex="0" aria-selected="true" aria-controls="van-tab-112">
+                           <span class="van-tab__text van-tab__text--ellipsis">
+                             <div data-v-164dafb9="" class="tabs-btn">
+                               <svg data-v-164dafb9="" class="svg-icon icon-CQ9 gameIcon gameIcon">
+                                 <use xlink:href="#icon-CQ9"></use>
+                               </svg>
+                               CQ9
+                             </div>
+                           </span>
+                         </div>
+                        
+                        <!-- Tab for PG -->
+                        <div id="van-tabs-110-4" role="tab" class="van-tab van-tab--line" tabindex="-1" aria-selected="false" aria-controls="van-tab-116">
+                          <span class="van-tab__text van-tab__text--ellipsis">
+                            <div data-v-164dafb9="" class="tabs-btn">
+                              <svg data-v-164dafb9="" class="svg-icon icon-PG gameIcon gameIcon">
+                                <use xlink:href="#icon-PG"></use>
+                              </svg>
+                              PG
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                
+                    <!-- Tab content for each game provider -->
+                    <div class="van-tabs__content van-tabs__content--animated">
+                      <div class="van-swipe van-tabs__track">
+                        
+                        <div class="van-swipe__track">
+                          <!-- JILI Content -->
+                          <div data-v-164dafb9="" class="van-swipe-item van-tab__panel-wrapper" id="van-tab-115" role="tabpanel" tabindex="-1" aria-hidden="true" aria-labelledby="van-tabs-110-3" style="width: fit-content;">
+                           <div class="van-tab__panel">
+                             <div data-v-164dafb9="" class="picContainer">
+                               <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(2)" src="/jili_games/GAMEID_02.png">
+                               <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(4)" src="/jili_games/GAMEID_04.png">
+                               <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(5)" src="/jili_games/GAMEID_05.png">
+                               <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(6)" src="/jili_games/GAMEID_06.png">
+                               <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(9)" src="/jili_games/GAMEID_09.png">
+                               <div data-v-5d47e2fb="" class="more" onclick="location.href = '/slots'">
+                                 <div data-v-5d47e2fb="" class="more-l1">
+                                   <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                                     <use xlink:href="#icon-p3more">
+                                     </use>
+                                   </svg>
+                                   More
+                                 </div>
+                                 <div data-v-5d47e2fb="" class="more-l2">
+                                   Jili
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                          <!-- MG Content -->
+                          <div data-v-164dafb9="" class="van-swipe-item van-tab__panel-wrapper" id="van-tab-113" role="tabpanel" tabindex="-1" aria-hidden="true" aria-labelledby="van-tabs-110-1" style="width: fit-content;">
+                           <div class="van-tab__panel">
+                              <div data-v-164dafb9="" class="picContainer">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(10)" src="/jili_games/GAMEID_10.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(13)" src="/jili_games/GAMEID_13.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(14)" src="/jili_games/GAMEID_14.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(16)" src="/jili_games/GAMEID_16.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(17)" src="/jili_games/GAMEID_17.png">
+                                <div data-v-5d47e2fb="" class="more" onclick="location.href = '/slots'">
+                                  <div data-v-5d47e2fb="" class="more-l1">
+                                    <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                                      <use xlink:href="#icon-p3more">
+                                      </use>
+                                    </svg>
+                                    More
+                                  </div>
+                                  <div data-v-5d47e2fb="" class="more-l2">
+                                    MG
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- EVO_Electronic Content -->
+                          <div data-v-164dafb9="" class="van-swipe-item van-tab__panel-wrapper" id="van-tab-114" role="tabpanel" tabindex="-1" aria-hidden="true" aria-labelledby="van-tabs-110-2" style="width: fit-content;">
+                           <div class="van-tab__panel">
+                              <div data-v-164dafb9="" class="picContainer">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(18)" src="/jili_games/GAMEID_18.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(21)" src="/jili_games/GAMEID_21.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(23)" src="/jili_games/GAMEID_23.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(26)" src="/jili_games/GAMEID_26.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(27)" src="/jili_games/GAMEID_27.png">
+                                <div data-v-5d47e2fb="" class="more" onclick="location.href = '/slots'">
+                                  <div data-v-5d47e2fb="" class="more-l1">
+                                    <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                                      <use xlink:href="#icon-p3more">
+                                      </use>
+                                    </svg>
+                                    More
+                                  </div>
+                                  <div data-v-5d47e2fb="" class="more-l2">
+                                    EVO
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- CQ9 Content -->
+                          <div data-v-164dafb9="" class="van-swipe-item van-tab__panel-wrapper" id="van-tab-112" role="tabpanel" tabindex="0" aria-hidden="false" aria-labelledby="van-tabs-110-0" style="width: fit-content;">
+                           <div class="van-tab__panel">
+                              <div data-v-164dafb9="" class="picContainer">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(30)" src="/jili_games/GAMEID_30.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(33)" src="/jili_games/GAMEID_33.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(35)" src="/jili_games/GAMEID_35.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(36)" src="/jili_games/GAMEID_36.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(37)" src="/jili_games/GAMEID_37.png">
+                                <div data-v-5d47e2fb="" class="more" onclick="location.href = '/slots'">
+                                  <div data-v-5d47e2fb="" class="more-l1">
+                                    <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                                      <use xlink:href="#icon-p3more">
+                                      </use>
+                                    </svg>
+                                    More
+                                  </div>
+                                  <div data-v-5d47e2fb="" class="more-l2">
+                                    CQ9
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                         </div>
+                          
+                          <!-- PG Content -->
+                          <div data-v-164dafb9="" class="van-swipe-item van-tab__panel-wrapper" id="van-tab-116" role="tabpanel" tabindex="-1" aria-hidden="true" aria-labelledby="van-tabs-110-4" style="width: fit-content;">
+                           <div class="van-tab__panel">
+                              <div data-v-164dafb9="" class="picContainer">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(38)" src="/jili_games/GAMEID_38.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(40)" src="/jili_games/GAMEID_40.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(42)" src="/jili_games/GAMEID_42.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(43)" src="/jili_games/GAMEID_43.png">
+                                <img data-v-164dafb9="" alt="JILI Game" onclick="openJILIGameById(44)" src="/jili_games/GAMEID_44.png">
+                                <div data-v-5d47e2fb="" class="more" onclick="location.href = '/slots'">
+                                  <div data-v-5d47e2fb="" class="more-l1">
+                                    <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                                      <use xlink:href="#icon-p3more">
+                                      </use>
+                                    </svg>
+                                    More
+                                  </div>
+                                  <div data-v-5d47e2fb="" class="more-l2">
+                                    PG
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+
+
+
+
+               
+               
+               <div data-v-5d47e2fb="" data-v-0137aa14="" class="homeNav" id="flash" style="margin-top:20px">
+                  <div data-v-5d47e2fb="" class="title">
+                    <b data-v-5d47e2fb="">
+                    </b>
+                    Original
+                  </div>
+                  <div data-v-5d47e2fb="" class="tip">
+                    The games are independently developed by our team, fun, fair, and safe
+                  </div>
+                  <div data-v-5d47e2fb="" class="picContainer">
+                    <!--v-if-->
+                    <img data-v-5d47e2fb="" alt="" class=""  onclick="openJDBGame(22, 22001)" src="/jdb_images/22001_200x200_en.png">
+                    <img data-v-5d47e2fb="" alt="" class=""  onclick="openJDBGame(22, 22002)" src="/jdb_images/22002_200x200_en.png">
+                    <img data-v-5d47e2fb="" alt="" class=""  onclick="openJDBGame(22, 22003)" src="/jdb_images/22003_200x200_en.png">
+                    <img data-v-5d47e2fb="" alt="" class=""  onclick="openJDBGame(22, 22004)" src="/jdb_images/22004_200x200_en.png">
+                    <img data-v-5d47e2fb="" alt="" class=""  onclick="openJDBGame(22, 22005)" src="/jdb_images/22005_200x200_en.png">
+                    <div data-v-5d47e2fb="" class="more" onclick="location.href = '/original'">
+                      <div data-v-5d47e2fb="" class="more-l1">
+                        <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                          <use xlink:href="#icon-p3more">
+                          </use>
+                        </svg>
+                        More
+                      </div>
+                      <div data-v-5d47e2fb="" class="more-l2">
+                        Original
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+               <div data-v-94997d77="" data-v-0137aa14="" class="homeNav" id="bigaward" style="margin-top:20px">
+                  <div data-v-94997d77="" class="title">
+                    <div data-v-94997d77="">
+                      <b data-v-94997d77="">
+                      </b>
+                      Super Jackpot
+                    </div>
+                    
+                  </div>
+                  <div data-v-94997d77="" class="tip">
+                    When you win a super jackpot, you will receive additional rewards
+                  </div>
+                  <div data-v-94997d77="" class="tip">
+                    Maximum bonus
+                    <span data-v-94997d77="">
+                      ₹300.00
+                    </span>
+                  </div>
+                  <div data-v-fde5c416="" data-v-5cc5cfb9="" class="daman__container allGame">
+                     <div onclick="openJILIGameById(224)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
+                           class="gameImg"
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/TB_Chess/800.png"
+                           src="/jili_games/GAMEID_224.png">
+                        <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
+                              data-v-fde5c416="">85.96%</span>
+                           <div data-v-fde5c416="" class="win-p" style="width: 85.96%;"></div>
+                        </div>
+                     </div>
+                     <div onclick="openJDBGame(22, 22001)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
+                           class="gameImg"
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/SPRIBE/22001.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/SPRIBE/22001.png">
+                        <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
+                              data-v-fde5c416="">89.64%</span>
+                           <div data-v-fde5c416="" class="win-p" style="width: 89.64%;"></div>
+                        </div>
+                     </div>
+                     <div data-v-fde5c416="" class="item" onclick="openJILIGameById(1)"><img data-v-fde5c416=""
+                           class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/PG/98.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/1.png">
+                        <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
+                              data-v-fde5c416="">85.14%</span>
+                           <div data-v-fde5c416="" class="win-p" style="width: 85.14%;"></div>
+                        </div>
+                     </div>
+
+
+
+                     <div onclick="openJILIGameById(1)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
+                           class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/1.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/1.png">
+                        <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
+                              data-v-fde5c416="">89.83%</span>
+                           <div data-v-fde5c416="" class="win-p" style="width: 89.83%;"></div>
+                        </div>
+                     </div>
+                     <div onclick="openJILIGameById(100)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
+                           class="gameImg"
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/100.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/100.png">
+                        <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
+                              data-v-fde5c416="">84.9%</span>
+                           <div data-v-fde5c416="" class="win-p" style="width: 84.9%;"></div>
+                        </div>
+                     </div>
+                     <div data-v-fde5c416="" class="item" onclick="openJILIGameById(119)"><img data-v-fde5c416=""
+                           class="gameImg"
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/PG/1543462.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/119.png">
+                        <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
+                              data-v-fde5c416="">91.42%</span>
+                           <div data-v-fde5c416="" class="win-p" style="width: 91.42%;"></div>
+                        </div>
+                     </div>
+
+                  </div><!--彩票--><!--其他-->
+                  <div data-v-94997d77="" class="btn" onclick="location.href = '/jackpot'">
+                    Look Super Jackpot
+                  </div>
+                </div>
+
+
+
+               <div data-v-b3f20c24="" data-v-0137aa14="" class="homeNav" id="sport" style="margin-top:20px">
+                 <div data-v-b3f20c24="" class="title">
+                   <div data-v-b3f20c24="">
+                     <b data-v-b3f20c24="">
+                     </b>
+                     Sports
+                     <div data-v-b3f20c24="" class="allMore">
+                       More Fun
+                     </div>
+                   </div>
+                   
+                 </div>
+                 <div data-v-b3f20c24="" class="tip">
+                   Latest sports events, rich gameplay
+                 </div>
+                 <div data-v-3ad7aed7="" class="swiper_box">
+                  <div data-v-3ad7aed7="" class="swiper my-swipe">
+                    <div class="swiper-wrapper">
+                      <div data-v-3ad7aed7="" class="swiper-slide">
+                        <img data-v-a75fb528="" alt="" style="border-radius: 8px;" src="/jili_games/GAMEID_112.png" onclick="openJILIGameById(112)">
+                        <img data-v-a75fb528="" alt="" style="border-radius: 8px;" src="/jili_games/GAMEID_113.png" onclick="openJILIGameById(113)">
+                        <img data-v-a75fb528="" alt="" style="border-radius: 8px;" src="/jili_games/GAMEID_114.png" onclick="openJILIGameById(114)">
+                     </div>
+                     <div data-v-3ad7aed7="" class="swiper-slide">
+                        <img data-v-a75fb528="" alt="" style="border-radius: 8px;" src="/jili_games/GAMEID_115.png" onclick="openJILIGameById(115)">
+                        <img data-v-a75fb528="" alt="" style="border-radius: 8px;" src="/jili_games/GAMEID_116.png" onclick="openJILIGameById(116)">
+                        <img data-v-a75fb528="" alt="" style="border-radius: 8px;" src="/jili_games/GAMEID_128.png" onclick="openJILIGameById(128)">
+                      </div>
+                      <!-- Add more slides as necessary -->
+                    </div>
+                  </div>
+                </div>
+               </div>
+               <div data-v-d7f5555c="" data-v-0137aa14="" class="homeNav" id="video" style="margin-top:20px">
+                 <div data-v-d7f5555c="" class="title">
+                   <b data-v-d7f5555c="">
+                   </b>
+                   Casino
+                 </div>
+                 <div data-v-d7f5555c="" class="tip">
+                   Guided by live dealers, you will experience the fun of baccarat
+                 </div>
+                 <div data-v-d64223be="" class="picContainer">
+                  <!--v-if-->
+                  <img data-v-d64223be="" alt="" class="" onclick="openJILIGameById(111)" src="/jili_games/GAMEID_111.png">
+                  <img data-v-d64223be="" alt="" class="" onclick="openJILIGameById(113)" src="/jili_games/GAMEID_113.png">
+                  <img data-v-d64223be="" alt="" class="" onclick="openJILIGameById(114)" src="/jili_games/GAMEID_114.png">
+                  <img data-v-d64223be="" alt="" class="" onclick="openJILIGameById(118)" src="/jili_games/GAMEID_118.png">
+                  <img data-v-d64223be="" alt="" class="" onclick="openJILIGameById(122)" src="/jili_games/GAMEID_122.png">
+                  
+                  <div data-v-5d47e2fb="" class="more" onclick="location.href = '/casinos'">
+                     <div data-v-5d47e2fb="" class="more-l1">
+                       <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                         <use xlink:href="#icon-p3more">
+                         </use>
+                       </svg>
+                       More
+                     </div>
+                     <div data-v-5d47e2fb="" class="more-l2">
+                       Casino
+                     </div>
+                   </div>
+                </div>
+               </div>
+              
+               <div data-v-d64223be="" data-v-0137aa14="" class="homeNav" id="fish" style="margin-top:20px">
+                 <div data-v-d64223be="" class="title">
+                   <b data-v-d64223be="">
+                   </b>
+                   Fishing
+                 </div>
+                 <div data-v-d64223be="" class="tip">
+                   Classic arcade gameplay, super cool visual enjoyment
+                 </div>
+                 <div data-v-d64223be="" class="picContainer">
+                   <!--v-if-->
+                   <img data-v-d64223be="" alt="" class="" onclick="openJILIGameById(510)" src="https://ossimg.diuacting.com/DiuWin/gamelogo/V8Card/510.png">
+                   <img data-v-d64223be="" alt="" class="" onclick="openJILIGameById(1)" src="https://ossimg.diuacting.com/DiuWin/gamelogo/JILI/1.png">
+                   <img data-v-d64223be="" alt="" class="" onclick="openJILIGameById(119)" src="https://ossimg.diuacting.com/DiuWin/gamelogo/JILI/119.png">
+                   <img data-v-d64223be="" alt="" class="" onclick="openJILIGameById(20)" src="https://ossimg.diuacting.com/DiuWin/gamelogo/JILI/20.png">
+                   <img data-v-d64223be="" alt="" class="" onclick="openJILIGameById(212)" src="https://ossimg.diuacting.com/DiuWin/gamelogo/JILI/212.png">
+                   <div data-v-d64223be="" class="more" onclick="location.href = '/fishing'">
+                     <div data-v-d64223be="" class="more-l1">
+                       <svg data-v-d64223be="" class="svg-icon icon-p3more">
+                         <use xlink:href="#icon-p3more">
+                         </use>
+                       </svg>
+                       More
+                     </div>
+                     <div data-v-d64223be="" class="more-l2">
+                       Fishing
+                     </div>
+                   </div>
+                 </div>
+               </div>
+              
+             </div>
+
+
+
+
+
+            
+         </div><!-- 中奖信息 -->
+         <div data-v-ffb14677="" class="luckyWinners__container" style="margin-top:40px">
+            <h1 data-v-ffb14677="">Winning information</h1>
+            <div data-v-ffb14677="" class="luckyWinners__container-wrapper">
+               <div data-v-ffb14677="" style="position: relative;">
+                  <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item">
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-img"><img data-v-ffb14677=""
+                           class="" data-origin="/assets/png/10-29a6603e.png" src="/assets/png/10-29a6603e.png"></div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-info">
+                        <h1 data-v-ffb14677="">Mem***ROQ</h1>
+                     </div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-winType"><img
+                           data-v-ffb14677="" class=""
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20240102161956p963.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20240102161956p963.png">
+                     </div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-winAmount">
+                        <h1 data-v-ffb14677="">Receive ₹40,000.00</h1><span data-v-ffb14677="">Winning amount</span>
+                     </div>
+                  </div>
+                  <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item">
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-img"><img data-v-ffb14677=""
+                           class="" data-origin="/assets/png/8-ea087ede.png" src="/assets/png/8-ea087ede.png"></div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-info">
+                        <h1 data-v-ffb14677="">Mem***MWB</h1>
+                     </div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-winType"><img
+                           data-v-ffb14677="" class=""
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026192554xfnm.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026192554xfnm.png">
+                     </div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-winAmount">
+                        <h1 data-v-ffb14677="">Receive ₹80.00</h1><span data-v-ffb14677="">Winning amount</span>
+                     </div>
+                  </div>
+                  <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item">
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-img"><img data-v-ffb14677=""
+                           class="" data-origin="/assets/png/16-cf8e1441.png" src="/assets/png/16-cf8e1441.png"></div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-info">
+                        <h1 data-v-ffb14677="">Mem***JHU</h1>
+                     </div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-winType"><img
+                           data-v-ffb14677="" class=""
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20240102161956p963.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20240102161956p963.png">
+                     </div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-winAmount">
+                        <h1 data-v-ffb14677="">Receive ₹200.00</h1><span data-v-ffb14677="">Winning amount</span>
+                     </div>
+                  </div>
+                  <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item">
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-img"><img data-v-ffb14677=""
+                           class="" data-origin="/assets/png/12-ae12c679.png" src="/assets/png/12-ae12c679.png"></div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-info">
+                        <h1 data-v-ffb14677="">Mem***NAJ</h1>
+                     </div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-winType"><img
+                           data-v-ffb14677="" class=""
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_202310261925122stc.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_202310261925122stc.png">
+                     </div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-winAmount">
+                        <h1 data-v-ffb14677="">Receive ₹200.00</h1><span data-v-ffb14677="">Winning amount</span>
+                     </div>
+                  </div>
+                  <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item">
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-img"><img data-v-ffb14677=""
+                           class="" data-origin="/assets/png/17-bedde42f.png" src="/assets/png/17-bedde42f.png"></div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-info">
+                        <h1 data-v-ffb14677="">Mem***ROA</h1>
+                     </div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-winType"><img
+                           data-v-ffb14677="" class=""
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20240102161956p963.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20240102161956p963.png">
+                     </div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-winAmount">
+                        <h1 data-v-ffb14677="">Receive ₹200.00</h1><span data-v-ffb14677="">Winning amount</span>
+                     </div>
+                  </div>
+                  <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item">
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-img"><img data-v-ffb14677=""
+                           class="" data-origin="/assets/png/5-ab77b716.png" src="/assets/png/5-ab77b716.png"></div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-info">
+                        <h1 data-v-ffb14677="">Mem***QHM</h1>
+                     </div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-winType"><img
+                           data-v-ffb14677="" class=""
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_202310261925122stc.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_202310261925122stc.png">
+                     </div>
+                     <div data-v-ffb14677="" class="luckyWinners__container-wrapper__item-winAmount">
+                        <h1 data-v-ffb14677="">Receive ₹200.00</h1><span data-v-ffb14677="">Winning amount</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div><!-- 今日盈利排行榜 -->
+         <div data-v-84514e8e="" class="dailyProfitRank">
+            <div data-v-84514e8e="" class="title"><b data-v-84514e8e=""></b>Today's earnings chart</div>
+            <div data-v-84514e8e="" class="dailyProfitRank__content">
+               <div data-v-84514e8e="" class="dailyProfitRank__content-topThree">
+                  <div data-v-84514e8e="" class="dailyProfitRank__content-topThree__item" style="order: 2; top: -45px;">
+                     <div data-v-84514e8e=""
+                        style="background: url('/assets/png/border1-3b6518ec.png') center center / 100% 100% no-repeat;">
+                        <img data-v-84514e8e="" data-img="/assets/png/avatar-ea3b8ee9.png" class=""
+                           data-origin="/assets/png/8-ea087ede.png" src="/assets/png/8-ea087ede.png">
+                     </div>
+                     <div data-v-84514e8e=""><img data-v-84514e8e="" class=""
+                           data-origin="/assets/png/crown1-3912fd85.png" src="/assets/png/crown1-3912fd85.png"><img
+                           data-v-84514e8e="" class="" data-origin="/assets/png/place1-fe39c3f3.png"
+                           src="/assets/png/place1-fe39c3f3.png"></div><span data-v-84514e8e="">Mem***GVT</span><span
+                        data-v-84514e8e="">₹12,505,260.13</span>
+                  </div>
+                  <div data-v-84514e8e="" class="dailyProfitRank__content-topThree__item" style="order: 1; top: -30px;">
+                     <div data-v-84514e8e=""
+                        style="background: url('/assets/png/border2-7a806be7.png') center center / 100% 100% no-repeat;">
+                        <img data-v-84514e8e="" data-img="/assets/png/avatar-ea3b8ee9.png" class=""
+                           data-origin="/assets/png/17-bedde42f.png" src="/assets/png/17-bedde42f.png">
+                     </div>
+                     <div data-v-84514e8e=""><img data-v-84514e8e="" class=""
+                           data-origin="/assets/png/crown2-c8aced52.png" src="/assets/png/crown2-c8aced52.png"><img
+                           data-v-84514e8e="" class="" data-origin="/assets/png/place2-8189be28.png"
+                           src="/assets/png/place2-8189be28.png"></div><span data-v-84514e8e="">Mem***NNB</span><span
+                        data-v-84514e8e="">₹8,899,283.14</span>
+                  </div>
+                  <div data-v-84514e8e="" class="dailyProfitRank__content-topThree__item" style="order: 3; top: -30px;">
+                     <div data-v-84514e8e=""
+                        style="background: url('/assets/png/border3-cfec4a7d.png') center center / 100% 100% no-repeat;">
+                        <img data-v-84514e8e="" data-img="/assets/png/avatar-ea3b8ee9.png" class=""
+                           data-origin="/assets/png/16-cf8e1441.png" src="/assets/png/16-cf8e1441.png">
+                     </div>
+                     <div data-v-84514e8e=""><img data-v-84514e8e="" class=""
+                           data-origin="/assets/png/crown3-2ca02146.png" src="/assets/png/crown3-2ca02146.png"><img
+                           data-v-84514e8e="" class="" data-origin="/assets/png/place3-d9b0be38.png"
+                           src="/assets/png/place3-d9b0be38.png"></div><span data-v-84514e8e="">Mem***TYB</span><span
+                        data-v-84514e8e="">₹6,955,144.08</span>
+                  </div>
+               </div>
+               <div data-v-84514e8e="" class="dailyProfitRank__content-list">
+                  <div data-v-84514e8e="" class="dailyProfitRank__content-list__item"><span data-v-84514e8e=""
+                        class="left-rank">4</span><img data-v-84514e8e="" data-img="/assets/png/avatar-ea3b8ee9.png"
+                        class="" data-origin="/assets/png/5-ab77b716.png" src="/assets/png/5-ab77b716.png"><span
+                        data-v-84514e8e=""
+                        class="middle-name">Mem***FTL</span><!-- <span class="middle-name">{{ formatString(item.nickName, 10) }}</span> --><span
+                        data-v-84514e8e="" class="right-box">₹5,233,891.66</span></div>
+                  <div data-v-84514e8e="" class="dailyProfitRank__content-list__item"><span data-v-84514e8e=""
+                        class="left-rank">5</span><img data-v-84514e8e="" data-img="/assets/png/avatar-ea3b8ee9.png"
+                        class="" data-origin="/assets/png/2-58c8a9bc.png" src="/assets/png/2-58c8a9bc.png"><span
+                        data-v-84514e8e=""
+                        class="middle-name">Mem***XOA</span><!-- <span class="middle-name">{{ formatString(item.nickName, 10) }}</span> --><span
+                        data-v-84514e8e="" class="right-box">₹5,077,879.20</span></div>
+               </div>
+            </div>
+         </div>
+
+         <div data-v-ca43e9bb="" class="tool">
+            <div data-v-ca43e9bb="" class="title">
+              <b data-v-ca43e9bb="">
+              </b>
+              Basic Tools
+            </div>
+            <div data-v-ca43e9bb="" class="tool-container">
+              <div data-v-ca43e9bb="" class="tool-item">
+                <svg data-v-ca43e9bb="" class="svg-icon icon-p3Language">
+                  <use xlink:href="#icon-p3Language">
+                  </use>
+                </svg>
+                <div data-v-ca43e9bb="">
+                  Language
+                </div>
+              </div>
+              <div data-v-ca43e9bb="" class="tool-item">
+                <svg data-v-ca43e9bb="" class="svg-icon icon-p3Notification">
+                  <use xlink:href="#icon-p3Notification">
+                  </use>
+                </svg>
+                <div data-v-ca43e9bb="">
+                  Notification
+                </div>
+              </div>
+              <div data-v-ca43e9bb="" class="tool-item">
+                <svg data-v-ca43e9bb="" class="svg-icon icon-p3Service">
+                  <use xlink:href="#icon-p3Service">
+                  </use>
+                </svg>
+                <div data-v-ca43e9bb="">
+                  24/7 Customer service
+                </div>
+              </div>
+              <div data-v-ca43e9bb="" class="tool-item">
+                <svg data-v-ca43e9bb="" class="svg-icon icon-p3Guide">
+                  <use xlink:href="#icon-p3Guide">
+                  </use>
+                </svg>
+                <div data-v-ca43e9bb="">
+                  Beginner's Guide
+                </div>
+              </div>
+              <div data-v-ca43e9bb="" class="tool-item">
+                <svg data-v-ca43e9bb="" class="svg-icon icon-p3About">
+                  <use xlink:href="#icon-p3About">
+                  </use>
+                </svg>
+                <div data-v-ca43e9bb="">
+                  About us
+                </div>
+              </div>
+              <div data-v-ca43e9bb="" class="tool-item">
+                <svg data-v-ca43e9bb="" class="svg-icon icon-p3Down">
+                  <use xlink:href="#icon-p3Down">
+                  </use>
+                </svg>
+                <div data-v-ca43e9bb="">
+                  Download APP
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        
+          
+         <div data-v-c0caae78="" class="dialog inactive">
+            <div data-v-c0caae78="" class="dialog__container" role="dialog" tabindex="0">
+               <div data-v-c0caae78="" class="dialog__container-img"><img data-v-c0caae78="" alt="" class=""
+                     data-origin="/assets/png/superjackpotHome-72bbeb43.png"
+                     src="/assets/png/superjackpotHome-72bbeb43.png"></div>
+               <div data-v-c0caae78="" class="dialog__container-title">
+                  <h1 data-v-c0caae78="">Congratulation</h1>
+               </div>
+               <div data-v-c0caae78="" class="dialog__container-content">
+                  <div class="Laundry-Con">
+                     <div class="Laundry-Con_tip">Get 【Super Jackpot】!</div>
+                     <div class="Landty-Con-tips">Visit the [Super Jackpot] page to claim your reward</div>
+                  </div>
+               </div>
+               <div data-v-c0caae78="" class="dialog__container-footer"><button data-v-c0caae78="">OK</button></div>
+            </div>
+            <div data-v-c0caae78="" class="dialog__outside"></div>
+         </div>
+      </div><!--online custom service-->
+      <div class="customer" id="customerId" onclick="location.href='/support'"
+         style="--f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif; --f6a705e1-currentFontFamily: bahnschrift;">
+         <img class="" data-origin="/assets/png/icon_sevce-8a1f5628.png" src="/assets/png/icon_sevice-8a1f5628.png">
+      </div>
+      <%- include('../nav') -%>
+         <div class="van-overlay"
+            style="z-index: 2000; --f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif; display: none;">
+
+         </div>
+
+
+
+
+
+         
+         <div role="dialog" tabindex="0" class="van-popup van-popup--center van-dialog prompt-dialog"
+            style="z-index: 2002; display: none;">
+            <div class="van-dialog__content">
+               <div class="promptHeader">Notification</div>
+               <div class="promptContent">
+                  <h2
+                     style="margin-top: 0px; margin-bottom: 0px; font-family: Verdana, Helvetica; line-height: 26px; font-size: 18px; text-align: center;">
+                     <font color="#000000" style="background-color: rgb(255, 255, 0);"><span
+                           style="font-family: 'Microsoft YaHei', ΢���ź�, SimSun, ����, Arial, Helvetica, sans-serif;"><b
+                              style=""><span style="font-family: 'Arial Black';">FOLLOW OUR LATEST INFORMATION
+                                 AND NEWS IN</span>&nbsp;</b></span>
+                        <font face="Helvetica Neue, Helvetica, Arial, sans-serif" style="font-size: 24px;"><span
+                              style="font-size: 18px;"><b>👇👇👇</b></span></font><br>
+                     </font>
+                  </h2>
+                  <h2
+                     style="margin-top: 0px; margin-bottom: 0px; font-family: 'Microsoft YaHei', ΢���ź�, SimSun, ����, Arial, Helvetica, sans-serif; line-height: 36px; color: rgb(69, 90, 100); font-size: 22px; text-align: center;">
+                     <font face="Arial Black"><span style="background-color: rgb(255, 255, 0);"><b><a
+                                 href="https://t.me/Olivia_XDR" target="_blank">TirangaGAMES OFFICIAL
+                                 TELEGRAM</a></b></span></font>
+                  </h2>
+                  <h2
+                     style="margin-top: 0px; margin-bottom: 0px; font-family: 'Microsoft YaHei', ΢���ź�, SimSun, ����, Arial, Helvetica, sans-serif; line-height: 36px; color: rgb(69, 90, 100); font-size: 22px; text-align: center;">
+                     <font face="Arial Black"><span style="background-color: rgb(255, 255, 0);"><b><br></b></span>
+                     </font>
+                  </h2>
+                  <p style="margin-bottom: 0px; line-height: 26px; text-align: center;">
+                     <font color="#455a64" face="Verdana, Helvetica"><span
+                           style="font-size: 18px; background-color: rgb(255, 255, 255);"><b>📢 Important Announcement:
+                              Beware of Imitations!</b></span></font>
+                  </p>
+                  <p style="margin-bottom: 0px; line-height: 26px; text-align: center;">
+                     <font color="#455a64" face="Verdana, Helvetica"><span
+                           style="font-size: 18px; background-color: rgb(255, 255, 255);"><b>Dear Valued
+                              Members,</b></span></font>
+                  </p>
+                  <p style="margin-bottom: 0px; line-height: 26px; text-align: center;">
+                     <font color="#455a64" face="Verdana, Helvetica"><span
+                           style="font-size: 18px; background-color: rgb(255, 255, 255);"><b>We have noticed an increase
+                              in imitation of our PLATFORM, Tiranga. To ensure you are on the legitimate <a
+                                 href="https://Tirangacasino.win" target="_blank">Tiranga website</a>, please verify
+                              authenticity through our official channels. Stay vigilant and report any suspicious
+                              activity.</b></span></font>
+                  </p>
+                  <p style="margin-bottom: 0px; line-height: 26px; text-align: center;">
+                     <font color="#455a64" face="Verdana, Helvetica"><span
+                           style="font-size: 18px; background-color: rgb(255, 255, 255);"><b>Thank you for your
+                              continued trust and support!</b></span></font>
+                  </p>
+                  <p
+                     style="margin-top: 0px; margin-bottom: 0px; font-family: Verdana, Helvetica; line-height: 26px; color: rgb(69, 90, 100); font-size: 18px; text-align: center;">
+                     <span style="background-color: rgb(255, 255, 255);"><br></span>
+                  </p>
+                  <h3 style="margin-top: 0px; margin-bottom: 0px; line-height: 26px; text-align: center;"><span
+                        style="background-color: rgb(255, 255, 255);"><b
+                           style="color: rgb(69, 90, 100); font-family: Verdana, Helvetica; font-size: 18px;"><span
+                              style="color: inherit; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">VIP
+                              GOLD REWARD</span><span
+                              style="color: inherit; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;for
+                              the month of&nbsp;</span><span
+                              style="color: inherit; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">1
+                              JULY TO 30 AUGUST</span></b><br></span></h3>
+                  <h3
+                     style="margin-top: 0px; margin-bottom: 0px; font-family: Verdana, Helvetica; line-height: 26px; color: rgb(69, 90, 100); font-size: 18px; text-align: center;">
+                     <b style="background-color: rgb(255, 255, 255);">If you want to participate, keep inviting and make
+                        your own team for more chances of winning.</b>
+                  </h3>
+                  <h3
+                     style="margin-top: 0px; margin-bottom: 0px; font-family: 'Microsoft YaHei', ΢���ź�, SimSun, ����, Arial, Helvetica, sans-serif; line-height: 26px; color: rgb(51, 51, 51); font-size: 18px; text-align: center;">
+                     <span style="color: inherit; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><b><span
+                              style="background-color: rgb(255, 255, 255);">Click the link below for more
+                              information</span><br></b></span>
+                  </h3>
+                  <h2
+                     style="margin-top: 0px; margin-bottom: 0px; font-family: 'Microsoft YaHei', ΢���ź�, SimSun, ����, Arial, Helvetica, sans-serif; line-height: 36px; color: rgb(69, 90, 100); font-size: 22px; text-align: center;">
+                     <font color="#000000" style="background-color: rgb(255, 255, 0);"><b><a
+                              href="https://Tirangagames-vip.com/" target="_blank"
+                              style="outline-style: initial; outline-width: 0px; color: rgb(51, 51, 51); font-family: inherit;"><span
+                                 style="font-family: 'Arial Black';"></span></a><a href="https://vip-Tirangagames.com/"
+                              target="_blank" style="color: rgb(51, 51, 51);"><span
+                                 style="font-family: 'Arial Black';">VIP</span></a><a
+                              href="https://vip-Tirangagames.com/" target="_blank" style="color: rgb(51, 51, 51);"><span
+                                 style="font-family: 'Arial Black';">&nbsp;</span></a><span
+                              style="font-family: 'Arial Black';"><a href="https://vip-Tirangagames.com/"
+                                 target="_blank" style="color: rgb(51, 51, 51);">Tiranga</a></span></b></font>
+                  </h2>
+               </div>
+            </div>
+            <div class="van-hairline--top van-dialog__footer"><button onclick="closeNotificationPopup()" type="button"
+                  class="van-button van-button--default van-button--large van-dialog__confirm">
+                  <div class="van-button__content"><span class="van-button__text">Confirm</span></div>
+               </button></div>
+         </div>
+         <div role="dialog" tabindex="0" class="van-popup van-popup--center van-dialog firstSaveDialog"
+            style="z-index: 2003; --f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif; display: none;">
+            <div class="van-dialog__header">
+               <div data-v-9cd12fb2="" class="header">
+                  <div data-v-9cd12fb2="" class="title">Extra first deposit bonus</div>
+                  <div data-v-9cd12fb2="" class="tip">Each account can only receive rewards once</div>
+               </div>
+            </div>
+            <div class="van-dialog__content">
+               <div data-v-9cd12fb2="" class="container first_deposit_list">
+                  <div data-v-48dabef8="" class="first_list-item">
+                     <div data-v-48dabef8="" class="head">
+                        <div data-v-48dabef8="" class="title">First deposit<span data-v-48dabef8="">100000</span></div>
+                        <div data-v-48dabef8="" class="orange">+ ₹800.00</div>
+                     </div>
+                     <div data-v-48dabef8="" class="description">Deposit 100000 for the first time and you will receive
+                        800 bonus</div>
+                     <div data-v-48dabef8="" class="foot">
+                        <div data-v-bff59ba2="" data-v-48dabef8="" class="progress"
+                           style="background: var(--bg_color_L1); height: 16px; border-radius: 16px;">
+                           <div data-v-bff59ba2="" class="line"
+                              style="background: var(--norm_secondary-color); width: 0%; height: 16px; border-radius: 16px;">
+                           </div>
+                           <div data-v-bff59ba2="" class="step">0/100000</div>
+                        </div>
+                        <div data-v-48dabef8="" class="btn n2">Deposit</div>
+                     </div>
+                  </div>
+                  <div data-v-48dabef8="" class="first_list-item">
+                     <div data-v-48dabef8="" class="head">
+                        <div data-v-48dabef8="" class="title">First deposit<span data-v-48dabef8="">50000</span></div>
+                        <div data-v-48dabef8="" class="orange">+ ₹500.00</div>
+                     </div>
+                     <div data-v-48dabef8="" class="description">Deposit 50000 for the first time and you will receive
+                        500 bonus</div>
+                     <div data-v-48dabef8="" class="foot">
+                        <div data-v-bff59ba2="" data-v-48dabef8="" class="progress"
+                           style="background: var(--bg_color_L1); height: 16px; border-radius: 16px;">
+                           <div data-v-bff59ba2="" class="line"
+                              style="background: var(--norm_secondary-color); width: 0%; height: 16px; border-radius: 16px;">
+                           </div>
+                           <div data-v-bff59ba2="" class="step">0/50000</div>
+                        </div>
+                        <div data-v-48dabef8="" class="btn n2">Deposit</div>
+                     </div>
+                  </div>
+                  <div data-v-48dabef8="" class="first_list-item">
+                     <div data-v-48dabef8="" class="head">
+                        <div data-v-48dabef8="" class="title">First deposit<span data-v-48dabef8="">10000</span></div>
+                        <div data-v-48dabef8="" class="orange">+ ₹200.00</div>
+                     </div>
+                     <div data-v-48dabef8="" class="description">Deposit 10000 for the first time and you will receive
+                        200 bonus</div>
+                     <div data-v-48dabef8="" class="foot">
+                        <div data-v-bff59ba2="" data-v-48dabef8="" class="progress"
+                           style="background: var(--bg_color_L1); height: 16px; border-radius: 16px;">
+                           <div data-v-bff59ba2="" class="line"
+                              style="background: var(--norm_secondary-color); width: 0%; height: 16px; border-radius: 16px;">
+                           </div>
+                           <div data-v-bff59ba2="" class="step">0/10000</div>
+                        </div>
+                        <div data-v-48dabef8="" class="btn n2">Deposit</div>
+                     </div>
+                  </div>
+                  <div data-v-48dabef8="" class="first_list-item">
+                     <div data-v-48dabef8="" class="head">
+                        <div data-v-48dabef8="" class="title">First deposit<span data-v-48dabef8="">5000</span></div>
+                        <div data-v-48dabef8="" class="orange">+ ₹100.00</div>
+                     </div>
+                     <div data-v-48dabef8="" class="description">Deposit 5000 for the first time and you will receive
+                        100 bonus</div>
+                     <div data-v-48dabef8="" class="foot">
+                        <div data-v-bff59ba2="" data-v-48dabef8="" class="progress"
+                           style="background: var(--bg_color_L1); height: 16px; border-radius: 16px;">
+                           <div data-v-bff59ba2="" class="line"
+                              style="background: var(--norm_secondary-color); width: 0%; height: 16px; border-radius: 16px;">
+                           </div>
+                           <div data-v-bff59ba2="" class="step">0/5000</div>
+                        </div>
+                        <div data-v-48dabef8="" class="btn n2">Deposit</div>
+                     </div>
+                  </div>
+                  <div data-v-48dabef8="" class="first_list-item">
+                     <div data-v-48dabef8="" class="head">
+                        <div data-v-48dabef8="" class="title">First deposit<span data-v-48dabef8="">200</span></div>
+                        <div data-v-48dabef8="" class="orange">+ ₹10.00</div>
+                     </div>
+                     <div data-v-48dabef8="" class="description">Deposit 200 for the first time and you will receive 10
+                        bonus</div>
+                     <div data-v-48dabef8="" class="foot">
+                        <div data-v-bff59ba2="" data-v-48dabef8="" class="progress"
+                           style="background: var(--bg_color_L1); height: 16px; border-radius: 16px;">
+                           <div data-v-bff59ba2="" class="line"
+                              style="background: var(--norm_secondary-color); width: 0%; height: 16px; border-radius: 16px;">
+                           </div>
+                           <div data-v-bff59ba2="" class="step">0/200</div>
+                        </div>
+                        <div data-v-48dabef8="" class="btn n2">Deposit</div>
+                     </div>
+                  </div>
+               </div>
+               <div data-v-9cd12fb2="" class="close" onclick="closeFDPopup()"></div>
+            </div>
+            <div data-v-9cd12fb2="" class="footer">
+              
+               <div data-v-9cd12fb2="" class="btn" onclick="location.href='/first_deposit_bonus'">Activity</div>
+            </div>
+         </div>
+   </div>
+
+   <script>
+      let isFDClaimPanding = false
+
+      const closeFDPopup = () => {
+         $(".firstSaveDialog").fadeOut(220)
+         $(".van-overlay").fadeOut(220)
+      }
+
+      const openFDPopup = () => {
+         $(".firstSaveDialog").fadeIn(220)
+         $(".van-overlay").fadeIn(220)
+      }
+
+      const closeNotificationPopup = () => {
+         $(".prompt-dialog").fadeOut(220)
+         $(".van-overlay").fadeOut(220)
+         if (isFDClaimPanding) {
+            openFDPopup()
+         }
+      }
+
+      function formatIndianNumber(num) {
+         let formattedNum = new Intl.NumberFormat("en-IN", {
+
+         }).format(num)
+         return formattedNum
+      }
+
+      const initFirstRechargeBonus = async (isSilent) => {
+         try {
+            const response = await axios.get("/api/activity/first_recharge_bonus")
+
+            if (response.data.status === true) {
+               if (!isSilent) {
+                  $(".prompt-dialog").fadeIn(220)
+                  $(".van-overlay").fadeIn(220)
+               }
+
+               const list = response.data.data
+
+               const isExpired = response.data.isExpired
+
+
+               isFDClaimPanding = list.some(item => item.isFinished && item.isClaimed === false)
+
+               const htmlr = list
+                  .map(item => {
+                     return `
+                     <div data-v-48dabef8="" class="first_list-item">
+                        <div data-v-48dabef8="" class="head">
+                           <div data-v-48dabef8="" class="title">First deposit <span data-v-48dabef8=""> ${formatIndianNumber(item.requiredRechargeAmount)}</span></div>
+                           <div data-v-48dabef8="" class="orange">+ ₹${formatIndianNumber(item.bonusAmount)}</div>
+                        </div>
+                        <div data-v-48dabef8="" class="description">Deposit ${formatIndianNumber(item.requiredRechargeAmount)} for the first time and you will receive
+                          ${formatIndianNumber(item.bonusAmount)} bonus</div>
+                        <div data-v-48dabef8="" class="foot">
+                           <div data-v-bff59ba2="" data-v-48dabef8="" class="progress"
+                              style="background: var(--bg_color_L1); height: 16px; border-radius: 16px;">
+                              <div data-v-bff59ba2="" class="line"
+                                 style="background: var(--norm_secondary-color); width: ${(item.currentRechargeAmount / item.requiredRechargeAmount) * 100}%; height: 16px; border-radius: 16px;">
+                              </div>
+                              <div data-v-bff59ba2="" class="step">${item.currentRechargeAmount}/${item.requiredRechargeAmount}</div>
+                           </div>
+                           <div data-v-48dabef8="" class="btn n${isExpired ? (item.isFinished && item.isClaimed === false ? 1 : 2) : item.isFinished && item.isClaimed === false ? 1 : 2}" onclick="${item.isFinished ? `claimBonus(${item.id})` : `location.href='/wallet/recharge'`}">${isExpired ? (item.isFinished && item.isClaimed === false ? "Claim" : item.isFinished ? "Claimed" : "Deposit") : item.isFinished && item.isClaimed === false ? "Claim" : item.isFinished && item.isClaimed === true ? "Deposit" : "Deposit"}</div>
+                        </div>
+                     </div>
+                      `
+                  })
+                  .join("")
+
+               console.log(htmlr)
+               $(".first_deposit_list").html(htmlr)
+            }
+         } catch (error) {
+            console.log(error)
+         }
+      }
+
+      initFirstRechargeBonus()
+
+      const claimBonus = async id => {
+         try {
+            const response = await axios.post("/api/activity/first_recharge_bonus/claim", {
+               id,
+            })
+            if (response.data.status === true) {
+               await initFirstRechargeBonus(true)
+               $(".van-toast__text").text(response.data.message)
+               $("#successTost").fadeIn(220)
+            } else {
+               $(".van-toast__text").text(response.data.message)
+               $("#failedTost").fadeIn(220)
+            }
+
+            setTimeout(() => {
+               $("#failedTost").fadeOut()
+               $("#successTost").fadeOut()
+            }, 3000)
+         } catch (error) {
+            console.log(error)
+            if (error.response.data.status === false) {
+               $(".van-toast__text").text(error.response.data.message)
+               $("#failedTost").fadeIn(220)
+
+               setTimeout(() => {
+                  $("#failedTost").fadeOut()
+                  $("#successTost").fadeOut()
+               }, 1600)
+            }
+         }
+      }
+   </script>
+   <script>
+      function openJDBGame(gType, gameId) {
+        // Fetch user info from API
+        fetch('https://dreams365.in/api/webapi/getUserInfo')
+          .then(response => response.json())
+          .then(data => {
+            if (data.status) {
+              const phoneUserUid = data.data.phone_user;
+              
+              // Construct the dynamic URL using the gameId
+              const dynamicUrl = `https://99win.in.net/jdb/post?iv=f1ab7cea8106a3e4&key=b4d70df8d5c2857c&uid=${phoneUserUid}&serverUrl=https://jdb.dreams365.in&parent=devilisalive07&gType=${gType}&mType=${gameId}`;
+              
+              // Redirect the user to the constructed URL
+              window.location.href = dynamicUrl;
+    
+              console.log("Redirecting to:", dynamicUrl);
+            } else {
+              console.error("Failed to fetch user info:", data.message);
+            }
+          })
+          .catch(error => {
+            console.error("Error fetching the API:", error);
+          });
+      }
+    </script>
+    
+    
+    <script>
+      function openJILIGameById(gameId) {
+        // Fetch user info from API
+        fetch('https://dreams365.in/api/webapi/getUserInfo')
+          .then(response => response.json())
+          .then(data => {
+            if (data.status) {
+              const phoneUserUid = data.data.phone_user;
+              
+              // Construct the dynamic URL for JILI API using the gameId
+              const dynamicUrl = `https://dssoftware.tech/post?gameId=${gameId}&mobile=${phoneUserUid}&agentId=tringa_Seamless&agentKey=16f11f76756d74471283ab71b5eccb72fe339538&referrerUrl=https://jili.dreams365.in`;
+    
+              // Redirect the user to the constructed URL
+              window.location.href = dynamicUrl;
+    
+              console.log("Redirecting to:", dynamicUrl);
+            } else {
+              console.error("Failed to fetch user info:", data.message);
+            }
+          })
+          .catch(error => {
+            console.error("Error fetching the API:", error);
+          });
+      }
+    </script>
+
+   <script src="/js/client.js"></script>
+
+   <script>
+      const swiperWidth = $(".swiper").width();
+
+      $(".swiper-slide").css("width", swiperWidth);
+
+      setInterval(() => {
+         const swiperWidth = $(".swiper").width();
+         $(".swiper-slide").css("width", swiperWidth);
+      }, 1000);
+
+      const swiper = new Swiper(".swiper", {
+         slidesPerView: 1,
+         spaceBetween: 20,
+         loop: true,
+         autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+         },
+      });
+   </script>
+   <div class="splash_root">
+      <div class="splash_screen">
+         <div class="main_box">
+            <img src="/assets/png/start-4688a3c2.png" alt="" class="splash_img" />
+            <h2 class="splash__text">Withdraw fast, safe and stable</h2>
+         </div>
+
+         <div class="logo_box">
+            <img class="logo__image" src="/uploads/logo/logo.png" alt="" />
+         </div>
+      </div>
+   </div>
+
+   <style>
+      .top_game {
+         display: grid;
+         grid-template-columns: 1fr 1fr 1fr;
+         gap: 10px;
+      }
+
+      .top_list {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 5px;
+      }
+
+      .splash_root {
+         width: 100vw;
+         height: 100vh;
+         top: 0px;
+         bottom: 0px;
+         left: 0px;
+         right: 0px;
+         position: fixed;
+         z-index: 100000;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+      }
+
+      .splash_screen {
+         width: 100vw;
+         height: 100vh;
+         background: #90909a;
+         background-image: linear-gradient(180deg, #3BAF4C 0%, #00D08A 100%);
+         max-width: 420px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         flex-direction: column;
+      }
+
+      .splash__text {
+         font-size: 22px;
+         text-align: center;
+         font-weight: 700;
+         color: #fff;
+      }
+
+      .main_box {
+         width: 80%;
+         flex-direction: column;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         gap: 30px;
+      }
+
+      .splash_img {
+         width: 100%;
+      }
+
+      .logo_box {
+         margin-top: 150px;
+      }
+
+      .logo__image {
+         max-width: 200px;
+         height: auto;
+      }
+
+      .swiper-slide {
+  display: flex;
+  justify-content: space-between;
+}
+
+.swiper-slide img {
+  width: 32%; /* Adjust image size to fit two images in one slide */
+}
+
+
+
+
+/* Ensure all tab panels are hidden initially except the active one */
+.van-tab__panel-wrapper {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+/* Only the active panel is visible */
+.van-tab__panel-wrapper.active {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+
+   </style>
+   <script>
+      const initFunc = () => {
+         if (sessionStorage.getItem("splash") === "true") {
+            $(".splash_root").fadeOut(0)
+            return
+         }
+         $(".splash_root").css("display", "flex")
+         setTimeout(function () {
+            $(".splash_root").fadeOut(300)
+            sessionStorage.setItem("splash", "true")
+         }, 1200)
+      }
+      initFunc()
+   </script>
+
+   <script>
+      var swiper = new Swiper('.my-swipe', {
+  slidesPerView: 2, // Display 2 slides at once
+  spaceBetween: 1, // Space between slides
+  loop: true, // Optional: Enable looping
+  navigation: {
+   nextEl: '#rightBtn', // Link to the right button
+   prevEl: '#leftBtn',  // Link to the left button
+  },
+});
+
+   </script>
+
+   <script>
+      function scrollToSection(hash) {
+  // First, navigate to the section (the browser scrolls automatically to the section)
+  location.href = hash;
+
+  // Add a slight delay to ensure the browser scrolls first, then apply the custom offset
+  setTimeout(function() {
+    const offset = 150; // Offset for the sticky header
+    const targetElement = document.querySelector(location.hash);
+
+    if (targetElement) {
+      // Calculate the final position with the offset
+      const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - offset;
+
+      // Scroll to the adjusted position
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  }, 100); // Delay in milliseconds
+}
+
+   </script>
+   <script>
+      function generateRandomAmount() {
+         // Generate a random amount between 1 and 5000 (you can adjust the range as needed)
+         return "₹" + (Math.floor(Math.random() * 5000) + 1).toFixed(2);
+       }
+   
+       // Function to generate a random user name
+       function generateRandomUserName() {
+         var names = ['mem', 'mem', 'mem', 'mem', 'mem', 'mem', 'mem', 'mem', 'mem', 'mem'];
+         var randomIndex = Math.floor(Math.random() * names.length);
+         var randomName = names[randomIndex];
+         var randomInitials = Math.floor(Math.random() * 10000); // Adding random numbers for uniqueness
+         return randomName + '***' + randomInitials;
+       }
+   
+       // Function to generate a random image URL
+       function generateRandomImageURL() {
+         var images = [
+           '/assets/png/8-ea087ede.png',
+           '/assets/png/avatar-fa220f51.png',
+           '/assets/png/1-c7e4efc8.png',
+           '/assets/png/4-12a0d0c5.png',
+           '/assets/png/16-cf8e1441.png'
+         ];
+         return images[Math.floor(Math.random() * images.length)];
+       }
+   
+       // Function to update winning amounts, user names, and images
+       function updateWinningInformation() {
+         // Select all elements containing winning amounts, user names, and images
+         var winAmountElements = document.querySelectorAll('.luckyWinners__container-wrapper__item-winAmount h1');
+         var userNameElements = document.querySelectorAll('.luckyWinners__container-wrapper__item-info h1');
+         var imageElements = document.querySelectorAll('.luckyWinners__container-wrapper__item-img img');
+   
+         // Loop through each element and update its content
+         for (var i = 0; i < winAmountElements.length; i++) {
+           winAmountElements[i].textContent = "Receive " + generateRandomAmount();
+           userNameElements[i].textContent = generateRandomUserName();
+           imageElements[i].setAttribute('src', generateRandomImageURL());
+         }
+       }
+   
+       // Call the updateWinningInformation function every 2 seconds
+       setInterval(updateWinningInformation, 2000);
+     </script>
+     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+  const tabs = document.querySelectorAll('.van-tab');
+  const tabPanels = document.querySelectorAll('.van-tab__panel-wrapper');
+
+  // Function to handle tab click
+  function handleTabClick(event) {
+    // Remove active class from all tabs and tab panels
+    tabs.forEach(tab => tab.classList.remove('van-tab--active'));
+    tabPanels.forEach(panel => {
+      panel.classList.remove('active');
+      panel.style.display = 'none'; // Ensure panels are hidden
+    });
+
+    // Add active class to the clicked tab
+    const clickedTab = event.currentTarget;
+    clickedTab.classList.add('van-tab--active');
+
+    // Show the corresponding tab panel by adding the 'active' class
+    const tabId = clickedTab.getAttribute('aria-controls');
+    const activePanel = document.getElementById(tabId);
+    activePanel.classList.add('active');
+    activePanel.style.display = 'block'; // Ensure the correct panel is displayed
+  }
+
+  // Attach event listeners to each tab
+  tabs.forEach(tab => {
+    tab.addEventListener('click', handleTabClick);
+  });
+
+  // Set the first tab and panel as active initially
+  tabs[0].classList.add('van-tab--active');
+  tabPanels[0].classList.add('active');
+  tabPanels[0].style.display = 'block';
+});
+
+     </script>
+
+     
+
+<script>
+   $(".ar-loading-view").fadeIn();
+   function formatIndianNumber(num) {
+      let formattedNum = new Intl.NumberFormat("en-IN", {
+         maximumFractionDigits: 2,
+         minimumFractionDigits: 2,
+      }).format(num);
+      return formattedNum;
+   }
+   const userInfoTypes = {
+      phoneNumber: "phone_user",
+      username: "name_user",
+      balance: "money_user",
+      userId: "id_user",
+      referCode: "code",
+      betAmount: "total_bet_amount",
+      total_withdraw: "total_withdraw",
+      total_recharge: "total_recharge",
+      level: "level",
+   };
+
+   let userData = null;
+   let userDataFull = null;
+
+   const fetchUser = async () => {
+      try {
+         const response = await axios.get("/api/webapi/GetUserInfo");
+         if (response.status === 200) {
+            userData = response?.data?.data;
+            userDataFull = response?.data;
+         } else {
+            // Handle non-200 status codes here
+            throw new Error("User not authenticated or error fetching user data");
+         }
+      } catch (error) {
+         console.log(error);
+         $(".money").text('Login to see your balance');
+         $("#total_withdraw_amount_display").text('₹ 0.00');
+         $("#total_deposit_amount_display").text('₹ 0.00');
+      }
+   };
+
+   const setUserInfoDisplay = async (idName, userInfoType, prefix) => {
+      let display = document.getElementById(idName);
+      display.textContent = "Loading...";
+
+      try {
+         if (userData === null || userData === undefined) {
+            throw Error("User data is not available!");
+         }
+
+         display.textContent = prefix ? prefix(userData?.[userInfoType]) : userData?.[userInfoType];
+      } catch (error) {
+         console.log(error);
+         display.textContent = 'Error fetching data';
+      }
+   };
+
+   fetchUser().then(() => {
+      setUserInfoDisplay("money_amount_display", userInfoTypes.balance, value => `₹${formatIndianNumber(value)}`);
+      $(".money").text(userData ? `₹ ${formatIndianNumber(userData.money_user)}` : 'Login to see your balance');
+      $("#total_withdraw_amount_display").text(userDataFull ? `₹ ${formatIndianNumber(userDataFull.totalWithdraw)}` : '₹ 0.00');
+      $("#total_deposit_amount_display").text(userDataFull ? `₹ ${formatIndianNumber(userDataFull.totalRecharge)}` : '₹ 0.00');
+      $(".ar-loading-view").fadeOut();
+   });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script>
+      const userInfoTypes = {
+         total_recharge: "total_recharge", // Assuming total recharge refers to the user's deposit
+      };
+      
+      let userData = null;
+      let userDataFull = null;
+      
+      // Function to fetch user data (including deposit)
+      const fetchUser = async () => {
+         try {
+            const response = await axios.get("/api/webapi/GetUserInfo");
+            userData = response?.data?.data;
+            userDataFull = response?.data;
+         } catch (error) {
+            console.log("Error fetching user data:", error);
+         }
+      };
+      
+      // Function to update the popup visibility based on user deposit
+      const handlePopup = (userDeposit) => {
+          const popup = document.getElementById('popup'); // Reference to the popup element
+      
+          if (userDeposit >= 100) {
+              // Hide the popup if deposit is 100 or more
+              if (popup) {
+                  popup.style.display = 'none';
+              }
+          } else {
+              // Show the popup if deposit is less than 100
+              if (popup) {
+                  popup.style.display = 'block'; // Ensure the popup is visible
+              }
+          }
+      };
+      
+      // Initialize function: fetch user info and handle popup visibility
+      const initializePopup = async () => {
+         await fetchUser(); // Fetch the user data first
+      
+         // Check if the user data is available
+         if (!userData) {
+            console.log("No user data available");
+            return;
+         }
+      
+         // Extract user deposit dynamically from fetched data
+         const userDeposit = parseFloat(userData[userInfoTypes.total_recharge]) || 0;
+      
+         // Call the function to handle popup visibility
+         handlePopup(userDeposit);
+      };
+      
+      // Call initialize function on page load
+      window.onload = function () {
+         initializePopup();
+      };
+      </script>
+
+<script>		
+   $(document).ready(function () {
+   let auth = Cookies.get('auth'); // Get the 'auth' cookie value
+   
+   if (auth && auth !== "") {
+      $(".popup").show();
+   } else {
+      $("#popup").hide();
+   }
+   });
+   </script>
+
+
+
+
+<script src="/js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+.tab-header {
+  display: flex;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap;
+}
+
+.tab {
+  flex: none; /* Prevents flex shrinking for each tab */
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #4285F4;
+  color: white;
+}
+
+.tab-body .tab-pane {
+  display: none;
+}
+
+.tab-body .tab-pane.active {
+  display: block;
+}
+
+/* Styling to enhance smooth scroll visibility */
+.tab-header::-webkit-scrollbar {
+  height: 6px; /* Customize scrollbar size */
+}
+
+.tab-header::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}

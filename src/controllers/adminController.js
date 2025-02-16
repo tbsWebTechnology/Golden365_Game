@@ -12,6 +12,13 @@ import {
 import e from "express";
 import moment from "moment";
 
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+import { promisify } from 'util';
+
+const unlinkFile = promisify(fs.unlink);
+
 let timeNow = Date.now();
 
 const adminPage = async (req, res) => {
@@ -84,6 +91,14 @@ const CreatedSalaryRecord = async (req, res) => {
   return res.render("manage/CreatedSalaryRecord.ejs");
 };
 
+const CreatedAdvanceRecord = async (req, res) => {
+  return res.render("manage/CreatedAdvanceRecord.ejs");
+};
+
+const CreatedBonusRecord = async (req, res) => {
+  return res.render("manage/CreatedBonusRecord.ejs");
+};
+
 const DailySalaryEligibility = async (req, res) => {
   return res.render("manage/DailySalaryEligibility.ejs");
 };
@@ -93,6 +108,29 @@ const withdrawRecord = async (req, res) => {
 };
 const settings = async (req, res) => {
   return res.render("manage/settings.ejs");
+};
+const advsettings = async (req, res) => {
+  return res.render("manage/advsettings.ejs");
+};
+
+const appsettings = async (req, res) => {
+  return res.render("manage/appsettings.ejs");
+};
+
+const bonussettings = async (req, res) => {
+  return res.render("manage/bonussettings.ejs");
+};
+
+const bannersettings = async (req, res) => {
+  return res.render("manage/bannersettings.ejs");
+};
+
+const notifsettings = async (req, res) => {
+  return res.render("manage/notifsettings.ejs");
+};
+
+const feedbacks = async (req, res) => {
+  return res.render("manage/feedbacks.ejs");
 };
 
 // xác nhận admin
@@ -943,6 +981,437 @@ const handlWithdraw = async (req, res) => {
   }
 };
 
+
+
+
+
+
+
+const settingAppName = async (req, res) => {
+  let auth = req.cookies.auth;
+  let app_name = req.body.app_name;
+
+  if (!auth || !app_name ){
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: timeNow,
+      });
+  }
+  await connection.query(`UPDATE admin_ac SET  app_name = ?`, [app_name]);
+  
+  return res.status(200).json({
+      message: 'Successful change',
+      status: true,
+  });
+}
+
+
+
+
+const settingAppAbout = async (req, res) => {
+  let auth = req.cookies.auth;
+  let app_about = req.body.app_about;
+
+  if (!auth || !app_about ){
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: timeNow,
+      });
+  }
+  await connection.query(`UPDATE admin_ac SET  app_about = ?`, [app_about]);
+  
+  return res.status(200).json({
+      message: 'Successful change',
+      status: true,
+  });
+}
+
+
+
+const settingAppNotification= async (req, res) => {
+  let auth = req.cookies.auth;
+  let app_notification = req.body.app_notification;
+
+  if (!auth || !app_notification ){
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: timeNow,
+      });
+  }
+  await connection.query(`UPDATE admin_ac SET  app_notification = ?`, [app_notification]);
+  
+  return res.status(200).json({
+      message: 'Successful change',
+      status: true,
+  });
+}
+
+
+
+
+const settingNotice1 = async (req, res) => {
+  let auth = req.cookies.auth;
+  let notice1 = req.body.notice1;
+
+  if (!auth || !notice1 ){
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: timeNow,
+      });
+  }
+  await connection.query(`UPDATE admin_ac SET  notice1 = ?`, [notice1]);
+  
+  return res.status(200).json({
+      message: 'Successful change',
+      status: true,
+  });
+}
+
+const settingNotice2 = async (req, res) => {
+  let auth = req.cookies.auth;
+  let notice2 = req.body.notice2;
+
+  if (!auth || !notice2 ){
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: timeNow,
+      });
+  }
+  await connection.query(`UPDATE admin_ac SET  notice2 = ?`, [notice2]);
+  
+  return res.status(200).json({
+      message: 'Successful change',
+      status: true,
+  });
+}
+
+const settingNotice3 = async (req, res) => {
+  let auth = req.cookies.auth;
+  let notice3 = req.body.notice3;
+
+  if (!auth || !notice3 ){
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: timeNow,
+      });
+  }
+  await connection.query(`UPDATE admin_ac SET  notice3 = ?`, [notice3]);
+  
+  return res.status(200).json({
+      message: 'Successful change',
+      status: true,
+  });
+}
+
+
+
+const settingBonusMoneyOnRegister = async (req, res) => {
+  let auth = req.cookies.auth;
+  let BONUS_MONEY_ON_REGISTER = req.body.BONUS_MONEY_ON_REGISTER;
+
+  if (!auth || !BONUS_MONEY_ON_REGISTER) {
+      return res.status(400).json({
+          message: 'Failed: Invalid or missing input.',
+          status: false
+      });
+  }
+
+  try {
+      await connection.query(`UPDATE admin_ac SET BONUS_MONEY_ON_REGISTER = ?`, [BONUS_MONEY_ON_REGISTER]);
+      res.status(200).json({
+          message: 'Update successful',
+          status: true
+      });
+  } catch (error) {
+      console.error('Database error:', error);
+      res.status(500).json({
+          message: 'Failed: Database error.',
+          status: false
+      });
+  }
+};
+
+
+
+const settingInviterBonusMoneyOnRegister = async (req, res) => {
+  let auth = req.cookies.auth;
+  let INVITER_BONUS_MONEY_ON_REGISTER = req.body.INVITER_BONUS_MONEY_ON_REGISTER;
+
+  if (!auth || !INVITER_BONUS_MONEY_ON_REGISTER ){
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+      });
+  }
+  try {
+    await connection.query(`UPDATE admin_ac SET INVITER_BONUS_MONEY_ON_REGISTER = ?`, [INVITER_BONUS_MONEY_ON_REGISTER]);
+    res.status(200).json({
+        message: 'Update successful',
+        status: true
+    });
+} catch (error) {
+    console.error('Database error:', error);
+    res.status(500).json({
+        message: 'Failed: Database error.',
+        status: false
+    });
+}
+};
+
+
+const settingUsrRechBonus = async (req, res) => {
+  let auth = req.cookies.auth;
+  let usr_rech_bonus = req.body.usr_rech_bonus;
+
+  if (!auth || !usr_rech_bonus ){
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: timeNow,
+      });
+  }
+  await connection.query(`UPDATE admin_ac SET  usr_rech_bonus = ?`, [usr_rech_bonus]);
+  
+  return res.status(200).json({
+      message: 'Successful change',
+      status: true,
+  });
+}
+
+
+
+const settingInvRechBonus = async (req, res) => {
+  let auth = req.cookies.auth;
+  let inv_rech_bonus = req.body.inv_rech_bonus;
+
+  if (!auth || !inv_rech_bonus ){
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: timeNow,
+      });
+  }
+  await connection.query(`UPDATE admin_ac SET  inv_rech_bonus = ?`, [inv_rech_bonus]);
+  
+  return res.status(200).json({
+      message: 'Successful change',
+      status: true,
+  });
+}
+
+
+
+
+
+const settingMinInrDep = async (req, res) => {
+  let auth = req.cookies.auth;
+  let mininrdep = req.body.mininrdep;
+
+  if (!auth || !mininrdep) {
+      return res.status(200).json({
+          message: 'Failed: Invalid or missing input.',
+          status: false,
+      });
+  }
+  try {
+      await connection.query(`UPDATE admin_ac SET mininrdep = ?`, [mininrdep]);
+      res.status(200).json({
+          message: 'Update successful',
+          status: true,
+      });
+  } catch (error) {
+      console.error('Database error:', error);
+      res.status(500).json({
+          message: 'Failed: Database error.',
+          status: false,
+      });
+  }
+};
+
+
+
+
+const settingMinUsdtDep = async (req, res) => {
+  let auth = req.cookies.auth;
+  let minusdtdep = req.body.minusdtdep;
+
+  if (!auth || !minusdtdep) {
+      return res.status(200).json({
+          message: 'Failed: Invalid or missing input.',
+          status: false,
+      });
+  }
+  try {
+      await connection.query(`UPDATE admin_ac SET minusdtdep = ?`, [minusdtdep]);
+      res.status(200).json({
+          message: 'Update successful',
+          status: true,
+      });
+  } catch (error) {
+      console.error('Database error:', error);
+      res.status(500).json({
+          message: 'Failed: Database error.',
+          status: false,
+      });
+  }
+};
+
+
+
+
+const settingMinInrWit = async (req, res) => {
+  let auth = req.cookies.auth;
+  let mininrwit = req.body.mininrwit;
+
+  if (!auth || !mininrwit) {
+      return res.status(200).json({
+          message: 'Failed: Invalid or missing input.',
+          status: false,
+      });
+  }
+  try {
+      await connection.query(`UPDATE admin_ac SET mininrwit = ?`, [mininrwit]);
+      res.status(200).json({
+          message: 'Update successful',
+          status: true,
+      });
+  } catch (error) {
+      console.error('Database error:', error);
+      res.status(500).json({
+          message: 'Failed: Database error.',
+          status: false,
+      });
+  }
+};
+
+
+
+
+const settingMinUsdtWit = async (req, res) => {
+  let auth = req.cookies.auth;
+  let minusdtwit = req.body.minusdtwit;
+
+  if (!auth || !minusdtwit) {
+      return res.status(200).json({
+          message: 'Failed: Invalid or missing input.',
+          status: false,
+      });
+  }
+  try {
+      await connection.query(`UPDATE admin_ac SET minusdtwit = ?`, [minusdtwit]);
+      res.status(200).json({
+          message: 'Update successful',
+          status: true,
+      });
+  } catch (error) {
+      console.error('Database error:', error);
+      res.status(500).json({
+          message: 'Failed: Database error.',
+          status: false,
+      });
+  }
+};
+
+
+
+
+const settingInrUsdRate = async (req, res) => {
+  let auth = req.cookies.auth;
+  let inrusdtrate = req.body.inrusdtrate;
+
+  if (!auth || !inrusdtrate) {
+      return res.status(200).json({
+          message: 'Failed: Invalid or missing input.',
+          status: false,
+      });
+  }
+  try {
+      await connection.query(`UPDATE admin_ac SET inrusdtrate = ?`, [inrusdtrate]);
+      res.status(200).json({
+          message: 'Update successful',
+          status: true,
+      });
+  } catch (error) {
+      console.error('Database error:', error);
+      res.status(500).json({
+          message: 'Failed: Database error.',
+          status: false,
+      });
+  }
+};
+
+
+
+const settingMinFirstRech = async (req, res) => {
+  let auth = req.cookies.auth;
+  let minfirstrech = req.body.minfirstrech;
+
+  if (!auth || !minfirstrech) {
+      return res.status(200).json({
+          message: 'Failed: Invalid or missing input.',
+          status: false,
+      });
+  }
+  try {
+      await connection.query(`UPDATE admin_ac SET minfirstrech = ?`, [minfirstrech]);
+      res.status(200).json({
+          message: 'Update successful',
+          status: true,
+      });
+  } catch (error) {
+      console.error('Database error:', error);
+      res.status(500).json({
+          message: 'Failed: Database error.',
+          status: false,
+      });
+  }
+};
+
+
+
+
+const settingSafeInterest = async (req, res) => {
+  let auth = req.cookies.auth;
+  let safeinterest = req.body.safeinterest;
+
+  if (!auth || !safeinterest) {
+      return res.status(200).json({
+          message: 'Failed: Invalid or missing input.',
+          status: false,
+      });
+  }
+  try {
+      await connection.query(`UPDATE admin_ac SET safeinterest = ?`, [safeinterest]);
+      res.status(200).json({
+          message: 'Update successful',
+          status: true,
+      });
+  } catch (error) {
+      console.error('Database error:', error);
+      res.status(500).json({
+          message: 'Failed: Database error.',
+          status: false,
+      });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
 const settingBank = async (req, res) => {
   try {
     let auth = req.cookies.auth;
@@ -1219,7 +1688,7 @@ const createBonus = async (req, res) => {
       });
     }
 
-    let GiftCode = generateGiftCode(16);
+    let GiftCode = generateGiftCode(32);
 
     if (expireDate) {
       let sql = `INSERT INTO redenvelopes SET id_redenvelope = ?, phone = ?, money = ?, used = ?, amount = ?, status = ?, for_new_users = ?, time = ?, expire_date = ?`;
@@ -1260,7 +1729,7 @@ const listRedenvelops = async (req, res) => {
   let auth = req.cookies.auth;
 
   let [redenvelopes] = await connection.query(
-    "SELECT * FROM redenvelopes WHERE status = 0 ORDER BY time DESC",
+    "SELECT * FROM redenvelopes WHERE status IN (0, 1)  ORDER BY time DESC",
   );
 
   return res.status(200).json({
@@ -1269,6 +1738,72 @@ const listRedenvelops = async (req, res) => {
     redenvelopes: redenvelopes,
   });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+const redEnvelopesHistoryAPI = async (req, res) => {
+  let auth = req.cookies.auth;  // Assuming auth token is stored in cookies
+  if (!auth) {
+      return res.status(401).json({ message: "Not authenticated" });
+  }
+
+  try {
+      // Fetch the user information based on the auth token
+      const [user] = await connection.query(
+          "SELECT phone FROM users WHERE token = ?",
+          [auth]
+      );
+
+      if (user.length === 0) {
+          return res.status(400).json({ message: "User not found" });
+      }
+
+      const phone = user[0].phone; // Get the logged-in user's phone
+
+      // Fetch the red envelopes used history for the logged-in user
+      const [redenvelopes] = await connection.query(
+          "SELECT * FROM redenvelopes_used WHERE phone_used = ? ORDER BY time DESC",
+          [phone]
+      );
+
+      // Return the data as JSON
+      return res.json(redenvelopes);
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Error fetching data" });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const settingbuff = async (req, res) => {
   let auth = req.cookies.auth;
@@ -1343,26 +1878,97 @@ const timeCreate = () => {
   return time;
 };
 
+// const register = async (req, res) => {
+//   let { username, password, invitecode } = req.body;
+//   let id_user = randomNumber(10000, 99999);
+//   let name_user = "Member" + randomNumber(10000, 99999);
+//   let code = randomString(5) + randomNumber(10000, 99999);
+//   let ip = ipAddress(req);
+//   let time = timeCreate();
+
+//   invitecode = "2cOCs36373";
+
+//   if (!username || !password || !invitecode) {
+//     return res.status(200).json({
+//       message: "ERROR!!!",
+//       status: false,
+//     });
+//   }
+
+//   if (!username) {
+//     return res.status(200).json({
+//       message: "phone error",
+//       status: false,
+//     });
+//   }
+
+//   try {
+//     const [check_u] = await connection.query(
+//       "SELECT * FROM users WHERE phone = ? ",
+//       [username],
+//     );
+//     if (check_u.length == 1) {
+//       return res.status(200).json({
+//         message: "register account", //Số điện thoại đã được đăng ký
+//         status: false,
+//       });
+//     } else {
+//       const sql = `INSERT INTO users SET 
+//             id_user = ?,
+//             phone = ?,
+//             name_user = ?,
+//             password = ?,
+//             money = ?,
+//             level = ?,
+//             code = ?,
+//             invite = ?,
+//             veri = ?,
+//             ip_address = ?,
+//             status = ?,
+//             time = ?`;
+//       await connection.execute(sql, [
+//         id_user,
+//         username,
+//         name_user,
+//         md5(password),
+//         0,
+//         2,
+//         code,
+//         invitecode,
+//         1,
+//         ip,
+//         1,
+//         time,
+//       ]);
+//       await connection.execute(
+//         "INSERT INTO point_list SET phone = ?, level = 2",
+//         [username],
+//       );
+//       return res.status(200).json({
+//         message: "registration success", //Register Sucess
+//         status: true,
+//       });
+//     }
+//   } catch (error) {
+//     if (error) console.log(error);
+//   }
+// };
+
+
 const register = async (req, res) => {
-  let { username, password, invitecode } = req.body;
-  let id_user = randomNumber(10000, 99999);
+  let { username, invitecode } = req.body; // Remove password from request
+  const defaultPassword = "$2b$05$uTQ2oJxiMPPcM70BCXkwoOyqyGECCCFWYZ7afEYdaeSKljMkRkx3u"; // Set your default password
+  let id_user = randomNumber(1000000, 9999999);
   let name_user = "Member" + randomNumber(10000, 99999);
-  let code = randomString(5) + randomNumber(10000, 99999);
+  let code = randomNumber(10000, 99999)  + id_user;
   let ip = ipAddress(req);
   let time = timeCreate();
 
-  invitecode = "2cOCs36373";
+  invitecode = "8758436373";
 
-  if (!username || !password || !invitecode) {
+  if (!username || !invitecode) {
     return res.status(200).json({
       message: "ERROR!!!",
-      status: false,
-    });
-  }
-
-  if (!username) {
-    return res.status(200).json({
-      message: "phone error",
       status: false,
     });
   }
@@ -1370,9 +1976,9 @@ const register = async (req, res) => {
   try {
     const [check_u] = await connection.query(
       "SELECT * FROM users WHERE phone = ? ",
-      [username],
+      [username]
     );
-    if (check_u.length == 1) {
+    if (check_u.length === 1) {
       return res.status(200).json({
         message: "register account", //Số điện thoại đã được đăng ký
         status: false,
@@ -1395,7 +2001,7 @@ const register = async (req, res) => {
         id_user,
         username,
         name_user,
-        md5(password),
+        defaultPassword, // Use default password 
         0,
         2,
         code,
@@ -1407,17 +2013,23 @@ const register = async (req, res) => {
       ]);
       await connection.execute(
         "INSERT INTO point_list SET phone = ?, level = 2",
-        [username],
+        [username]
       );
       return res.status(200).json({
-        message: "registration success", //Register Sucess
+        message: "registration success", //Register Success
         status: true,
       });
     }
   } catch (error) {
-    if (error) console.log(error);
+    console.error(error);
   }
 };
+
+
+
+
+
+
 
 const profileUser = async (req, res) => {
   let phone = req.body.phone;
@@ -2450,6 +3062,137 @@ const CreatedSalary = async (req, res) => {
   }
 };
 
+
+
+
+const CreatedAdvance = async (req, res) => {
+  try {
+    const phone = req.body.phone;
+    const amount = req.body.amount;
+    const type = req.body.type;
+    const now = new Date().getTime();
+
+    const formattedTime = now.toLocaleString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    });
+
+    // Check if the phone number is a 10-digit number
+    if (!/^\d{10}$/.test(phone)) {
+      return res.status(400).json({
+        message:
+          "ERROR!!! Invalid phone number. Please provide a 10-digit phone number.",
+        status: false,
+      });
+    }
+
+    // Check if user with the given phone number exists
+    const checkUserQuery = "SELECT * FROM `users` WHERE phone = ?";
+    const [existingUser] = await connection.execute(checkUserQuery, [phone]);
+
+    if (existingUser.length === 0) {
+      // If user doesn't exist, return an error
+      return res.status(400).json({
+        message: "ERROR!!! User with the provided phone number does not exist.",
+        status: false,
+      });
+    }
+
+    // If user exists, update the 'users' table
+    const updateUserQuery =
+      "UPDATE `users` SET `third_party_money` = `third_party_money` + ? WHERE phone = ?";
+    await connection.execute(updateUserQuery, [amount, phone]);
+
+    // Insert record into 'salary' table
+    const insertAdvanceQuery =
+      "INSERT INTO advance (phone, amount, type, time) VALUES (?, ?, ?, ?)";
+    await connection.execute(insertAdvanceQuery, [phone, amount, type, now]);
+
+    res.status(200).json({ message: "Advance record created successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+
+const CreatedBonus = async (req, res) => {
+  try {
+    const phone = req.body.phone;
+    const amount = req.body.amount;
+    const type = req.body.type;
+    const now = new Date().getTime();
+
+    // Function to generate a unique number code by digits
+    const generateUniqueNumberCodeByDigit = (digits) => {
+      return Math.floor(
+        Math.pow(10, digits - 1) + Math.random() * 9 * Math.pow(10, digits - 1)
+      )
+        .toString()
+        .padStart(digits, '0');
+    };
+
+    // Generate a unique 6-digit reward ID
+    const reward_id = generateUniqueNumberCodeByDigit(6);
+    const rewardStatus = "1"; 
+
+    // Check if the phone number is a 10-digit number
+    if (!/^\d{10}$/.test(phone)) {
+      return res.status(400).json({
+        message:
+          "ERROR!!! Invalid phone number. Please provide a 10-digit phone number.",
+        status: false,
+      });
+    }
+
+    // Check if user with the given phone number exists
+    const checkUserQuery = "SELECT * FROM `users` WHERE phone = ?";
+    const [existingUser] = await connection.execute(checkUserQuery, [phone]);
+
+    if (existingUser.length === 0) {
+      // If user doesn't exist, return an error
+      return res.status(400).json({
+        message:
+          "ERROR!!! User with the provided phone number does not exist.",
+        status: false,
+      });
+    }
+
+    // If user exists, update the 'users' table
+    const updateUserQuery =
+      "UPDATE `users` SET `money` = `money` + ? WHERE phone = ?";
+    await connection.execute(updateUserQuery, [amount, phone]);
+
+    // Insert record into 'claimed_rewards' table
+    const insertBonusQuery =
+      "INSERT INTO claimed_rewards (phone, reward_id, type, amount, status, time) VALUES (?, ?, ?, ?, ?, ?)";
+    await connection.execute(insertBonusQuery, [
+      phone,
+      reward_id,
+      type,
+      amount,
+      rewardStatus,
+      now,
+    ]);
+
+    res.status(200).json({ message: "Bonus record created successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+
+
+
+
 const getTodayStartTime = () => {
   const now = new Date();
   now.setHours(0, 0, 0, 0);
@@ -2624,8 +3367,365 @@ const getSalary = async (req, res) => {
   });
 };
 
+const getAdvance = async (req, res) => {
+  const [rows] = await connection.query(
+    `SELECT * FROM advance ORDER BY time DESC`,
+  );
+
+  if (!rows) {
+    return res.status(200).json({
+      message: "Failed",
+      status: false,
+    });
+  }
+  console.log("asdasdasd : " + rows);
+  return res.status(200).json({
+    message: "Success",
+    status: true,
+    data: {},
+    rows: rows,
+  });
+};
+
+
+const getBonus = async (req, res) => {
+  const [rows] = await connection.query(
+    `SELECT * FROM claimed_rewards ORDER BY time DESC`,
+  );
+
+  if (!rows) {
+    return res.status(200).json({
+      message: "Failed",
+      status: false,
+    });
+  }
+  console.log("asdasdasd : " + rows);
+  return res.status(200).json({
+    message: "Success",
+    status: true,
+    data: {},
+    rows: rows,
+  });
+};
+
+
+// Set up multer storage
+const currentDirectory = process.cwd();
+
+// Define the destination directory relative to the current directory
+const uploadDir = path.join(currentDirectory, 'src', 'public', 'uploads', 'banners');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadDir); // Specify the destination folder for banner uploads
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); // Set the filename
+    }
+
+});
+
+// Initialize multer upload
+const upload = multer({ storage: storage }).array('banners');
+
+
+const uploadBanner = async (req, res) => {
+    try {
+        // Handle file upload using multer
+        upload(req, res, async function (err) {
+            if (err instanceof multer.MulterError) {
+                console.error('Multer error:', err);
+                return res.status(400).json({ message: 'File upload error' });
+            } else if (err) {
+                console.error('Error uploading files:', err);
+                return res.status(500).json({ message: 'Internal server error' });
+            }
+
+            // If files are successfully uploaded
+            const banners = req.files; // Access uploaded files
+            if (!banners || banners.length === 0) {
+                return res.status(400).json({ message: 'No files uploaded' });
+            }
+
+            // Process and save the files to storage
+            // Assuming each uploaded banner corresponds to a separate record in the database
+            for (const banner of banners) {
+                const filename = banner.filename;
+                // Save file information to MySQL database
+                await connection.query('INSERT INTO banners (filename) VALUES (?)', [filename]);
+            }
+
+            return res.status(200).json({ message: 'Files uploaded successfully', status: true, files: banners });
+        });
+    } catch (error) {
+        console.error('Error uploading files:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+const getBanners = async (req, res) => {
+    try {
+        const [rows] = await connection.query('SELECT filename FROM banners');
+        return res.status(200).json({ message: 'Success', status: true, filename:rows });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+const deleteBanner = async (req, res) => {
+    const filename = req.body.filename; // Access the filename from the request parameters
+    const currentDirectory = process.cwd();
+    const filePath = path.join(currentDirectory, 'src', 'public', 'uploads', 'banners', filename);
+    
+    // Delete the file
+    fs.unlink(filePath, async (err) => {
+        if (err) {
+            console.error('Error deleting banner:', err);
+            return res.status(500).json({ error: 'Internal server error' });
+        }       
+        // If the file is deleted successfully, delete its record from the database
+        try {
+            await connection.query('DELETE FROM banners WHERE filename = ?', [filename]);
+            res.status(200).json({ message: 'Banner deleted successfully', status: true });
+        } catch (error) {
+            console.error('Error deleting banner from database:', error);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+    });
+};
+
+
+
+
+
+
+
+
+// Directories for logo and favicon uploads
+const logoDir = path.join(currentDirectory, 'src', 'public', 'uploads', 'logo');
+const faviconDir = path.join(currentDirectory, 'src', 'public', 'uploads', 'favicon');
+
+// Create directories if they don't exist
+if (!fs.existsSync(logoDir)) fs.mkdirSync(logoDir, { recursive: true });
+if (!fs.existsSync(faviconDir)) fs.mkdirSync(faviconDir, { recursive: true });
+
+// Separate multer configurations for logo and favicon
+const logoStorage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, logoDir),
+  filename: (req, file, cb) => cb(null, 'logo.png'),
+});
+
+const faviconStorage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, faviconDir),
+  filename: (req, file, cb) => cb(null, 'favicon.png'),
+});
+
+// Multer upload instances
+const uploadLogo = multer({ storage: logoStorage }).single('logo');
+const uploadFavicon = multer({ storage: faviconStorage }).single('favicon');
+
+// Handlers
+const uploadLogoHandler = (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'No logo file uploaded.' });
+  }
+  res.status(200).json({ message: 'Logo uploaded successfully!' });
+};
+
+const uploadFaviconHandler = (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'No favicon file uploaded.' });
+  }
+  res.status(200).json({ message: 'Favicon uploaded successfully!' });
+};
+
+
+
+
+
+
+
+
+const updateApigameStatus = async (req, res) => {
+    const phone = req.body.phone; // Access the phone number from the request body
+    const apigame = req.body.apigame; // Access the apigame status from the request body
+
+    // Check if both phone and apigame status are provided
+    if (!phone || apigame === undefined) {
+        return res.status(400).json({ error: 'Phone number and API Games status are required', status: false });
+    }
+
+    try {
+        // Find the user by phone number
+        const [user] = await connection.query('SELECT * FROM users WHERE phone = ?', [phone]);
+
+        if (!user) {
+            // If user is not found, return an error response
+            return res.status(404).json({ error: 'User not found', status: false });
+        }
+
+        // Update the apigame status in the database
+        await connection.query('UPDATE users SET apigame = ? WHERE phone = ?', [apigame, phone]);
+        
+        // Respond with success message
+        res.status(200).json({ message: 'API Games status updated successfully', status: true });
+    } catch (error) {
+        console.error('Error updating API Games status:', error);
+        return res.status(500).json({ error: 'Internal server error', status: false });
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+const notificationUploadDir = path.join(currentDirectory, 'src', 'public', 'uploads', 'notifications');
+
+// Ensure the directory exists for notification images
+if (!fs.existsSync(notificationUploadDir)) {
+  fs.mkdirSync(notificationUploadDir, { recursive: true });
+}
+
+// Multer storage configuration for notification images
+const notificationStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, notificationUploadDir); // Destination for notification uploads
+  },
+  filename: function (req, file, cb) {
+    cb(null, 'notification-' + Date.now() + path.extname(file.originalname)); // Unique file name
+  }
+});
+
+// Multer upload middleware for a single notification image
+const uploadNotificationImage = multer({ storage: notificationStorage }).single('image'); // Changed from `storage` to `notificationStorage`
+
+// Add Notification Function
+const addNotification = async (req, res) => {
+  uploadNotificationImage(req, res, async function (err) {
+    if (err) {
+      return res.status(500).json({ message: 'File upload error', error: err.message });
+    }
+
+    try {
+      const { heading, content, link, time } = req.body;
+      const imageUrl = req.file ? `/uploads/notifications/${req.file.filename}` : null;
+
+      const insertNotificationQuery = `
+        INSERT INTO notification (heading, image, content, link, time)
+        VALUES (?, ?, ?, ?, ?)
+      `;
+
+      await connection.execute(insertNotificationQuery, [heading, imageUrl, content, link, time]);
+
+      res.status(200).json({ message: "Notification added successfully!", imageUrl });
+    } catch (error) {
+      console.error("Error inserting notification:", error);
+      res.status(500).json({ error: "Failed to insert notification" });
+    }
+  });
+};
+
+const getNotifications = async (req, res) => {
+  try {
+    const fetchNotificationsQuery = `SELECT * FROM notification ORDER BY time DESC`;
+
+    // Fetch all notifications
+    const [results] = await connection.execute(fetchNotificationsQuery);
+
+    res.status(200).json(results);
+  } catch (error) {
+    console.error("Error fetching notifications:", error);
+    res.status(500).json({ error: "Failed to fetch notifications" });
+  }
+};
+
+
+// Update Notification
+const updateNotification = async (req, res) => {
+  uploadNotificationImage(req, res, async function (err) {
+    if (err) {
+      return res.status(500).json({ message: 'File upload error', error: err.message });
+    }
+
+    const { id, heading, content, link, time } = req.body;
+    let imageUrl = req.body.existingImageUrl; // Default to the existing image
+
+    if (req.file) {
+      imageUrl = `/uploads/notifications/${req.file.filename}`; // Use new uploaded image if available
+    }
+
+    try {
+      const updateNotificationQuery = `
+        UPDATE notification
+        SET heading = ?, image = ?, content = ?, link = ?, time = ?
+        WHERE id = ?
+      `;
+
+      await connection.execute(updateNotificationQuery, [heading, imageUrl, content, link, time, id]);
+
+      res.status(200).json({ message: 'Notification updated successfully!', status: true });
+    } catch (error) {
+      console.error('Error updating notification:', error);
+      res.status(500).json({ error: 'Failed to update notification', status: false });
+    }
+  });
+};
+
+
+// Delete Notification
+const deleteNotification = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deleteQuery = `DELETE FROM notification WHERE id = ?`;
+
+    await connection.execute(deleteQuery, [id]);
+
+    res.status(200).json({ message: "Notification deleted successfully!" });
+  } catch (error) {
+    console.error("Error deleting notification:", error);
+    res.status(500).json({ error: "Failed to delete notification" });
+  }
+};
+
+
+
+
+// Fetch all feedbacks
+const getFeedbacks = async (req, res) => {
+  try {
+    // Query to get feedbacks from the database
+    const [rows] = await connection.query('SELECT id, phone, feedback, date_time FROM feedbacks ORDER BY date_time DESC');
+    
+    if (rows.length === 0) {
+      return res.status(200).json([]);
+    }
+
+    // Send feedbacks data
+    res.status(200).json(rows);
+  } catch (error) {
+    console.error('Error fetching feedbacks:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+
+
+
+
+
 const adminController = {
-  adminPage,
+  adminPage,  
   adminPage3,
   adminPage5,
   adminPage10,
@@ -2647,6 +3747,17 @@ const adminController = {
   levelSetting,
   handlWithdraw,
   settings,
+  advsettings,
+  appsettings,
+  bannersettings,
+  bonussettings,
+  notifsettings,
+  feedbacks,
+  getFeedbacks,
+  addNotification,
+  getNotifications,
+  updateNotification,
+  deleteNotification,
   editResult2,
   settingBank,
   settingGet,
@@ -2675,10 +3786,43 @@ const adminController = {
   adminPageK3,
   updateLevel,
   CreatedSalaryRecord,
+  CreatedAdvanceRecord,
+  CreatedBonusRecord,
   CreatedSalary,
+  CreatedAdvance,
+  CreatedBonus,
   DailySalaryEligibility,
   listCheckSalaryEligibility,
   getSalary,
+  getAdvance,
+  getBonus,
+  uploadBanner,
+  getBanners,
+  deleteBanner,
+  uploadLogo,
+  uploadFavicon,
+  uploadLogoHandler,
+  uploadFaviconHandler,
+  settingNotice1,
+  settingNotice2,
+  settingNotice3,
+  settingAppName,
+  settingBonusMoneyOnRegister,
+  settingInviterBonusMoneyOnRegister,
+  settingUsrRechBonus,
+  settingInvRechBonus,
+  settingAppAbout,
+  settingAppNotification,
+  updateApigameStatus,
+  settingMinInrDep,
+  settingMinUsdtDep,
+  settingMinInrWit,
+  settingMinUsdtWit,
+  settingInrUsdRate,
+  settingMinFirstRech,
+  settingSafeInterest,
 };
 
 export default adminController;
+export { redEnvelopesHistoryAPI };
+

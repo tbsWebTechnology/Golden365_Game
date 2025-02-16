@@ -1,0 +1,690 @@
+<html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 40px;">
+
+<head>
+    
+
+   <meta charset="UTF-8">
+   <link rel="icon" type="image/svg+xml" href="/uploads/favicon/favicon.png" />
+   <meta name="google" content="notranslate">
+   <meta name="robots" content="noindex,nofollow">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+   <link rel="manifest">
+   <title id="app-title"></title>
+  <script src="/js/app.js"></script>
+  <link rel="stylesheet" href="/assets/css/slidercaptcha.css" />
+   <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css">
+   <link rel="stylesheet" href="/assets/css/page-activity-4fe5c6bf.css">
+   <link rel="stylesheet" href="/assets/css/index-2c2fee84.css">
+   <link rel="stylesheet" href="/assets/css/page-home-522c97b9.css">
+   <link rel="stylesheet" href="/assets/css/page-login-49518e3f.css">
+   <link rel="stylesheet" href="/assets/css/page-test-24de9c20.css">
+   <link rel="stylesheet" href="/assets/css/page-main-284c07ba.css">
+   <link rel="stylesheet" href="/assets/css/page-promotion-14ce89d7.css">
+   <link rel="stylesheet" href="/assets/css/page-wallet-b9af2085.css">
+   <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script src="/js/client.js"></script>
+
+</head>
+
+<style>
+   body {
+       font-family: Arial, sans-serif;
+       background-color: #f4f4f9;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       height: 100vh;
+       margin: 0;
+   }
+   .login-container {
+       background-color: white;
+       padding: 30px;
+       border-radius: 8px;
+       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+       width: 100%;
+       max-width: 400px;
+   }
+   h2 {
+       text-align: center;
+       margin-bottom: 20px;
+   }
+   input[type="text"],
+   input[type="password"] {
+       width: 100%;
+       padding: 10px;
+       margin: 10px 0;
+       border: 1px solid #ccc;
+       border-radius: 5px;
+   }
+   button {
+       width: 100%;
+       padding: 10px;
+       background-color: #007bff;
+       color: white;
+       border: none;
+       border-radius: 5px;
+       cursor: pointer;
+       font-size: 16px;
+   }
+   button:hover {
+       background-color: #0056b3;
+   }
+   .error {
+       color: red;
+       text-align: center;
+       margin-bottom: 10px;
+   }
+
+   .dropdown__value[data-v-5067ef5e] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex
+;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding-left: .4rem;
+    font-size: .4rem;
+    cursor: pointer;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+.phoneInput__container-input input[data-v-50aa8bb0] {
+    width: 80%;
+    height: 1.17333rem;
+    margin-left: 2.66667rem;
+    padding: .36rem .34667rem;
+    color: var(--text_color_L1);
+    font-size: .37333rem;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    background: var(--bg_color_L2);
+}
+</style>
+</head>
+<body style="background-image: url('/bg.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
+<div class="login-container">
+   <p style="font-size: 28px; justify-self: center; margin-bottom: 20px;">Admin Login</p>
+   
+   <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+       <p class="error"><%= errorMessage %></p>
+   <% } %>
+
+   <form action="/login" method="POST">
+
+
+      <div data-v-50aa8bb0="" class="phoneInput__container-input">
+         <div data-v-5067ef5e="" data-v-50aa8bb0="" class="dropdown">
+            <div data-v-5067ef5e="" class="dropdown__value"><span data-v-5067ef5e="">+91</span><i
+                  data-v-5067ef5e=""
+                  class="van-badge__wrapper van-icon van-icon-arrow-down"><!----><!----><!----></i></div>
+            <div data-v-5067ef5e="" class="dropdown__list">
+               <div data-v-5067ef5e="" class="dropdown__list-item active"><span
+                     data-v-5067ef5e="">+91</span> India (भारत)</div>
+            </div>
+         </div>
+         <input maxlength="10" id="phone_number_inp" data-v-50aa8bb0="" type="text" name="userNumber"
+            placeholder="Enter Phone Number" />
+      </div>
+
+
+      <!-- <input type="text" name="username" placeholder="Username / Phone" required="" style="font-size: 18px;" maxlength="10" id="phone_number_inp" data-v-50aa8bb0="" type="text" name="userNumber" /> -->
+       <input id="password_inp" data-v-ea5b66c8="" type="password" placeholder="Password" maxlength="32" autocomplete="new-password"  style="font-size: .37333rem;" />
+       <button id="showCaptcha" data-v-33f88764="" class="active" type="submit">Login</button>
+   </form>
+   
+   
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+   .message_alert_root {
+      font-family:
+         -apple-system,
+         BlinkMacSystemFont,
+         Helvetica Neue,
+         Helvetica,
+         Segoe UI,
+         Arial,
+         Roboto,
+         PingFang SC,
+         Hiragino Sans GB,
+         Microsoft Yahei,
+         sans-serif;
+      font-size: 12px;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+      max-width: 12.8rem;
+      width: 80%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 100000;
+      border-radius: 14px;
+   }
+
+   .message_alert_text {
+      font-family:
+         -apple-system,
+         BlinkMacSystemFont,
+         Helvetica Neue,
+         Helvetica,
+         Segoe UI,
+         Arial,
+         Roboto,
+         PingFang SC,
+         Hiragino Sans GB,
+         Microsoft Yahei,
+         sans-serif;
+      margin: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+      transition: opacity 0.5s;
+      animation: bounce-in-data-v-1dcba851 0.5s;
+      position: relative;
+      padding: 0.32rem 0.66667rem;
+      text-align: center;
+      line-height: 0.64rem;
+      overflow: hidden;
+      font-size: 0.37333rem;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.8);
+   }
+
+   @keyframes bounce-in-data-v-1dcba851 {
+      0% {
+         transform: scale(0.4);
+      }
+
+      50% {
+         transform: scale(1.03);
+      }
+
+      to {
+         transform: scale(1);
+      }
+   }
+</style>
+<script>
+   function setCookie(cname, cvalue, exdays) {
+      const d = new Date()
+      d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
+      let expires = "expires=" + d.toUTCString()
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
+   }
+
+   const alertMessage = text => {
+      const msg = document.createElement("div")
+      msg.setAttribute("data-v-1dcba851", "")
+      msg.className = "message_alert_root"
+
+      const msgContent = document.createElement("div")
+      msgContent.setAttribute("data-v-1dcba851", "")
+      msgContent.className = "message_alert_text"
+      msgContent.style = ""
+      msgContent.textContent = text
+
+      msg.appendChild(msgContent)
+      document.body.appendChild(msg)
+
+      setTimeout(() => {
+         msgContent.classList.remove("v-enter-active", "v-enter-to")
+         msgContent.classList.add("v-leave-active", "v-leave-to")
+
+         setTimeout(() => {
+            document.body.removeChild(msg)
+         }, 100)
+      }, 1000)
+   }
+
+   function validateForm(phoneNumber, password, text) {
+         if (!phoneNumber || !password) {
+            alertMessage(text)
+            return false
+         } else {
+            return true
+         }
+      }
+
+   const closeEye = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAP1BMVEUAAADExMTExMTDw8PExMTFxcXFxcXExMS/v7/FxcXFxcXExMTExMTDw8PExMTFxcXFxcXExMTPz8+/v7/ExMTkagEbAAAAFHRSTlMAIO/ff29fvxDfMD/PoI+fr1AQMBwdwB4AAAFQSURBVDjL5ZJbkoQgDEXDI4iAqN3sf61DIEFHqmvmv/OhEE5ycwvgm0Il+z9uLQU/HJ0OrTvD4IqdoZdbdOHQh+sczphlSmKlvZu4uPZG2bkqfnDRzFlKL/FKuM9cig+/OoLCmcs8Au7ZqUDcG4IW00OGE2Fh040D/G1baeFO8mDo07gmpdUAa5djVGQPgej3OFtuwqZX7U3o1C0RmjevL+/rWLZqVzqnyV0bc70atgVJInPUaR/ip5TkATrmIBYBd3Gq6pGSVWpc18mPY9jYGKk0jgeP0nCjPxtDTgpnZXDkjGy0kgv3AK+4FG6opMmQXJVwob8wK0/jgCu8qWS+c/oU7hJumUqyrl2MOdDLzd85maVs/p6iQScOMnG1HcYXANlBwsriH9zWua2NZ4zmR8l+Jy6Ycotk/czJfQU8kqmRdgwwhU9y7X+F3yx8VfwAZv4b1F/KTEQAAAAASUVORK5CYII="
+   const openEye = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAOVBMVEUAAADExMTFxcXExMTFxcXFxcXExMTExMTExMTFxcW/v7/ExMTExMTFxcXGxsa/v7/Pz8/FxcXExMSmSILoAAAAEnRSTlMA338gMF/vP7+fEHBPj28wEM9PEbqRAAABB0lEQVQ4y+1TR5IDIQwkCBjCJP3/scvaQj3Feqfsu/sCJXUrIcwXH8GHzbmt0T0r5ciCmNu/tCqsARte0uh8xAlUjCkUHrGtfxHu116LAYLtJjfz3I1xMtld7gelY4zATsyKcmjhjsWDWcHz4AUWBGVGdNRlu0p4bSn3g2S0Pby2h0IWkRDcK3OS66mJC3NWdxFbHBpCwKTq1nNjIgSiahokF+IoLBZNvT5vuafWvk8kXNEMjWYQMBi4k+bmnNraD68Wi4HHm4EPyfyE/vmEO3jbvBRDWBKVMQX7d33e371594/N8pR3lCNf4egk+QrnDv+0+1dEhJvRrt81mVtQq87V4M0Xn+AHBckSwmsdObYAAAAASUVORK5CYII="
+
+   $("#password_eye_btn").click(function (event) {
+      var x = $("#password_inp")
+      var y = $(this)
+      if (x.attr("type") === "password") {
+         x.attr("type", "text")
+         y.attr("src", openEye)
+      } else {
+         x.attr("type", "password")
+         y.attr("src", closeEye)
+      }
+   })
+
+   $(document).ready(function () {
+ // Disable the showCaptcha button initially
+ $("#showCaptcha").prop("disabled", true);
+
+ // Update button state based on input
+ function updateCaptchaButtonState() {
+     const phoneNumber = $("#phone_number_inp").val().trim();
+     const password = $("#password_inp").val().trim();
+     const dialCode = $('.dropdown__value span').text().trim();
+     $("#showCaptcha").prop("disabled", !phoneNumber || !password);
+ }
+
+ // Show the popup and handle click on the showCaptcha button
+ $("#showCaptcha").click(async e => {
+     e.preventDefault();
+     let phoneNumber = $("#phone_number_inp").val().trim();
+     let password = $("#password_inp").val().trim();
+     let dialCode = $('.dropdown__value span').text().trim();
+
+     // Validate fields
+     if (!phoneNumber || !password || !dialCode) {
+         alertMessage("Please fill in both fields."); // Show popup
+         return; // Stop execution if fields are empty
+     }
+
+     // Proceed with showing the CAPTCHA if fields are filled
+     showCaptcha();
+ });
+
+ // Attach input event listener to both fields
+ $("#phone_number_inp, #password_inp").on('input', updateCaptchaButtonState);
+});
+
+</script>
+
+
+
+<style>
+   .top_game {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+   }
+
+   .top_list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+   }
+
+   .splash_root {
+      width: 100vw;
+      height: 100vh;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      position: fixed;
+      z-index: 100000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
+   .splash_screen {
+      width: 100vw;
+      height: 100vh;
+      background: #333;
+      background-image: var(--light-main_gradient-color);
+      max-width: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+   }
+
+   .splash__text {
+      font-size: 22px;
+      text-align: center;
+      font-weight: 700;
+      color: #d9ac4f;
+   }
+
+   .main_box {
+      width: 80%;
+      flex-direction: column;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+   }
+
+   .splash_img {
+      width: 100%;
+   }
+
+   .logo_box {
+      margin-top: 150px;
+   }
+
+   .logo__image {
+      max-width: 200px;
+      height: auto;
+   }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+   const initFunc = () => {
+      if (sessionStorage.getItem("splash") === "true") {
+         $(".splash_root").fadeOut(0)
+         return
+      }
+      $(".splash_root").css("display", "flex")
+      setTimeout(function () {
+         $(".splash_root").fadeOut(1000)
+         sessionStorage.setItem("splash", "true")
+      }, 1200)
+   }
+   initFunc()
+</script>
+<script>function switchTab(tabIndex) {
+   // Get all tab buttons and content
+   const tabs = document.querySelectorAll('.tab');
+   const contents = document.querySelectorAll('.tab-content');
+ 
+   // Loop through all tabs
+   tabs.forEach((tab, index) => {
+     if (index === tabIndex) {
+       tab.classList.add('active');
+     } else {
+       tab.classList.remove('active');
+     }
+   });
+ 
+   // Loop through all contents
+   contents.forEach((content, index) => {
+     if (index === tabIndex) {
+       content.style.display = 'block';
+     } else {
+       content.style.display = 'none';
+     }
+   });
+ }
+ </script>
+ <div id="errorDialog" class="dialog hidden">
+   <div class="dialog-content">
+       <div class="error-icon">!</div>
+       <p><strong>Error: 147</strong></p>
+       <p>Wrong account or password</p>
+   </div>
+</div>
+ <style>/* styles.css */
+   body {
+ font-family: Arial, sans-serif;
+}
+
+button {
+ padding: 10px 20px;
+ background-color: #007bff;
+ color: white;
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+}
+
+.dialog {
+ position: fixed;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ background-color: rgba(0, 0, 0, 0.8);
+ color: white;
+ padding: 20px;
+ border-radius: 10px;
+ text-align: center;
+ display: none;
+ z-index: 1000;
+ width: 3.6rem;
+}
+
+.dialog-content {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.error-icon {
+font-size: 24px;
+ font-weight: bold;
+ /* background-color: white; */
+ color: white;
+ border-radius: 50%;
+ width: 40px;
+ height: 40px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ margin-bottom: 10px;
+}
+
+.hidden {
+ display: none;
+}
+
+.visible {
+ display: block;
+}
+   </style>
+
+   <script>// script.js
+      document.addEventListener('DOMContentLoaded', () => {
+ const errorButton = document.getElementById('showDialogBtn');
+ const errorDialog = document.getElementById('errorDialog');
+
+ errorButton.addEventListener('click', () => {
+     // Show the error dialog
+     errorDialog.classList.add('visible');
+
+     // Optionally hide the dialog after 3 seconds
+     setTimeout(() => {
+         errorDialog.classList.remove('visible');
+     }, 3000);
+ });
+});
+      </script>
+
+<div id="logindialog" style="display:none;">
+<p>Fill all required details.</p>
+</div>
+<div class="van-overlay" id="captchaoverlay" style="display: none;"></div>
+<div id="captcha" style="display: none;"></div>
+<div class="dialog" id="dialog" style="/* display: none; */">
+<svg width="50" height="65" viewBox="0 0 50 65" xmlns="http://www.w3.org/2000/svg" style="
+height: 1.4rem;
+">
+<!-- Background rectangle -->
+<rect width="100%" height="100%" fill="transparent"></rect>
+
+<!-- Exclamation mark -->
+<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50" fill="white" font-family="Arial">!</text>
+</svg>
+<div class="error-message">Error: 30<br>Verification timed out, please try again</div>
+</div>
+<script>
+ document.addEventListener("DOMContentLoaded", function() {
+const captchaContainer = document.getElementById('captcha');
+
+function initializeCaptcha() {
+  // Reset the CAPTCHA content before initializing
+  captchaContainer.innerHTML = ''; // Clear previous CAPTCHA content
+  
+  sliderCaptcha({
+      id: 'captcha',
+      width: 340,
+      height: 200,
+      sliderL: 42,
+      sliderR: 9,
+      offset: 5,
+      loadingText: 'Loading...',
+      failedText: 'Try again',
+      barText: 'Hold and slide',
+      repeatIcon: 'fa fa-redo',
+      setSrc: function () {
+          // Optional: Set CAPTCHA source here
+      },
+      onSuccess: function () {
+         captchaContainer.style.display = 'none'; // Hide CAPTCHA container on fail
+document.getElementById('captchaoverlay').style.display = 'none'; // Hide overlay on fail
+// Trigger login process
+let phoneNumber = $("#phone_number_inp").val().trim();
+let password = $("#password_inp").val().trim();
+let dialCode = $('.dropdown__value span').text().trim()
+$(".van-overlay").fadeIn(10);
+
+$.ajax({
+  type: "POST",
+  url: "/api/webapi/login",
+  data: {
+   dialCode: dialCode,
+   phoneNumber: phoneNumber,
+      pwd: password,
+  },
+  dataType: "json",
+  success: function (response) {
+      if (response.status === true) {
+          $(".van-overlay").fadeOut(300);
+          $(".Loading").fadeIn(10);
+          setCookie("token", response.token, 1);
+          setCookie("auth", response.value, 1);
+          setTimeout(() => {
+              location.href = "/admin/manager/index";
+          }, 500);
+      } else {
+          $(".van-overlay").fadeOut(300);
+          alertMessage(response.message);
+      }
+  },
+  error: function (error) {
+      $(".van-overlay").fadeOut(300);
+      alertMessage(error.responseJSON.message);
+  },
+});
+
+$('.dropdown').click(function () {
+         $('.dropdown__list').css("opacity", $('.dropdown__list').css("opacity") === "1" ? "0" : "1");
+         $('.dropdown__list').css("height", $('.dropdown__list').css("opacity") === "1" ? ".2rem" : "6rem");
+      });
+
+      const setDialCode = (dialCode) => {
+         $('.dropdown__value span').text(dialCode);
+         $('.dropdown__list-item').removeClass('active');
+         $(`.dropdown__list-item .dial_code:contains(${dialCode})`).parent().addClass('active');
+      };
+
+
+      $.ajax({
+         url: "/country_codes.json",
+         method: "GET",
+         success: function (response) {
+            // Handle success response
+
+            const html = response.map((country) => {
+               return `
+                  <div data-v-482b13c8="" class="dropdown__list-item" onclick="setDialCode('${country.dial_code}')">
+                     <span data-v-482b13c8="" class="dial_code">${country.dial_code}</span>
+                     ${country.name}
+                  </div>`;
+            }).join('');
+
+            $('.dropdown__list').html(html);
+
+            setDialCode("+91");
+         },
+         error: function (xhr, status, error) {
+            // Handle error response
+         }
+      });
+
+
+},
+      onFail: function () {
+         captchaContainer.style.display = 'none'; // Hide CAPTCHA container on fail
+document.getElementById('captchaoverlay').style.display = 'none'; // Hide overlay on fail
+const dialog = document.getElementById('dialog');
+dialog.style.display = 'block'; // Show dialog on fail
+captchaContainer.innerHTML = ''; // Clear the CAPTCHA content
+
+// Disable the showCaptcha button
+const showCaptchaButton = document.getElementById('showCaptcha');
+showCaptchaButton.disabled = true;
+
+// Automatically close the dialog after 2 seconds
+setTimeout(function() {
+  dialog.style.display = 'none'; // Hide dialog
+  captchaContainer.style.display = 'none'; // Hide CAPTCHA container
+  document.getElementById('captchaoverlay').style.display = 'none'; // Hide overlay
+  
+  // Re-enable the showCaptcha button after dialog is closed
+  showCaptchaButton.disabled = false;
+}, 2000);
+      },
+      onRefresh: function () {
+          // Handle refresh logic if needed
+      }
+  });
+}
+
+// Show CAPTCHA and initialize when the button is clicked
+document.getElementById('showCaptcha').addEventListener('click', function() {
+  captchaContainer.style.display = 'block'; // Show CAPTCHA
+  document.getElementById('captchaoverlay').style.display = 'block'; // Show overlay
+  initializeCaptcha(); // Initialize new CAPTCHA
+});
+});
+
+</script>
+
+<script src="/assets/css/longbow.slidercaptcha.js"></script>
+
+<script>$(document).ready(function() {
+$("#showCaptcha").click(function() {
+ if ($(this).is(':disabled')) {
+     $("#logindialog").show();
+     // Automatically close the dialog after 2 seconds
+     setTimeout(function() {
+         $("#logindialog").hide();
+     }, 5000);
+ }
+});
+});</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

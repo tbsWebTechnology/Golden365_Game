@@ -2,18 +2,18 @@ import axios from "axios";
 import connection from "../config/connectDB.js";
 
 export const GAME_CATEGORIES_MAP = {
-  SLOT: 1,
-  POKER: 2,
-  LOBBY: 3,
-  FISHING: 5,
-  CASINO: 8,
+  SLOT: 1000,
+  POKER: 2000,
+  LOBBY: 3000,
+  FISHING: 4000,
+  CASINO: 5000,
 };
 
 const gameCategoriesPage = (GameCategoriesId) => async (req, res) => {
   try {
     const response = await axios({
       method: "GET",
-      url: "https://bytefusionapi.com/api/neo_jili/game_list",
+      url: "https://api.7xclub.live/list",
       data: {
         agentId: process.env.JILI_AGENT_ID,
         agentKey: process.env.JILI_AGENT_KEY,
@@ -44,7 +44,7 @@ const gameSlotsPage = (GameCategoriesId) => async (req, res) => {
   try {
     const response = await axios({
       method: "GET",
-      url: "https://bytefusionapi.com/api/neo_jili/game_list",
+      url: "https://api.7xclub.live/list",
       data: {
         agentId: process.env.JILI_AGENT_ID,
         agentKey: process.env.JILI_AGENT_KEY,
@@ -62,9 +62,7 @@ const gameSlotsPage = (GameCategoriesId) => async (req, res) => {
     return res.render("jili/slots.ejs", {
       // gameName: slotsGame.name,
       gameList: slotsGame.list,
-      // headerDisplay: "",
-      // tabAddressJili: req._parsedOriginalUrl.pathname.split("/")[2],
-      // tabAddressJdb: req._parsedOriginalUrl.pathname.split("/")[2],
+     
     });
   } catch (error) {
     console.log(error);
@@ -80,7 +78,7 @@ const getGameLink = async (req, res) => {
     let gameId = req.query.game_id;
 
     const [rows] = await connection.execute(
-      "SELECT `token`, `status` FROM `users` WHERE `token` = ? AND `veri` = 1",
+      "SELECT `token`, `status` FROM `users` WHERE `token` = ? AND `veri` = 1 AND `apigame` = 1",
       [token],
     );
 
@@ -109,7 +107,7 @@ const getGameLink = async (req, res) => {
 
     const response = await axios({
       method: "POST",
-      url: "https://bytefusionapi.com/api/neo_jili/generate_link",
+      url: "https://api.7xclub.live/devil",
       data: {
         gameId: gameId,
         agentId: process.env.JILI_AGENT_ID,
@@ -142,7 +140,7 @@ const gameList = async (req, res) => {
   try {
     const response = await axios({
       method: "GET",
-      url: "https://bytefusionapi.com/api/neo_jili/game_list",
+      url: "https://api.7xclub.live/list",
       data: {
         agentId: process.env.JILI_AGENT_ID,
         agentKey: process.env.JILI_AGENT_KEY,
@@ -329,23 +327,7 @@ const cancelBet = async (req, res) => {
   // console.log(reqId);
   // console.log(token);
   try {
-    // // console.log({
-    //    reqId,
-    //    token,
-    //    currency,
-    //    game,
-    //    wagersTime,
-    //    betAmount,
-    //    round,
-    //    winloseAmount,
-    //    isFreeRound,
-    //    userId,
-    //    transactionId,
-    //    platform,
-    //    statementType,
-    //    gameCategory,
-    //    freeSpinData,
-    // })
+    
 
     console.log("Player cancelBet Request");
     console.log(req.body);
@@ -418,9 +400,9 @@ const sessionBet = async (req, res) => {
   // const currency = req.body?.currency
   // const game = req.body?.game
   // const wagersTime = req.body?.wagersTime
-  const betAmount = req.body?.betAmount;
+  const betAmount = Number(req.body?.betAmount);
   // const round = req.body?.["round(*)"]
-  const winloseAmount = req.body?.winloseAmount;
+  const winloseAmount = Number(req.body?.winloseAmount);
   const preserve = req.body?.preserve;
   // const isFreeRound = req.body?.isFreeRound
   // const userId = req.body?.userId
@@ -471,7 +453,7 @@ const sessionBet = async (req, res) => {
       // console.log(rows[0]?.status, 1)
       // Get user details from the database
       const username = rows[0]?.phone;
-      const balance = rows[0]?.money;
+      const balance = Number(rows[0]?.money);
       const token = rows[0]?.token;
 
       if (balance <= betAmount) {
@@ -481,28 +463,34 @@ const sessionBet = async (req, res) => {
         });
       }
 
-      // // console.log(balance, betAmount, winloseAmount)
+      console.log(balance, betAmount, winloseAmount);
 
-      let finalAmount;
+      let finalAmount = 0;
 
       if (preserve === 0 && betAmount > 0 && winloseAmount === 0) {
         finalAmount = Number(balance - betAmount);
+        console.log("finalAmount = Number(balance - betAmount);");
       } else if (preserve === 0 && betAmount === 0 && winloseAmount >= 0) {
         finalAmount = Number(balance + winloseAmount);
-      } else if ((preserve > 0, betAmount === 0, winloseAmount === 0)) {
+        console.log("finalAmount = Number(balance + winloseAmount);");
+      } else if (preserve > 0 && betAmount === 0 && winloseAmount === 0) {
         finalAmount = Number(balance - preserve);
+        console.log("finalAmount = Number(balance - preserve);");
       } else if (preserve > 0 && betAmount >= 0 && winloseAmount >= 0) {
         finalAmount = Number(balance + preserve - betAmount + winloseAmount);
+        console.log(
+          "finalAmount = Number(balance + preserve - betAmount + winloseAmount);",
+        );
       }
 
       console.log(finalAmount);
+      console.log(Number(balance + winloseAmount));
 
       await connection.query(
         "UPDATE users SET money = ?, total_money = ? WHERE `phone` = ?",
         [finalAmount, finalAmount, username],
       );
 
-      // Return the user details as the response
       return res.status(200).json({
         errorCode: 0,
         message: "success",

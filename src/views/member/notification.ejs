@@ -1,22 +1,26 @@
 <html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 37px;">
 
 <head>
-   <script src="/app.config.js?v=1718968461132"></script>
+    
 
    <meta charset="UTF-8">
-   <link rel="icon" type="image/svg+xml"
-      href="https://ossimg.tirangaagent.com/Tiranga/other/h5setting_20231017190406lyb3.ico">
+   <link rel="icon" type="image/svg+xml" href="/uploads/favicon/favicon.png" />
    <meta name="google" content="notranslate">
    <meta name="robots" content="noindex,nofollow">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-   <link rel="manifest" href="/manifest.tiranga.json?version=1.1">
-   <title>Indn Club</title>
+   
+   <title id="app-title"></title>
+  <script src="/js/app.js"></script>
    <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css">
    <link rel="stylesheet" href="/assets/css/page-activity-4fe5c6bf.css">
    <link rel="stylesheet" href="/assets/css/index-2c2fee84.css">
    <link rel="stylesheet" href="/assets/css/page-home-522c97b9.css">
-   <link rel="stylesheet" href="/assets/css/page-login-49518e3f.css">
+   <link rel="stylesheet" href="/assets/css/page-login-49518e3f.css">   
+   <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
+
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
    <style name="nordpass-fonts">
       @font-face {
          font-family: "Roboto Mono";
@@ -65,6 +69,31 @@
          font-weight: 700;
          src: url("chrome-extension://eiaeiblijfjekdanodkjadfinkhbfgcd/css/../assets/Inter-Bold.ttf") format("truetype");
       }
+      .infiniteScroll[data-v-61888f52] {
+       min-height: 2.66667rem;
+       border-radius: .16rem;
+       margin-top: 20px;
+       }
+
+       .svg-icon {
+    width: 1.8em;
+    height: 1.8em;
+    fill: var(--svgHoticon);
+    vertical-align: middle;
+    margin-right: 8px;
+}
+.notification-container-content-desc[data-v-00f99608] {
+    margin-top: .32rem;
+    word-break: break-all;
+    color: var(--text_color_L1) !important;
+    font-size: 0.35rem;
+}
+.notification-container-content {
+    padding: 0.4rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin-bottom: 0.4rem;
+}
    </style>
 
    <link rel="stylesheet" href="/assets/css/page-main-284c07ba.css">
@@ -4059,7 +4088,7 @@
                      <clipPath id="__lottie_element_2">
                         <rect width="200" height="200" x="0" y="0"></rect>
                      </clipPath>
-                     <image xlink:href="/logo_loading.png">
+                     <image xlink:href="/uploads/logo/logo.png">
                      </image>
                      <image
                         xlink:href="data:image/png;base64,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">
@@ -4074,7 +4103,7 @@
                      <g class="png" transform="matrix(0.8999999761581421,0,0,0.8999999761581421,31.150001525878906,82)"
                         opacity="1" style="display: block;">
                         <image width="163px" height="60px" preserveAspectRatio="xMidYMid slice"
-                           xlink:href="/logo_loading.png">
+                           xlink:href="/uploads/logo/logo.png">
                         </image>
                      </g>
                   </g>
@@ -4142,42 +4171,16 @@
          </div>
          <div data-v-61888f52="" data-v-00f99608="" class="infiniteScroll sysMessage__container-msgWrapper"
             id="refresh0e71cc01fb41441697fe953b94cddf8d">
-            <div data-v-00f99608="" class="notification-container-content">
-               <div data-v-00f99608="" class="notification-container-content-title"><svg data-v-00f99608=""
-                     class="svg-icon icon-notificationIcon">
-                     <use xlink:href="#icon-notificationIcon"></use>
-                  </svg><span data-v-00f99608="">Welcome To Indn Club!</span></div>
-               <div data-v-00f99608="" class="notification-container-content-desc">Welcome to the Indn Club!
-                  Greetings, Gamers and Enthusiasts! The Indn Club is more than just a platform for gaming. We
-                  invite you to join us, you'll find a variety of games, promo, bonus, luxury gold awards, Register now
-                  and win.</div>
-               <h5 data-v-00f99608="">2024-04-08 23:45:44</h5>
-            </div>
-            <div data-v-00f99608="" class="notification-container-content">
-               <div data-v-00f99608="" class="notification-container-content-title"><svg data-v-00f99608=""
-                     class="svg-icon icon-notificationIcon">
-                     <use xlink:href="#icon-notificationIcon"></use>
-                  </svg><span data-v-00f99608="">Avoid Scammer And Phising Link</span></div>
-               <div data-v-00f99608="" class="notification-container-content-desc">Please be sure to always use our
-                  official website for playing the games with the following link, https://tirangacasino.win. Please
-                  always check our official link to access our website and avoid scammers and phishing links</div>
-               <h5 data-v-00f99608="">2024-05-25 17:16:52</h5>
-            </div>
-            <div data-v-00f99608="" class="notification-container-content">
-               <div data-v-00f99608="" class="notification-container-content-title"><svg data-v-00f99608=""
-                     class="svg-icon icon-notificationIcon">
-                     <use xlink:href="#icon-notificationIcon"></use>
-                  </svg><span data-v-00f99608="">Beware Of Fraud And Scammer </span></div>
-               <div data-v-00f99608="" class="notification-container-content-desc">If your deposit not receive, please
-                  send it directly to Indn Club Self-service Center (https://www.tirangaservice.com) wait till
-                  already get process, do not send to another person and trust anyone claiming to represent Tiranga
-                  Games. Always verify our website authenticity through the official community channels. Your safety and
-                  trust is our prority.</div>
-               <h5 data-v-00f99608="">2024-04-08 23:45:27</h5>
-            </div>
+            
             <div data-v-61888f52="" class="infiniteScroll__loading"><!--v-if-->
                <div data-v-61888f52="">No more</div>
             </div>
+
+
+            
+
+
+
          </div>
       </div><!--online custom service-->
       <div class="customer" id="customerId" onclick="location.href='/support'"
@@ -4186,5 +4189,52 @@
       </div>
    </div>
 </body>
+
+<script>
+   function fetchNotifications() {
+  fetch('/api/get-notifications')
+    .then(response => response.json())
+    .then(data => {
+      if (data.status) {
+        const notificationContainer = document.getElementById('refresh0e71cc01fb41441697fe953b94cddf8d');
+        notificationContainer.innerHTML = '';
+        
+        data.data.forEach(notification => {
+          const notificationHTML = `
+            <div class="notification-container-content">
+              <div class="notification-container-content-title">
+                <svg class="svg-icon icon-notificationIcon"><use xlink:href="#icon-notificationIcon"></use></svg>
+                <span data-v-00f99608="" data-v-00f99608="">${notification.heading}</span>
+              </div>
+              <div data-v-00f99608="" class="notification-container-content-desc">
+                <img src="${notification.image}" alt="Notification Image" style="max-width: 100%; border-radius: 5px;">
+              </div>
+              <div data-v-00f99608="" class="notification-container-content-desc">
+                ${notification.content}
+              </div>
+              <div data-v-00f99608="" class="notification-container-content-desc">
+                <a href="${notification.link}" target="_blank" style="padding-left: 0px !important;">Click Here</a>
+              </div>
+              <h5 data-v-00f99608="">${formatDate(new Date(notification.time))}</h5>
+            </div>
+          `;
+          notificationContainer.innerHTML += notificationHTML;
+        });
+      } else {
+        alert('Failed to fetch notifications');
+      }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function formatDate(date) {
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true };
+  return date.toLocaleDateString('en-GB', options).replace(',', '');
+}
+
+document.addEventListener('DOMContentLoaded', fetchNotifications);
+
+
+</script>
 
 </html>

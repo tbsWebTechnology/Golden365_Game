@@ -1,4 +1,5 @@
 import connection from "../config/connectDB.js";
+import moment from "moment";
 
 const gameStatisticsPage = async (req, res) => {
   return res.render("member/game_statistics.ejs");
@@ -66,26 +67,35 @@ const gameStatistics = async (req, res) => {
     );
     const trxWingoBetCount = parseInt(trxWingo1[0].trxWingoBetCount || 0);
 
+
+
+
     const [wingo2] = await connection.query(
-      "SELECT SUM(money) AS wingoBetAmount FROM minutes_1 WHERE phone = ? AND time BETWEEN '?' AND '?'",
+      "SELECT SUM(money + fee) AS wingoBetAmount FROM minutes_1 WHERE phone = ? AND time BETWEEN '?' AND '?'",
       [userInfo.phone, startDate, endDate],
     );
     const wingoBetAmount = parseInt(wingo2[0].wingoBetAmount || 0);
+
     const [k32] = await connection.query(
       "SELECT SUM(money) AS k3BetAmount FROM result_k3 WHERE phone = ? AND time BETWEEN '?' AND '?'",
       [userInfo.phone, startDate, endDate],
     );
     const k3BetAmount = parseInt(k32[0].k3BetAmount || 0);
+
     const [G5d2] = await connection.query(
       "SELECT SUM(money) AS g5dBetAmount FROM result_5d WHERE phone = ? AND time BETWEEN '?' AND '?'",
       [userInfo.phone, startDate, endDate],
     );
     const g5dBetAmount = parseInt(G5d2[0].g5dBetAmount || 0);
+
     const [trxWingo2] = await connection.query(
-      "SELECT SUM(money) AS trxWingoBetAmount FROM trx_wingo_bets WHERE phone = ? AND time BETWEEN '?' AND '?'",
+      "SELECT SUM(amount) AS trxWingoBetAmount FROM trx_wingo_bets WHERE phone = ? AND time BETWEEN '?' AND '?'",
       [userInfo.phone, startDate, endDate],
     );
     const trxWingoBetAmount = parseInt(trxWingo2[0].trxWingoBetAmount || 0);
+
+
+
 
     const [wingo3] = await connection.query(
       "SELECT SUM(get) AS wingoWinAmount FROM minutes_1 WHERE phone = ? AND time BETWEEN '?' AND '?'",
@@ -108,12 +118,19 @@ const gameStatistics = async (req, res) => {
     );
     const trxWingoWinAmount = parseInt(trxWingo3[0].trxWingoWinAmount || 0);
 
+
+
+
     const totalBetCount =
-      wingoBetCount + k3BetCount + g5dBetCount + trxWingoBetCount;
-    const totalBetAmount =
-      wingoBetAmount + k3BetAmount + g5dBetAmount + trxWingoBetAmount;
-    const totalWinAmount =
-      wingoWinAmount + k3WinAmount + g5dWinAmount + trxWingoWinAmount;
+  (wingoBetCount || 0) + (k3BetCount || 0) + (g5dBetCount || 0) + (trxWingoBetCount || 0);
+const totalBetAmount =
+  (wingoBetAmount || 0) + (k3BetAmount || 0) + (g5dBetAmount || 0) + (trxWingoBetAmount || 0);
+const totalWinAmount =
+  (wingoWinAmount || 0) + (k3WinAmount || 0) + (g5dWinAmount || 0) + (trxWingoWinAmount || 0);
+
+ 
+  
+
 
     return res.status(200).send({
       status: 200,
@@ -159,10 +176,104 @@ const autoCleanOldGames = async () => {
   }
 };
 
+
+
+
+
+
+const updateSafeBonusAndTransfer = async () => {
+  try {
+    // Fetch `safeinterest` from the `admin_ac` table
+    const [adminConfig] = await connection.query(
+      "SELECT safeinterest FROM admin_ac LIMIT 1"
+    );
+
+    if (!adminConfig || adminConfig.length === 0) {
+      console.error("Failed to fetch safeinterest value. Aborting.");
+      return;
+    }
+
+    const safeInterest = parseFloat(adminConfig[0].safeinterest);
+
+    if (isNaN(safeInterest) || safeInterest <= 0) {
+      console.error("Invalid safeinterest value. Aborting.");
+      return;
+    }
+
+    // Fetch users with `third_party_money` greater than 0
+    const [users] = await connection.query(
+      "SELECT phone, third_party_money, safe_bonus FROM users WHERE third_party_money > 0"
+    );
+
+    if (users.length === 0) {
+      console.log("No users with third_party_money to update.");
+      return;
+    }
+
+    for (const user of users) {
+      const { phone, third_party_money, safe_bonus } = user;
+      const bonusAmount = parseFloat(
+        (parseFloat(third_party_money) * safeInterest).toFixed(2)
+      ); // Calculate bonus based on safeinterest
+
+      if (isNaN(bonusAmount) || bonusAmount <= 0) {
+        console.error(`Invalid bonus amount for user ${phone}. Skipping.`);
+        continue;
+      }
+
+      // Safely add the bonus amount to the current safe_bonus and third_party_money
+      const updatedSafeBonus = parseFloat(
+        (parseFloat(safe_bonus || 0) + bonusAmount).toFixed(2)
+      );
+      const updatedThirdPartyMoney = parseFloat(
+        (parseFloat(third_party_money) + bonusAmount).toFixed(2)
+      );
+
+      const transactionConnection = await connection.getConnection();
+      try {
+        await transactionConnection.beginTransaction();
+
+        // Update safe_bonus and third_party_money in users table
+        await transactionConnection.query(
+          "UPDATE users SET safe_bonus = ?, third_party_money = ? WHERE phone = ?",
+          [updatedSafeBonus, updatedThirdPartyMoney, phone]
+        );
+
+        // Insert into safe_transfer table
+        const transferId = Math.floor(
+          100000000000 + Math.random() * 900000000000
+        ).toString();
+        const epochTime = Date.now();
+        await transactionConnection.query(
+          "INSERT INTO safe_transfer (phone, transfer_id, amount, type, time) VALUES (?, ?, ?, ?, ?)",
+          [phone, transferId, bonusAmount, 3, epochTime]
+        );
+
+        await transactionConnection.commit();
+        console.log(
+          `Successfully updated safe_bonus, third_party_money, and logged transfer for user ${phone}.`
+        );
+      } catch (err) {
+        await transactionConnection.rollback();
+        console.error(`Error processing user ${phone}:`, err);
+      } finally {
+        transactionConnection.release();
+      }
+    }
+  } catch (err) {
+    console.error("Error in updateSafeBonusAndTransfer:", err);
+  }
+};
+
+
+
+
+
 const gameController = {
   gameStatistics,
   gameStatisticsPage,
   autoCleanOldGames,
+  updateSafeBonusAndTransfer, // Added function
 };
 
 export default gameController;

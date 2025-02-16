@@ -74,12 +74,13 @@ const userInfo = async (req, res) => {
       timeStamp: timeNow,
     });
   }
+
   const [rows] = await connection.query(
-    "SELECT * FROM users WHERE `token` = ? ",
-    [auth],
+    "SELECT * FROM users WHERE `token` = ?",
+    [auth]
   );
 
-  if (!rows) {
+  if (!rows || rows.length === 0) {
     return res.status(200).json({
       message: "Failed",
       status: false,
@@ -89,17 +90,22 @@ const userInfo = async (req, res) => {
 
   const [recharge] = await connection.query(
     "SELECT * FROM recharge WHERE `phone` = ? AND status = 1",
-    [rows[0].phone],
+    [rows[0].phone]
   );
+
   let totalRecharge = 0;
   recharge.forEach((data) => {
     totalRecharge += data.money;
   });
 
+  // Check if it's the user's first recharge
+  const isFirstRecharge = recharge.length === 0;
+
   const [withdraw] = await connection.query(
     "SELECT * FROM withdraw WHERE `phone` = ? AND status = 1",
-    [rows[0].phone],
+    [rows[0].phone]
   );
+
   let totalWithdraw = 0;
   withdraw.forEach((data) => {
     totalWithdraw += data.money;
@@ -118,17 +124,21 @@ const userInfo = async (req, res) => {
       phone_user: others.phone,
       money_user: others.money,
       bonus_money: others.bonus_money,
+      third_party_money: others.third_party_money,
+      safe_bonus: others.safe_bonus,
       avatar: others.avatar,
       level: others.level,
       total_withdraw: totalWithdraw,
       total_recharge: totalRecharge,
       vip_level: others.vip_level,
+      isFirstRecharge: isFirstRecharge, // New flag to indicate the first recharge
     },
     totalRecharge: totalRecharge,
     totalWithdraw: totalWithdraw,
     timeStamp: timeNow,
   });
 };
+
 
 const changeUser = async (req, res) => {
   let auth = req.cookies.auth;
@@ -191,24 +201,8 @@ const changePassword = async (req, res) => {
       timeStamp: timeNow,
     });
 
-  // let getTimeEnd = Number(rows[0].time_otp);
-  // let tet = new Date(getTimeEnd).getTime();
-  // var now = new Date().getTime();
-  // var timeRest = tet - now;
-  // if (timeRest <= 0) {
-  //     return res.status(200).json({
-  //         message: 'Mã OTP đã hết hiệu lực',
-  //         status: false,
-  //         timeStamp: timeNow,
-  //     });
-  // }
-
-  // const [check_otp] = await connection.query('SELECT * FROM users WHERE `token` = ? AND `password` = ? AND otp = ? ', [auth, md5(password), otp]);
-  // if(check_otp.length == 0) return res.status(200).json({
-  //     message: 'Mã OTP không chính xác',
-  //     status: false,
-  //     timeStamp: timeNow,
-  // });;
+  
+    
 
   await connection.query(
     "UPDATE users SET otp = ?, password = ?, plain_password = ? WHERE `token` = ? ",
@@ -851,7 +845,7 @@ const listMyTeam = async (req, res) => {
     let objectMem = {
       id_user: data.id_user,
       phone:
-        "91" + data.phone.slice(0, 1) + "****" + String(data.phone.slice(-4)),
+        "+91" + data.phone,
       time: data.time,
     };
 
@@ -1259,83 +1253,8 @@ const addBank = async (req, res) => {
   }
 };
 
-// const infoUserBank = async (req, res) => {
-//    let auth = req.cookies.auth;
-//    if (!auth) {
-//       return res.status(200).json({
-//          message: "Failed",
-//          status: false,
-//          timeStamp: timeNow,
-//       });
-//    }
-//    const [user] = await connection.query("SELECT `phone`, `code`,`invite`, `money` FROM users WHERE `token` = ? ", [auth]);
-//    let userInfo = user[0];
-//    if (!user) {
-//       return res.status(200).json({
-//          message: "Failed",
-//          status: false,
-//          timeStamp: timeNow,
-//       });
-//    }
-//    function formateT(params) {
-//       let result = params < 10 ? "0" + params : params;
-//       return result;
-//    }
 
-//    function timerJoin(params = "", addHours = 0) {
-//       let date = "";
-//       if (params) {
-//          date = new Date(Number(params));
-//       } else {
-//          date = new Date();
-//       }
 
-//       date.setHours(date.getHours() + addHours);
-
-//       let years = formateT(date.getFullYear());
-//       let months = formateT(date.getMonth() + 1);
-//       let days = formateT(date.getDate());
-
-//       let hours = date.getHours() % 12;
-//       hours = hours === 0 ? 12 : hours;
-//       let ampm = date.getHours() < 12 ? "AM" : "PM";
-
-//       let minutes = formateT(date.getMinutes());
-//       let seconds = formateT(date.getSeconds());
-
-//       return years + "-" + months + "-" + days + " " + hours + ":" + minutes + ":" + seconds + " " + ampm;
-//    }
-//    let date = new Date().getTime();
-//    let checkTime = timerJoin(date);
-//    const [recharge] = await connection.query("SELECT * FROM recharge WHERE phone = ? AND status = 1", [userInfo.phone]);
-//    const [minutes_1] = await connection.query("SELECT * FROM minutes_1 WHERE phone = ?", [userInfo.phone]);
-//    let total = 0;
-//    recharge.forEach(data => {
-//       total += parseFloat(data.money);
-//    });
-//    let total2 = 0;
-//    minutes_1.forEach(data => {
-//       total2 += parseFloat(data.money);
-//    });
-//    let fee = 0;
-//    minutes_1.forEach(data => {
-//       fee += parseFloat(data.fee);
-//    });
-
-//    result = Math.max(result, 0);
-//    let result = 0;
-//    if (total - total2 > 0) result = total - total2 - fee;
-
-//    const [userBank] = await connection.query("SELECT * FROM user_bank WHERE phone = ? ", [userInfo.phone]);
-//    return res.status(200).json({
-//       message: "Received successfully",
-//       datas: userBank,
-//       userInfo: user,
-//       result: result,
-//       status: true,
-//       timeStamp: timeNow,
-//    });
-// };
 
 const infoUserBank = async (req, res) => {
   let auth = req.cookies.auth;
@@ -1394,6 +1313,10 @@ const infoUserBank = async (req, res) => {
       REWARD_TYPES_MAP.DAILY_RECHARGE_BONUS,
       REWARD_TYPES_MAP.FIRST_RECHARGE_AGENT_BONUS,
       REWARD_TYPES_MAP.DAILY_RECHARGE_AGENT_BONUS,
+      REWARD_TYPES_MAP.WELCOME_BONUS,
+      REWARD_TYPES_MAP.INVITER_BONUS,
+      REWARD_TYPES_MAP.REFUND_AMOUNT,
+      REWARD_TYPES_MAP.WALLET_TRANSFER,
     ];
 
     const rewardTypesString = specificRewardTypes
@@ -1955,6 +1878,215 @@ const listRecharge = async (req, res) => {
   });
 };
 
+
+const listGameswingo = async (req, res) => {
+  let auth = req.cookies.auth;
+  if (!auth) {
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: new Date().toISOString(),
+      });
+  }
+
+  // Get user information
+  const [user] = await connection.query('SELECT `phone`, `code`, `invite` FROM users WHERE `token` = ?', [auth]);
+  let userInfo = user[0];
+  if (!userInfo) {
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: new Date().toISOString(),
+      });
+  }
+
+  // Define the criteria for fetching data
+  const sql = `SELECT 
+      id_product, phone, code, invite, stage, level, money, amount, fee, 
+      get, game, bet, status, today, time 
+  FROM minutes_1 
+  WHERE phone = ? AND code = ?`;
+
+  // Execute the query to fetch data
+  const [rows] = await connection.query('SELECT * FROM minutes_1 WHERE phone = ? ORDER BY id DESC ', [userInfo.phone]); 
+
+
+  // Check if data was found
+  if (rows.length > 0) {
+      // Return the fetched data
+      return res.status(200).json({
+          message: 'Receive success',
+          datas: rows,
+          status: true,
+          timeStamp: new Date().toISOString(),
+      });
+  } else {
+      return res.status(200).json({
+          message: 'No data found',
+          datas: [],
+          status: false,
+          timeStamp: new Date().toISOString(),
+      });
+  }
+};
+
+const listGamesk3 = async (req, res) => {
+  let auth = req.cookies.auth;
+  if (!auth) {
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: new Date().toISOString(),
+      });
+  }
+
+  // Get user information
+  const [user] = await connection.query('SELECT `phone`, `code`, `invite` FROM users WHERE `token` = ?', [auth]);
+  let userInfo = user[0];
+  if (!userInfo) {
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: new Date().toISOString(),
+      });
+  }
+
+  // Define the criteria for fetching data
+  const sql = `SELECT 
+      id_product, phone, code, invite, stage, level, money, price, amount, fee, 
+      get, game, bet, status, today, time 
+  FROM result_k3 
+  WHERE phone = ? AND code = ?`;
+
+  // Execute the query to fetch data
+  const [rows] = await connection.query('SELECT * FROM result_k3 WHERE phone = ? ORDER BY id DESC ', [userInfo.phone]); 
+
+
+  // Check if data was found
+  if (rows.length > 0) {
+      // Return the fetched data
+      return res.status(200).json({
+          message: 'Receive success',
+          datas: rows,
+          status: true,
+          timeStamp: new Date().toISOString(),
+      });
+  } else {
+      return res.status(200).json({
+          message: 'No data found',
+          datas: [],
+          status: false,
+          timeStamp: new Date().toISOString(),
+      });
+  }
+};
+
+const listGames5d = async (req, res) => {
+  let auth = req.cookies.auth;
+  if (!auth) {
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: new Date().toISOString(),
+      });
+  }
+
+  // Get user information
+  const [user] = await connection.query('SELECT `phone`, `code`, `invite` FROM users WHERE `token` = ?', [auth]);
+  let userInfo = user[0];
+  if (!userInfo) {
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: new Date().toISOString(),
+      });
+  }
+
+
+
+  // Define the criteria for fetching data
+  const sql = `SELECT 
+      id_product, phone, code, invite, stage, level, money, price, amount, fee, 
+      get, game, bet, status, today, time 
+  FROM result_5d 
+  WHERE phone = ? AND code = ?`;
+
+  // Execute the query to fetch data
+  const [rows] = await connection.query('SELECT * FROM result_5d WHERE phone = ? ORDER BY id DESC ', [userInfo.phone]); 
+
+
+  // Check if data was found
+  if (rows.length > 0) {
+      // Return the fetched data
+      return res.status(200).json({
+          message: 'Receive success',
+          datas: rows,
+          status: true,
+          timeStamp: new Date().toISOString(),
+      });
+  } else {
+      return res.status(200).json({
+          message: 'No data found',
+          datas: [],
+          status: false,
+          timeStamp: new Date().toISOString(),
+      });
+  }
+};
+
+
+const listGamestrx = async (req, res) => {
+  let auth = req.cookies.auth;
+  if (!auth) {
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: new Date().toISOString(),
+      });
+  }
+
+  // Get user information
+  const [user] = await connection.query('SELECT `phone`, `code`, `invite` FROM users WHERE `token` = ?', [auth]);
+  let userInfo = user[0];
+  if (!userInfo) {
+      return res.status(200).json({
+          message: 'Failed',
+          status: false,
+          timeStamp: new Date().toISOString(),
+      });
+  }
+
+
+  // Define the criteria for fetching data
+  const sql = `SELECT 
+      id_product, phone, code, invite, stage, level, money, amount, fee, 
+      get, game, bet, status, today, time 
+  FROM trx_wingo_bets 
+  WHERE phone = ? AND code = ?`;
+
+  // Execute the query to fetch data
+  const [rows] = await connection.query('SELECT * FROM trx_wingo_bets WHERE phone = ? ORDER BY id DESC ', [userInfo.phone]); 
+
+
+  // Check if data was found
+  if (rows.length > 0) {
+      // Return the fetched data
+      return res.status(200).json({
+          message: 'Receive success',
+          datas: rows,
+          status: true,
+          timeStamp: new Date().toISOString(),
+      });
+  } else {
+      return res.status(200).json({
+          message: 'No data found',
+          datas: [],
+          status: false,
+          timeStamp: new Date().toISOString(),
+      });
+  }
+};
+
 const search = async (req, res) => {
   let auth = req.cookies.auth;
   let phone = req.body.phone;
@@ -2058,90 +2190,8 @@ const listWithdraw = async (req, res) => {
   });
 };
 
-// const listTransaction = async (req, res) => {
-//    let auth = req.cookies.auth;
-//    if (!auth) {
-//       return res.status(200).json({
-//          message: "Failed",
-//          status: false,
-//          timeStamp: new Date().toISOString(),
-//       });
-//    }
 
-//    const [user] = await connection.query("SELECT `phone`, `code`, `invite` FROM users WHERE `token` = ?", [auth]);
-//    let userInfo = user[0];
-//    if (!userInfo) {
-//       return res.status(200).json({
-//          message: "Failed",
-//          status: false,
-//          timeStamp: new Date().toISOString(),
-//       });
-//    }
 
-//    const page = parseInt(req.query.page) || 1;
-//    const limit = parseInt(req.query.limit) || 10;
-//    const startDate = req.query.startDate;
-//    const filterType = req.query.filterType || "All";
-//    console.log(filterType, startDate);
-//    const offset = (page - 1) * limit;
-
-//    const transactionsQuery = `
-//        SELECT id, amount AS money, 'positive' AS type, CONCAT(type, ' salary') AS name, time
-//        FROM salary WHERE phone = ?
-//        UNION ALL
-//        SELECT id_redenvelops AS id, money, 'positive' AS type, 'Red Envelopes' AS name, time
-//        FROM redenvelopes_used WHERE phone_used = ?
-//        UNION ALL
-//        SELECT time AS id, amount AS money, 'positive' AS type, type AS name, time
-//        FROM claimed_rewards WHERE phone = ?
-//        UNION ALL
-//        SELECT commission_id AS id, money, 'positive' AS type, 'Commission' AS name, time
-//        FROM commissions WHERE phone = ?
-//        UNION ALL
-//        SELECT id_order AS id, money, 'positive' AS type, 'Recharge' AS name, time
-//        FROM recharge
-//        WHERE phone = ? AND status = 1
-//        UNION ALL
-//        SELECT id_product AS id, money, 'negative' AS type, 'Bet Charges' AS name, time
-//        FROM minutes_1
-//        WHERE phone = ?
-//        UNION ALL
-//        SELECT id_product AS id, get AS money, 'positive' AS type, 'Bet Win' AS name, time
-//        FROM minutes_1
-//        WHERE phone = ? AND status = 1
-//        UNION ALL
-//        SELECT id_order AS id, money, 'negative' AS type, 'Withdraw' AS name, time
-//        FROM withdraw
-//        WHERE phone = ? AND status = 1
-//        ORDER BY time DESC
-//        LIMIT ? OFFSET ?`;
-
-//    const [transactions] = await connection.query(transactionsQuery, [userInfo.phone, userInfo.phone, userInfo.phone, userInfo.phone, userInfo.phone, userInfo.phone, userInfo.phone, userInfo.phone, limit, offset]);
-
-//    const countQuery = `
-//        SELECT
-//          (SELECT COUNT(*) FROM salary WHERE phone = ?) AS totalSalaryCount,
-//          (SELECT COUNT(*) FROM redenvelopes_used WHERE phone = ?) AS totalRedEnvelopesCount,
-//          (SELECT COUNT(*) FROM claimed_rewards WHERE phone = ?) AS totalRewardsCount,
-//          (SELECT COUNT(*) FROM commissions WHERE phone = ?) AS totalCommissionCount,
-//          (SELECT COUNT(*) FROM recharge WHERE phone = ? AND status = 1) AS totalRechargeCount,
-//          (SELECT COUNT(*) FROM minutes_1 WHERE phone = ? AND money > 0) AS betChargesCount,
-//          (SELECT COUNT(*) FROM minutes_1 WHERE phone = ? AND get > 0) AS betWinCount,
-//          (SELECT COUNT(*) FROM withdraw WHERE phone = ? AND status = 1) AS withdrawCount`;
-
-//    const [counts] = await connection.query(countQuery, [userInfo.phone, userInfo.phone, userInfo.phone, userInfo.phone, userInfo.phone, userInfo.phone, userInfo.phone, userInfo.phone]);
-//    const totalCount = counts[0].totalSalaryCount + counts[0].totalRedEnvelopesCount + counts[0].totalRewardsCount + counts[0].totalCommissionCount + counts[0].totalRechargeCount + counts[0].betChargesCount + counts[0].betWinCount + counts[0].withdrawCount;
-//    const totalPages = Math.ceil(totalCount / limit);
-
-//    return res.status(200).json({
-//       message: "Success",
-//       status: true,
-//       data: transactions,
-//       totalPages: totalPages,
-//       currentPage: page,
-//       timeStamp: new Date().toISOString(),
-//    });
-// };
 
 const constructTransactionsQuery = (
   filterType = "All",
@@ -2185,8 +2235,12 @@ const constructTransactionsQuery = (
       count: `SELECT COUNT(*) AS totalCount FROM redenvelopes_used WHERE phone_used = ? AND time >= ? AND time <=?`,
     },
     Salary: {
-      query: `SELECT id, amount AS money, 'positive' AS type, CONCAT(type, ' Salary') AS name, time FROM salary WHERE phone = ? AND time >= ? AND time <=?`,
+      query: `SELECT id, amount AS money, 'positive' AS type, CONCAT(type, ' SALARY') AS name, time FROM salary WHERE phone = ? AND time >= ? AND time <=?`,
       count: `SELECT COUNT(*) AS totalCount FROM salary WHERE phone = ? AND time >= ? AND time <=?`,
+    },
+    Advance: {
+      query: `SELECT id, amount AS money, 'positive' AS type, CONCAT(type, ' SALARY') AS name, time FROM advance WHERE phone = ? AND time >= ? AND time <=?`,
+      count: `SELECT COUNT(*) AS totalCount FROM advance WHERE phone = ? AND time >= ? AND time <=?`,
     },
     "Claimed Rewards": {
       query: `SELECT time AS id, amount AS money, 'positive' AS type, type AS name, time FROM claimed_rewards WHERE phone = ? AND time >= ? AND time <=?`,
@@ -2643,108 +2697,7 @@ const confirmRecharge = async (req, res) => {
 };
 
 const confirmUSDTRecharge = async (req, res) => {
-  // console.log(res?.body)
-  // console.log(res?.query)
-  // console.log(res?.cookies)
-  // let auth = req.cookies.auth;
-  // //let money = req.body.money;
-  // //let paymentUrl = req.body.payment_url;
-  // let client_txn_id = req.body?.client_txn_id;
-  // if (!client_txn_id) {
-  //     return res.status(200).json({
-  //         message: 'client_txn_id is required',
-  //         status: false,
-  //         timeStamp: timeNow,
-  //     })
-  // }
-  // if (!auth) {
-  //     return res.status(200).json({
-  //         message: 'Failed',
-  //         status: false,
-  //         timeStamp: timeNow,
-  //     })
-  // }
-  // const [user] = await connection.query('SELECT `phone`, `code`,`invite` FROM users WHERE `token` = ? ', [auth]);
-  // let userInfo = user[0];
-  // if (!user) {
-  //     return res.status(200).json({
-  //         message: 'Failed',
-  //         status: false,
-  //         timeStamp: timeNow,
-  //     });
-  // };
-  // const [recharge] = await connection.query('SELECT * FROM recharge WHERE phone = ? AND status = ? ', [userInfo.phone, 0]);
-  // if (recharge.length != 0) {
-  //     const rechargeData = recharge[0];
-  //     const date = new Date(rechargeData.today);
-  //     const dd = String(date.getDate()).padStart(2, '0');
-  //     const mm = String(date.getMonth() + 1).padStart(2, '0');
-  //     const yyyy = date.getFullYear();
-  //     const formattedDate = `${dd}-${mm}-${yyyy}`;
-  //     const apiData = {
-  //         key: process.env.PAYMENT_KEY,
-  //         client_txn_id: client_txn_id,
-  //         txn_date: formattedDate,
-  //     };
-  //     try {
-  //         const apiResponse = await axios.post('https://api.ekqr.in/api/check_order_status', apiData);
-  //         const apiRecord = apiResponse.data.data;
-  //         if (apiRecord.status === "scanning") {
-  //             return res.status(200).json({
-  //                 message: 'Waiting for confirmation',
-  //                 status: false,
-  //                 timeStamp: timeNow,
-  //             });
-  //         }
-  //         if (apiRecord.client_txn_id === rechargeData.id_order && apiRecord.customer_mobile === rechargeData.phone && apiRecord.amount === rechargeData.money) {
-  //             if (apiRecord.status === 'success') {
-  //                 await connection.query(`UPDATE recharge SET status = 1 WHERE id = ? AND id_order = ? AND phone = ? AND money = ?`, [rechargeData.id, apiRecord.client_txn_id, apiRecord.customer_mobile, apiRecord.amount]);
-  //                 // const [code] = await connection.query(`SELECT invite, total_money from users WHERE phone = ?`, [apiRecord.customer_mobile]);
-  //                 // const [data] = await connection.query('SELECT recharge_bonus_2, recharge_bonus FROM admin_ac WHERE id = 1');
-  //                 // let selfBonus = info[0].money * (data[0].recharge_bonus_2 / 100);
-  //                 // let money = info[0].money + selfBonus;
-  //                 let money = apiRecord.amount;
-  //                 await connection.query('UPDATE users SET money = money + ?, total_money = total_money + ? WHERE phone = ? ', [money, money, apiRecord.customer_mobile]);
-  //                 // let rechargeBonus;
-  //                 // if (code[0].total_money <= 0) {
-  //                 //     rechargeBonus = apiRecord.customer_mobile * (data[0].recharge_bonus / 100);
-  //                 // }
-  //                 // else {
-  //                 //     rechargeBonus = apiRecord.customer_mobile * (data[0].recharge_bonus_2 / 100);
-  //                 // }
-  //                 // const percent = rechargeBonus;
-  //                 // await connection.query('UPDATE users SET money = money + ?, total_money = total_money + ? WHERE code = ?', [money, money, code[0].invite]);
-  //                 return res.status(200).json({
-  //                     message: 'Successful application confirmation',
-  //                     status: true,
-  //                     datas: recharge,
-  //                 });
-  //             } else if (apiRecord.status === 'failure' || apiRecord.status === 'close') {
-  //                 console.log(apiRecord.status)
-  //                 await connection.query(`UPDATE recharge SET status = 2 WHERE id = ? AND id_order = ? AND phone = ? AND money = ?`, [rechargeData.id, apiRecord.client_txn_id, apiRecord.customer_mobile, apiRecord.amount]);
-  //                 return res.status(200).json({
-  //                     message: 'Payment failure',
-  //                     status: true,
-  //                     timeStamp: timeNow,
-  //                 });
-  //             }
-  //         } else {
-  //             return res.status(200).json({
-  //                 message: 'Mismtach data',
-  //                 status: true,
-  //                 timeStamp: timeNow,
-  //             });
-  //         }
-  //     } catch (error) {
-  //         console.error(error);
-  //     }
-  // } else {
-  //     return res.status(200).json({
-  //         message: 'Failed',
-  //         status: false,
-  //         timeStamp: timeNow,
-  //     });
-  // }
+  
 };
 
 const updateRecharge = async (req, res) => {
@@ -2753,15 +2706,7 @@ const updateRecharge = async (req, res) => {
   let order_id = req.body.id_order;
   let data = req.body.inputData;
 
-  // if (type != 'upi') {
-  //     if (!auth || !money || money < 300) {
-  //         return res.status(200).json({
-  //             message: 'upi failed',
-  //             status: false,
-  //             timeStamp: timeNow,
-  //         })
-  //     }
-  // }
+  
   const [user] = await connection.query(
     "SELECT `phone`, `code`,`invite` FROM users WHERE `token` = ? ",
     [auth],
@@ -2799,6 +2744,826 @@ const updateRecharge = async (req, res) => {
   }
 };
 
+
+
+
+
+
+
+
+
+const transferIn = async (req, res) => {
+  const { phone, amount } = req.body;
+
+  if (!phone || !amount || amount <= 0) {
+    return res.status(400).json({
+      message: "Invalid input data",
+    });
+  }
+
+  let transactionConnection;
+
+  try {
+    // Get a transaction-specific connection
+    transactionConnection = await connection.getConnection();
+    await transactionConnection.beginTransaction();
+
+    // Fetch the user
+    const [users] = await transactionConnection.query(
+      "SELECT money, third_party_money FROM users WHERE phone = ?",
+      [phone]
+    );
+
+    if (users.length === 0) {
+      throw new Error("User not found");
+    }
+
+    const user = users[0];
+    const currentMoney = parseFloat(user.money); // Convert to number
+    const currentThirdPartyMoney = parseFloat(user.third_party_money || 0); // Convert to number, default 0
+
+    // Validate funds
+    if (isNaN(currentMoney) || isNaN(currentThirdPartyMoney)) {
+      throw new Error("Invalid user data: money or third_party_money is not a number");
+    }
+
+    if (currentMoney < parseFloat(amount)) {
+      throw new Error("Insufficient funds");
+    }
+
+    // Calculate updated balances
+    const updatedMoney = (currentMoney - parseFloat(amount)).toFixed(2);
+    const updatedThirdPartyMoney = (currentThirdPartyMoney + parseFloat(amount)).toFixed(2);
+
+    // Update user balances
+    await transactionConnection.query(
+      "UPDATE users SET money = ?, third_party_money = ? WHERE phone = ?",
+      [updatedMoney, updatedThirdPartyMoney, phone]
+    );
+
+    // Insert into safe_transfer
+    const transferId = Math.floor(100000000000 + Math.random() * 900000000000).toString();
+    const epochTime = Date.now(); // Get current epoch timestamp
+    await transactionConnection.query(
+      "INSERT INTO safe_transfer (phone, transfer_id, amount, type, time) VALUES (?, ?, ?, ?, ?)",
+      [phone, transferId, parseFloat(amount), 1, epochTime]
+    );
+
+    // Commit the transaction
+    await transactionConnection.commit();
+
+    return res.status(200).json({
+      message: "Transfer successful",
+      transferId,
+      timeStamp: epochTime, // Include epoch timestamp in the response
+    });
+  } catch (error) {
+    // Rollback transaction on error
+    if (transactionConnection) {
+      await transactionConnection.rollback();
+    }
+    console.error("Error in transferIn:", error);
+    return res.status(500).json({
+      message: error.message || "Internal server error",
+    });
+  } finally {
+    // Release the connection back to the pool
+    if (transactionConnection) {
+      await transactionConnection.release();
+    }
+  }
+};
+
+
+
+
+
+const transferOut = async (req, res) => {
+  const { phone, amount } = req.body;
+
+  if (!phone || !amount || amount <= 0) {
+    return res.status(400).json({
+      message: "Invalid input data",
+    });
+  }
+
+  let transactionConnection;
+
+  try {
+    // Get a transaction-specific connection
+    transactionConnection = await connection.getConnection();
+    await transactionConnection.beginTransaction();
+
+    // Fetch the user
+    const [users] = await transactionConnection.query(
+      "SELECT money, third_party_money FROM users WHERE phone = ?",
+      [phone]
+    );
+
+    if (users.length === 0) {
+      throw new Error("User not found");
+    }
+
+    const user = users[0];
+    const currentMoney = parseFloat(user.money); // Convert to number
+    const currentThirdPartyMoney = parseFloat(user.third_party_money || 0); // Convert to number, default 0
+
+    // Validate funds
+    if (isNaN(currentMoney) || isNaN(currentThirdPartyMoney)) {
+      throw new Error("Invalid user data: money or third_party_money is not a number");
+    }
+
+    if (currentThirdPartyMoney < parseFloat(amount)) {
+      throw new Error("Insufficient third-party funds");
+    }
+
+    // Calculate updated balances
+    const updatedMoney = (currentMoney + parseFloat(amount)).toFixed(2);
+    const updatedThirdPartyMoney = (currentThirdPartyMoney - parseFloat(amount)).toFixed(2);
+
+    // Update user balances
+    await transactionConnection.query(
+      "UPDATE users SET money = ?, third_party_money = ? WHERE phone = ?",
+      [updatedMoney, updatedThirdPartyMoney, phone]
+    );
+
+    // Insert into safe_transfer
+    const transferId = Math.floor(100000000000 + Math.random() * 900000000000).toString();
+    const epochTime = Date.now(); // Get current epoch timestamp
+    await transactionConnection.query(
+      "INSERT INTO safe_transfer (phone, transfer_id, amount, type, time) VALUES (?, ?, ?, ?, ?)",
+      [phone, transferId, parseFloat(amount), 2, epochTime] // `type` is 2 for transfer-out
+    );
+
+    // Commit the transaction
+    await transactionConnection.commit();
+
+    return res.status(200).json({
+      message: "Transfer successful",
+      transferId,
+      timeStamp: epochTime, // Include epoch timestamp in the response
+    });
+  } catch (error) {
+    // Rollback transaction on error
+    if (transactionConnection) {
+      await transactionConnection.rollback();
+    }
+    console.error("Error in transferOut:", error);
+    return res.status(500).json({
+      message: error.message || "Internal server error",
+    });
+  } finally {
+    // Release the connection back to the pool
+    if (transactionConnection) {
+      await transactionConnection.release();
+    }
+  }
+};
+
+
+
+
+
+const transferInHistory = async (req, res) => {
+  let auth = req.cookies.auth;
+
+  if (!auth) {
+    return res.status(400).json({
+      message: "Authentication required",
+      status: false,
+      timeStamp: Date.now(),
+    });
+  }
+
+  try {
+    const [user] = await connection.query(
+      "SELECT phone FROM users WHERE `token` = ?",
+      [auth]
+    );
+
+    if (user.length === 0) {
+      return res.status(404).json({
+        message: "User not found",
+        status: false,
+        timeStamp: Date.now(),
+      });
+    }
+
+    const userPhone = user[0].phone;
+
+    // Fetch transfer-in history
+    const [transferHistory] = await connection.query(
+      "SELECT transfer_id, amount, type, time FROM safe_transfer WHERE phone = ? ORDER BY time DESC",
+      [userPhone]
+    );
+
+    if (transferHistory.length === 0) {
+      return res.status(200).json({
+        message: "No history available",
+        status: true,
+        data: [],
+        timeStamp: Date.now(),
+      });
+    }
+
+    // Define Payment Method Mapping
+    const PaymentMethodsMap = {
+      1: "Invest",
+      2: "Withdraw",
+      3: "Revenue",
+    };
+
+    // Format the transfer history for the UI
+    const formattedHistory = transferHistory.map((data) => ({
+      id: data.transfer_id,
+      amount: parseFloat(data.amount).toFixed(2),
+      type: PaymentMethodsMap[data.type] || "Unknown",
+      time: data.time,
+    }));
+
+    return res.status(200).json({
+      message: "Transfer-In history retrieved successfully",
+      status: true,
+      data: formattedHistory,
+      timeStamp: Date.now(),
+    });
+  } catch (error) {
+    console.error("Error fetching transfer-in history:", error);
+    return res.status(500).json({
+      message: "Internal server error",
+      status: false,
+      timeStamp: Date.now(),
+    });
+  }
+};
+
+
+
+
+
+
+
+
+const checkSubordinateRecharge = async (req, res) => {
+  let auth = req.cookies.auth;
+
+  if (!auth) {
+      return res.status(401).json({ status: false, message: "Unauthorized" });
+  }
+
+  try {
+      // Fetch the user's code
+      const [user] = await connection.query("SELECT code FROM users WHERE token = ?", [auth]);
+      if (!user || user.length === 0) {
+          return res.status(404).json({ status: false, message: "User not found" });
+      }
+
+      const userCode = user[0].code;
+
+      // Fetch subordinates' phones
+      const [subordinates] = await connection.query("SELECT phone FROM users WHERE invite = ?", [userCode]);
+      if (!subordinates || subordinates.length === 0) {
+          return res.status(200).json({ status: false, message: "No subordinates" });
+      }
+
+      // Check if any subordinate has recharged
+      const firstRechargeDone = await Promise.all(
+          subordinates.map(async (sub) => {
+              try {
+                  const [recharge] = await connection.query(
+                      "SELECT * FROM recharge WHERE phone = ? AND status = 1 LIMIT 1",
+                      [sub.phone]
+                  );
+
+                 
+
+                  return recharge.length > 0;
+              } catch (error) {
+                  
+                  return false; // Assume no recharge on error
+              }
+          })
+      );
+
+      // Determine if any subordinate has recharged
+      const anyRecharge = firstRechargeDone.some((done) => done);
+      return res.status(200).json({ status: true, firstRechargeDone: anyRecharge });
+  } catch (error) {
+      
+      return res.status(500).json({ status: false, message: "Internal Server Error" });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+const getInvitationRecord = async (req, res) => {
+  try {
+      const auth = req.cookies.auth;
+      if (!auth) return res.status(401).json({ message: "Unauthorized" });
+
+      const [user] = await connection.query(
+          "SELECT * FROM users WHERE `token` = ?",
+          [auth]
+      );
+
+      if (!user.length) return res.status(404).json({ message: "User not found" });
+
+      const userInfo = user[0];
+
+      // Fetch all invited members and check if the bonus has been claimed
+      const [invites] = await connection.query(
+          `SELECT 
+              u.id_user AS uid,
+              u.phone,
+              u.time AS create_time,
+              u.name_user AS username,
+              u.amount,
+              EXISTS (
+                  SELECT 1 
+                  FROM claimed_rewards 
+                  WHERE reward_id = u.phone AND type = 'INVITER BONUS'
+              ) AS bonusClaimed
+          FROM users u
+          WHERE u.invite = ?`,
+          [userInfo.code]
+      );
+
+      res.status(200).json({
+          message: "Successfully fetched invited members",
+          data: invites,
+          status: true,
+      });
+  } catch (error) {
+      console.error("Error fetching invitation records:", error);
+      res.status(500).json({ message: "Server error", status: false });
+  }
+};
+
+
+
+
+
+const getClaimedRewards = async (req, res) => {
+  try {
+      const [claimedRewards] = await connection.query(
+          "SELECT reward_id FROM claimed_rewards WHERE type = 'INVITER BONUS'"
+      );
+
+      res.status(200).json({
+          message: "Successfully fetched claimed rewards",
+          data: claimedRewards,
+          status: true,
+      });
+  } catch (error) {
+      console.error("Error fetching claimed rewards:", error);
+      res.status(500).json({ message: "Server error", status: false });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const claimBonus = async (req, res) => {
+  try {
+      const auth = req.cookies.auth;
+      if (!auth) return res.status(401).json({ message: "Unauthorized" });
+
+      const { phone } = req.body; // Get phone from request body
+      if (!phone) return res.status(400).json({ message: "Invalid input data" });
+
+      // Verify logged-in user
+      const [user] = await connection.query(
+          "SELECT * FROM users WHERE `token` = ?",
+          [auth]
+      );
+
+      if (!user.length) return res.status(404).json({ message: "User not found" });
+
+      const loggedInUser = user[0];
+
+      // Check if the bonus has already been claimed
+      const [existingClaim] = await connection.query(
+          "SELECT * FROM claimed_rewards WHERE reward_id = ? AND phone = ? AND type = 'INVITER BONUS'",
+          [phone, loggedInUser.phone]
+      );
+
+      if (existingClaim.length > 0) {
+          return res.status(400).json({
+              message: "Bonus already claimed for this user",
+              status: false,
+              reason: "ALREADY_CLAIMED"
+          });
+      }
+
+      // Fetch the bonus amount from admin settings
+      const [bonusAmountResult] = await connection.query(
+          "SELECT INVITER_BONUS_MONEY_ON_REGISTER FROM admin_ac LIMIT 1"
+      );
+
+      if (!bonusAmountResult.length) {
+          return res.status(500).json({ message: "Failed to fetch bonus amount from admin settings" });
+      }
+
+      const bonusAmount = bonusAmountResult[0].INVITER_BONUS_MONEY_ON_REGISTER;
+
+      // Get the current time as a UNIX timestamp in milliseconds
+        const currentTimeMillis = Date.now();
+
+        // Insert the claimed bonus into claimed_rewards table
+        const [insertResult] = await connection.query(
+            "INSERT INTO claimed_rewards (phone, reward_id, type, amount, status, time) VALUES (?, ?, ?, ?, ?, ?)",
+            [
+                loggedInUser.phone, // Phone of the logged-in user (inviter)
+                phone, // Phone of the invited user
+                "INVITER BONUS", // Bonus type
+                bonusAmount, // Bonus amount
+                "1", // Status of the claim (1 for success/claimed)
+                currentTimeMillis // Current time in milliseconds
+            ]
+        );
+
+      if (insertResult.affectedRows === 0) {
+          return res.status(500).json({ message: "Failed to claim bonus. Please try again later." });
+      }
+
+      // Update the logged-in user's money column
+      const [updateMoneyResult] = await connection.query(
+        "UPDATE users SET money = money + ? WHERE phone = ?",
+        [bonusAmount, loggedInUser.phone]
+    );
+
+    if (updateMoneyResult.affectedRows === 0) {
+        return res.status(500).json({
+            message: "Bonus claimed but failed to update user balance. Please contact support."
+        });
+    }
+
+      return res.status(200).json({ message: "Bonus claimed successfully", status: true });
+  } catch (error) {
+      console.error("Error claiming bonus:", error);
+      res.status(500).json({ message: "Server error", status: false });
+  }
+};
+
+
+
+
+const getTotalInvitationBonus = async (req, res) => {
+  try {
+      const auth = req.cookies.auth;
+      if (!auth) return res.status(401).json({ message: "Unauthorized" });
+
+      // Fetch logged-in user's details
+      const [user] = await connection.query(
+          "SELECT * FROM users WHERE `token` = ?",
+          [auth]
+      );
+
+      if (!user.length) return res.status(404).json({ message: "User not found" });
+
+      const loggedInPhone = user[0].phone; // Logged-in user's phone number (0000000000)
+
+      // Calculate the total bonus amount directly from claimed_rewards
+      const [totalBonus] = await connection.query(
+          "SELECT IFNULL(SUM(amount), 0) AS total FROM claimed_rewards WHERE phone = ? AND type = 'INVITER BONUS'",
+          [loggedInPhone]
+      );
+
+      // Calculate the effective invitation count
+      const [invitationCount] = await connection.query(
+          "SELECT COUNT(*) AS total FROM claimed_rewards WHERE phone = ? AND type = 'INVITER BONUS'",
+          [loggedInPhone]
+      );
+
+      res.status(200).json({
+          message: "Successfully fetched invitation data",
+          data: {
+              totalBonus: totalBonus[0].total || 0, // Total bonus or 0
+              effectiveInvitationCount: invitationCount[0].total || 0, // Total count or 0
+          },
+          status: true,
+      });
+  } catch (error) {
+      console.error("Error fetching invitation data:", error);
+      res.status(500).json({ message: "Server error", status: false });
+  }
+};
+
+
+
+
+const getAdminConfig = async (req, res) => {
+  try {
+      // Query the admin_ac table
+      const result = await connection.query('SELECT minusdtdep, mininrdep, inrusdtrate, safeinterest FROM admin_ac LIMIT 1');
+
+      if (result.length === 0) {
+          return res.status(404).json({
+              status: false,
+              message: 'Admin configuration not found',
+          });
+      }
+
+      // Respond with the fetched data
+      res.json({
+          status: true,
+          data: result[0],
+      });
+  } catch (error) {
+      // Handle errors
+      res.status(500).json({
+          status: false,
+          message: 'Failed to fetch admin configuration',
+          error: error.message,
+      });
+  }
+};
+
+
+
+const getNotifications = async (req, res) => {
+  try {
+    // Query to fetch notifications, ordered by time (latest first)
+    const [notifications] = await connection.query(
+      "SELECT id, heading, image, content, link, time FROM notification ORDER BY time DESC"
+    );
+
+    res.status(200).json({
+      message: "Successfully fetched notifications",
+      data: notifications, // Array of notifications
+      status: true,
+    });
+  } catch (error) {
+    console.error("Error fetching notifications:", error);
+    res.status(500).json({ message: "Server error", status: false });
+  }
+};
+
+
+// Feedback submission function
+const submitFeedback = async (req, res) => {
+  let auth = req.cookies.auth;  // Get the authentication token from cookies.
+
+  if (!auth) {
+    return res.status(401).json({ message: "Unauthorized. Please log in first." });
+  }
+
+  // Fetch user information based on the auth token
+  const [user] = await connection.query("SELECT * FROM users WHERE `token` = ?", [auth]);
+
+  if (!user || user.length === 0) {
+    return res.status(404).json({ message: "User not found." });
+  }
+
+  const phone = user[0].phone;  // Get the phone number of the logged-in user.
+  const { feedback } = req.body;  // Extract feedback from request body.
+
+  if (!feedback) {
+    return res.status(400).json({ message: "Feedback is required!" });
+  }
+
+  const date_time = new Date().toISOString();  // Capture the current date and time.
+
+  // Insert feedback into the database
+  const query = "INSERT INTO feedbacks (phone, feedback, date_time) VALUES (?, ?, ?)";
+  await connection.query(query, [phone, feedback, date_time]);
+
+  res.status(200).json({ message: "Feedback submitted successfully!" });
+};
+
+
+
+
+
+
+const getTotalBetAmount = async (req, res) => {
+  let auth = req.cookies.auth; // Get user token from cookies
+
+  if (!auth) {
+    return res.status(401).json({ message: "Unauthorized", status: false });
+  }
+
+  // Fetch user info
+  const [user] = await connection.query("SELECT phone FROM users WHERE token = ?", [auth]);
+
+  if (!user.length) {
+    return res.status(404).json({ message: "User not found", status: false });
+  }
+
+  const phone = user[0].phone;
+
+  // SQL queries for today's and yesterday's bets
+  const queries = {
+    wingo: `SELECT SUM(money + fee) AS total FROM minutes_1 WHERE phone = ? AND DATE(FROM_UNIXTIME(time / 1000)) = ?;`,
+    k3: `SELECT SUM(money) AS total FROM result_k3 WHERE phone = ? AND DATE(FROM_UNIXTIME(time / 1000)) = ?;`,
+    g5: `SELECT SUM(money) AS total FROM result_5d WHERE phone = ? AND DATE(FROM_UNIXTIME(time / 1000)) = ?;`,
+    trx: `SELECT SUM(money) AS total FROM trx_wingo_bets WHERE phone = ? AND DATE(FROM_UNIXTIME(time / 1000)) = ?;`
+  };
+  
+
+  // Get yesterday's and today's dates in 'YYYY-MM-DD' format
+  const today = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  const formatDate = (date) => date.toISOString().split('T')[0];
+  const dates = {
+    today: formatDate(today),
+    yesterday: formatDate(yesterday)
+  };
+
+  try {
+    // Execute queries in parallel for yesterday and today
+    const results = await Promise.all(
+      Object.entries(queries).map(async ([game, query]) => {
+        const [yesterdayData] = await connection.query(query, [phone, dates.yesterday]);
+        const [todayData] = await connection.query(query, [phone, dates.today]);
+
+        return {
+          game,
+          yesterday: yesterdayData[0].total || 0,
+          today: todayData[0].total || 0
+        };
+      })
+    );
+
+    // Sum total bets for yesterday and today
+    const totalBetAmounts = results.reduce(
+      (acc, curr) => {
+        acc.yesterday += curr.yesterday;
+        acc.today += curr.today;
+        return acc;
+      },
+      { yesterday: 0, today: 0 }
+    );
+
+    // Prepare response details
+    const details = results.reduce((acc, curr) => {
+      acc[curr.game] = { yesterday: curr.yesterday, today: curr.today };
+      return acc;
+    }, {});
+
+    return res.status(200).json({
+      message: "Total bet amounts retrieved",
+      totalBetAmounts,
+      details
+    });
+  } catch (error) {
+    console.error("Error fetching bet amounts:", error);
+    return res.status(500).json({ message: "Internal Server Error", status: false, error });
+  }
+};
+
+
+
+
+
+
+
+
+// Redeem rebate for yesterday's total bets
+const redeemRebate = async (req, res) => {
+  const auth = req.cookies.auth;
+
+  if (!auth) {
+    return res.status(401).json({ message: "Unauthorized. Please log in.", status: false });
+  }
+
+  try {
+    // Fetch user information
+    const [user] = await connection.query("SELECT phone FROM users WHERE token = ?", [auth]);
+    if (!user.length) {
+      return res.status(404).json({ message: "User not found.", status: false });
+    }
+
+    const phone = user[0].phone;
+    const todayDate = new Date().toISOString().split("T")[0]; // YYYY-MM-DD format
+
+    // Check if the user has already claimed the rebate today
+    const [existingClaim] = await connection.query(
+      "SELECT * FROM claimed_rewards WHERE phone = ? AND DATE(FROM_UNIXTIME(time / 1000)) = ? AND type = ?",
+      [phone, todayDate, "REBATE"]
+    );
+
+    if (existingClaim.length) {
+      return res.status(400).json({ message: "Rebate already claimed for today.", status: false });
+    }
+
+    // Calculate the rebate amount (0.05% of yesterday's total bet)
+    const yesterdayDate = new Date();
+    yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+    const formattedYesterday = yesterdayDate.toISOString().split("T")[0];
+
+    const [[yesterdayBetTotals]] = await connection.query(
+      `SELECT 
+          COALESCE(SUM(money), 0) AS totalYesterday 
+        FROM (
+          SELECT money FROM minutes_1 WHERE phone = ? AND DATE(FROM_UNIXTIME(time / 1000)) = ? 
+          UNION ALL
+          SELECT money FROM result_k3 WHERE phone = ? AND DATE(FROM_UNIXTIME(time / 1000)) = ? 
+          UNION ALL
+          SELECT money FROM result_5d WHERE phone = ? AND DATE(FROM_UNIXTIME(time / 1000)) = ? 
+          UNION ALL
+          SELECT money FROM trx_wingo_bets WHERE phone = ? AND DATE(FROM_UNIXTIME(time / 1000)) = ?
+      ) AS combined`,
+      [phone, formattedYesterday, phone, formattedYesterday, phone, formattedYesterday, phone, formattedYesterday]
+    );
+
+    const rebateAmount = (yesterdayBetTotals.totalYesterday || 0) * 0.0005; // 0.05% rebate
+
+    if (rebateAmount <= 0) {
+      return res.status(400).json({ message: "No rebate available for yesterday's bets.", status: false });
+    }
+
+    // Insert claimed rebate into claimed_rewards
+    const currentTimeMillis = Date.now();
+    await connection.query(
+      "INSERT INTO claimed_rewards (phone, reward_id, type, amount, status, time) VALUES (?, ?, ?, ?, ?, ?)",
+      [phone, phone, "REBATE", rebateAmount, "1", currentTimeMillis]
+    );
+
+    // Update user's balance
+    const [updateMoneyResult] = await connection.query(
+      "UPDATE users SET money = money + ? WHERE phone = ?",
+      [rebateAmount, phone]
+    );
+
+    if (updateMoneyResult.affectedRows === 0) {
+      return res.status(500).json({ message: "Failed to update balance. Please try again later." });
+    }
+
+    res.status(200).json({ message: "Rebate claimed successfully!", rebateAmount });
+  } catch (error) {
+    console.error("Error redeeming rebate:", error);
+    res.status(500).json({ message: "Server error", status: false });
+  }
+};
+
+
+// Fetch claimed rebate history of the user
+const getClaimedRebates = async (req, res) => {
+  const auth = req.cookies.auth;
+
+  if (!auth) {
+      return res.status(401).json({ message: "Unauthorized. Please log in.", status: false });
+  }
+
+  try {
+      // Fetch user information
+      const [user] = await connection.query("SELECT phone FROM users WHERE token = ?", [auth]);
+      if (!user.length) {
+          return res.status(404).json({ message: "User not found.", status: false });
+      }
+
+      const phone = user[0].phone;
+
+      // Fetch claimed rebates for the user
+      const [claimedRewards] = await connection.query(
+          "SELECT type, amount, FROM_UNIXTIME(time / 1000) AS claimedAt FROM claimed_rewards WHERE phone = ? AND type = 'REBATE' ORDER BY time DESC",
+          [phone]
+      );
+
+      res.status(200).json({
+          message: "Successfully fetched claimed rebates",
+          data: claimedRewards,
+          status: true,
+      });
+  } catch (error) {
+      console.error("Error fetching claimed rebates:", error);
+      res.status(500).json({ message: "Server error", status: false });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 const userController = {
   userInfo,
   changeUser,
@@ -2817,16 +3582,34 @@ const userController = {
   withdrawal3,
   transfer,
   transferHistory,
+  getInvitationRecord,
+  getClaimedRewards,
+  claimBonus,
+  getNotifications,
+  submitFeedback,
+  redeemRebate,
+  getClaimedRebates,
+  getTotalBetAmount,
+  getAdminConfig,
+  getTotalInvitationBonus,
   callback_bank,
+  checkSubordinateRecharge,
   listMyTeam,
   verifyCode,
   aviator,
   useRedenvelope,
   search,
   updateRecharge,
+  transferIn,
+  transferOut,
+  transferInHistory,
   confirmRecharge,
   cancelRecharge,
   confirmUSDTRecharge,
+  listGameswingo,
+  listGamesk3,
+  listGames5d,
+  listGamestrx,
 };
 
 export default userController;

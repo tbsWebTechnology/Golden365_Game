@@ -1,9 +1,64 @@
 import connection from "../config/connectDB.js";
+import jwt from 'jsonwebtoken'
+import md5 from "md5";
+// import e from "express";
+import e from "express";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const homePage = async (req, res) => {
-  const [settings] = await connection.query("SELECT `app` FROM admin_ac");
-  let app = settings[0].app;
-  return res.render("home/index.ejs", { app });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const homePage = async(req, res) => {
+    try {
+      let isAuthenticated = !!req.cookies.auth; // true if logged in, false if not
+
+    const [settings] = await connection.query('SELECT `app` , `app_name`, `app_about` , `app_notification` , `notice1` , `notice2` , `notice3` FROM admin_ac');
+    let app = settings[0].app;
+    
+    let app_name = settings[0].app_name;
+    let app_about = settings[0].app_about;
+    let app_notification = settings[0].app_notification;
+
+    let notice1 = settings[0].notice1;
+    let notice2 = settings[0].notice2;
+    let notice3 = settings[0].notice3;
+
+    const bannersDir = path.join(__dirname, '../public/uploads/banners');
+    fs.readdir(bannersDir, (err, files) => {
+        if (err) {
+            console.error('Error reading banner files:', err);
+            return res.status(500).send('Internal server error');
+        }
+        // Filter out directories and get only file names
+        const bannerFiles = files.filter(file => fs.statSync(path.join(bannersDir, file)).isFile());
+        res.render("home/index.ejs", {app, banners: bannerFiles, isAuthenticated, app_name, app_about, app_notification, notice1, notice2, notice3 }); // Pass banner files to the member page template
+  
+
+      });
+    } catch (error) {
+        return res.status(500).send('Internal server error');
+    }
+}
+
+
+
+// Function to handle fetching banner files for the admin panel
+const getBannerFiles = (req, res) => {
+    // Read the contents of the 'uploads/banners' directory
+    const bannersDir = path.join(__dirname, '../uploads/banners');
+    fs.readdir(bannersDir, (err, files) => {
+        if (err) {
+            console.error('Error reading banner files:', err);
+            return res.status(500).send('Internal server error');
+        }
+        // Filter out directories and get only file names
+        const bannerFiles = files.filter(file => fs.statSync(path.join(bannersDir, file)).isFile());
+        res.render('index', { banners: bannerFiles }); // Pass banner files to the homepage template
+    });
 };
 
 const activityPage = async (req, res) => {
@@ -46,6 +101,43 @@ const supportPage = async (req, res) => {
 
   return res.render("member/support.ejs", { telegram });
 };
+
+
+const originalPage = async (req, res) => {
+  return res.render("home/original.ejs");
+}
+
+const fishingPage = async (req, res) => {
+  return res.render("home/fishing.ejs");
+}
+
+const casinosPage = async (req, res) => {
+  return res.render("home/casinos.ejs");
+}
+
+const slotsPage = async (req, res) => {
+  return res.render("home/slots.ejs");
+}
+
+const betHistoryPage = async (req, res) => {
+  return res.render("member/bet-history.ejs");
+}
+
+const betk3Page = async (req, res) => {
+  return res.render("member/k3-bet-history.ejs");
+}
+
+const bet5dPage = async (req, res) => {
+  return res.render("member/5d-bet-history.ejs");
+}
+
+const betwingoPage = async (req, res) => {
+  return res.render("member/wingo-bet-history.ejs");
+}
+
+const bettrxwingoPage = async (req, res) => {
+  return res.render("member/trx-wingo-bet-history.ejs");
+}
 
 const attendancePage = async (req, res) => {
   return res.render("checkIn/attendance.ejs");
@@ -165,6 +257,31 @@ const promotion1Page = async (req, res) => {
   return res.render("promotion/promotion1.ejs");
 };
 
+const TeamPartnerPage = async (req, res) => {
+  return res.render("promotion/TeamPartner.ejs");
+};
+
+const turntablePage = async (req, res) => {
+  return res.render("promotion/turntable.ejs");
+};
+
+const RulesPage = async (req, res) => {
+  return res.render("promotion/Rules.ejs");
+};
+
+
+const DetailsPage = async (req, res) => {
+  return res.render("promotion/Detail.ejs");
+};
+
+const PromotionsharePage = async (req, res) => {
+  return res.render("promotion/PromotionShare.ejs");
+};
+
+const IntroducePage = async (req, res) => {
+  return res.render("promotion/Introduce.ejs");
+};
+
 const promotionmyTeamPage = async (req, res) => {
   return res.render("promotion/myTeam.ejs");
 };
@@ -190,21 +307,76 @@ const bonusRecordPage = async (req, res) => {
 const transactionhistoryPage = async (req, res) => {
   return res.render("wallet/transactionhistory.ejs");
 };
-const gameHistoryPage = async (req, res) => {
-  return res.render("member/game_history.ejs");
+
+
+
+const casinoHistoryPage = async (req, res) => {
+  return res.render("member/casino-bet-history.ejs");
+};
+
+
+const fishingHistoryPage = async (req, res) => {
+  return res.render("member/fishing-bet-history.ejs");
+};
+
+
+const rummyHistoryPage = async (req, res) => {
+  return res.render("member/rummy-bet-history.ejs");
+};
+
+
+const originalHistoryPage = async (req, res) => {
+  return res.render("member/original-bet-history.ejs");
+};
+
+const slotsHistoryPage = async (req, res) => {
+  return res.render("member/slots-bet-history.ejs");
+};
+
+
+const strongBoxPage = async (req, res) => {
+  return res.render("member/strongbox.ejs");
 };
 
 const walletPage = async (req, res) => {
   return res.render("wallet/index.ejs");
 };
 
+// const rechargePage = async (req, res) => {
+//   return res.render("wallet/recharge.ejs", {
+//     MINIMUM_MONEY_USDT: process.env.MINIMUM_MONEY_USDT,
+//     MINIMUM_MONEY_INR: process.env.MINIMUM_MONEY_INR,
+//     USDT_INR_EXCHANGE_RATE: process.env.USDT_INR_EXCHANGE_RATE,
+//   });
+// };
+
+
 const rechargePage = async (req, res) => {
-  return res.render("wallet/recharge.ejs", {
-    MINIMUM_MONEY_USDT: process.env.MINIMUM_MONEY_USDT,
-    MINIMUM_MONEY_INR: process.env.MINIMUM_MONEY_INR,
-    USDT_INR_EXCHANGE_RATE: process.env.USDT_INR_EXCHANGE_RATE,
-  });
+  try {
+    // Query the admin_ac table
+    const [results] = await connection.query("SELECT mininrdep, minusdtdep, inrusdtrate, minfirstrech FROM admin_ac LIMIT 1");
+
+    if (!results || results.length === 0) {
+      console.error("No admin configuration found in admin_ac table");
+      return res.status(404).send("Admin configuration not found");
+    }
+
+    const adminData = results[0]; // Extract the first result
+
+    return res.render("wallet/recharge.ejs", {
+      MINIMUM_MONEY_USDT: adminData.minusdtdep,
+      MINIMUM_MONEY_INR: adminData.mininrdep,
+      USDT_INR_EXCHANGE_RATE: adminData.inrusdtrate,
+      MIN_FIRST_RECHARGE: adminData.minfirstrech,
+    });
+  } catch (error) {
+    console.error("Error fetching admin configuration:", error);
+    return res.status(500).send("Internal server error");
+  }
 };
+
+
+
 
 const rechargerecordPage = async (req, res) => {
   return res.render("wallet/rechargerecord.ejs");
@@ -337,18 +509,38 @@ const getSalaryRecord = async (req, res) => {
 };
 
 const homeController = {
-  gameHistoryPage,
+  casinoHistoryPage,
+  fishingHistoryPage,
+  rummyHistoryPage,
+  originalHistoryPage,
+  slotsHistoryPage,
   homePage,
   checkInPage,
   invibonusPage,
   rebatePage,
   jackpotPage,
+  originalPage,
+  fishingPage,
+  casinosPage,
+  slotsPage,
+  betHistoryPage,
+  betk3Page,
+  bet5dPage,
+  betwingoPage,
+  bettrxwingoPage,
   vipPage,
+  strongBoxPage,
   activityPage,
+  TeamPartnerPage,
   dailytaskPage,
   promotionPage,
   subordinatesPage,
   promotion1Page,
+  turntablePage,
+  IntroducePage,
+  DetailsPage,
+  RulesPage,
+  PromotionsharePage,
   walletPage,
   mianPage,
   myProfilePage,
@@ -402,6 +594,7 @@ const homeController = {
   changeAvatarPage,
   invitationRulesPage,
   supportPage,
+  getBannerFiles,
 };
 
 export default homeController;

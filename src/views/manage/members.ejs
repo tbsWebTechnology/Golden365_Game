@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Members list</title>
+    <title>Players List</title>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
@@ -31,10 +31,33 @@
       <%- include('nav') %>
       <div class="content-wrapper">
         <section class="content-header">
+        
+        
+        
+        <div class="container my-4" style="background: aquamarine;">
+          <h3>Update API Games Status of Playerss</h3>
+          <form id="update-apigame-form" style="max-width: 400px; margin: 0 auto;">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter phone number" required />
+            
+              <label for="apigame-status">API Games Status</label>
+              <select id="apigame-status" name="apigame-status" class="form-control">
+                <option value="1">On</option>
+                <option value="0">Off</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Status</button>
+          </form>
+        </div>
+        
+        
+        
+        
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1>Members list</h1>
+                <h1>Players List</h1>
               </div>
             </div>
           </div>
@@ -51,10 +74,20 @@
 
         <!-- Main content -->
         <section class="content">
+        
+        
+        
+        
+          
+
+        
+        
+        
+        
           <!-- Default box -->
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Members list</h3>
+              <h3 class="card-title">Players List</h3>
               <div class="card-tools">
                 <button
                   type="button"
@@ -81,9 +114,11 @@
                     <th class="text-center">#</th>
                     <th class="text-center">Account</th>
                     <th class="text-center">Level</th>
-                    <th class="text-center">Amount</th>
+                    <th class="text-center">Wallet</th>
+                    <th class="text-center">Advance</th>
                     <th class="text-center">Status</th>
                     <th class="text-center">Password</th>
+                    <th class="text-center">API Games</th>
                     <th class="text-center">Action</th>
                   </tr>
                 </thead>
@@ -139,18 +174,22 @@
           <td>
             <b>${data.money}</b>
           </td>
+           <td>
+            <b>${data.third_party_money}</b>
+          </td>
           <td class="project-state">
             ${data.status == 1 ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-warning">Banned</span>'}
           </td>
           <td>
             <b style="color: #2003db">${data.plain_password}</b>
           </td>
-          <!--<td class="project-state">
-            <span class="badge badge-warning">Offline</span>
+          
+          <td>
+            <b style="color: #2003db">${data.apigame == 1 ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-warning">Inactive</span>'}</b>
           </td>
-          <td class="project-state">
-            <span class="badge badge-success">Online</span>
-          </td> -->
+          
+          
+          
           <td class="project-actions text-center" style="min-width: 100px">
             <a class="btn btn-primary btn-sm confirm-btn" href="/admin/member/info/${data.phone}">
               <i class="fas fa-folder"></i> Profile</a>
@@ -280,5 +319,40 @@
 
       $("#search").on("keyup", searchTable);
     </script>
+    
+    
+    
+    <script>
+      // Submit handler for the new form
+      $('#update-apigame-form').submit(function(e) {
+        e.preventDefault();
+
+        const phone = $('#phone').val().trim();
+        const apigameStatus = $('#apigame-status').val();
+
+        $.ajax({
+          type: 'POST',
+          url: '/api/webapi/admin/updateApigameStatus',
+          data: {
+            phone: phone,
+            apigame: apigameStatus
+          },
+          dataType: 'json',
+          success: function(response) {
+            if (response.status === true) {
+              Swal.fire('Success', response.message, 'success');
+            } else {
+              Swal.fire('Error', response.message, 'error');
+            }
+          },
+          error: function() {
+            Swal.fire('Error', 'Could not update API Games status. Please try again.', 'error');
+          }
+        });
+      });
+    </script>
+    
+    
+    
   </body>
 </html>

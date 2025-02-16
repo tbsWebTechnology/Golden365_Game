@@ -48,13 +48,13 @@ const cronJobGame1p = (io) => {
   });
 
   cron.schedule("*/3 * * * *", async () => {
-    await trxWingoController.addTrxWingo(3);
-    await trxWingoController.handlingTrxWingo1P(3);
-    const [trxWingo] = await connection.execute(
-      `SELECT * FROM trx_wingo_game WHERE game = '${TRX_WINGO_GAME_TYPE_MAP.MIN_3}' ORDER BY id DESC LIMIT 2`,
-      [],
-    );
-    io.emit("data-server-trx-wingo", { data: trxWingo });
+    // await trxWingoController.addTrxWingo(3);
+    // await trxWingoController.handlingTrxWingo1P(3);
+    // const [trxWingo] = await connection.execute(
+    //   `SELECT * FROM trx_wingo_game WHERE game = '${TRX_WINGO_GAME_TYPE_MAP.MIN_3}' ORDER BY id DESC LIMIT 2`,
+    //   [],
+    // );
+    // io.emit("data-server-trx-wingo", { data: trxWingo });
 
     await winGoController.addWinGo(3);
     await winGoController.handlingWinGo1P(3);
@@ -85,13 +85,13 @@ const cronJobGame1p = (io) => {
   });
 
   cron.schedule("*/5 * * * *", async () => {
-    await trxWingoController.addTrxWingo(5);
-    await trxWingoController.handlingTrxWingo1P(5);
-    const [trxWingo] = await connection.execute(
-      `SELECT * FROM trx_wingo_game WHERE game = '${TRX_WINGO_GAME_TYPE_MAP.MIN_5}' ORDER BY id DESC LIMIT 2`,
-      [],
-    );
-    io.emit("data-server-trx-wingo", { data: trxWingo });
+    // await trxWingoController.addTrxWingo(5);
+    // await trxWingoController.handlingTrxWingo1P(5);
+    // const [trxWingo] = await connection.execute(
+    //   `SELECT * FROM trx_wingo_game WHERE game = '${TRX_WINGO_GAME_TYPE_MAP.MIN_5}' ORDER BY id DESC LIMIT 2`,
+    //   [],
+    // );
+    // io.emit("data-server-trx-wingo", { data: trxWingo });
 
     await winGoController.addWinGo(5);
     await winGoController.handlingWinGo1P(5);
@@ -121,14 +121,28 @@ const cronJobGame1p = (io) => {
     io.emit("data-server-k3", { data: data3, game: "5" });
   });
 
-  cron.schedule("*/10 * * * *", async () => {
-    await trxWingoController.addTrxWingo(10);
-    await trxWingoController.handlingTrxWingo1P(10);
-    const [trxWingo] = await connection.execute(
-      `SELECT * FROM trx_wingo_game WHERE game = '${TRX_WINGO_GAME_TYPE_MAP.MIN_10}' ORDER BY id DESC LIMIT 2`,
-      [],
-    );
-    io.emit("data-server-trx-wingo", { data: trxWingo });
+  // cron.schedule("*/30 * * * * *", async () => {
+  //   await winGoController.addWinGo(10);
+  //   await winGoController.handlingWinGo1P(10);
+  //   const [winGo1] = await connection.execute(
+  //     'SELECT * FROM `wingo` WHERE `game` = "wingo10" ORDER BY `id` DESC LIMIT 2 ',
+  //     [],
+  //   );
+  //   const data = winGo1;
+  //   io.emit("data-server", { data: data });
+
+  // });
+
+
+
+  cron.schedule("*/10  * * * *", async () => {
+    // await trxWingoController.addTrxWingo(10);
+    // await trxWingoController.handlingTrxWingo1P(10);
+    // const [trxWingo] = await connection.execute(
+    //   `SELECT * FROM trx_wingo_game WHERE game = '${TRX_WINGO_GAME_TYPE_MAP.MIN_10}' ORDER BY id DESC LIMIT 2`,
+    //   [],
+    // );
+    // io.emit("data-server-trx-wingo", { data: trxWingo });
 
     await winGoController.addWinGo(10);
     await winGoController.handlingWinGo1P(10);
@@ -164,6 +178,11 @@ const cronJobGame1p = (io) => {
     await connection.execute("UPDATE turn_over SET daily_turn_over = ?", [0]);
   });
 
+  cron.schedule("0 2 * * *", async () => {
+    console.log("Running updateSafeBonusAndTransfer...");
+    await gameController.updateSafeBonusAndTransfer();
+  });
+
   cron.schedule("0 3 * * *", async () => {
     gameController.autoCleanOldGames();
   });
@@ -171,6 +190,10 @@ const cronJobGame1p = (io) => {
   cron.schedule("0 2 1 * *", async () => {
     vipController.releaseVIPLevel();
   });
+
+//   cron.schedule("0 23 * * *", async () => {
+//     vipController.releaseVIPLevel();
+// });
 
   cron.schedule(
     "0 0 * * *",

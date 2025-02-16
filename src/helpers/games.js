@@ -23,6 +23,9 @@ export function generatePeriod(gameRepresentationId) {
   return parseInt(NewGamePeriod);
 }
 
+
+
+
 export const generateClaimRewardID = () => {
   const min = 1;
   const max = 2147483647;

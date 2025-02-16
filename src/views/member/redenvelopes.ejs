@@ -1,17 +1,17 @@
 <html lang="en" translate="no" data-dpr="1" style="font-size: 37px;" dir="ltr">
 
 <head>
-  <script src="/app.config.js?v=1718968461132"></script>
+   
 
   <meta charset="UTF-8">
-  <link rel="icon" type="image/svg+xml"
-    href="https://ossimg.tirangaagent.com/Tiranga/other/h5setting_20231017190406lyb3.ico">
+  <link rel="icon" type="image/svg+xml" href="/uploads/favicon/favicon.png" />
   <meta name="google" content="notranslate">
   <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <link rel="manifest" href="/manifest.tiranga.json?version=1.1">
-  <title>Indn Club</title>
+  <title id="app-title"></title>
+  <script src="/js/app.js"></script>
 
   <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css">
   <link rel="stylesheet" href="/assets/css/page-activity-4fe5c6bf.css">
@@ -28,6 +28,8 @@
 
   <link rel="stylesheet" href="/assets/css/page-test-24de9c20.css">
   <link rel="stylesheet" href="/assets/css/page-wallet-b9af2085.css">
+  <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
+
 
 
 </head>
@@ -3984,7 +3986,7 @@
               <clipPath id="__lottie_element_2">
                 <rect width="200" height="200" x="0" y="0"></rect>
               </clipPath>
-              <image xlink:href="/logo_loading.png">
+              <image xlink:href="/uploads/logo/logo.png">
               </image>
               <image
                 xlink:href="data:image/png;base64,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">
@@ -3998,7 +4000,7 @@
               </g>
               <g class="png" transform="matrix(0.8999999761581421,0,0,0.8999999761581421,31.150001525878906,82)"
                 opacity="1" style="display: block;">
-                <image width="163px" height="60px" preserveAspectRatio="xMidYMid slice" xlink:href="/logo_loading.png">
+                <image width="163px" height="60px" preserveAspectRatio="xMidYMid slice" xlink:href="/uploads/logo/logo.png">
                 </image>
               </g>
             </g>
@@ -4066,7 +4068,7 @@
             </div>
           </div>
         </div>
-        <div data-v-695ca243="" class="redeem-container-header-belly"><img data-v-695ca243="" alt="" class=""
+        <div data-v-695ca243="" class="redeem-container-header-belly"><img data-v-695ca243="" style="width:100% !important" alt="" class=""
             data-origin="/assets/png/gift-d7507b9b.png" src="/assets/png/gift-d7507b9b.png"></div>
       </div>
       <div data-v-695ca243="" class="redeem-container-content">
@@ -4082,10 +4084,23 @@
               class="svg-icon icon-giftHistory">
               <use xlink:href="#icon-giftHistory"></use>
             </svg><!-- <img :src="getIcons('main', 'gRecord')" /> --><span data-v-695ca243="">History</span></div>
-          <div data-v-695ca243="" class="redeem-container-record-itemsBox">
+          <div data-v-695ca243="" class="redeem-container-record-itemsBox" style="height:100% !important">
             <div data-v-61888f52="" data-v-695ca243="" class="infiniteScroll"
               id="refreshf618a9c1c1304db8854410be7885c001">
               <div data-v-61888f52="" class="infiniteScroll__loading"><!--v-if-->
+
+
+                <table id="redenvelopesTable" style="width:100%">
+                  <thead>
+                      
+                  </thead>
+                  <tbody id="redenvelopesBody">
+                      <!-- Data will be dynamically added here -->
+                  </tbody>
+              </table>
+
+
+
                 <div data-v-f84b843f="" data-v-61888f52="" class="empty__container empty"><svg data-v-f84b843f=""
                     class="svg-icon icon-empty">
                     <use xlink:href="#icon-empty"></use>
@@ -4095,6 +4110,24 @@
               </div>
             </div>
           </div>
+
+
+
+
+
+        
+    
+    
+
+    
+
+
+
+
+
+
+
+      
         </div>
       </div>
     </div><!--online custom service-->
@@ -4179,56 +4212,211 @@
       transform: scale(1)
     }
   }
+
+  .msg-content.v-enter-active.v-enter-to {
+    position: absolute;
+    /* top: 0%; */
+    position-area: center;
+    background: black;
+    color: white;
+    width: 85%;
+    font-size: medium;
+    text-align: center;
+    padding: 1.5rem;
+}
+
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-
-  const alertMessage = (text) => {
-    const msg = document.createElement('div');
-    msg.setAttribute('data-v-1dcba851', '');
-    msg.className = 'message_alert_root';
-
-    const msgContent = document.createElement('div');
-    msgContent.setAttribute('data-v-1dcba851', '');
-    msgContent.className = 'message_alert_text';
-    msgContent.style = '';
-    msgContent.textContent = text;
-
-    msg.appendChild(msgContent);
-    document.body.appendChild(msg);
-
-    setTimeout(() => {
-      msgContent.classList.remove('v-enter-active', 'v-enter-to');
-      msgContent.classList.add('v-leave-active', 'v-leave-to');
-
+  <script src="/js/client.js"></script>
+  
+  <script>
+    function alertMess(text, sic) {
+      $('body').append(
+        `
+                <div data-v-1dcba851="" class="msg">
+                    <div data-v-1dcba851="" class="msg-content v-enter-active v-enter-to" style=""> ${text} </div>
+                </div>
+                `
+      );
       setTimeout(() => {
-        document.body.removeChild(msg);
-      }, 100);
-    }, 1000);
+        $('.msg .msg-content').removeClass('v-enter-active v-enter-to');
+        $('.msg .msg-content').addClass('v-leave-active v-leave-to');
+        setTimeout(() => {
+          $('.msg').remove();
+        }, 100);
+        sic.removeClass('block-click');
+      }, 1500);
+    }
+    $('button').click(function (e) {
+      e.preventDefault();
+      let value = $('input').val().trim();
+      $(this).addClass('block-click');
+      let iej = $(this);
+      if (value) {
+        $.ajax({
+          type: "POST",
+          url: "/api/webapi/use/redenvelope",
+          data: {
+            code: value,
+          },
+          dataType: "json",
+          success: function (response) {
+            alertMess(response.message, iej);
+          }
+        });
+      } else {
+        alertMess('Please enter the gift code', iej);
+      }
+    });
+  </script>
+
+
+<script>
+  function formateT(params) {
+      let result = (params < 10) ? "0" + params : params;
+      return result;
   }
 
-  $('button').click(function (e) {
-    e.preventDefault();
-    let value = $('input').val().trim();
-    $(this).addClass('block-click');
-    let iej = $(this);
-    if (value) {
-      $.ajax({
-        type: "POST",
-        url: "/api/webapi/use/redenvelope",
-        data: {
-          code: value,
-        },
-        dataType: "json",
-        success: function (response) {
-          alertMessage(response.message, iej);
-        }
-      });
-    } else {
-      alertMessage('Please enter the gift code', iej);
-    }
+  function timerJoin(params = '', addHours = 0) {
+      let date = '';
+      if (params) {
+          date = new Date(Number(params));  // Convert the timestamp to a Date object
+      } else {
+          date = new Date();  // Use the current date if no timestamp is provided
+      }
+
+      date.setHours(date.getHours() + addHours);  // Add any additional hours if provided
+
+      // Format the date components
+      let years = formateT(date.getFullYear());
+      let months = formateT(date.getMonth() + 1);  // Month is 0-based, so add 1
+      let days = formateT(date.getDate());
+
+      let hours = date.getHours() % 12;
+      hours = hours === 0 ? 12 : hours;  // Convert 24-hour format to 12-hour
+      let ampm = date.getHours() < 12 ? "AM" : "PM";
+
+      let minutes = formateT(date.getMinutes());
+      let seconds = formateT(date.getSeconds());
+
+      // Combine the components into a formatted string
+      return years + '-' + months + '-' + days + ' ' + hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+      fetch('/api/redenvelopes')
+          .then(response => response.json())
+          .then(data => {
+              const redenvelopesBody = document.getElementById('redenvelopesBody');
+              const noDataMessage = document.getElementById('noDataMessage');
+
+              if (data.length === 0) {
+                  noDataMessage.style.display = "block";  // Show "No data" message if no history
+                  return;
+              }
+
+
+
+
+
+
+
+
+              data.forEach(redenvelope => {
+                console.log('Corrected timestamp from backend:', redenvelope.time);
+
+                // Create the table row
+                const row = document.createElement('tr');
+                row.style.height = "60px";
+                row.style.borderBottom = "1px solid #d8d8d8"; 
+
+                // 1. Create a new table cell for "Successfully Received" and Date/Time
+                const timeCell = document.createElement('td');
+                timeCell.style.verticalAlign = "middle";
+                try {
+                    let timestamp = redenvelope.time;
+
+                    // Create a div to wrap "Successfully Received" and the date
+                    const timeWrapper = document.createElement('div23');
+                    timeWrapper.style.verticalAlign = "middle";
+
+                    // Create "Successfully Received" text
+                    const successText = document.createElement('div');
+                    successText.textContent = "Successfully Received";
+                    successText.style.fontWeight = "bold";  // Make it bold
+                    successText.style.color = "#1ab266";
+
+                    // Use timerJoin to format the timestamp correctly
+                    const dateText = document.createElement('div');
+                    dateText.textContent = timerJoin(timestamp);
+                    dateText.style.fontSize = "12px";
+
+                    // Append "Successfully Received" and the date/time into the wrapper
+                    timeWrapper.appendChild(successText);
+                    timeWrapper.appendChild(dateText);
+
+                    // Add the wrapper into the time cell
+                    timeCell.appendChild(timeWrapper);
+                } catch (error) {
+                    console.error('Error converting timestamp:', error);
+                    timeCell.textContent = 'Invalid Date';
+                }
+
+                // Append timeCell to the row
+                row.appendChild(timeCell);
+
+                // 2. Create a new table cell for the amount with the image instead of the wallet icon
+                const amountCell = document.createElement('td');
+                amountCell.style.verticalAlign = "middle";
+
+                // Create a div for styling the amount
+                const amountWrapper = document.createElement('div');
+                amountWrapper.style.border = "1px solid #ccc";  // Border around the amount
+                amountWrapper.style.borderRadius = "8px";  // Border around the amount
+                amountWrapper.style.padding = "3px 3px 3px 20px";  // Padding for some space
+                amountWrapper.style.textAlign = "right";  // Right-align the amount
+
+                // Create the image element
+                const goldImage = document.createElement('img');
+                goldImage.src = "/assets/png/gold-4a60a059.png";  // Set the image source
+                goldImage.style.width = "15px";  // Set the width of the image
+                goldImage.style.marginRight = "10px";  // Add some space between the image and the amount
+
+                // Create the text for the amount
+                const amountText = document.createElement('span');
+                amountText.textContent = ` ${redenvelope.money}`;  // Add space before the amount
+
+                // Append the image and the amount text into the amount wrapper
+                amountWrapper.appendChild(goldImage);
+                amountWrapper.appendChild(amountText);
+
+                // Append the amount wrapper to the amount cell
+                amountCell.appendChild(amountWrapper);
+
+                // Append amountCell to the row
+                row.appendChild(amountCell);
+
+                // Finally, append the row to the table body
+                redenvelopesBody.appendChild(row);
+            });
+
+
+
+
+
+
+
+          })
+          .catch(error => {
+              console.error('Error fetching red envelopes history:', error);
+          });
   });
 </script>
+
+
+
+
 
 
 </html>

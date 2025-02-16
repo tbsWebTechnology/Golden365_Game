@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Statisticals</title>
+    <title>Leaders Dashboard</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/css/admin.css">
 </head>
 
-<body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="light-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
         <%- include('nav') %>
 
@@ -25,7 +25,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Statistics</h1>
+                                <h1>Leaders Dashboard</h1>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                                 <div class="info-box">
                                     <span class="info-box-icon bg-info"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Number Of Member</span>
+                                        <span class="info-box-text">Total Users</span>
                                         <span class="info-box-number totalMember">0</span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -80,7 +80,7 @@
                                     <span class="info-box-icon bg-warning"><i class="fa fa-user-times" aria-hidden="true"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Account is Locked</span>
+                                        <span class="info-box-text">Locked Accounts</span>
                                         <span class="info-box-number totalMemberFail">0</span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -112,7 +112,7 @@
                                     <span class="info-box-icon bg-success"><i class="fa fa-check" aria-hidden="true"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Recharge Today</span>
+                                        <span class="info-box-text">Today's Recharge</span>
                                         <span class="info-box-number totalRechargeToday">0</span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -137,7 +137,7 @@
                                     <span class="info-box-icon bg-warning"><i class="fa fa-university" aria-hidden="true"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Withdraw Money Today</span>
+                                        <span class="info-box-text">Today's Withdrawal</span>
                                         <span class="info-box-number totalwithdrawToday">0</span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -161,20 +161,24 @@
                         <div class="row info-box">
                             <div class="form-group" style="width: 100%;">
                                 <div class="text-center">
-                                    <label for="telegram">Create a Collaborator Account</label>
+                                    <label for="telegram">Create a Leaders Account</label>
                                 </div>
-                                <label for="username" style="color: #3498db;">Account</label>
+                                <label for="username" style="color: #3498db;">Account Phone</label>
                                 <input type="text" class="form-control" id="username" placeholder="Enter Account Number" value=""><br>
-                                <label for="password" style="color: #3498db;">Account Number</label>
-                                <input type="text" class="form-control" id="password" placeholder="Enter Password" value=""><br>
+                                <label for="password" style="color: #3498db;">Password</label>
+                                <input type="text" class="form-control" id="password" placeholder="Enter Password" value="123456" readonly><br>
                                 <button type="submit" class="btn btn-danger create_ctv" style="width: 100%;">Create</button>
                             </div>
                         </div>
 
+
+                        
+                          
+
                         <div class="row info-box">
                             <div class="form-group" style="width: 100%;">
                                 <div class="text-center">
-                                    <label for="">Increase / Decrease Money (Giftcode) For all CTV</label>
+                                    <label for="">Increase / Decrease Money (Giftcode) For all Leaders</label>
                                 </div>
                                 <label for="username" style="color: #3498db;">Increase | Decrease</label>
                                 <select class="form-select mb-4" id="buff-all-ctv" style="width: 100%;padding: 5px;">
@@ -182,7 +186,7 @@
                                     <option value="1">Plus Money (+)</option>
                                     <option value="2">Deduct Money (-)</option>
                                 </select>
-                                <label for="money-buff-all" style="color: #3498db;">Amount Of Money</label>
+                                <label for="money-buff-all" style="color: #3498db;">Amount</label>
                                 <input type="text" class="form-control" id="money-buff-all" placeholder="Enter Amount" value=""><br>
                                 <button type="submit" class="btn btn-primary buff-all" style="width: 100%;">Submit</button>
                             </div>
@@ -191,17 +195,17 @@
                         <div class="row info-box">
                             <div class="form-group" style="width: 100%;">
                                 <div class="text-center">
-                                    <label for="phone">Increase/Decrease The Amount Generated (Giftcode) for CTV</label>
+                                    <label for="phone">Increase/Decrease The Amount Generated (Giftcode) for Leaders</label>
                                 </div>
                                 <label for="phone" style="color: #3498db;">Account</label>
-                                <input type="text" class="form-control" id="phone" placeholder="Enter Collaborator Account" value=""><br>
+                                <input type="text" class="form-control" id="phone" placeholder="Enter Leaders Account" value=""><br>
                                 <label for="buff-one" style="color: #3498db;">Increase | Decrease</label>
                                 <select class="form-select mb-4" id="buff-one" style="width: 100%;padding: 5px;">
                                     <option selected value="">-------- Select Function --------</option>
                                     <option value="1">Plus Money (+)</option>
                                     <option value="2">Deduct Money (-)</option>
                                 </select>
-                                <label for="money-buff-one" style="color: #3498db;">Amount Of Money</label>
+                                <label for="money-buff-one" style="color: #3498db;">Amount</label>
                                 <input type="text" class="form-control" id="money-buff-one" placeholder="Enter Amount" value=""><br>
                                 <button type="submit" class="btn btn-primary buff-one" style="width: 100%;">Submit</button>
                             </div>
@@ -234,14 +238,14 @@
                                     <label for="phone">Number of points to add and subtract / membership money</label>
                                 </div>
                                 <label for="phone" style="color: #3498db;">Account</label>
-                                <input type="text" class="form-control" id="phone2" placeholder="Enter collaborator account" value=""><br>
+                                <input type="text" class="form-control" id="phone2" placeholder="Enter Leaders Account" value=""><br>
                                 <label for="buff-three" style="color: #3498db;">up or down</label>
                                 <select class="form-select mb-4" id="buff-three" style="width: 100%;padding: 5px;">
                                     <option selected value="">-------- select function --------</option>
                                     <option value="1">Increase (+)</option>
                                     <option value="2">Decrease (-)</option>
                                 </select>
-                                <label for="money-buff-three" style="color: #3498db;">Amount Of Money</label>
+                                <label for="money-buff-three" style="color: #3498db;">Amount</label>
                                 <input type="text" class="form-control" id="money-buff-three" placeholder="Enter Amount" value=""><br>
                                 <button type="submit" class="btn btn-primary buff-three" style="width: 100%;">Submit</button>
                             </div>

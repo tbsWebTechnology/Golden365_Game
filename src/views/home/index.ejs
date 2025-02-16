@@ -4,25 +4,178 @@
 
 
    <meta charset="UTF-8">
-   <link rel="icon" type="image/svg+xml"
-      href="https://ossimg.tirangaagent.com/Tiranga/other/h5setting_20231017190406lyb3.ico">
+   <link rel="icon" type="image/svg+xml" href="/uploads/favicon/favicon.png" />
    <meta name="google" content="notranslate">
+   <link rel="manifest" href="/manifest.json">
    <meta name="robots" content="noindex,nofollow">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-   <link rel="manifest" href="/manifest.tiranga.json?version=1.1">
-   <title>Indn Club</title>
-   <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css">
+
+   <title id="app-title"></title>
+
+
+   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+
+
    <link rel="stylesheet" href="/assets/css/page-activity-15aec14d.css">
    <link rel="stylesheet" href="/assets/css/page-home-cd3ca502.css">
-   <link rel="stylesheet" href="/assets/css/page-login-0a6284d7.css">
-   <link rel="stylesheet" href="/assets/css/index-2ce02a2b.css">
+
+   <link rel="stylesheet" href="/css/page-home-a4807077.css">
+   <link rel="stylesheet" href="/css/modules-5dd73da0.css">
+
+   <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
+
    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"
       integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 </head>
+
+
+<style>
+   #leftBtn,
+   #rightBtn {
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+   }
+
+   .nav-right .text[data-v-3dc40049] {
+      color: var(--text_color_L2);
+   }
+
+   .navbar__content-left img {
+      height: 70%;
+   }
+
+
+   /* Basic popup styling */
+   #popupdeposit {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: white;
+      border: 2px solid #ccc;
+      z-index: 1000;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   }
+
+   /* Overlay for background dim */
+   #popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+   }
+
+   /* Close button styling */
+   .close-btn {
+      cursor: pointer;
+      color: red;
+      font-weight: bold;
+      float: right;
+   }
+
+   /* Container for the marquee effect */
+   .noticeBar__container {
+      width: 100%;
+      background-color: #f0f0f0;
+      /* Optional, for styling */
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+   }
+
+   /* Container for the text */
+   .noticeBar__container-body {
+      overflow: hidden;
+      white-space: nowrap;
+      width: 80%;
+      /* Adjust width as needed */
+   }
+
+   /* The moving text */
+   #noticehome {
+      display: inline-block;
+      animation: marquee 30s linear infinite;
+      /* Adjust speed with the duration (10s) */
+      padding-left: 100%;
+      /* Start text off-screen on the right */
+   }
+
+   /* Keyframes to move text from right to left */
+   @keyframes marquee {
+      0% {
+         transform: translateX(1%);
+         /* Starts from the right edge */
+      }
+
+      100% {
+         transform: translateX(-100%);
+         /* Ends at the left edge */
+      }
+   }
+
+   /* Style for the button */
+   .hotIcon {
+      background-color: #007bff;
+      /* Button color */
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+   }
+
+   .rechage_active[data-v-9e03166f] {
+      background: var(--main_gradient-color);
+      color: white;
+   }
+
+   .Recharge__container-rechageBtn[data-v-9e03166f] {
+      margin-top: 1.66667rem;
+      font-size: .5rem;
+      z-index: 88;
+      background: var(--main_gradient-color2);
+      width: 100%;
+      max-width: 6rem;
+      height: 1.3333rem;
+      line-height: 1.3333rem;
+      color: var(--main_gradient-color2);
+      text-align: center;
+      border-radius: .66667rem;
+      margin-bottom: .4rem;
+      justify-self: center;
+
+   }
+
+   /* Style for the button */
+   .hotIcon {
+      background-color: #007bff;
+      /* Button color */
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+   }
+
+   .hidden {
+      display: none !important;
+   }
+</style>
+
+
 
 <body style="font-size: 12px;" class="">
    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -4432,7 +4585,7 @@
                      <clipPath id="__lottie_element_2">
                         <rect width="200" height="200" x="0" y="0"></rect>
                      </clipPath>
-                     <image xlink:href="/logo_loading.png">
+                     <image xlink:href="/uploads/logo/logo.png">
                      </image>
                      <image
                         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAAACXBIWXMAAAABAAAAAQBPJcTWAAAATlBMVEVHcExWtthewtlUstddwdpcvthYttZdv9lYtdtSsNhVs9ZWtNddwdlcwdlIn9NcwNlFmtJHntNEltBDlNBfxNldwdlDks9ZutlDm9JLptXm8Yi6AAAAFHRSTlMAMPBhmsBAexD/IFDQ4KCw2/CExn9LFu4AAAWJSURBVHja7Vxpe7MqEBVBQHBfiv7/P3oBTatX82YzhpknfGrT2HA4ywyYJIq+4+6hOMcAQ7Y/Pz81xYHDDg1dVs2E46cCOX3Cm6ZtZy7mQYApiTfFGsBlADK8os0+Bj8kEBR8DaJqi6bhnBM1P1CAQKGLegGh0Us/UP9oC4AQ/ofCYlA7wdUW4ZcR1VQXJgotI6iDFxcUDYngDtpiQBHRWVMF7OZjhlE3CjQMPcGogPe0xHljAA9DNg7FAB1GROthGOBvlFQ7ODoaCRxH4+gYWgUchiwsGUMNfdMacU8HeFVFjYMBnw7ZOhwFeDpI5WUFHUaknT0qAh4H9aELXlZR4e0R4cBBceCAn7pT7NbwbS4rHDisrsahUjj8UUkkfCDA0YzjiMEfdBxQ4CBIcKjaCgtBPZcVDhxRMY4Y+kRr9HHEELzEGqRWSAyicRhkxGAQ7gwS4RAWhkrohYWhghCLo0WAI3KJhSB5fSlsMDi9xpFY3ukY3kqpLI4ECyEKCSEFDkJSNIQ0KAhJ01piICQd0wIJISkGh8g6xUEItYRg2IZEWYqjqBNLCEVi9RoDjsgSwjDg0FisXqZpjgGHxGJ1jaSqu8zKsGQWivaEYMksYYGgUFaSpiUWi6AIX44lfK1FYhTKKrFYJE9TgaXR4li8LpF4HUULH7HUoDh2cHUdhdejGAuQ1BgUoUVMalD08NwYg0JZ2jKCAogwSNIXEZAUST00hmEBIr5AvkC+QDaNSSJRAFGxyVAAWTRYXyBfIF8gO4MaczklZaCbxkXLK75AwgMC+Cx+0bvD3rMvosoBgXv0my8y10A+11pO3v4M9g6ispMnGPr4lcFLY8DeebORmy9/AftGlFVbogHn78oWBHBsrYPK9FDdTpahBfmIjq5dIUyfIfD65HaYTUq+1pK0JgH5sW9pGVhNPANqEmoZkP+TWg7UImtz677vFXyLWK31pgdYSXYqedn3APtG0ffx5iHTwwvgrN9klLImAbe5cpPWW3DwtGWVtZWRAJhbed+zXZqA5RbZU5bPLWA1kW0zy1d7iw/U7krGe8qy49rjwfZZ11zN9jIgbKsnV1MZkN359cpn7R7DoSS5Hk4cUnXn/9JPAiiB2b/ko+FQcsPQORhKbviZQgkufmuiCZDgujlPDoMSfXuaCYhuPr8tHNcaB7/BEvekK9tv8oOKXtve3j6qds1xHrbfy/s2HC6CWehOv2uC1u9dwDssJ5n7SoQKW1zl/Sa2odAFKy76SKwm4SaXih/pPfyzwyyL2WNr7PgL8qYiezRSWZg28Qv8UA7JLMQ9FnGSJ49f0wf2mT5XQR4PIVc/46CQeJU8oXfxsB5PMHr57IUBIWF99+x0HJVJSHw8uwuXWdeFEsL0JcuGg4S+GD0kDgMJtdPoXur+wkAiHI4Xy7NH8uHsYgfgCAHJMThsT+8cn3+sxsvEvvwxLYbPrvhDu3iSHYZjXpTuIyep3AubHCtTdr5RfFwdatDpP55sFFl2x4e/5zg+davF87co2odXV8pzZfWWjPFGiU86JvJp1SXvWTcdn0aKp+N9QTm5LxbnuOOt2SI8Kclbq6MquxPq1kRKx952DimntToh6nU+LZh8I+XxKW2EvLzY8VDotEin9RDKJ3EXHyswKSYYyZn9qfJ9pF07ctzieJ677Ow2m89QMnqEDvSUIV3+ifNmMgnMKoy8SsakqXNFtSeHLn8eixJZN8v0k3dgJb1MI2dPdGGc/V4uPn6HjFxosdIQDywqEeXvhSyQO5b6D0uXMXoTDdEi+b2gK2lIZ/76YthJKIkQnG/mJzkXoswWT4yZDu+OvqLlEsyM6Hds/haXItyvuVSUJd0dI2MCwHd1Ki7YloCZhoQJDe37RrmzxN/gO675js34DxGidN2D9/DoAAAAAElFTkSuQmCC">
@@ -4450,7 +4603,7 @@
                         transform="matrix(0.9055200219154358,0,0,0.9055200219154358,30.72771453857422,81.88960266113281)"
                         opacity="1" style="display: block;">
                         <image width="163px" height="60px" preserveAspectRatio="xMidYMid slice"
-                           xlink:href="/logo_loading.png">
+                           xlink:href="/uploads/logo/logo.png">
                         </image>
                      </g>
                   </g>
@@ -4506,778 +4659,806 @@
          <div data-v-12a80a3e="" class="navbar">
             <div data-v-12a80a3e="" class="navbar-fixed">
                <div data-v-12a80a3e="" class="navbar__content">
-                  <div data-v-12a80a3e="" class="navbar__content-left"><img src="/h5setting_202308141709544lm1.png"
-                        alt="">
+                  <div data-v-12a80a3e="" class="navbar__content-left"><img src="/uploads/logo/logo.png" alt="">
                   </div>
                   <div data-v-12a80a3e="" class="navbar__content-center">
                      <div data-v-12a80a3e="" class="navbar__content-title"></div>
                   </div>
+
+
                   <div data-v-12a80a3e="" class="navbar__content-right">
-                     <div class="content-daman__right">
-                        <div class="message" onclick="location.href = '/login_notification'"><svg
-                              class="svg-icon icon-notification">
-                              <use xlink:href="#icon-notification"></use>
+                     <div data-v-3dc40049="" class="nav-right">
+
+                        <% if (isAuthenticated) { %>
+                           <!-- Show balance when the user is logged in -->
+                           <svg data-v-3dc40049="" class="svg-icon icon-lottyWallet">
+                              <use xlink:href="#icon-lottyWallet"></use>
                            </svg>
-                           <div data-v-c10b67fb="" class="point point-flicker point" style=""></div>
-                        </div>
+                           <div data-v-3dc40049="">
+                              <div data-v-3dc40049="" class="text">Balance</div>
+                              <div data-v-3dc40049="" class="money">₹0.00</div>
+                           </div>
+                           <% } else { %>
+                              <!-- Show login/register when the user is not logged in -->
+                              <div data-v-3dc40049="" class="nav-btn login" onclick="location.href = '/login'">
+                                 Log in
+                              </div>
+                              <div data-v-3dc40049="" class="nav-btn" onclick="location.href = '/register'">
+                                 Register
+                              </div>
+                              <% } %>
                      </div>
                   </div>
+
+
+
                </div>
             </div>
          </div><!-- 头部轮播图 -->
-         <div data-v-3ad7aed7="" class="swiper_box">
+
+
+         <div data-v-3ad7aed7="" class="swiper_box" style="padding-top:10px; !important">
             <div data-v-3ad7aed7="" class="swiper swiper-initialized swiper-horizontal swiper-pointer-events my-swipe">
                <div class="swiper-wrapper" style="transform: translate3d(-3736px, 0px, 0px); transition-duration: 0ms;">
-                  <div data-v-3ad7aed7="" class="swiper-slide" style="width: 447px; margin-right: 20px;">
-                     <img data-v-3ad7aed7="" class="" src="/banner/BANNER_1.jpg">
-                  </div>
-                  <div data-v-3ad7aed7="" class="swiper-slide" style="width: 447px; margin-right: 20px;">
-                     <img data-v-3ad7aed7="" class="" src="/banner/BANNER_2.jpg">
-                  </div>
-                  <div data-v-3ad7aed7="" class="swiper-slide" style="width: 447px; margin-right: 20px;">
-                     <img data-v-3ad7aed7="" class="" src="/banner/BANNER_3.jpg">
-                  </div>
-                  <div data-v-3ad7aed7="" class="swiper-slide" style="width: 447px; margin-right: 20px;">
-                     <img data-v-3ad7aed7="" class="" src="/banner/BANNER_4.jpg">
-                  </div>
-                  <div data-v-3ad7aed7="" class="swiper-slide" style="width: 447px; margin-right: 20px;">
-                     <img data-v-3ad7aed7="" class="" src="/banner/BANNER_5.jpg">
-                  </div>
-                  <div data-v-3ad7aed7="" class="swiper-slide" style="width: 447px; margin-right: 20px;">
-                     <img data-v-3ad7aed7="" class="" src="/banner/BANNER_6.jpg">
-                  </div>
-                  <div data-v-3ad7aed7="" class="swiper-slide" style="width: 447px; margin-right: 20px;">
-                     <img data-v-3ad7aed7="" class="" src="/banner/BANNER_7.jpg">
-                  </div>
-                  <div data-v-3ad7aed7="" class="swiper-slide" style="width: 447px; margin-right: 20px;">
-                     <img data-v-3ad7aed7="" class="" src="/banner/BANNER_8.jpg">
-                  </div>
-                  <div data-v-3ad7aed7="" class="swiper-slide" style="width: 447px; margin-right: 20px;">
-                     <img data-v-3ad7aed7="" class="" src="/banner/BANNER_9.jpg">
-                  </div>
-                  <div data-v-3ad7aed7="" class="swiper-slide" style="width: 447px; margin-right: 20px;">
-                     <img data-v-3ad7aed7="" class="" src="/banner/BANNER_10.jpg">
-                  </div>
+                  <% banners.forEach(banner=> { %>
+                     <div data-v-3ad7aed7="" class="swiper-slide" style="width: 447px; margin-right: 20px;">
+                        <img data-v-3ad7aed7="" src="./uploads/banners/<%= banner %>" alt="Banner Image"
+                           style="width:100%">
+                     </div>
+                     <% }) %>
                </div>
             </div>
-         </div><!-- 滚动通知栏 -->
+         </div>
+
+
+
+         <!-- 滚动通知栏 -->
+
+
          <div class="noticeBar__container"><svg class="svg-icon icon-noticeBarSpeaker">
                <use xlink:href="#icon-noticeBarSpeaker"></use>
             </svg>
             <div class="noticeBar__container-body">
-               <div class="noticeBar__container-body-text">Welcome to the Indn Club! Greetings, Gamers and
-                  Enthusiasts! The Indn Club is more than just a platform for gaming. We invite you to join us,
-                  you'll find a variety of games, promo, bonus, luxury gold awards, Register now and win.</div>
+               <div id="noticehome">Welcome</div>
             </div><button class="hotIcon">Detail</button>
          </div><!-- 热门、彩票、游戏选项卡 -->
-         <div data-v-5cc5cfb9="" class="gameScenes-daman">
-            <div data-v-5cc5cfb9="" class="game-menu">
-               <div data-v-5cc5cfb9="" class="row space">
-                  <div onclick="location.href='/home#popular'" data-v-5cc5cfb9="" class="row-item"><img
-                        data-v-5cc5cfb9="" class="game_image" alt=""
-                        data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154444kutg.png"
-                        src="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154444kutg.png"><img
-                        data-v-5cc5cfb9="" class="game_bg" alt="" data-origin="/assets/png/popular-044514e1.png"
-                        src="/assets/png/popular-044514e1.png">
-                     <div data-v-5cc5cfb9="" class="game_text">Popular</div>
-                  </div>
-                  <div onclick="location.href='/home#lottery'" data-v-5cc5cfb9="" class="row-item"><img
-                        data-v-5cc5cfb9="" class="game_image" alt=""
-                        data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154540veqj.png"
-                        src="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154540veqj.png"><img
-                        data-v-5cc5cfb9="" class="game_bg" alt="" data-origin="/assets/png/lottery-c0a9176b.png"
-                        src="/assets/png/lottery-c0a9176b.png">
-                     <div data-v-5cc5cfb9="" class="game_text">Lottery</div>
+
+
+
+
+
+         <div id="Popup" class="overlay"
+            style="z-index: 2001;position: fixed;top: 0;left: 0;/* z-index: var(--van-overlay-z-index); */width: 100%;height: 100%;background: var(--van-overlay-background);height: 36.3rem;display: none;">
+            <div data-v-84514e8e="" class="title" style="
+ height: 0.56rem; */
+ /* display: -webkit-box; */
+ /* display: -webkit-flex; */
+ display: flex;
+ /* -webkit-box-align: center; */
+ /* -webkit-align-items: center; */
+ align-items: center;
+ font-size: 0.4rem;
+ font-weight: 500;
+ margin-bottom: 0.5rem;
+ color: #fff;
+ margin-top: 1.3rem;
+ text-align: center;
+ padding-top: 6rem;
+ /* margin-left: 0.5rem; */
+ background: url(/assets/png/360_F_180044560_U73ZKLb89onRnY2j1jxjzKjHsYQuULqp-removebg-preview.png);
+ background-size: contain;
+ background-position: center;
+ background-repeat: no-repeat;
+ "><b data-v-84514e8e=""></b><span>Deposit Minimum ₹200 is Required to Play Games</span></div>
+
+
+            <div data-v-9e03166f="" class="Recharge__container-rechageBtn" id="deposit_fund_btn"
+               onclick="location.href='/wallet/recharge'">Deposit Now
+            </div>
+
+         </div>
+         <div data-v-0137aa14="" class="van-tabs van-tabs--line gameTypeHome">
+            <div class="flex justify-center gap-2 p-2">
+
+               <!-- Popular Card  -->
+               <div class="p-3 text-center rounded-sm shadow-lg w-[200px] h-[130px] flex flex-col items-center"
+                  style="background-image: url('https://bdgwin.cc/assets/png/hot_bg-1c1c6ca1.png'); background-size: cover; background-position: center;">
+                  <img src="https://ossimg.bdg123456.com/BDGWin/gamecategory/gamecategory_20240306233417aiaq.png"
+                     alt="Popular" class="w-45 h-24 object-cover">
+                  <p class="mt-2 text-sm font-bold">Popular</p>
+               </div>
+
+               <!-- Lottery Card -->
+               <div class="p-3 text-center rounded-sm shadow-lg w-[160px] h-[120px] flex flex-col items-center"
+                  style="background-image: url('https://bdgwin.cc/assets/png/hot_bg-1c1c6ca1.png'); background-size: cover; background-position: center;"
+                  onclick="scrollToSection('/home#lottery')">
+
+                  <img src="https://ossimg.bdg123456.com/BDGWin/gamecategory/gamecategory_2024030623351551lj.png"
+                     alt="Lottery" class="w-32 h-24 object-cover">
+                  <p class="mt-2 text-sm font-bold">Lottery</p>
+               </div>
+
+
+
+
+
+               <!-- Slots Card -->
+               <div class="p-3 text-center rounded-sm shadow-lg w-[160px] h-[120px] flex flex-col items-center"
+                  style="background-image: url('https://bdgwin.cc/assets/png/hot_bg-1c1c6ca1.png'); background-size: cover; background-position: center;"
+                  onclick="scrollToSection('/home#bigaward')">
+
+                  <img src="https://ossimg.bdg123456.com/BDGWin/gamecategory/gamecategory_202403062335332eu1.png"
+                     alt="Slots" class="w-32 h-24 object-cover">
+                  <p class="mt-2 text-sm font-bold">Super Jackpot</p>
+               </div>
+
+            </div>
+            <div class="van-tabs__content">
+
+            </div>
+         </div>
+         <div data-v-0137aa14="" class="game-content">
+
+
+
+
+
+            <div data-v-5d47e2fb="" data-v-0137aa14="" class="homeNav" id="lottery" style="margin-top:5px">
+
+
+               <div class="relative w-38 h-14 flex flex-col items-center">
+                  <img src="https://bdgwin.cc/assets/png/third_bg-e90cc231.png" class="w-full rounded-lg"
+                     alt="Background">
+
+                  <div class="absolute top-0 left-0 right-0 bottom-0 flex justify-around ">
+                     <div class="text-center" onclick="scrollToSection('/home#sport')">
+                        <img src="https://ossimg.bdg123456.com/BDGWin/gamecategory/gamecategory_20240306233509iqfa.png"
+                           class="w-12" alt="Sports">
+                        <p class="text-black text-xs font-bold mt-1">Sports</p>
+                     </div>
+
+                     <div class="text-center" onclick="scrollToSection('/home#video')">
+                        <img src="https://ossimg.bdg123456.com/BDGWin/gamecategory/gamecategory_20240306233502xkvs.png"
+                           class="w-12" alt="Casino">
+                        <p class="text-black text-xs font-bold mt-1">Casino</p>
+                     </div>
+
+                     <div class="text-center">
+                        <img src="https://ossimg.bdg123456.com/BDGWin/gamecategory/gamecategory_202403062334551n7x.png"
+                           class="w-12" alt="Rummy">
+                        <p class="text-black text-xs font-bold mt-1">Rummy</p>
+                     </div>
                   </div>
                </div>
-               <div data-v-5cc5cfb9="" class="row wrap">
-                  <div onclick="location.href='/home#casino'" data-v-5cc5cfb9="" class="row-item row-small game_video">
-                     <img data-v-5cc5cfb9="" class="game_image" alt=""
-                        data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240529195514q4uq.png"
-                        src="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240529195514q4uq.png"><img
-                        data-v-5cc5cfb9="" class="game_bg" alt="" data-origin="/assets/png/video-c9dce622.png"
-                        src="/assets/png/video-c9dce622.png">
-                     <div data-v-5cc5cfb9="" class="game_text">Casino</div>
+
+
+               <div class="flex justify-between space-x-4 gap-2">
+                  <div
+                     style="background-image: url('https://bdgwin.cc/assets/png/hot_bg-1c1c6ca1.png'); background-size: cover; background-position: center;"
+                     class="relative w-20 h-8 flex flex-col items-center rounded-sm shadow-lg p-2"
+                     onclick="scrollToSection('/home#fish')">
+
+                     <div class="absolute inset-0">
+                        <div class="text-center flex justify-between items-end p-2">
+                           <img src="/assets/png/gamecategory_202403062334443pb8.png" alt="Fishing"
+                              style="width: 40%; height: 100%; margin-left: 5px; margin-top: 5px;">
+
+                           <p
+                              style="color: black; font-size: 15px; font-weight: bold; margin-top: 4px; margin-right: 5px;">
+                              Fishing</p>
+
+                        </div>
+                     </div>
                   </div>
-                  <div onclick="location.href='/home#slots'" data-v-5cc5cfb9="" class="row-item row-small game_slot">
-                     <img data-v-5cc5cfb9="" class="game_image" alt=""
-                        data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154558lshk.png"
-                        src="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154558lshk.png"><img
-                        data-v-5cc5cfb9="" class="game_bg" alt="" data-origin="/assets/png/slot-bf07af03.png"
-                        src="/assets/png/slot-bf07af03.png">
-                     <div data-v-5cc5cfb9="" class="game_text">Slots</div>
+
+                  <div
+                     style="background-image: url('https://bdgwin.cc/assets/png/hot_bg-1c1c6ca1.png'); background-size: cover; background-position: center;"
+                     class="relative w-20 h-8 flex flex-col items-center rounded-sm shadow-lg p-2">
+                     <div class="absolute inset-0" onclick="scrollToSection('/home#flash')">
+                        <div class="text-center flex justify-between items-end p-2">
+                           <img
+                              src="https://ossimg.bdg123456.com/BDGWin/gamecategory/gamecategory_20240306233502xkvs.png"
+                              class="w-1/2 h-full" alt="Original">
+                           <p
+                              style="color: black; font-size: 15px; font-weight: bold; margin-top: 4px; margin-right: 5px;">
+                              Original</p>
+                        </div>
+                     </div>
+
                   </div>
-                  <div onclick="location.href='/home#sports'" data-v-5cc5cfb9="" class="row-item row-small game_sport">
-                     <img data-v-5cc5cfb9="" class="game_image" alt=""
-                        data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154454akso.png"
-                        src="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154454akso.png"><img
-                        data-v-5cc5cfb9="" class="game_bg" alt="" data-origin="/assets/png/sport-ac79bf87.png"
-                        src="/assets/png/sport-ac79bf87.png">
-                     <div data-v-5cc5cfb9="" class="game_text">Sports</div>
+               </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+            <div data-v-5d47e2fb="" data-v-0137aa14="" class="homeNav" id="lottery" style="margin-top:20px">
+               <div data-v-a75fb528="" class="title">
+                  <div data-v-a75fb528="">
+                     <b data-v-a75fb528=""></b>
+                     Lottery
+                     <div data-v-a75fb528="" class="allMore">More Inside</div>
                   </div>
-                  <div onclick="location.href='/home#rummy'" data-v-5cc5cfb9="" class="row-item row-small game_chess">
-                     <img data-v-5cc5cfb9="" class="game_image" alt=""
-                        data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_202404151616441889.png"
-                        src="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_202404151616441889.png"><img
-                        data-v-5cc5cfb9="" class="game_bg" alt="" data-origin="/assets/png/chess-9c4d1dff.png"
-                        src="/assets/png/chess-9c4d1dff.png">
-                     <div data-v-5cc5cfb9="" class="game_text">Rummy</div>
+
+               </div>
+               <div data-v-a75fb528="" class="tip">Fair and diverse lottery gameplay</div>
+
+
+
+               <div class=" p-4 ">
+                  <div class="rounded-lg p-4  flex items-center justify-between shadow-md cursor-pointer"
+                     style="background-image: url('/assets/png/third_bg-e90cc231.png'); background-size: cover; background-position: center; margin-bottom: 10px;"
+                     onclick="window.location.href='/wingo'">
+                     <div style="margin-left: 20px;">
+                        <h2 style="font-size: 15px; font-weight: 800; color: #8F5206; margin-top: -8px;">Win Go</h2>
+                        <p style="font-size: 10px; color: #8F5206; margin-top: 10px;">Guess Number</p>
+                        <p style="font-size: 10px; color: #8F5206; margin-top: 5px;">Green/Red/Violet to win</p>
+                     </div>
+                     <img src="/assets/png/lotterycategory_20240321194458iceq.png" alt="Win Go" class="w-10 h-8">
                   </div>
-                  <div onclick="location.href='/home#fishing'" data-v-5cc5cfb9="" class="row-item row-small game_fish">
-                     <img data-v-5cc5cfb9="" class="game_image" alt=""
-                        data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221164829vcfa.png"
-                        src="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221164829vcfa.png"><img
-                        data-v-5cc5cfb9="" class="game_bg" alt="" data-origin="/assets/png/fish-a70df76d.png"
-                        src="/assets/png/fish-a70df76d.png">
-                     <div data-v-5cc5cfb9="" class="game_text">Fishing</div>
+
+                  <div class="rounded-lg p-4 flex items-center justify-between shadow-md cursor-pointer"
+                     style="background-image: url('/assets/png/third_bg-e90cc231.png'); background-size: cover; background-position: center; margin-bottom: 10px;"
+                     onclick="window.location.href='/k3'">
+                     <div style="margin-left: 20px;">
+                        <h2 style="font-size: 15px; font-weight: 800; color: #8F5206; margin-top: -8px;">K3</h2>
+                        <p style="font-size: 10px; color: #8F5206; margin-top: 10px;">Guess Number</p>
+                        <p style="font-size: 10px; color: #8F5206; margin-top: 5px;">Big/Small/Odd/Even</p>
+                     </div>
+                     <img src="/assets/png/lotterycategory_20240321194451en5o.png" alt="K3" class="w-10 h-8">
                   </div>
-                  <div onclick="location.href='/home#original'" data-v-5cc5cfb9=""
-                     class="row-item row-small game_flash"><img data-v-5cc5cfb9="" class="game_image" alt=""
-                        data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240415161436vabi.png"
-                        src="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240415161436vabi.png"><img
-                        data-v-5cc5cfb9="" class="game_bg" alt="" data-origin="/assets/png/flash-eac62fa4.png"
-                        src="/assets/png/flash-eac62fa4.png">
-                     <div data-v-5cc5cfb9="" class="game_text">Original</div>
+
+                  <div class="rounded-lg p-4 flex items-center justify-between shadow-md cursor-pointer"
+                     style="background-image: url('/assets/png/third_bg-e90cc231.png'); background-size: cover; background-position: center; margin-bottom: 10px;"
+                     onclick="window.location.href='/5d'">
+                     <div style="margin-left: 20px;">
+                        <h2 style="font-size: 15px; font-weight: 800; color: #8F5206; margin-top: -8px;">5D</h2>
+                        <p style="font-size: 10px; color: #8F5206; margin-top: 10px;">Guess Number</p>
+                        <p style="font-size: 10px; color: #8F5206; margin-top: 5px;">Big/Small/Odd/Even</p>
+                     </div>
+                     <img src="/assets/png/lotterycategory_20240321194510h9i1.png" alt="5D" class="w-10 h-8">
                   </div>
+
+                  <div class="rounded-lg p-4 flex items-center justify-between shadow-md cursor-pointer"
+                     style="background-image: url('/assets/png/third_bg-e90cc231.png'); background-size: cover; background-position: center; margin-bottom: 10px;"
+                     onclick="window.location.href='/trx_wingo'">
+                     <div style="margin-left: 20px;">
+                        <h2 style="font-size: 15px; font-weight: 800; color: #8F5206; margin-top: -8px;">TRX WinGo</h2>
+                        <p style="font-size: 10px; color: #8F5206; margin-top: 10px;">Guess Number</p>
+                        <p style="font-size: 10px; color: #8F5206; margin-top: 5px;">Try your luck today</p>
+                     </div>
+                     <img src="/assets/png/lotterycategory_20240321194519jacj.png" alt="TRX WinGo" class="w-10 h-8">
+                  </div>
+               </div>
+
+
+
+
+            </div>
+
+
+
+
+            <div data-v-5d47e2fb="" data-v-0137aa14="" class="homeNav" id="lottery" style="margin-top:10px">
+               <div data-v-a75fb528="" class="title">
+                  <div data-v-a75fb528="">
+                     <b data-v-a75fb528=""></b>
+                     Refer & Earn
+
+                  </div>
+
+               </div>
+               <div data-v-a75fb528="" class="tip">Refer your friends and earn unlimited.</div>
+               <div data-v-5d47e2fb="">
+                  <!--v-if-->
+                  <img data-v-a75fb528="" alt="" src="/activity/referearn.jpg" style="width: 100%; border-radius: 10px;"
+                     onclick="window.location.href='/invibonus'">
+
                </div>
             </div>
-            <!-- <div data-v-5cc5cfb9="" class="game-sticky">
-               <div data-v-5cc5cfb9="" class="fun-tabs tabs" activeclassname="tab_active">
-                  <div class="fun-tabs__tab-list"
-                     style="transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); transition-duration: 360ms; transform: translate3d(0px, 0px, 0px);">
-                     <div class="fun-tab-item funtab_item activeClassName" style="color: rgb(22, 119, 255);">
-                        <div class="fun-tab-item__wrap">
-                           <div class="fun-tab-item__label">
-                              <div data-v-5cc5cfb9="" class="tab_item tab_active"><img data-v-5cc5cfb9="" class=""
-                                    data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154444kutg.png"
-                                    src="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154444kutg.png"><span
-                                    data-v-5cc5cfb9="">Popular</span></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="fun-tab-item funtab_item">
-                        <div class="fun-tab-item__wrap">
-                           <div class="fun-tab-item__label">
-                              <div data-v-5cc5cfb9="" class="tab_item"><img data-v-5cc5cfb9="" class=""
-                                    data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154540veqj.png"
-                                    src="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154540veqj.png"><span
-                                    data-v-5cc5cfb9="">Lottery</span></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="fun-tab-item funtab_item">
-                        <div class="fun-tab-item__wrap">
-                           <div class="fun-tab-item__label">
-                              <div data-v-5cc5cfb9="" class="tab_item"><img data-v-5cc5cfb9="" class=""
-                                    data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240529195514q4uq.png"
-                                    src="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240529195514q4uq.png"><span
-                                    data-v-5cc5cfb9="">Casino</span></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="fun-tab-item funtab_item">
-                        <div class="fun-tab-item__wrap">
-                           <div class="fun-tab-item__label">
-                              <div data-v-5cc5cfb9="" class="tab_item"><img data-v-5cc5cfb9="" class=""
-                                    data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154558lshk.png"
-                                    src="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154558lshk.png"><span
-                                    data-v-5cc5cfb9="">Slots</span></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="fun-tab-item funtab_item">
-                        <div class="fun-tab-item__wrap">
-                           <div class="fun-tab-item__label">
-                              <div data-v-5cc5cfb9="" class="tab_item"><img data-v-5cc5cfb9="" class="ar-lazyload"
-                                    data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221154454akso.png"><span
-                                    data-v-5cc5cfb9="">Sports</span></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="fun-tab-item funtab_item">
-                        <div class="fun-tab-item__wrap">
-                           <div class="fun-tab-item__label">
-                              <div data-v-5cc5cfb9="" class="tab_item"><img data-v-5cc5cfb9="" class="ar-lazyload"
-                                    data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_202404151616441889.png"><span
-                                    data-v-5cc5cfb9="">Rummy</span></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="fun-tab-item funtab_item">
-                        <div class="fun-tab-item__wrap">
-                           <div class="fun-tab-item__label">
-                              <div data-v-5cc5cfb9="" class="tab_item"><img data-v-5cc5cfb9="" class="ar-lazyload"
-                                    data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240221164829vcfa.png"><span
-                                    data-v-5cc5cfb9="">Fishing</span></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="fun-tab-item funtab_item">
-                        <div class="fun-tab-item__wrap">
-                           <div class="fun-tab-item__label">
-                              <div data-v-5cc5cfb9="" class="tab_item"><img data-v-5cc5cfb9="" class="ar-lazyload"
-                                    data-origin="https://ossimg.tirangaagent.com/Tiranga/gamecategory/gamecategory_20240415161436vabi.png"><span
-                                    data-v-5cc5cfb9="">Original</span></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="fun-tabs__active-line"
-                        style="transition: all 300ms ease 0s; width: 0px; height: 3px; transform: translate3d(53.5px, 0px, 0px); background-color: rgb(22, 119, 255);">
-                     </div>
-                  </div>
+
+
+
+
+
+            <div data-v-164dafb9="" data-v-0137aa14="" id="slot">
+               <div data-v-164dafb9="" class="title">
+                  <b data-v-164dafb9="">
+                  </b>
+                  Slots
                </div>
-            </div> -->
-            <div data-v-5cc5cfb9="" class="game-content">
-               <div data-v-5cc5cfb9="" class="game-list">
-                  <div data-v-5cc5cfb9="" class="" id="lottery">
-                     <div data-v-c50131ba="" data-v-5cc5cfb9="" class="daman-title daman-line">
-                        <div data-v-c50131ba="" class="daman-title-left"><span data-v-c50131ba="">Lottery</span></div>
-                        <div data-v-c50131ba="" class="btn-all">
-                           <p data-v-c50131ba="">All</p><span data-v-c50131ba="">4</span><svg data-v-c50131ba=""
-                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path data-v-c50131ba="" fill-rule="evenodd" clip-rule="evenodd"
-                                 d="M8.5064 19.541C7.99993 19.9904 7.2002 19.6308 7.2002 18.9537C7.2002 18.7288 7.29666 18.5147 7.46512 18.3657L14.6731 11.9896C14.7178 11.95 14.7181 11.8804 14.6738 11.8404L7.45763 5.33217C7.29374 5.18437 7.2002 4.97403 7.2002 4.75334C7.2002 4.078 8.00051 3.72221 8.50188 4.17465L15.8798 10.8325L16.2562 11.1964C16.6628 11.5895 16.6628 12.2412 16.2562 12.6343L15.8798 12.9982L8.5064 19.541Z"
-                                 fill="#666666"></path>
-                           </svg>
+               <div data-v-164dafb9="" class="tip">
+                  Online real-time game dealers, all verified fair games
+               </div>
+               <div data-v-164dafb9="" class="van-tabs van-tabs--line homeNav">
+                  <div class="van-tabs__wrap">
+                     <div role="tablist" class="van-tabs__nav van-tabs__nav--line" aria-orientation="horizontal">
+                        <!-- Tab for JILI -->
+                        <div id="van-tabs-110-3" role="tab" class="van-tab van-tab--line van-tab--active" tabindex="-1"
+                           aria-selected="false" aria-controls="van-tab-115">
+                           <span class="van-tab__text van-tab__text--ellipsis">
+                              <div data-v-164dafb9="" class="tabs-btn">
+                                 <svg data-v-164dafb9="" class="svg-icon icon-JILI gameIcon gameIcon">
+                                    <use xlink:href="#icon-JILI"></use>
+                                 </svg>
+                                 JILI
+                              </div>
+                           </span>
                         </div>
-                     </div><!--热门--><!--彩票-->
-                     <div data-v-36646609="" class="daman-lottery">
-                        <div data-v-36646609="" class="daman_img" onclick="window.location.href='/wingo?game_type=1'">
-                           <h3 data-v-36646609="">Win Go</h3><img data-v-36646609="" alt="" class=""
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/lotterycategory/lotterycategory_20240124125544jt65.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/lotterycategory/lotterycategory_20240124125544jt65.png">
-                           <div data-v-36646609="" class="daman-btn">GO <i data-v-36646609=""
-                                 class="van-badge__wrapper van-icon van-icon-arrow"></i></div>
+                        <!-- Tab for MG -->
+                        <div id="van-tabs-110-1" role="tab" class="van-tab van-tab--line" tabindex="-1"
+                           aria-selected="false" aria-controls="van-tab-113">
+                           <span class="van-tab__text van-tab__text--ellipsis">
+                              <div data-v-164dafb9="" class="tabs-btn">
+                                 <svg data-v-164dafb9="" class="svg-icon icon-MG gameIcon gameIcon">
+                                    <use xlink:href="#icon-MG"></use>
+                                 </svg>
+                                 MG
+                              </div>
+                           </span>
                         </div>
-                        <div data-v-36646609="" class="daman_img" onclick="window.location.href='/k3?game_type=1'">
-                           <h3 data-v-36646609="">K3</h3><img data-v-36646609="" alt="" class=""
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/lotterycategory/lotterycategory_20240124125551se9i.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/lotterycategory/lotterycategory_20240124125551se9i.png">
-                           <div data-v-36646609="" class="daman-btn">GO <i data-v-36646609=""
-                                 class="van-badge__wrapper van-icon van-icon-arrow"></i></div>
+                        <!-- Tab for EVO_Electronic -->
+                        <div id="van-tabs-110-2" role="tab" class="van-tab van-tab--line" tabindex="-1"
+                           aria-selected="false" aria-controls="van-tab-114">
+                           <span class="van-tab__text van-tab__text--ellipsis">
+                              <div data-v-164dafb9="" class="tabs-btn">
+                                 <svg data-v-164dafb9="" class="svg-icon icon-EVO_Electronic gameIcon gameIcon">
+                                    <use xlink:href="#icon-EVO_Electronic"></use>
+                                 </svg>
+                                 EVO_Electronic
+                              </div>
+                           </span>
                         </div>
-                        <div data-v-36646609="" class="daman_img" onclick="window.location.href='/5d?game_type=1'">
-                           <h3 data-v-36646609="">5D</h3><img data-v-36646609="" alt="" class=""
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/lotterycategory/lotterycategory_20240124125558slo1.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/lotterycategory/lotterycategory_20240124125558slo1.png">
-                           <div data-v-36646609="" class="daman-btn">GO <i data-v-36646609=""
-                                 class="van-badge__wrapper van-icon van-icon-arrow"></i></div>
+                        <!-- Tab for CQ9 -->
+                        <div id="van-tabs-110-0" role="tab" class="van-tab van-tab--line" tabindex="0"
+                           aria-selected="true" aria-controls="van-tab-112">
+                           <span class="van-tab__text van-tab__text--ellipsis">
+                              <div data-v-164dafb9="" class="tabs-btn">
+                                 <svg data-v-164dafb9="" class="svg-icon icon-CQ9 gameIcon gameIcon">
+                                    <use xlink:href="#icon-CQ9"></use>
+                                 </svg>
+                                 CQ9
+                              </div>
+                           </span>
                         </div>
-                        <div data-v-36646609="" class="daman_img"
-                           onclick="window.location.href='/trx_wingo?game_type=1'">
-                           <h3 data-v-36646609="">Trx Win Go</h3><img data-v-36646609="" alt="" class=""
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/lotterycategory/lotterycategory_20240124125606db4a.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/lotterycategory/lotterycategory_20240124125606db4a.png">
-                           <div data-v-36646609="" class="daman-btn">GO <i data-v-36646609=""
-                                 class="van-badge__wrapper van-icon van-icon-arrow"></i></div>
-                        </div>
-                     </div><!--其他-->
-                  </div>
-                  <div data-v-5cc5cfb9="" class="" id="original">
-                     <div data-v-c50131ba="" data-v-5cc5cfb9="" class="daman-title daman-line">
-                        <div data-v-c50131ba="" class="daman-title-left"><span data-v-c50131ba="">Original</span></div>
-                        <div data-v-c50131ba="" class="btn-all">
-                           <p data-v-c50131ba="">All</p><span data-v-c50131ba="">31</span><svg data-v-c50131ba=""
-                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path data-v-c50131ba="" fill-rule="evenodd" clip-rule="evenodd"
-                                 d="M8.5064 19.541C7.99993 19.9904 7.2002 19.6308 7.2002 18.9537C7.2002 18.7288 7.29666 18.5147 7.46512 18.3657L14.6731 11.9896C14.7178 11.95 14.7181 11.8804 14.6738 11.8404L7.45763 5.33217C7.29374 5.18437 7.2002 4.97403 7.2002 4.75334C7.2002 4.078 8.00051 3.72221 8.50188 4.17465L15.8798 10.8325L16.2562 11.1964C16.6628 11.5895 16.6628 12.2412 16.2562 12.6343L15.8798 12.9982L8.5064 19.541Z"
-                                 fill="#666666"></path>
-                           </svg>
-                        </div>
-                     </div><!--热门--><!--彩票--><!--其他-->
-                     <div data-v-fde5c416="" data-v-5cc5cfb9="" class="daman__container allGame">
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(22, 22001)"><img data-v-fde5c416=""
-                              class="gameImg ar-lazyload" src="/jdb_images/22001_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(22, 22002)"><img data-v-fde5c416=""
-                              class="gameImg ar-lazyload" src="/jdb_images/22002_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(22, 22003)"><img data-v-fde5c416=""
-                              class="gameImg ar-lazyload" src="/jdb_images/22003_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(22, 22004)"><img data-v-fde5c416=""
-                              class="gameImg ar-lazyload" src="/jdb_images/22004_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(22, 22005)"><img data-v-fde5c416=""
-                              class="gameImg ar-lazyload" src="/jdb_images/22005_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(22, 22006)"><img data-v-fde5c416=""
-                              class="gameImg ar-lazyload" src="/jdb_images/22006_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(22, 22007)"><img data-v-fde5c416=""
-                              class="gameImg ar-lazyload" src="/jdb_images/22007_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(22, 22008)"><img data-v-fde5c416=""
-                              class="gameImg ar-lazyload" src="/jdb_images/22008_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(22, 22009)"><img data-v-fde5c416=""
-                              class="gameImg ar-lazyload" src="/jdb_images/22009_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14053)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14053_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14091)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14091_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14090)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14090_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14089)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14089_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14087)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14087_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14086)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14086_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14085)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14085_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14084)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14084_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14083)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14083_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14082)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14082_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14080)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14080_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14081)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14081_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14079)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14079_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14075)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14075_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14068)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14068_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14067)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14067_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14065)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14065_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(0, 14064)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/14064_200x200_en.png">
+
+                        <!-- Tab for PG -->
+                        <div id="van-tabs-110-4" role="tab" class="van-tab van-tab--line" tabindex="-1"
+                           aria-selected="false" aria-controls="van-tab-116">
+                           <span class="van-tab__text van-tab__text--ellipsis">
+                              <div data-v-164dafb9="" class="tabs-btn">
+                                 <svg data-v-164dafb9="" class="svg-icon icon-PG gameIcon gameIcon">
+                                    <use xlink:href="#icon-PG"></use>
+                                 </svg>
+                                 PG
+                              </div>
+                           </span>
                         </div>
                      </div>
                   </div>
-                  <div data-v-5cc5cfb9="" class="" id="popular">
-                     <div data-v-c50131ba="" data-v-5cc5cfb9="" class="daman-title">
-                        <div data-v-c50131ba="" class="daman-title-left"><svg data-v-c50131ba=""
-                              class="svg-icon icon-hot">
-                              <use xlink:href="#icon-hot"></use>
-                           </svg><span data-v-c50131ba="">Platform recommendation</span></div>
-                        <div data-v-c50131ba="" class="btn-all">
-                           <p data-v-c50131ba="">All</p><span data-v-c50131ba="">6</span><svg data-v-c50131ba=""
-                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path data-v-c50131ba="" fill-rule="evenodd" clip-rule="evenodd"
-                                 d="M8.5064 19.541C7.99993 19.9904 7.2002 19.6308 7.2002 18.9537C7.2002 18.7288 7.29666 18.5147 7.46512 18.3657L14.6731 11.9896C14.7178 11.95 14.7181 11.8804 14.6738 11.8404L7.45763 5.33217C7.29374 5.18437 7.2002 4.97403 7.2002 4.75334C7.2002 4.078 8.00051 3.72221 8.50188 4.17465L15.8798 10.8325L16.2562 11.1964C16.6628 11.5895 16.6628 12.2412 16.2562 12.6343L15.8798 12.9982L8.5064 19.541Z"
-                                 fill="#666666"></path>
-                           </svg>
-                        </div>
-                     </div><!--热门-->
-                     <div data-v-fde5c416="" data-v-5cc5cfb9="" class="daman__container allGame">
-                        <div onclick="openJILIGameById(224)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/TB_Chess/800.png"
-                              src="/jili_games/GAMEID_224.png">
-                           <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
-                                 data-v-fde5c416="">85.96%</span>
-                              <div data-v-fde5c416="" class="win-p" style="width: 85.96%;"></div>
+
+                  <!-- Tab content for each game provider -->
+                  <div class="van-tabs__content van-tabs__content--animated">
+                     <div class="van-swipe van-tabs__track">
+
+                        <div class="van-swipe__track">
+                           <!-- JILI Content -->
+                           <div data-v-164dafb9="" class="van-swipe-item van-tab__panel-wrapper" id="van-tab-115"
+                              role="tabpanel" tabindex="-1" aria-hidden="true" aria-labelledby="van-tabs-110-3"
+                              style="width: fit-content;">
+                              <div class="van-tab__panel">
+                                 <div data-v-164dafb9="" class="picContainer">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(224)" src="/jili_games/GAMEID_224.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(111)" src="/jili_games/GAMEID_111.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(118)" src="/jili_games/GAMEID_118.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(6)" src="/jili_games/GAMEID_06.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(9)" src="/jili_games/GAMEID_09.png">
+                                    <div data-v-5d47e2fb="" class="more" class="restricted-link"
+                                       onclick="location.href = '/slots'">
+                                       <div data-v-5d47e2fb="" class="more-l1">
+                                          <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                                             <use xlink:href="#icon-p3more">
+                                             </use>
+                                          </svg>
+                                          More
+                                       </div>
+                                       <div data-v-5d47e2fb="" class="more-l2">
+                                          Jili
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
                            </div>
-                        </div>
-                        <div onclick="openJDBGame(22, 22001)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/SPRIBE/22001.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/SPRIBE/22001.png">
-                           <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
-                                 data-v-fde5c416="">89.64%</span>
-                              <div data-v-fde5c416="" class="win-p" style="width: 89.64%;"></div>
+                           <!-- MG Content -->
+                           <div data-v-164dafb9="" class="van-swipe-item van-tab__panel-wrapper" id="van-tab-113"
+                              role="tabpanel" tabindex="-1" aria-hidden="true" aria-labelledby="van-tabs-110-1"
+                              style="width: fit-content;">
+                              <div class="van-tab__panel">
+                                 <div data-v-164dafb9="" class="picContainer">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(10)" src="/jili_games/GAMEID_10.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(13)" src="/jili_games/GAMEID_13.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(14)" src="/jili_games/GAMEID_14.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(16)" src="/jili_games/GAMEID_16.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(17)" src="/jili_games/GAMEID_17.png">
+                                    <div data-v-5d47e2fb="" class="more restricted-link"
+                                       onclick="location.href = '/slots'">
+                                       <div data-v-5d47e2fb="" class="more-l1">
+                                          <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                                             <use xlink:href="#icon-p3more">
+                                             </use>
+                                          </svg>
+                                          More
+                                       </div>
+                                       <div data-v-5d47e2fb="" class="more-l2">
+                                          MG
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
                            </div>
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJILIGameById(1)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/PG/98.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/1.png">
-                           <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
-                                 data-v-fde5c416="">85.14%</span>
-                              <div data-v-fde5c416="" class="win-p" style="width: 85.14%;"></div>
+                           <!-- EVO_Electronic Content -->
+                           <div data-v-164dafb9="" class="van-swipe-item van-tab__panel-wrapper" id="van-tab-114"
+                              role="tabpanel" tabindex="-1" aria-hidden="true" aria-labelledby="van-tabs-110-2"
+                              style="width: fit-content;">
+                              <div class="van-tab__panel">
+                                 <div data-v-164dafb9="" class="picContainer">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(18)" src="/jili_games/GAMEID_18.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(21)" src="/jili_games/GAMEID_21.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(23)" src="/jili_games/GAMEID_23.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(26)" src="/jili_games/GAMEID_26.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(27)" src="/jili_games/GAMEID_27.png">
+                                    <div data-v-5d47e2fb="" class="more restricted-link"
+                                       onclick="location.href = '/slots'">
+                                       <div data-v-5d47e2fb="" class="more-l1">
+                                          <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                                             <use xlink:href="#icon-p3more">
+                                             </use>
+                                          </svg>
+                                          More
+                                       </div>
+                                       <div data-v-5d47e2fb="" class="more-l2">
+                                          EVO
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
                            </div>
-                        </div>
-
-
-
-                        <div onclick="openJILIGameById(1)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/1.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/1.png">
-                           <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
-                                 data-v-fde5c416="">89.83%</span>
-                              <div data-v-fde5c416="" class="win-p" style="width: 89.83%;"></div>
+                           <!-- CQ9 Content -->
+                           <div data-v-164dafb9="" class="van-swipe-item van-tab__panel-wrapper" id="van-tab-112"
+                              role="tabpanel" tabindex="0" aria-hidden="false" aria-labelledby="van-tabs-110-0"
+                              style="width: fit-content;">
+                              <div class="van-tab__panel">
+                                 <div data-v-164dafb9="" class="picContainer">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(30)" src="/jili_games/GAMEID_30.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(33)" src="/jili_games/GAMEID_33.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(35)" src="/jili_games/GAMEID_35.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(36)" src="/jili_games/GAMEID_36.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(37)" src="/jili_games/GAMEID_37.png">
+                                    <div data-v-5d47e2fb="" class="more restricted-link"
+                                       onclick="location.href = '/slots'">
+                                       <div data-v-5d47e2fb="" class="more-l1">
+                                          <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                                             <use xlink:href="#icon-p3more">
+                                             </use>
+                                          </svg>
+                                          More
+                                       </div>
+                                       <div data-v-5d47e2fb="" class="more-l2">
+                                          CQ9
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
                            </div>
-                        </div>
-                        <div onclick="openJILIGameById(100)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/100.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/100.png">
-                           <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
-                                 data-v-fde5c416="">84.9%</span>
-                              <div data-v-fde5c416="" class="win-p" style="width: 84.9%;"></div>
+
+                           <!-- PG Content -->
+                           <div data-v-164dafb9="" class="van-swipe-item van-tab__panel-wrapper" id="van-tab-116"
+                              role="tabpanel" tabindex="-1" aria-hidden="true" aria-labelledby="van-tabs-110-4"
+                              style="width: fit-content;">
+                              <div class="van-tab__panel">
+                                 <div data-v-164dafb9="" class="picContainer">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(38)" src="/jili_games/GAMEID_38.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(40)" src="/jili_games/GAMEID_40.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(42)" src="/jili_games/GAMEID_42.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(43)" src="/jili_games/GAMEID_43.png">
+                                    <img data-v-164dafb9="" alt="JILI Game" class="restricted-link"
+                                       onclick="openJILIGameById(44)" src="/jili_games/GAMEID_44.png">
+                                    <div data-v-5d47e2fb="" class="more restricted-link"
+                                       onclick="location.href = '/slots'">
+                                       <div data-v-5d47e2fb="" class="more-l1">
+                                          <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                                             <use xlink:href="#icon-p3more">
+                                             </use>
+                                          </svg>
+                                          More
+                                       </div>
+                                       <div data-v-5d47e2fb="" class="more-l2">
+                                          PG
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
                            </div>
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJILIGameById(119)"><img data-v-fde5c416=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/PG/1543462.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/119.png">
-                           <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
-                                 data-v-fde5c416="">91.42%</span>
-                              <div data-v-fde5c416="" class="win-p" style="width: 91.42%;"></div>
-                           </div>
-                        </div>
-
-                     </div><!--彩票--><!--其他-->
-                  </div>
-                  <div data-v-5cc5cfb9="" class="" id="slots">
-                     <div data-v-c50131ba="" data-v-5cc5cfb9="" class="daman-title daman-line">
-                        <div data-v-c50131ba="" class="daman-title-left"><span data-v-c50131ba="">Slots</span></div>
-                        <div data-v-c50131ba="" class="btn-all">
-                           <p data-v-c50131ba="">All</p><span data-v-c50131ba="">7</span><svg data-v-c50131ba=""
-                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path data-v-c50131ba="" fill-rule="evenodd" clip-rule="evenodd"
-                                 d="M8.5064 19.541C7.99993 19.9904 7.2002 19.6308 7.2002 18.9537C7.2002 18.7288 7.29666 18.5147 7.46512 18.3657L14.6731 11.9896C14.7178 11.95 14.7181 11.8804 14.6738 11.8404L7.45763 5.33217C7.29374 5.18437 7.2002 4.97403 7.2002 4.75334C7.2002 4.078 8.00051 3.72221 8.50188 4.17465L15.8798 10.8325L16.2562 11.1964C16.6628 11.5895 16.6628 12.2412 16.2562 12.6343L15.8798 12.9982L8.5064 19.541Z"
-                                 fill="#666666"></path>
-                           </svg>
-                        </div>
-                     </div><!--热门--><!--彩票--><!--其他-->
-                     <div data-v-9bb3e456="" data-v-5cc5cfb9="" class="daman__container allGame">
-                        <div onclick="openJILIGameById(2)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_02.png">
-                        </div>
-                        <div onclick="openJILIGameById(4)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_04.png">
-                        </div>
-                        <div onclick="openJILIGameById(5)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_05.png">
-                        </div>
-                        <div onclick="openJILIGameById(6)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_06.png">
-                        </div>
-                        <div onclick="openJILIGameById(9)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_09.png">
-                        </div>
-                        <div onclick="openJILIGameById(10)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_10.png">
-                        </div>
-                        <div onclick="openJILIGameById(13)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_13.png">
-                        </div>
-                        <div onclick="openJILIGameById(14)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_14.png">
-                        </div>
-                        <div onclick="openJILIGameById(16)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_16.png">
-                        </div>
-                        <div onclick="openJILIGameById(17)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_17.png">
-                        </div>
-                        <div onclick="openJILIGameById(18)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_18.png">
-                        </div>
-                        <div onclick="openJILIGameById(21)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_21.png">
-                        </div>
-                        <div onclick="openJILIGameById(23)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_23.png">
-                        </div>
-                        <div onclick="openJILIGameById(26)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_26.png">
-                        </div>
-                        <div onclick="openJILIGameById(27)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_27.png">
-                        </div>
-                        <div onclick="openJILIGameById(30)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_30.png">
-                        </div>
-                        <div onclick="openJILIGameById(33)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_33.png">
-                        </div>
-                        <div onclick="openJILIGameById(35)" data-v-9bb3e456="" class="item"><img data-v-9bb3e456=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026190224r2r8.png"
-                              src="/jili_games/GAMEID_35.png">
-                        </div>
-
-                     </div>
-                  </div>
-                  <div data-v-5cc5cfb9="" class="" id="sports">
-                     <div data-v-c50131ba="" data-v-5cc5cfb9="" class="daman-title daman-line">
-                        <div data-v-c50131ba="" class="daman-title-left"><span data-v-c50131ba="">Sports</span></div>
-                        <div data-v-c50131ba="" class="btn-all">
-                           <p data-v-c50131ba="">All</p><span data-v-c50131ba="">2</span><svg data-v-c50131ba=""
-                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path data-v-c50131ba="" fill-rule="evenodd" clip-rule="evenodd"
-                                 d="M8.5064 19.541C7.99993 19.9904 7.2002 19.6308 7.2002 18.9537C7.2002 18.7288 7.29666 18.5147 7.46512 18.3657L14.6731 11.9896C14.7178 11.95 14.7181 11.8804 14.6738 11.8404L7.45763 5.33217C7.29374 5.18437 7.2002 4.97403 7.2002 4.75334C7.2002 4.078 8.00051 3.72221 8.50188 4.17465L15.8798 10.8325L16.2562 11.1964C16.6628 11.5895 16.6628 12.2412 16.2562 12.6343L15.8798 12.9982L8.5064 19.541Z"
-                                 fill="#666666"></path>
-                           </svg>
-                        </div>
-                     </div><!--热门--><!--彩票--><!--其他-->
-                     <div data-v-9bb3e456="" data-v-5cc5cfb9="" class="daman__container allGame">
-                        <div onclick="openJILIGameById(112)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_112.png">
-                        </div>
-                        <div onclick="openJILIGameById(123)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_123.png">
-                        </div>
-                     </div>
-                  </div>
-                  <div data-v-5cc5cfb9="" class="" id="casino">
-                     <div data-v-c50131ba="" data-v-5cc5cfb9="" class="daman-title daman-line">
-                        <div data-v-c50131ba="" class="daman-title-left"><span data-v-c50131ba="">Casino</span></div>
-                        <div data-v-c50131ba="" class="btn-all">
-                           <p data-v-c50131ba="">All</p><span data-v-c50131ba=""></span><svg data-v-c50131ba=""
-                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path data-v-c50131ba="" fill-rule="evenodd" clip-rule="evenodd"
-                                 d="M8.5064 19.541C7.99993 19.9904 7.2002 19.6308 7.2002 18.9537C7.2002 18.7288 7.29666 18.5147 7.46512 18.3657L14.6731 11.9896C14.7178 11.95 14.7181 11.8804 14.6738 11.8404L7.45763 5.33217C7.29374 5.18437 7.2002 4.97403 7.2002 4.75334C7.2002 4.078 8.00051 3.72221 8.50188 4.17465L15.8798 10.8325L16.2562 11.1964C16.6628 11.5895 16.6628 12.2412 16.2562 12.6343L15.8798 12.9982L8.5064 19.541Z"
-                                 fill="#666666"></path>
-                           </svg>
-                        </div>
-                     </div><!--热门--><!--彩票--><!--其他-->
-                     <div data-v-fde5c416="" data-v-5cc5cfb9="" class="daman__container allGame">
-                        <div onclick="openJILIGameById(111)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_111.png">
-                        </div>
-                        <div onclick="openJILIGameById(113)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_113.png">
-                        </div>
-                        <div onclick="openJILIGameById(114)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_114.png">
-                        </div>
-                        <div onclick="openJILIGameById(118)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_118.png">
-                        </div>
-                        <div onclick="openJILIGameById(122)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_122.png">
-                        </div>
-                        <div onclick="openJILIGameById(124)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_124.png">
-                        </div>
-                        <div onclick="openJILIGameById(125)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_125.png">
-                        </div>
-                        <div onclick="openJILIGameById(139)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_139.png">
-                        </div>
-                        <div onclick="openJILIGameById(143)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_143.png">
-                        </div>
-
-                     </div>
-                  </div>
-                  <div data-v-5cc5cfb9="" class="" id="fishing">
-                     <div data-v-c50131ba="" data-v-5cc5cfb9="" class="daman-title daman-line">
-                        <div data-v-c50131ba="" class="daman-title-left"><span data-v-c50131ba="">Fishing</span></div>
-                        <div data-v-c50131ba="" class="btn-all">
-                           <p data-v-c50131ba="">All</p><span data-v-c50131ba="">21</span><svg data-v-c50131ba=""
-                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path data-v-c50131ba="" fill-rule="evenodd" clip-rule="evenodd"
-                                 d="M8.5064 19.541C7.99993 19.9904 7.2002 19.6308 7.2002 18.9537C7.2002 18.7288 7.29666 18.5147 7.46512 18.3657L14.6731 11.9896C14.7178 11.95 14.7181 11.8804 14.6738 11.8404L7.45763 5.33217C7.29374 5.18437 7.2002 4.97403 7.2002 4.75334C7.2002 4.078 8.00051 3.72221 8.50188 4.17465L15.8798 10.8325L16.2562 11.1964C16.6628 11.5895 16.6628 12.2412 16.2562 12.6343L15.8798 12.9982L8.5064 19.541Z"
-                                 fill="#666666"></path>
-                           </svg>
-                        </div>
-                     </div><!--热门--><!--彩票--><!--其他-->
-                     <div data-v-fde5c416="" data-v-5cc5cfb9="" class="daman__container allGame">
-                        <div data-v-fde5c416="" class="item" onclick="openJILIGameById(1)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/1.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/1.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJILIGameById(119)"><img data-v-fde5c416=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/119.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/119.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJILIGameById(20)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/20.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/20.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJILIGameById(212)"><img data-v-fde5c416=""
-                              class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/212.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/212.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJILIGameById(32)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/32.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/32.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJILIGameById(42)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(7, 7001)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/7001_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(7, 7002)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/7002_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(7, 7003)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/7003_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(7, 7004)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/7004_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(7, 7005)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/7005_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(7, 7006)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/7006_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(7, 7007)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/7007_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(7, 7008)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/7008_200x200_en.png">
-                        </div>
-                        <div data-v-fde5c416="" class="item" onclick="openJDBGame(7, 7009)"><img data-v-fde5c416=""
-                              class="gameImg" data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/42.png"
-                              src="/jdb_images/7009_200x200_en.png">
-                        </div>
-
-                     </div>
-                  </div>
-                  <div data-v-5cc5cfb9="" class="" id="rummy">
-                     <div data-v-c50131ba="" data-v-5cc5cfb9="" class="daman-title daman-line">
-                        <div data-v-c50131ba="" class="daman-title-left"><span data-v-c50131ba="">Rummy</span></div>
-                        <div data-v-c50131ba="" class="btn-all">
-                           <p data-v-c50131ba="">All</p><span data-v-c50131ba="">1</span><svg data-v-c50131ba=""
-                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path data-v-c50131ba="" fill-rule="evenodd" clip-rule="evenodd"
-                                 d="M8.5064 19.541C7.99993 19.9904 7.2002 19.6308 7.2002 18.9537C7.2002 18.7288 7.29666 18.5147 7.46512 18.3657L14.6731 11.9896C14.7178 11.95 14.7181 11.8804 14.6738 11.8404L7.45763 5.33217C7.29374 5.18437 7.2002 4.97403 7.2002 4.75334C7.2002 4.078 8.00051 3.72221 8.50188 4.17465L15.8798 10.8325L16.2562 11.1964C16.6628 11.5895 16.6628 12.2412 16.2562 12.6343L15.8798 12.9982L8.5064 19.541Z"
-                                 fill="#666666"></path>
-                           </svg>
-                        </div>
-                     </div><!--热门--><!--彩票--><!--其他-->
-                     <div data-v-9bb3e456="" data-v-5cc5cfb9="" class="daman__container allGame">
-                        <!-- <div data-v-9bb3e456="" class="item"><img data-v-9bb3e456="" class="gameImg"
-                              data-origin="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026192554xfnm.png"
-                              src="https://ossimg.tirangaagent.com/Tiranga/vendorlogo/vendorlogo_20231026192554xfnm.png">
-                           <div data-v-9bb3e456="" class="game-type">Rummy</div>
-                        </div> -->
-                        <div onclick="openJILIGameById(72)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_72.png">
-                        </div>
-                        <div onclick="openJILIGameById(75)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_75.png">
-                        </div>
-                        <div onclick="openJILIGameById(79)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_79.png">
-                        </div>
-                        <div onclick="openJILIGameById(94)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_94.png">
-                        </div>
-                        <div onclick="openJILIGameById(127)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_127.png">
-                        </div>
-                        <div onclick="openJILIGameById(128)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_128.png">
-                        </div>
-                        <div onclick="openJILIGameById(132)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_132.png">
-                        </div>
-                        <div onclick="openJILIGameById(159)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_159.png">
-                        </div>
-                        <div onclick="openJILIGameById(160)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_160.png">
-                        </div>
-                        <div onclick="openJILIGameById(161)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_161.png">
-                        </div>
-                        <div onclick="openJILIGameById(163)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_163.png">
-                        </div>
-                        <div onclick="openJILIGameById(220)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_220.png">
-                        </div>
-                        <div onclick="openJILIGameById(221)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_221.png">
-                        </div>
-                        <div onclick="openJILIGameById(231)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_231.png">
-                        </div>
-                        <div onclick="openJILIGameById(211)" data-v-fde5c416="" class="item"><img data-v-fde5c416=""
-                              class="gameImg" src="/jili_games/GAMEID_211.png">
                         </div>
                      </div>
                   </div>
                </div>
+
+
+
+
+
+
+
+               <!-- <div data-v-5d47e2fb="" data-v-0137aa14="" class="homeNav" id="flash" style="margin-top:20px">
+                  <div data-v-5d47e2fb="" class="title">
+                    <b data-v-5d47e2fb="">
+                    </b>
+                    Original
+                  </div>
+                  <div data-v-5d47e2fb="" class="tip">
+                    The games are independently developed by our team, fun, fair, and safe
+                  </div>
+                  <div data-v-5d47e2fb="" class="picContainer">
+                    
+                    <img data-v-5d47e2fb="" alt="" class="restricted-link"  onclick="openJDBGame(22, 22001)" src="/jdb_images/22001_200x200_en.png">
+                    <img data-v-5d47e2fb="" alt="" class="restricted-link"  onclick="openJDBGame(22, 22002)" src="/jdb_images/22002_200x200_en.png">
+                    <img data-v-5d47e2fb="" alt="" class="restricted-link"  onclick="openJDBGame(22, 22003)" src="/jdb_images/22003_200x200_en.png">
+                    <img data-v-5d47e2fb="" alt="" class="restricted-link"  onclick="openJDBGame(22, 22004)" src="/jdb_images/22004_200x200_en.png">
+                    <img data-v-5d47e2fb="" alt="" class="restricted-link"  onclick="openJDBGame(22, 22005)" src="/jdb_images/22005_200x200_en.png">
+                    <div data-v-5d47e2fb="" class="more restricted-link" onclick="location.href = '/original'">
+                      <div data-v-5d47e2fb="" class="more-l1">
+                        <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                          <use xlink:href="#icon-p3more">
+                          </use>
+                        </svg>
+                        More
+                      </div>
+                      <div data-v-5d47e2fb="" class="more-l2">
+                        Original
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+
+
+
+               <div data-v-94997d77="" data-v-0137aa14="" class="homeNav" id="bigaward" style="margin-top:20px">
+                  <div data-v-94997d77="" class="title">
+                     <div data-v-94997d77="">
+                        <b data-v-94997d77="">
+                        </b>
+                        Super Jackpot
+                     </div>
+
+                  </div>
+                  <div data-v-94997d77="" class="tip">
+                     When you win a super jackpot, you will receive additional rewards
+                  </div>
+                  <div data-v-94997d77="" class="tip">
+                     Maximum bonus
+                     <span data-v-94997d77="">
+                        ₹300.00
+                     </span>
+                  </div>
+                  <div data-v-fde5c416="" data-v-5cc5cfb9="" class="daman__container allGame">
+                     <div onclick="openJILIGameById(224)" data-v-fde5c416="" class="item restricted-link"><img
+                           data-v-fde5c416="" class="gameImg"
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/TB_Chess/800.png"
+                           src="/jili_games/GAMEID_224.png">
+                        <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
+                              data-v-fde5c416="">85.96%</span>
+                           <div data-v-fde5c416="" class="win-p" style="width: 85.96%;"></div>
+                        </div>
+                     </div>
+                     <div onclick="openJDBGame(22, 22001)" data-v-fde5c416="" class="item restricted-link"><img
+                           data-v-fde5c416="" class="gameImg"
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/SPRIBE/22001.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/SPRIBE/22001.png">
+                        <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
+                              data-v-fde5c416="">89.64%</span>
+                           <div data-v-fde5c416="" class="win-p" style="width: 89.64%;"></div>
+                        </div>
+                     </div>
+                     <div data-v-fde5c416="" class="item restricted-link" onclick="openJILIGameById(1)"><img
+                           data-v-fde5c416="" class="gameImg"
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/PG/98.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/1.png">
+                        <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
+                              data-v-fde5c416="">85.14%</span>
+                           <div data-v-fde5c416="" class="win-p" style="width: 85.14%;"></div>
+                        </div>
+                     </div>
+
+
+
+                     <div onclick="openJILIGameById(1)" data-v-fde5c416="" class="item restricted-link"><img
+                           data-v-fde5c416="" class="gameImg"
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/1.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/1.png">
+                        <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
+                              data-v-fde5c416="">89.83%</span>
+                           <div data-v-fde5c416="" class="win-p" style="width: 89.83%;"></div>
+                        </div>
+                     </div>
+                     <div onclick="openJILIGameById(100)" data-v-fde5c416="" class="item restricted-link"><img
+                           data-v-fde5c416="" class="gameImg"
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/100.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/100.png">
+                        <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
+                              data-v-fde5c416="">84.9%</span>
+                           <div data-v-fde5c416="" class="win-p" style="width: 84.9%;"></div>
+                        </div>
+                     </div>
+                     <div data-v-fde5c416="" class="item restricted-link" onclick="openJILIGameById(119)"><img
+                           data-v-fde5c416="" class="gameImg"
+                           data-origin="https://ossimg.tirangaagent.com/Tiranga/gamelogo/PG/1543462.png"
+                           src="https://ossimg.tirangaagent.com/Tiranga/gamelogo/JILI/119.png">
+                        <div data-v-fde5c416="" class="game-odd"><span data-v-fde5c416="">odds of winning</span><span
+                              data-v-fde5c416="">91.42%</span>
+                           <div data-v-fde5c416="" class="win-p" style="width: 91.42%;"></div>
+                        </div>
+                     </div>
+
+                  </div><!--彩票--><!--其他-->
+                  <div data-v-94997d77="" class="btn" onclick="location.href = '/jackpot'">
+                     Look Super Jackpot
+                  </div>
+               </div>
+
+
+
+               <div data-v-b3f20c24="" data-v-0137aa14="" class="homeNav" id="sport" style="margin-top:20px">
+                  <div data-v-b3f20c24="" class="title">
+                     <div data-v-b3f20c24="">
+                        <b data-v-b3f20c24="">
+                        </b>
+                        Sports
+                        <div data-v-b3f20c24="" class="allMore">
+                           More Fun
+                        </div>
+                     </div>
+
+                  </div>
+                  <div data-v-b3f20c24="" class="tip">
+                     Latest sports events, rich gameplay
+                  </div>
+                  <div data-v-3ad7aed7="" class="swiper_box">
+                     <div data-v-3ad7aed7="" class="swiper my-swipe">
+                        <div class="swiper-wrapper">
+                           <div data-v-3ad7aed7="" class="swiper-slide">
+                              <img data-v-a75fb528="" alt="" class="restricted-link" style="border-radius: 8px;"
+                                 src="/jili_games/GAMEID_112.png" onclick="openJILIGameById(112)">
+                              <img data-v-a75fb528="" alt="" class="restricted-link" style="border-radius: 8px;"
+                                 src="/jili_games/GAMEID_113.png" onclick="openJILIGameById(113)">
+                              <img data-v-a75fb528="" alt="" class="restricted-link" style="border-radius: 8px;"
+                                 src="/jili_games/GAMEID_114.png" onclick="openJILIGameById(114)">
+                           </div>
+                           <div data-v-3ad7aed7="" class="swiper-slide">
+                              <img data-v-a75fb528="" alt="" class="restricted-link" style="border-radius: 8px;"
+                                 src="/jili_games/GAMEID_115.png" onclick="openJILIGameById(115)">
+                              <img data-v-a75fb528="" alt="" class="restricted-link" style="border-radius: 8px;"
+                                 src="/jili_games/GAMEID_116.png" onclick="openJILIGameById(116)">
+                              <img data-v-a75fb528="" alt="" class="restricted-link" style="border-radius: 8px;"
+                                 src="/jili_games/GAMEID_128.png" onclick="openJILIGameById(128)">
+                           </div>
+                           <!-- Add more slides as necessary -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div data-v-d7f5555c="" data-v-0137aa14="" class="homeNav" id="video" style="margin-top:20px">
+                  <div data-v-d7f5555c="" class="title">
+                     <b data-v-d7f5555c="">
+                     </b>
+                     Casino
+                  </div>
+                  <div data-v-d7f5555c="" class="tip">
+                     Guided by live dealers, you will experience the fun of baccarat
+                  </div>
+                  <div data-v-d64223be="" class="picContainer">
+                     <!--v-if-->
+                     <img data-v-d64223be="" alt="" class="restricted-link" onclick="openJILIGameById(111)"
+                        src="/jili_games/GAMEID_111.png">
+                     <img data-v-d64223be="" alt="" class="restricted-link" onclick="openJILIGameById(113)"
+                        src="/jili_games/GAMEID_113.png">
+                     <img data-v-d64223be="" alt="" class="restricted-link" onclick="openJILIGameById(114)"
+                        src="/jili_games/GAMEID_114.png">
+                     <img data-v-d64223be="" alt="" class="restricted-link" onclick="openJILIGameById(118)"
+                        src="/jili_games/GAMEID_118.png">
+                     <img data-v-d64223be="" alt="" class="restricted-link" onclick="openJILIGameById(122)"
+                        src="/jili_games/GAMEID_122.png">
+
+                     <div data-v-5d47e2fb="" class="more restricted-link" onclick="location.href = '/casinos'">
+                        <div data-v-5d47e2fb="" class="more-l1">
+                           <svg data-v-5d47e2fb="" class="svg-icon icon-p3more">
+                              <use xlink:href="#icon-p3more">
+                              </use>
+                           </svg>
+                           More
+                        </div>
+                        <div data-v-5d47e2fb="" class="more-l2">
+                           Casino
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div data-v-d64223be="" data-v-0137aa14="" class="homeNav" id="fish" style="margin-top:20px">
+                  <div data-v-d64223be="" class="title">
+                     <b data-v-d64223be="">
+                     </b>
+                     Fishing
+                  </div>
+                  <div data-v-d64223be="" class="tip">
+                     Classic arcade gameplay, super cool visual enjoyment
+                  </div>
+                  <div data-v-d64223be="" class="picContainer">
+                     <!--v-if-->
+                     <img data-v-d64223be="" alt="" class="restricted-link" onclick="openJILIGameById(510)"
+                        src="https://ossimg.diuacting.com/DiuWin/gamelogo/V8Card/510.png">
+                     <img data-v-d64223be="" alt="" class="restricted-link" onclick="openJILIGameById(1)"
+                        src="https://ossimg.diuacting.com/DiuWin/gamelogo/JILI/1.png">
+                     <img data-v-d64223be="" alt="" class="restricted-link" onclick="openJILIGameById(119)"
+                        src="https://ossimg.diuacting.com/DiuWin/gamelogo/JILI/119.png">
+                     <img data-v-d64223be="" alt="" class="restricted-link" onclick="openJILIGameById(20)"
+                        src="https://ossimg.diuacting.com/DiuWin/gamelogo/JILI/20.png">
+                     <img data-v-d64223be="" alt="" class="restricted-link" onclick="openJILIGameById(212)"
+                        src="https://ossimg.diuacting.com/DiuWin/gamelogo/JILI/212.png">
+                     <div data-v-d64223be="" class="more restricted-link" onclick="location.href = '/fishing'">
+                        <div data-v-d64223be="" class="more-l1">
+                           <svg data-v-d64223be="" class="svg-icon icon-p3more">
+                              <use xlink:href="#icon-p3more">
+                              </use>
+                           </svg>
+                           More
+                        </div>
+                        <div data-v-d64223be="" class="more-l2">
+                           Fishing
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
             </div>
+
+
+
+
+
+
          </div><!-- 中奖信息 -->
-         <div data-v-ffb14677="" class="luckyWinners__container">
+         <div data-v-ffb14677="" class="luckyWinners__container" style="margin-top:40px">
             <h1 data-v-ffb14677="">Winning information</h1>
             <div data-v-ffb14677="" class="luckyWinners__container-wrapper">
                <div data-v-ffb14677="" style="position: relative;">
@@ -5388,7 +5569,7 @@
                            data-origin="/assets/png/crown1-3912fd85.png" src="/assets/png/crown1-3912fd85.png"><img
                            data-v-84514e8e="" class="" data-origin="/assets/png/place1-fe39c3f3.png"
                            src="/assets/png/place1-fe39c3f3.png"></div><span data-v-84514e8e="">Mem***GVT</span><span
-                        data-v-84514e8e="">₹12,505,260,079.13</span>
+                        data-v-84514e8e="">₹12,505,260.13</span>
                   </div>
                   <div data-v-84514e8e="" class="dailyProfitRank__content-topThree__item" style="order: 1; top: -30px;">
                      <div data-v-84514e8e=""
@@ -5400,7 +5581,7 @@
                            data-origin="/assets/png/crown2-c8aced52.png" src="/assets/png/crown2-c8aced52.png"><img
                            data-v-84514e8e="" class="" data-origin="/assets/png/place2-8189be28.png"
                            src="/assets/png/place2-8189be28.png"></div><span data-v-84514e8e="">Mem***NNB</span><span
-                        data-v-84514e8e="">₹4,172,899,283.14</span>
+                        data-v-84514e8e="">₹8,899,283.14</span>
                   </div>
                   <div data-v-84514e8e="" class="dailyProfitRank__content-topThree__item" style="order: 3; top: -30px;">
                      <div data-v-84514e8e=""
@@ -5412,7 +5593,7 @@
                            data-origin="/assets/png/crown3-2ca02146.png" src="/assets/png/crown3-2ca02146.png"><img
                            data-v-84514e8e="" class="" data-origin="/assets/png/place3-d9b0be38.png"
                            src="/assets/png/place3-d9b0be38.png"></div><span data-v-84514e8e="">Mem***TYB</span><span
-                        data-v-84514e8e="">₹1,514,955,144.08</span>
+                        data-v-84514e8e="">₹6,955,144.08</span>
                   </div>
                </div>
                <div data-v-84514e8e="" class="dailyProfitRank__content-list">
@@ -5421,20 +5602,86 @@
                         class="" data-origin="/assets/png/5-ab77b716.png" src="/assets/png/5-ab77b716.png"><span
                         data-v-84514e8e=""
                         class="middle-name">Mem***FTL</span><!-- <span class="middle-name">{{ formatString(item.nickName, 10) }}</span> --><span
-                        data-v-84514e8e="" class="right-box">₹1,164,233,891.66</span></div>
+                        data-v-84514e8e="" class="right-box">₹5,233,891.66</span></div>
                   <div data-v-84514e8e="" class="dailyProfitRank__content-list__item"><span data-v-84514e8e=""
                         class="left-rank">5</span><img data-v-84514e8e="" data-img="/assets/png/avatar-ea3b8ee9.png"
                         class="" data-origin="/assets/png/2-58c8a9bc.png" src="/assets/png/2-58c8a9bc.png"><span
                         data-v-84514e8e=""
                         class="middle-name">Mem***XOA</span><!-- <span class="middle-name">{{ formatString(item.nickName, 10) }}</span> --><span
-                        data-v-84514e8e="" class="right-box">₹903,077,879.20</span></div>
+                        data-v-84514e8e="" class="right-box">₹5,077,879.20</span></div>
                </div>
             </div>
          </div>
+
+         <div data-v-ca43e9bb="" class="tool">
+            <div data-v-ca43e9bb="" class="title">
+               <b data-v-ca43e9bb="">
+               </b>
+               Basic Tools
+            </div>
+            <div data-v-ca43e9bb="" class="tool-container">
+               <div data-v-ca43e9bb="" class="tool-item">
+                  <svg data-v-ca43e9bb="" class="svg-icon icon-p3Language">
+                     <use xlink:href="#icon-p3Language">
+                     </use>
+                  </svg>
+                  <div data-v-ca43e9bb="">
+                     Language
+                  </div>
+               </div>
+               <div data-v-ca43e9bb="" class="tool-item" onclick="location.href = '/notification'">
+                  <svg data-v-ca43e9bb="" class="svg-icon icon-p3Notification">
+                     <use xlink:href="#icon-p3Notification">
+                     </use>
+                  </svg>
+                  <div data-v-ca43e9bb="">
+                     Notification
+                  </div>
+               </div>
+               <div data-v-ca43e9bb="" class="tool-item" onclick="location.href = '/support'">
+                  <svg data-v-ca43e9bb="" class="svg-icon icon-p3Service">
+                     <use xlink:href="#icon-p3Service">
+                     </use>
+                  </svg>
+                  <div data-v-ca43e9bb="">
+                     24/7 Customer service
+                  </div>
+               </div>
+               <div data-v-ca43e9bb="" class="tool-item" onclick="location.href = '/guide'">
+                  <svg data-v-ca43e9bb="" class="svg-icon icon-p3Guide">
+                     <use xlink:href="#icon-p3Guide">
+                     </use>
+                  </svg>
+                  <div data-v-ca43e9bb="">
+                     Beginner's Guide
+                  </div>
+               </div>
+               <div data-v-ca43e9bb="" class="tool-item" onclick="location.href = '/about'">
+                  <svg data-v-ca43e9bb="" class="svg-icon icon-p3About">
+                     <use xlink:href="#icon-p3About">
+                     </use>
+                  </svg>
+                  <div data-v-ca43e9bb="">
+                     About us
+                  </div>
+               </div>
+               <div data-v-ca43e9bb="" class="tool-item">
+                  <svg data-v-ca43e9bb="" class="svg-icon icon-p3Down">
+                     <use xlink:href="#icon-p3Down">
+                     </use>
+                  </svg>
+                  <div data-v-ca43e9bb="">
+                     Download APP
+                  </div>
+               </div>
+            </div>
+         </div><!--下载PWA应用-->
+
+
          <div data-v-a3117ed9="" class="terms">
             <div data-v-a3117ed9="" class="terms-logo">
                <div data-v-a3117ed9="" class="terms-logo-left">
-                  <img data-v-a3117ed9="" src="/logo_loading.png" alt="">
+                  <img data-v-a3117ed9="" src="/uploads/logo/logo.png" alt="">
                </div>
                <span class="terms-logo-service" data-v-a3117ed9=""><svg width="70" height="70" viewBox="0 0 70 70"
                      fill="none" xmlns="http://www.w3.org/2000/svg" data-v-a3117ed9="">
@@ -5705,95 +5952,45 @@
                   fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect data-v-a3117ed9="" x="5.65625" width="8" height="8" rx="1" transform="rotate(45 5.65625 0)"
                      fill="currentColor"></rect>
-               </svg><span data-v-a3117ed9="">Indnclubb works with more than 10,000 online live game dealers and slot
-                  games, all of which are verified fair games.</span></p>
+               </svg><span data-v-a3117ed9="">
+                  <%= app_name %> works with more than 10,000 online live game dealers and slot
+                     games, all of which are verified fair games.
+               </span></p>
             <p data-v-a3117ed9="" class="terms-rule"><svg data-v-a3117ed9="" width="11" height="11" viewBox="0 0 11 11"
                   fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect data-v-a3117ed9="" x="5.65625" width="8" height="8" rx="1" transform="rotate(45 5.65625 0)"
                      fill="currentColor"></rect>
-               </svg><span data-v-a3117ed9="">Indnclub supports fast deposit and withdrawal, and looks forward to your
-                  visit.</span></p>
+               </svg><span data-v-a3117ed9="">
+                  <%= app_name %> supports fast deposit and withdrawal, and looks forward to your
+                     visit.
+               </span></p>
             <p data-v-a3117ed9="" class="terms-tips">Gambling can be addictive, please play rationally.</p>
-            <p data-v-a3117ed9="" class="terms-tips">Indnclub only accepts customers above the age of 18.</p>
+            <p data-v-a3117ed9="" class="terms-tips">
+               <%= app_name %> only accepts customers above the age of 18.
+            </p>
          </div>
-         <div data-v-c93e4510="" class="settingPanel__container">
-            <div data-v-c93e4510="" class="settingPanel__container-items">
-               <div data-v-c93e4510="" class="settingPanel__container-items__item ar-1px-b">
-                  <div data-v-c93e4510="" class="settingPanel__container-items__title"><svg data-v-c93e4510=""
-                        class="svg-icon icon-Language">
-                        <use xlink:href="#icon-Language"></use>
-                     </svg><span data-v-c93e4510="">Language</span></div>
-                  <div data-v-c93e4510="" class="settingPanel__container-items-right">
-                     <h5 data-v-c93e4510="" style="display: none;">8</h5><span data-v-c93e4510=""
-                        style="display: none;">English</span><i data-v-c93e4510=""
-                        class="van-badge__wrapper van-icon van-icon-arrow" style="color: rgb(102, 102, 102);"></i>
-                  </div>
-               </div>
-               <div data-v-c93e4510="" class="settingPanel__container-items__item ar-1px-b">
-                  <div data-v-c93e4510="" class="settingPanel__container-items__title"><svg data-v-c93e4510=""
-                        class="svg-icon icon-notificationCenter">
-                        <use xlink:href="#icon-notificationCenter"></use>
-                     </svg><span data-v-c93e4510="">Notification</span></div>
-                  <div data-v-c93e4510="" class="settingPanel__container-items-right">
-                     <h5 data-v-c93e4510="" style="display: none;">8</h5><span data-v-c93e4510=""
-                        style="display: none;">English</span><i data-v-c93e4510=""
-                        class="van-badge__wrapper van-icon van-icon-arrow" style="color: rgb(102, 102, 102);"></i>
-                  </div>
-               </div>
-               <div data-v-c93e4510="" class="settingPanel__container-items__item ar-1px-b">
-                  <div data-v-c93e4510="" class="settingPanel__container-items__title"><svg data-v-c93e4510=""
-                        class="svg-icon icon-server">
-                        <use xlink:href="#icon-server"></use>
-                     </svg><span data-v-c93e4510="">24/7 Customer service</span></div>
-                  <div data-v-c93e4510="" class="settingPanel__container-items-right">
-                     <h5 data-v-c93e4510="" style="display: none;">8</h5><span data-v-c93e4510=""
-                        style="display: none;">English</span><i data-v-c93e4510=""
-                        class="van-badge__wrapper van-icon van-icon-arrow" style="color: rgb(102, 102, 102);"></i>
-                  </div>
-               </div>
-               <div data-v-c93e4510="" class="settingPanel__container-items__item ar-1px-b">
-                  <div data-v-c93e4510="" class="settingPanel__container-items__title"><svg data-v-c93e4510=""
-                        class="svg-icon icon-guide">
-                        <use xlink:href="#icon-guide"></use>
-                     </svg><span data-v-c93e4510="">Beginner's Guide</span></div>
-                  <div data-v-c93e4510="" class="settingPanel__container-items-right">
-                     <h5 data-v-c93e4510="" style="display: none;">8</h5><span data-v-c93e4510=""
-                        style="display: none;">English</span><i data-v-c93e4510=""
-                        class="van-badge__wrapper van-icon van-icon-arrow" style="color: rgb(102, 102, 102);"></i>
-                  </div>
-               </div>
-               <div data-v-c93e4510="" class="settingPanel__container-items__item ar-1px-b">
-                  <div data-v-c93e4510="" class="settingPanel__container-items__title"><svg data-v-c93e4510=""
-                        class="svg-icon icon-about">
-                        <use xlink:href="#icon-about"></use>
-                     </svg><span data-v-c93e4510="">About us</span></div>
-                  <div data-v-c93e4510="" class="settingPanel__container-items-right">
-                     <h5 data-v-c93e4510="" style="display: none;">8</h5><span data-v-c93e4510=""
-                        style="display: none;">English</span><i data-v-c93e4510=""
-                        class="van-badge__wrapper van-icon van-icon-arrow" style="color: rgb(102, 102, 102);"></i>
-                  </div>
-               </div>
-               <div data-v-c93e4510="" class="settingPanel__container-items__item ar-1px-b">
-                  <div data-v-c93e4510="" class="settingPanel__container-items__title"><svg data-v-c93e4510=""
-                        class="svg-icon icon-down">
-                        <use xlink:href="#icon-down"></use>
-                     </svg><span data-v-c93e4510="">Download APP</span></div>
-                  <div data-v-c93e4510="" class="settingPanel__container-items-right">
-                     <h5 data-v-c93e4510="" style="display: none;">8</h5><span data-v-c93e4510=""
-                        style="display: none;">English</span><i data-v-c93e4510=""
-                        class="van-badge__wrapper van-icon van-icon-arrow" style="color: rgb(102, 102, 102);"></i>
-                  </div>
-               </div>
-            </div>
-         </div><!--下载PWA应用-->
-         <!-- <div data-v-b3bd7e49="" class="btn pwa-btn"><svg data-v-b3bd7e49="" class="line" width="1" height="60"
-               viewBox="0 0 1 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+
+
+
+
+
+
+         <div data-v-b3bd7e49="" class="btn pwa-btn">
+            <svg data-v-b3bd7e49="" class="line" width="1" height="60" viewBox="0 0 1 60" fill="none"
+               xmlns="http://www.w3.org/2000/svg">
                <line data-v-b3bd7e49="" x1="0.5" x2="0.5" y2="60" stroke="white"></line>
-            </svg><i data-v-b3bd7e49="" class="van-badge__wrapper van-icon van-icon-close close"></i><img
-               data-v-b3bd7e49="" class="icon"
-               src="https://ossimg.tirangaagent.com/Tiranga/other/h5setting_20231017190406lyb3.ico">
+            </svg>
+            <i data-v-b3bd7e49="" class="van-badge__wrapper van-icon van-icon-close close"></i>
+            <img data-v-b3bd7e49="" class="icon" src="/assets/png/activityIcon4-4b3e3dac.png">
             <div data-v-b3bd7e49="" class="text">Add to Desktop</div>
-         </div> -->
+         </div>
+
+
+
+
+
+
          <div data-v-c0caae78="" class="dialog inactive">
             <div data-v-c0caae78="" class="dialog__container" role="dialog" tabindex="0">
                <div data-v-c0caae78="" class="dialog__container-img"><img data-v-c0caae78="" alt="" class=""
@@ -5822,6 +6019,12 @@
             style="z-index: 2000; --f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif; display: none;">
 
          </div>
+
+
+
+
+
+
          <div role="dialog" tabindex="0" class="van-popup van-popup--center van-dialog prompt-dialog"
             style="z-index: 2002; display: none;">
             <div class="van-dialog__content">
@@ -5839,9 +6042,10 @@
                   </h2>
                   <h2
                      style="margin-top: 0px; margin-bottom: 0px; font-family: 'Microsoft YaHei', ΢���ź�, SimSun, ����, Arial, Helvetica, sans-serif; line-height: 36px; color: rgb(69, 90, 100); font-size: 22px; text-align: center;">
-                     <font face="Arial Black"><span style="background-color: rgb(255, 255, 0);"><b><a
-                                 href="https://t.me/IndnclubGames_Official" target="_blank">IndnclubGAMES OFFICIAL
-                                 TELEGRAM</a></b></span></font>
+                     <font face="Arial Black"><span style="background-color: rgb(255, 255, 0);"><b><a href="/support">
+                                 <%= app_name %> OFFICIAL
+                                    TELEGRAM
+                              </a></b></span></font>
                   </h2>
                   <h2
                      style="margin-top: 0px; margin-bottom: 0px; font-family: 'Microsoft YaHei', ΢���ź�, SimSun, ����, Arial, Helvetica, sans-serif; line-height: 36px; color: rgb(69, 90, 100); font-size: 22px; text-align: center;">
@@ -5861,10 +6065,12 @@
                   <p style="margin-bottom: 0px; line-height: 26px; text-align: center;">
                      <font color="#455a64" face="Verdana, Helvetica"><span
                            style="font-size: 18px; background-color: rgb(255, 255, 255);"><b>We have noticed an increase
-                              in imitation of our PLATFORM, Indnclub. To ensure you are on the legitimate <a
-                                 href="https://Indnclubcasino.win" target="_blank">Indnclub website</a>, please verify
-                              authenticity through our official channels. Stay vigilant and report any suspicious
-                              activity.</b></span></font>
+                              in imitation of our PLATFORM, <%= app_name %>. To ensure you are on the legitimate <a
+                                    href="/home">
+                                    <%= app_name %> website
+                                 </a>, please verify
+                                 authenticity through our official channels. Stay vigilant and report any suspicious
+                                 activity.</b></span></font>
                   </p>
                   <p style="margin-bottom: 0px; line-height: 26px; text-align: center;">
                      <font color="#455a64" face="Verdana, Helvetica"><span
@@ -5875,39 +6081,7 @@
                      style="margin-top: 0px; margin-bottom: 0px; font-family: Verdana, Helvetica; line-height: 26px; color: rgb(69, 90, 100); font-size: 18px; text-align: center;">
                      <span style="background-color: rgb(255, 255, 255);"><br></span>
                   </p>
-                  <h3 style="margin-top: 0px; margin-bottom: 0px; line-height: 26px; text-align: center;"><span
-                        style="background-color: rgb(255, 255, 255);"><b
-                           style="color: rgb(69, 90, 100); font-family: Verdana, Helvetica; font-size: 18px;"><span
-                              style="color: inherit; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">VIP
-                              GOLD REWARD</span><span
-                              style="color: inherit; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;for
-                              the month of&nbsp;</span><span
-                              style="color: inherit; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">1
-                              JULY TO 30 AUGUST</span></b><br></span></h3>
-                  <h3
-                     style="margin-top: 0px; margin-bottom: 0px; font-family: Verdana, Helvetica; line-height: 26px; color: rgb(69, 90, 100); font-size: 18px; text-align: center;">
-                     <b style="background-color: rgb(255, 255, 255);">If you want to participate, keep inviting and make
-                        your own team for more chances of winning.</b>
-                  </h3>
-                  <h3
-                     style="margin-top: 0px; margin-bottom: 0px; font-family: 'Microsoft YaHei', ΢���ź�, SimSun, ����, Arial, Helvetica, sans-serif; line-height: 26px; color: rgb(51, 51, 51); font-size: 18px; text-align: center;">
-                     <span style="color: inherit; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><b><span
-                              style="background-color: rgb(255, 255, 255);">Click the link below for more
-                              information</span><br></b></span>
-                  </h3>
-                  <h2
-                     style="margin-top: 0px; margin-bottom: 0px; font-family: 'Microsoft YaHei', ΢���ź�, SimSun, ����, Arial, Helvetica, sans-serif; line-height: 36px; color: rgb(69, 90, 100); font-size: 22px; text-align: center;">
-                     <font color="#000000" style="background-color: rgb(255, 255, 0);"><b><a
-                              href="https://Indnclubgames-vip.com/" target="_blank"
-                              style="outline-style: initial; outline-width: 0px; color: rgb(51, 51, 51); font-family: inherit;"><span
-                                 style="font-family: 'Arial Black';"></span></a><a href="https://vip-Indnclubgames.com/"
-                              target="_blank" style="color: rgb(51, 51, 51);"><span
-                                 style="font-family: 'Arial Black';">VIP</span></a><a
-                              href="https://vip-Indnclubgames.com/" target="_blank" style="color: rgb(51, 51, 51);"><span
-                                 style="font-family: 'Arial Black';">&nbsp;</span></a><span
-                              style="font-family: 'Arial Black';"><a href="https://vip-Indnclubgames.com/"
-                                 target="_blank" style="color: rgb(51, 51, 51);">Indnclub</a></span></b></font>
-                  </h2>
+
                </div>
             </div>
             <div class="van-hairline--top van-dialog__footer"><button onclick="closeNotificationPopup()" type="button"
@@ -6143,19 +6317,58 @@
       }
    </script>
    <script>
-      function openJDBGame(g_type, m_type) {
-         try {
-            window.location.href = window.location.href = `/jdb/launch?g_type=${g_type}&m_type=${m_type}`
-         } catch (error) {
-            console.log(error)
-         }
-      }
+      function openJDBGame(gType, gameId) {
+         // Fetch user info from API
+         fetch('https://dreams365.in/api/webapi/getUserInfo')
+            .then(response => response.json())
+            .then(data => {
+               if (data.status) {
+                  const phoneUserUid = data.data.phone_user;
 
-      function openJILIGameById(gameId) {
-         window.location.href = `/jili/game_link?game_id=${gameId}`;
-      }
+                  // Construct the dynamic URL using the gameId
+                  const dynamicUrl = `https://99win.in.net/jdb/post?iv=f1ab7cea8106a3e4&key=b4d70df8d5c2857c&uid=${phoneUserUid}&serverUrl=https://jdb.dreams365.in&parent=devilisalive07&gType=${gType}&mType=${gameId}`;
 
+                  // Redirect the user to the constructed URL
+                  window.location.href = dynamicUrl;
+
+                  console.log("Redirecting to:", dynamicUrl);
+               } else {
+                  console.error("Failed to fetch user info:", data.message);
+               }
+            })
+            .catch(error => {
+               console.error("Error fetching the API:", error);
+            });
+      }
    </script>
+
+
+   <script>
+      function openJILIGameById(gameId) {
+         // Fetch user info from API
+         fetch('https://diuwin365.site/api/webapi/getUserInfo')
+            .then(response => response.json())
+            .then(data => {
+               if (data.status) {
+                  const phoneUserUid = data.data.phone_user;
+
+                  // Construct the dynamic URL for JILI API using the gameId
+                  const dynamicUrl = `https://allapi.shivwin.in/post?gameId=${gameId}&mobile=${phoneUserUid}&agentId=tringa_Seamless&agentKey=16f11f76756d74471283ab71b5eccb72fe339538&referrerUrl=https://jili.diuwin365.site`;
+
+                  // Redirect the user to the constructed URL
+                  window.location.href = dynamicUrl;
+
+                  console.log("Redirecting to:", dynamicUrl);
+               } else {
+                  console.error("Failed to fetch user info:", data.message);
+               }
+            })
+            .catch(error => {
+               console.error("Error fetching the API:", error);
+            });
+      }
+   </script>
+
    <script src="/js/client.js"></script>
 
    <script>
@@ -6186,7 +6399,7 @@
          </div>
 
          <div class="logo_box">
-            <img class="logo__image" src="/h5setting_202308141709544lm1.png" alt="" />
+            <img class="logo__image" src="/uploads/logo/logo.png" alt="" />
          </div>
       </div>
    </div>
@@ -6223,7 +6436,7 @@
          width: 100vw;
          height: 100vh;
          background: #90909a;
-         background-image: linear-gradient(180deg, rgb(34 41 93), rgb(70 116 208));
+         background-image: linear-gradient(180deg, #3BAF4C 0%, #00D08A 100%);
          max-width: 420px;
          display: flex;
          align-items: center;
@@ -6259,6 +6472,34 @@
          max-width: 200px;
          height: auto;
       }
+
+      .swiper-slide {
+         display: flex;
+         justify-content: space-between;
+      }
+
+      .swiper-slide img {
+         width: 32%;
+         /* Adjust image size to fit two images in one slide */
+      }
+
+
+
+
+      /* Ensure all tab panels are hidden initially except the active one */
+      .van-tab__panel-wrapper {
+         display: none;
+         visibility: hidden;
+         opacity: 0;
+         transition: visibility 0s, opacity 0.3s ease-in-out;
+      }
+
+      /* Only the active panel is visible */
+      .van-tab__panel-wrapper.active {
+         display: block;
+         visibility: visible;
+         opacity: 1;
+      }
    </style>
    <script>
       const initFunc = () => {
@@ -6274,6 +6515,382 @@
       }
       initFunc()
    </script>
+
+   <script>
+      var swiper = new Swiper('.my-swipe', {
+         slidesPerView: 2, // Display 2 slides at once
+         spaceBetween: 1, // Space between slides
+         loop: true, // Optional: Enable looping
+         navigation: {
+            nextEl: '#rightBtn', // Link to the right button
+            prevEl: '#leftBtn',  // Link to the left button
+         },
+      });
+
+   </script>
+
+   <script>
+      function scrollToSection(hash) {
+         // First, navigate to the section (the browser scrolls automatically to the section)
+         location.href = hash;
+
+         // Add a slight delay to ensure the browser scrolls first, then apply the custom offset
+         setTimeout(function () {
+            const offset = 150; // Offset for the sticky header
+            const targetElement = document.querySelector(location.hash);
+
+            if (targetElement) {
+               // Calculate the final position with the offset
+               const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+               const offsetPosition = elementPosition - offset;
+
+               // Scroll to the adjusted position
+               window.scrollTo({
+                  top: offsetPosition,
+                  behavior: "smooth"
+               });
+            }
+         }, 100); // Delay in milliseconds
+      }
+
+   </script>
+   <script>
+      function generateRandomAmount() {
+         // Generate a random amount between 1 and 5000 (you can adjust the range as needed)
+         return "₹" + (Math.floor(Math.random() * 5000) + 1).toFixed(2);
+      }
+
+      // Function to generate a random user name
+      function generateRandomUserName() {
+         var names = ['mem', 'mem', 'mem', 'mem', 'mem', 'mem', 'mem', 'mem', 'mem', 'mem'];
+         var randomIndex = Math.floor(Math.random() * names.length);
+         var randomName = names[randomIndex];
+         var randomInitials = Math.floor(Math.random() * 10000); // Adding random numbers for uniqueness
+         return randomName + '***' + randomInitials;
+      }
+
+      // Function to generate a random image URL
+      function generateRandomImageURL() {
+         var images = [
+            '/assets/png/8-ea087ede.png',
+            '/assets/png/avatar-fa220f51.png',
+            '/assets/png/1-c7e4efc8.png',
+            '/assets/png/4-12a0d0c5.png',
+            '/assets/png/16-cf8e1441.png'
+         ];
+         return images[Math.floor(Math.random() * images.length)];
+      }
+
+      // Function to update winning amounts, user names, and images
+      function updateWinningInformation() {
+         // Select all elements containing winning amounts, user names, and images
+         var winAmountElements = document.querySelectorAll('.luckyWinners__container-wrapper__item-winAmount h1');
+         var userNameElements = document.querySelectorAll('.luckyWinners__container-wrapper__item-info h1');
+         var imageElements = document.querySelectorAll('.luckyWinners__container-wrapper__item-img img');
+
+         // Loop through each element and update its content
+         for (var i = 0; i < winAmountElements.length; i++) {
+            winAmountElements[i].textContent = "Receive " + generateRandomAmount();
+            userNameElements[i].textContent = generateRandomUserName();
+            imageElements[i].setAttribute('src', generateRandomImageURL());
+         }
+      }
+
+      // Call the updateWinningInformation function every 2 seconds
+      setInterval(updateWinningInformation, 2000);
+   </script>
+   <script>
+      document.addEventListener("DOMContentLoaded", function () {
+         const tabs = document.querySelectorAll('.van-tab');
+         const tabPanels = document.querySelectorAll('.van-tab__panel-wrapper');
+
+         // Function to handle tab click
+         function handleTabClick(event) {
+            // Remove active class from all tabs and tab panels
+            tabs.forEach(tab => tab.classList.remove('van-tab--active'));
+            tabPanels.forEach(panel => {
+               panel.classList.remove('active');
+               panel.style.display = 'none'; // Ensure panels are hidden
+            });
+
+            // Add active class to the clicked tab
+            const clickedTab = event.currentTarget;
+            clickedTab.classList.add('van-tab--active');
+
+            // Show the corresponding tab panel by adding the 'active' class
+            const tabId = clickedTab.getAttribute('aria-controls');
+            const activePanel = document.getElementById(tabId);
+            activePanel.classList.add('active');
+            activePanel.style.display = 'block'; // Ensure the correct panel is displayed
+         }
+
+         // Attach event listeners to each tab
+         tabs.forEach(tab => {
+            tab.addEventListener('click', handleTabClick);
+         });
+
+         // Set the first tab and panel as active initially
+         tabs[0].classList.add('van-tab--active');
+         tabPanels[0].classList.add('active');
+         tabPanels[0].style.display = 'block';
+      });
+
+   </script>
+
+
+
+   <script>
+      $(".ar-loading-view").fadeIn();
+      function formatIndianNumber(num) {
+         let formattedNum = new Intl.NumberFormat("en-IN", {
+            maximumFractionDigits: 2,
+            minimumFractionDigits: 2,
+         }).format(num);
+         return formattedNum;
+      }
+      const userInfoTypes = {
+         phoneNumber: "phone_user",
+         username: "name_user",
+         balance: "money_user",
+         userId: "id_user",
+         referCode: "code",
+         betAmount: "total_bet_amount",
+         total_withdraw: "total_withdraw",
+         total_recharge: "total_recharge",
+         level: "level",
+      };
+
+      let userData = null;
+      let userDataFull = null;
+
+      const fetchUser = async () => {
+         try {
+            const response = await axios.get("/api/webapi/GetUserInfo");
+            if (response.status === 200) {
+               userData = response?.data?.data;
+               userDataFull = response?.data;
+            } else {
+               // Handle non-200 status codes here
+               throw new Error("User not authenticated or error fetching user data");
+            }
+         } catch (error) {
+            console.log(error);
+            $(".money").text('Login to see your balance');
+            $("#total_withdraw_amount_display").text('₹ 0.00');
+            $("#total_deposit_amount_display").text('₹ 0.00');
+         }
+      };
+
+      const setUserInfoDisplay = async (idName, userInfoType, prefix) => {
+         let display = document.getElementById(idName);
+         display.textContent = "Loading...";
+
+         try {
+            if (userData === null || userData === undefined) {
+               throw Error("User data is not available!");
+            }
+
+            display.textContent = prefix ? prefix(userData?.[userInfoType]) : userData?.[userInfoType];
+         } catch (error) {
+            console.log(error);
+            display.textContent = 'Error fetching data';
+         }
+      };
+
+      fetchUser().then(() => {
+         setUserInfoDisplay("money_amount_display", userInfoTypes.balance, value => `₹${formatIndianNumber(value)}`);
+         $(".money").text(userData ? `₹ ${formatIndianNumber(userData.money_user)}` : 'Login to see your balance');
+         $("#total_withdraw_amount_display").text(userDataFull ? `₹ ${formatIndianNumber(userDataFull.totalWithdraw)}` : '₹ 0.00');
+         $("#total_deposit_amount_display").text(userDataFull ? `₹ ${formatIndianNumber(userDataFull.totalRecharge)}` : '₹ 0.00');
+         $(".ar-loading-view").fadeOut();
+      });
+   </script>
+
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   <script>
+      const userInfoTypes = {
+         total_recharge: "total_recharge", // Assuming total recharge refers to the user's deposit
+      };
+
+      let userData = null;
+      let userDataFull = null;
+
+      // Function to fetch user data (including deposit)
+      const fetchUser = async () => {
+         try {
+            const response = await axios.get("/api/webapi/GetUserInfo");
+            userData = response?.data?.data;
+            userDataFull = response?.data;
+         } catch (error) {
+            console.log("Error fetching user data:", error);
+         }
+      };
+
+      // Function to update the popup visibility based on user deposit
+      const handlePopup = (userDeposit) => {
+         const popup = document.getElementById('popup'); // Reference to the popup element
+
+         if (userDeposit >= 100) {
+            // Hide the popup if deposit is 100 or more
+            if (popup) {
+               popup.style.display = 'none';
+            }
+         } else {
+            // Show the popup if deposit is less than 100
+            if (popup) {
+               popup.style.display = 'block'; // Ensure the popup is visible
+            }
+         }
+      };
+
+      // Initialize function: fetch user info and handle popup visibility
+      const initializePopup = async () => {
+         await fetchUser(); // Fetch the user data first
+
+         // Check if the user data is available
+         if (!userData) {
+            console.log("No user data available");
+            return;
+         }
+
+         // Extract user deposit dynamically from fetched data
+         const userDeposit = parseFloat(userData[userInfoTypes.total_recharge]) || 0;
+
+         // Call the function to handle popup visibility
+         handlePopup(userDeposit);
+      };
+
+      // Call initialize function on page load
+      window.onload = function () {
+         initializePopup();
+      };
+
+
+   </script>
+
+
+
+
+   <script>
+      document.addEventListener('DOMContentLoaded', () => {
+         const restrictedLinks = document.querySelectorAll('.restricted-link');
+         const popup = document.getElementById('Popup'); // Reference to the popup element
+
+         // Function to fetch user deposit
+         const fetchUserDeposit = async () => {
+            try {
+               const response = await axios.get('/api/webapi/GetUserInfo'); // Replace with your API endpoint
+               if (response.status === 200 && response.data.data) {
+                  return parseFloat(response.data.data.total_recharge || 0); // Parse the total recharge value
+               } else {
+                  console.error('Error fetching user data:', response.data.message);
+                  return 0;
+               }
+            } catch (error) {
+               console.error('API call failed:', error);
+               return 0;
+            }
+         };
+
+         // Attach click event to each restricted link
+         restrictedLinks.forEach(link => {
+            const onclickAttr = link.getAttribute('onclick'); // Fetch the onclick attribute
+
+            link.addEventListener('click', async (event) => {
+               event.preventDefault(); // Prevent default navigation
+
+               const userDeposit = await fetchUserDeposit(); // Fetch user deposit value
+
+               if (userDeposit < 100) {
+                  // Show popup if deposit is less than ₹100
+                  if (popup) {
+                     popup.style.display = 'block';
+                  }
+               } else if (onclickAttr) {
+                  // If deposit condition is met, execute the onclick JavaScript function or redirect
+                  if (onclickAttr.startsWith('window.location.href')) {
+                     // Handle links that redirect using window.location.href
+                     const targetUrl = onclickAttr.match(/window\.location\.href\s*=\s*['"](.*?)['"]/)?.[1];
+                     if (targetUrl) {
+                        window.location.href = targetUrl;
+                     }
+                  } else {
+                     // Execute custom JavaScript functions like openJDBGame or openJILIGameById
+                     eval(onclickAttr);
+                  }
+               }
+            });
+
+            // Remove the inline onclick attribute to avoid conflicts
+            link.removeAttribute('onclick');
+         });
+      });
+
+   </script>
+
+
+   <script>
+      $(document).ready(function () {
+         let auth = Cookies.get('auth'); // Get the 'auth' cookie value
+
+         if (auth && auth !== "") {
+            $(".popup").show();
+         } else {
+            $("#popup").hide();
+         }
+      });
+   </script>
+
+
+
+   <script>
+      let deferredPrompt;
+
+      window.addEventListener('beforeinstallprompt', (event) => {
+         event.preventDefault();
+         deferredPrompt = event; // Save the event for triggering later
+
+         // Show your custom install button
+         const addToHomeButton = document.querySelector('.pwa-btn');
+         addToHomeButton.style.display = 'block';
+
+         addToHomeButton.addEventListener('click', () => {
+            if (deferredPrompt) {
+               deferredPrompt.prompt(); // Show the install prompt
+
+               deferredPrompt.userChoice.then((choiceResult) => {
+                  if (choiceResult.outcome === 'accepted') {
+                     console.log('User accepted the A2HS prompt');
+                  } else {
+                     console.log('User dismissed the A2HS prompt');
+                  }
+                  deferredPrompt = null; // Clear the saved prompt
+               });
+            }
+         });
+      });
+
+
+      document.addEventListener('DOMContentLoaded', () => {
+         const closeButton = document.querySelector('.van-icon-close');
+         const shortcutButton = document.querySelector('.pwa-btn');
+
+         closeButton.addEventListener('click', () => {
+            if (shortcutButton) {
+               shortcutButton.classList.add('hidden'); // Add 'hidden' class
+            }
+         });
+      });
+
+
+
+   </script>
+
+
+
+
+
+   <script src="/js/app.js"></script>
 </body>
 
 </html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Create giftcode</title>
+    <title>Manage Gift Codes</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
@@ -49,7 +49,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Giftcode</h1>
+                                <h1>Manage Gift Codes</h1>
                             </div>
                         </div>
                     </div>
@@ -62,25 +62,25 @@
                             <div class="col-md-12">
                                 <div style="padding: 10px 20px;">
                                     <div class="form-group money">
-                                        <label for="money">Giftcode</label>
+                                        <label for="money">Amount of Gift</label>
                                         <input type="text" oninput="value=value.replace(/\D/g,'')" class="form-control"
                                             id="money" placeholder="Enter the amount">
                                     </div>
                                     <div class="form-group money">
-                                        <label for="user">Users</label>
+                                        <label for="user">No. of Users</label>
                                         <input type="number" class="form-control" id="user"
                                             placeholder="Enter the no of user">
                                     </div>
                                     <div class="form-group money">
                                         <div class="expiry_date_top">
-                                            <label for="expiry_date">Expiry Date</label>
+                                            <label for="expiry_date">Date of Expiration</label>
                                             <input type="checkbox" class="checkbox_expiry" id="expiry_date_check">
                                         </div>
                                         <input type="datetime-local" class="form-control" id="expiry_date"
                                             placeholder="Enter the no of user">
                                     </div>
                                     <div class="form-group money checkbox_field">
-                                        <label for="isForNewUsers">Only New Users</label>
+                                        <label for="isForNewUsers">Only for New Users</label>
                                         <input type="checkbox" class="checkbox" id="isForNewUsers">
                                     </div>
 
@@ -133,7 +133,7 @@
                     <!-- Default box -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Gift code has not been used yet</h3>
+                            <h3 class="card-title">Gift Codes List</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                     <i class="fas fa-minus"></i>
@@ -153,6 +153,7 @@
                                         <th class="text-center">Users</th>
                                         <th class="text-center">New users Only</th>
                                         <th class="text-center">Expiry</th>
+                                        <th class="text-center">Redeemed</th>
                                         <th class="text-center">Time</th>
 
                                     </tr>
@@ -221,6 +222,7 @@
                     <td style="min-width: 110px;"><b>${data.used}</b></td>
                     <td class="project-state"><span class="badge badge-${(data.for_new_users == 1 ? 'success' : 'warning')}">${(data.for_new_users == 1 ? 'Yes' : 'No')}</span></td>
                     <td style="min-width: 110px;"><b>${data.expire_date !== "0" ? timerJoin(data.expire_date) : "No"}</b></td>
+                    <td style="min-width: 110px;"><span class="badge badge-${(data.status == 1 ? 'success' : 'warning')}"><b>${(data.status == 1 ? 'Yes' : 'No')}</b></span></td>
                     <td style="min-width: 110px;"><b>${timerJoin(data.time)}</b></td>
                     
                 </tr>

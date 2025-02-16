@@ -168,9 +168,8 @@ fetch("/api/webapi/GetUserInfo")
       return false;
     }
     $("#balance_amount").text(`₹ ${formatIndianNumber(data.data.money_user)} `);
-    $("#bonus_balance_amount").text(
-      `₹ ${formatIndianNumber(data.data.bonus_money)} `,
-    );
+    $("#balance_advamount").text(`₹ ${formatIndianNumber(data.data.third_party_money)} `);
+    $("#bonus_balance_amount").text(`₹ ${formatIndianNumber(data.data.bonus_money)} `,); 
   });
 
 $(".reload_money").click(function (e) {
@@ -199,7 +198,7 @@ function drawChartLineInCanvas(topBoxNumber, bottomBoxNumber, canvasId) {
   const myCanvas = document.getElementById(canvasId);
   let boxXList = [10, 40, 70, 100, 128, 157, 186, 215, 244, 273];
   const ctx0 = myCanvas.getContext("2d");
-  ctx0.strokeStyle = "#B1835A";
+  ctx0.strokeStyle = "#2b3270";
   ctx0.beginPath();
   ctx0.moveTo(boxXList[topBoxNumber], 21);
   ctx0.lineTo(boxXList[bottomBoxNumber], 128);
@@ -283,9 +282,9 @@ const displayResultHandler = ({ status, amount, period, result }) => {
 
   $("#popup_modal").css("display", "block");
 
-  // setTimeout(() => {
-  //   $(".WinningTip__C").hide();
-  // }, 5000);
+   setTimeout(() => {
+     $(".WinningTip__C").hide();
+   }, 5000);
 };
 
 function showGameHistoryData(list_orders) {

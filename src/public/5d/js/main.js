@@ -142,14 +142,14 @@ function showResultNow(data) {
   let total = 0;
   for (let i = 0; i < arr.length; i++) {
     total += Number(arr[i]);
-    $(`.round-num:eq(${i}) .num`).text(arr[i]);
+    $(`.round-num:eq(${i}) .fade-item`).text(arr[i]);
     let random = Math.floor(Math.random() * 10);
     $(`.transform${i} .slot-num:eq(0)`).text(random);
     random = Math.floor(Math.random() * 10);
     $(`.transform${i} .slot-num:eq(1)`).text(random);
     $(`.transform${i} .slot-num:eq(2)`).text(arr[i]);
   }
-  $("#total_r").text(total);
+  $(".round-num #total_r").text(total);
 }
 function callListOrder() {
   $.ajax({
@@ -224,7 +224,7 @@ function downAndHidden() {
   $("#box-join").css("transform", "translateY(1000px)");
   $("body").removeClass("van-overflow-hidden");
   $(".0-9 .bet-num-line .bet-box-num").removeClass("active");
-  $(".small-big .bet-type-btn").attr("class", "bet-type-btn ");
+  $(".small-big .bet-type-btn").attr("class", "bet-type-btn flex-row-between");
   $("#result").attr("list-join", "");
   $("#result").attr("value", "1000");
   $("#plus-minus .minus").removeClass("action");
@@ -244,7 +244,7 @@ function reload_money() {
         unsetCookie();
         return false;
       }
-      $("#balance_amount").text(`₹ ${data.data.money_user}.00 `);
+      $("#balance_amount").text(`₹ ${data.data.money_user}`);
       $(".Loading").fadeOut(0);
     });
 }
@@ -413,7 +413,7 @@ $(".0-9 .bet-num-line").click(function (e) {
     );
   }
   $(`.0-9 .bet-num-line[txt=${info}] .bet-box-num`).addClass("active");
-  $(".small-big .bet-type-btn").attr("class", "bet-type-btn ");
+  $(".small-big .bet-type-btn").attr("class", "bet-type-btn flex-row-between");
 
   $("#result").attr("list-join", (list += info));
   result();
@@ -429,11 +429,10 @@ $(".select-number-0-9").click(function (e) {
 $(".small-big .bet-type-btn").click(function (e) {
   e.preventDefault();
   let info = $(this).attr("data-join");
-  console.log(info)
   $(".van-overlay").fadeIn();
   $("#box-join").css("transform", "translateY(0px)");
   $("body").addClass("van-overflow-hidden");
-  $(`.small-big .bet-type-btn`).attr("class", "bet-type-btn");
+  $(`.small-big .bet-type-btn`).attr("class", "bet-type-btn flex-row-between");
   $(`.small-big .bet-type-btn[data-join=${info}]`).addClass(info);
   $(".0-9 .bet-num-line .bet-box-num").removeClass("active");
 
@@ -675,8 +674,7 @@ function GetMyEmerdList(datas) {
         let check = isNumber(data.bet);
         if (check) {
           join += `
-                  <div 
-="">
+                  <div data-v-42f27458="">
                       <span data-v-42f27458="" style="color: rgb(0, 0, 0);">
                         <span data-v-42f27458="" class="li circle-black" style="color: rgb(0, 0, 0);">${arr2[i]}</span>  
                       </span>
@@ -791,6 +789,9 @@ const STATUS_MAP = {
 };
 
 const displayResultHandler = ({ status, amount, period, result }) => {
+
+  console.log("Popup Trigger:", { status, amount, period, result }); // Debug log
+  
   let total = String(result).split("");
   const tabList = ["A", "B", "C", "D", "E"];
   let numberStatusContent = total
@@ -830,15 +831,15 @@ const displayResultHandler = ({ status, amount, period, result }) => {
     $("#popup_win_symbol").css("display", "none");
     $("#popup_loss_symbol").css("display", "block");
   } else {
-    // $(".modal-popup__title").text("Result")
-    // $(".modal-popup__amount").text(`No Bets !`)
+     $(".modal-popup__title").text("Result")
+     $(".modal-popup__amount").text(`No Bets !`)
   }
 
   $("#popup_modal").css("display", "block");
 
-  // setTimeout(() => {
-  //    $(".WinningTip__C").hide()
-  // }, 5000)
+   setTimeout(() => {
+      $(".WinningTip__C").hide()
+   }, 5000)
 };
 
 function handleMyEmerdList() {
@@ -870,11 +871,18 @@ function handleMyEmerdList() {
         },
         dataType: "json",
         success: function (response) {
+          console.log("Nested AJAX Response:", response);
+
           let list_orders = response.data.gameslist;
 
           // Assuming firstGame is defined somewhere in your code
-          console.log(lastGame.stage, list_orders[0].period);
-          if (lastGame && lastGame.stage === list_orders[0].period) {
+          console.log("lastGame.stage:", lastGame.stage, "list_orders[0].period:", list_orders[0].period);
+          console.log("Difference:", Math.abs(Number(lastGame.stage) - Number(list_orders[0].period)));
+
+
+
+if (Math.abs(Number(lastGame.stage) - Number(list_orders[0].period)) <= 2) {
+  console.log("Condition met for displayResultHandler");
             if (lastGame.get == 0) {
               displayResultHandler({
                 status: STATUS_MAP.LOSS,

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html translate="no" data-dpr="1" style="font-size: 37.52px;">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="robots" content="noindex,nofollow">
+  <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+  <title id="app-title"></title>
+  <script src="/js/app.js"></script>
+  <link rel="stylesheet" href="/5d/css/chunk3.css" />
+  <link rel="stylesheet" href="/5d/css/main.css" />
+  <link rel="stylesheet" href="/5d/css/chunk1.css" />
+  <link rel="stylesheet" href="/5d/css/chunk2.css" />
+  
+
+  
+  <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
+  <link rel="stylesheet" href="/assets/css/page-home-522c97b9.css">
+  
+  <link rel="shortcut icon" href="/images/bitbug_favicon.ico" type="image/x-icon">
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      
+      padding: 0;
+      margin: 0;
+    }
+
+    .slot-column {
+      margin-right: 0 !important;
+    }
+
+    .block-click {
+      pointer-events: none;
+    }
+
+    #result {
+      display: none;
+    }
+
+    .display-none {
+      display: none;
+    }
+    .issueName2 {
+    background-color: var(--main-color);
+    padding: 0.3rem;
+    width: 1rem;
+    border-radius: 0.13rem;
+    color: #ffffff;
+}
+
+
+
+      /* Container for the marquee effect */
+      .noticeBar__container {
+      width: 100%;
+      background-color: #f0f0f0; /* Optional, for styling */
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Container for the text */
+    .noticeBar__container-body {
+      overflow: hidden;
+      white-space: nowrap;
+      width: 80%; /* Adjust width as needed */
+    }
+
+    /* The moving text */
+    #noticegame {
+      display: inline-block;
+      animation: marquee 30s linear infinite; /* Adjust speed with the duration (10s) */
+      padding-left: 100%; /* Start text off-screen on the right */
+    }
+
+    /* Keyframes to move text from right to left */
+    @keyframes marquee {
+      0% {
+        transform: translateX(1%); /* Starts from the right edge */
+      }
+      100% {
+        transform: translateX(-100%); /* Ends at the left edge */
+      }
+    }
+
+    /* Style for the button */
+    .hotIcon {
+      background-color: #007bff; /* Button color */
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+
+    
+  </style>
+</head>
+
+<body style="font-size: 12px;">
+  <div id="app">
+    <div data-v-42f27458="" class="mian game" style="padding-top: 1.226667rem !important">
+      <div data-v-12a80a3e="" data-v-5d71c3fd="" class="navbar main" style="height: 0rem !important;">
+        <div data-v-12a80a3e="" class="navbar-fixed">
+           <div data-v-12a80a3e="" class="navbar__content">
+              <div data-v-12a80a3e="" class="navbar__content-left" onclick="location.href = '/home'"><i data-v-12a80a3e=""
+                    class="van-badge__wrapper van-icon van-icon-arrow-left"><!----><!----><!----></i></div>
+              <div data-v-12a80a3e="" class="navbar__content-center">
+                 <div data-v-12a80a3e="" class="headLogo"
+                    style="background-image: url(&quot;/uploads/logo/logo.png&quot;);">
+                 </div>
+                 <div data-v-12a80a3e="" class="navbar__content-title"></div>
+              </div>
+              <div data-v-12a80a3e="" class="navbar__content-right">
+                 <div data-v-5d71c3fd="" class="WinGo__C-head-more">
+                    <div data-v-5d71c3fd="" onclick="location.href = '/support'"></div>
+                    <div data-v-5d71c3fd="" class="" id="audio_button"></div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div><!-- 钱包余额 -->
+      <%- include('element/info.ejs') -%>
+        <%- include('element/content.ejs') -%>
+          <%- include('element/list_order.ejs') -%>
+            <%- include('element/alert.ejs') -%>
+            <%- include('element/result_popup.ejs') -%>
+              <!---->
+              <div data-v-7692a079="" data-v-42f27458="" class="Loading c-row c-row-middle-center">
+                <div data-v-7692a079="" class="van-loading van-loading--circular">
+                  <span data-v-7692a079="" class="van-loading__spinner van-loading__spinner--circular"
+                    style="-webkit-animation-duration: 1s; animation-duration: 1s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      viewBox="0 0 200 200" width="200" height="200" preserveAspectRatio="xMidYMid meet"
+                      style="width: 100%;height: 100%;transform: translate3d(0px, 0px, 0px);content-visibility: visible;">
+                      <g transform="matrix(-0.5984085202217102,0.8011911511421204,-0.8011911511421204,-0.5984085202217102,239.9599609375,79.72173309326172)"
+                        style="display: block;">
+                        <image width="200px" height="200px" preserveAspectRatio="xMidYMid slice"
+                          xlink:href="/index_files/loadingspinner.png"></image>
+                      </g>
+                      <g transform="matrix(0.9408400058746338,0,0,0.9408400058746338,20.969436645507812,79.30152130126953)"
+                        style="display: block;">
+                        <image width="168px" height="44px" preserveAspectRatio="xMidYMid slice"
+                          xlink:href="/index_files/h5setting_202401100608011fs2.png"></image>
+                      </g>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"
+      integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
+      crossorigin="anonymous"></script>
+    <script src="/5d/js/main.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Advance Settings</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+        integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+    <style>
+        .form-group {
+            margin-top: 20px;
+            padding: 0px;
+            border-radius: 15px;
+            background: #dedede;
+            box-shadow: 0 0 5px #b8b8b8;
+        }
+
+        .form-group button {
+            margin-top: 30px;
+        }
+
+        .text-center{
+            background: lightslategrey;
+    border-radius: 15px 15px 0px 0px;
+    height: 50px;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px;
+        }
+
+        @media only screen and (min-width: 600px) {
+            .myNotice{
+                display: block;
+                justify-content: space-between;
+}
+.myNotice .form-control {
+            text-align: center;
+        }
+
+      
+
+}
+.form-control {
+    display: block;
+    justify-items: center;
+
+    width: 94% !important;
+    justify-self: center;
+}
+
+
+.drag-drop-area {
+    border: 2px dashed #007bff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    justify-self: center;
+    margin-top: 30px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.drag-drop-area p {
+    margin: 0;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.drag-drop-area.drag-over {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+
+
+.preview-container {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.preview-container img {
+    max-width: 100px;
+    max-height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <%- include('nav') %>
+            <div class="content-wrapper">
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>Advance Settings</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+
+                 
+                                
+                                <div class="form-group" style="text-align: center; padding-bottom: 25px; width: 94%; justify-self: center; margin-top:20px; margin-bottom:100px;">
+                                <form id="envForm">
+                                    <div class="text-center">
+                                        <label for="envForm">Core Settings (Needs Project Restart)</label>
+                                    </div>
+                                    
+                                <div style="display:none;">
+                                    <input type="text" id="port" name="PORT" readonly>
+                                    <input type="text" id="accountBank" name="accountBank" readonly>
+                                    <input type="text" id="secret_key" name="secret_key" readonly>
+                                    <input type="text" id="JWT_ACCESS_TOKEN" name="JWT_ACCESS_TOKEN" readonly>
+                                    <input type="text" id="WOWPAY_MERCHANT_ID" name="WOWPAY_MERCHANT_ID" readonly>
+                                    <input type="text" id="WOWPAY_MERCHANT_KEY" name="WOWPAY_MERCHANT_KEY" readonly>
+                                    <input type="text" id="PAYMENT_INFO" name="PAYMENT_INFO" readonly>
+                                    <input type="number" id="SALT_ROUNDS" name="SALT_ROUNDS" readonly>
+                                    <select id="ENABLE_MAIN_WALLET_TRANSFER" name="ENABLE_MAIN_WALLET_TRANSFER" readonly><option value="true">true</option>
+                                        <option value="false">false</option></select>
+                                    
+                                    <input type="text" id="AQUA_PAY_USERNAME" name="AQUA_PAY_USERNAME" readonly>
+                                    <input type="number" id="TRX_WINGO_GAME_TIME_SS" name="TRX_WINGO_GAME_TIME_SS" readonly>
+
+                                    <input type="text" class="form-control" id="DATABASE_HOST" name="DATABASE_HOST" readonly><br>
+                                    <input type="text" class="form-control" id="DATABASE_USER" name="DATABASE_USER" readonly><br>
+                                    <input type="password" class="form-control" id="DATABASE_PASSWORD" name="DATABASE_PASSWORD" readonly><br>
+                                    <input type="text" class="form-control" id="DATABASE_NAME" name="DATABASE_NAME" readonly><br>
+                                    <select id="ENABLE_BONUS_MONEY" name="ENABLE_BONUS_MONEY" required><option value="true">true</option>
+                                        <option value="false">false</option></select><br>
+
+                                    
+
+                                </div>
+                                    
+
+                                <div style="width:90%; justify-self: center; padding-top:30px; padding-bottom:40px;">    
+                                    
+                                    <label for="UPI_GATEWAY_PAYMENT_KEY" style="color: #3498db;">UPI Gateway Payment Key:</label><br>
+                                    <input type="text" class="form-control" id="UPI_GATEWAY_PAYMENT_KEY" name="UPI_GATEWAY_PAYMENT_KEY" required><br>
+
+                                    <label for="PAYMENT_EMAIL" style="color: #3498db;">Payment Email:</label><br>
+                                    <input type="email" class="form-control" id="PAYMENT_EMAIL" name="PAYMENT_EMAIL" required><br>
+                            
+                                    <label for="APP_BASE_URL" style="color: #3498db;">App Base URL:</label><br>
+                                    <input type="text" class="form-control" id="APP_BASE_URL" name="APP_BASE_URL" required><br>
+                            
+                                    <label for="APP_NAME" style="color: #3498db;">Payment App Name:</label><br>
+                                    <input type="text" class="form-control" id="APP_NAME" name="APP_NAME" required><br><br><br>
+
+                                    <label for="MINIMUM_MONEY_USDT" style="color: #3498db;">Minimum Recharge Money USDT:</label><br>
+                                    <input type="number" class="form-control" id="MINIMUM_MONEY_USDT" name="MINIMUM_MONEY_USDT" required><br>
+                            
+                                    <label for="MINIMUM_MONEY_INR" style="color: #3498db;">Minimum Recharge Money INR:</label><br>
+                                    <input type="number" class="form-control" id="MINIMUM_MONEY_INR" name="MINIMUM_MONEY_INR" required><br><br><br>
+
+
+                                    <label for="MINIMUM_WITHDRAWAL_MONEY_USDT" style="color: #3498db;">Minimum Withdrawal Money USDT:</label><br>
+                                    <input type="number" class="form-control" id="MINIMUM_WITHDRAWAL_MONEY_USDT" name="MINIMUM_WITHDRAWAL_MONEY_USDT" required><br>
+                            
+                                    <label for="MINIMUM_WITHDRAWAL_MONEY_INR" style="color: #3498db;">Minimum Withdrawal Money INR:</label><br>
+                                    <input type="number" class="form-control" id="MINIMUM_WITHDRAWAL_MONEY_INR" name="MINIMUM_WITHDRAWAL_MONEY_INR" required><br><br><br>
+
+                                    <label for="FAST2SMS_API" style="color: #3498db;">Fast2SMS API:</label><br>
+                                    <input type="text" class="form-control" id="FAST2SMS_API" name="FAST2SMS_API" required><br><br><br>
+
+                                    <label for="USDT_INR_EXCHANGE_RATE" style="color: #3498db;">USDT INR Exchange Rate:</label><br>
+                                    <input type="number" class="form-control" id="USDT_INR_EXCHANGE_RATE" name="USDT_INR_EXCHANGE_RATE" required><br><br><br>
+
+                                    <label for="JILI_AGENT_ID" style="color: #3498db;">JILI Agent ID:</label><br>
+                                    <input type="text" class="form-control" id="JILI_AGENT_ID" name="JILI_AGENT_ID" required><br>
+                            
+                                    <label for="JILI_AGENT_KEY" style="color: #3498db;">JILI Agent Key:</label><br>
+                                    <input type="text" class="form-control" id="JILI_AGENT_KEY" name="JILI_AGENT_KEY" required><br>
+                            
+                                    <label for="JILI_GAME_BASE_URL" style="color: #3498db;">JILI Game Base URL:</label><br>
+                                    <input type="text" class="form-control" id="JILI_GAME_BASE_URL" name="JILI_GAME_BASE_URL" required><br>
+                            
+                                    <label for="BYTE_FUSION_SECRET_KEY" style="color: #3498db;">Byte Fusion Secret Key:</label><br>
+                                    <input type="text" class="form-control" id="BYTE_FUSION_SECRET_KEY" name="BYTE_FUSION_SECRET_KEY" required><br><br><br>
+
+                                    <label for="JDB_AGENT_ID" style="color: #3498db;">JDB Agent ID:</label><br>
+                                    <input type="text" class="form-control" id="JDB_AGENT_ID" name="JDB_AGENT_ID" required><br>
+                            
+                                    <label for="JDB_DC" style="color: #3498db;">JDB DC:</label><br>
+                                    <input type="text" class="form-control" id="JDB_DC" name="JDB_DC" required><br>
+                            
+                                    <label for="JDB_API_URL" style="color: #3498db;">JDB API URL:</label><br>
+                                    <input type="text" class="form-control" id="JDB_API_URL" name="JDB_API_URL" required><br>
+                            
+                                    <label for="JDB_IV" style="color: #3498db;">JDB IV:</label><br>
+                                    <input type="text" class="form-control" id="JDB_IV" name="JDB_IV" required><br>
+                            
+                                    <label for="JDB_KEY" style="color: #3498db;">JDB Key:</label><br>
+                                    <input type="text" class="form-control" id="JDB_KEY" name="JDB_KEY" required><br>
+                            
+                                    <label for="PARENT" style="color: #3498db;">JDB Parent:</label><br>
+                                    <input type="text" class="form-control" id="PARENT" name="PARENT" required><br><br><br>
+
+                                    <label for="TRON_API_KEY" style="color: #3498db;">TRON API Key:</label><br>
+                                    <input type="text" class="form-control" id="TRON_API_KEY" name="TRON_API_KEY" required><br><br><br>
+
+                                    <label for="UPAY_API_URL" style="color: #3498db;">UPAY API URL:</label><br>
+                                    <input type="text" class="form-control" id="UPAY_API_URL" name="UPAY_API_URL"><br>
+                                    <label for="UPAY_APP_ID" style="color: #3498db;">UPAY APP ID:</label><br>
+                                    <input type="text" class="form-control" id="UPAY_APP_ID" name="UPAY_APP_ID"><br>
+                                    <label for="UPAY_APP_SECRET" style="color: #3498db;">UPAY APP SECRET:</label><br>
+                                    <input type="text" class="form-control" id="UPAY_APP_SECRET" name="UPAY_APP_SECRET"><br><br><br>
+                                    
+                                    <label for="RSPAY_MERCHANT_ID" style="color: #3498db;">RSPay Merchant ID:</label><br>
+                                    <input type="text" class="form-control" id="RSPAY_MERCHANT_ID" name="RSPAY_MERCHANT_ID" required><br>
+                            
+                                    <label for="RSPAY_MERCHANT_KEY" style="color: #3498db;">RSPay Merchant Key:</label><br>
+                                    <input type="text" class="form-control" id="RSPAY_MERCHANT_KEY" name="RSPAY_MERCHANT_KEY" required><br><br>
+
+
+                            
+                                    <button type="submit" style="width: 30%; border-radius:60px;" class="btn btn-primary">Update</button>
+
+                                </div>
+
+
+                                </form>
+                            
+                                <div id="message"></div>
+                               </div>
+
+
+
+
+
+
+                               
+                              
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/dist/js/adminlte.min.js"></script>
+    <script src="/js/admin/admin.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function (event) {
+          event.preventDefault(); // Prevent the page from reloading
+      
+          const formData = new FormData();
+          const fileInput = document.getElementById('file');
+          formData.append('file', fileInput.files[0]);
+      
+          fetch('/upload-image', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('uploadMessage').innerText = data.message;
+          })
+          .catch(error => {
+            document.getElementById('uploadMessage').innerText = 'Failed to upload file';
+            console.error('Error uploading file:', error);
+          });
+        });
+      </script>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Fetch current .env values and populate the form
+            fetch('/settings/env')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('port').value = data.PORT;
+                    document.getElementById('accountBank').value = data.accountBank;
+                    document.getElementById('secret_key').value = data.secret_key;
+                    document.getElementById('JWT_ACCESS_TOKEN').value = data.JWT_ACCESS_TOKEN;
+                    document.getElementById('UPI_GATEWAY_PAYMENT_KEY').value = data.UPI_GATEWAY_PAYMENT_KEY;
+                    document.getElementById('WOWPAY_MERCHANT_ID').value = data.WOWPAY_MERCHANT_ID;
+                    document.getElementById('WOWPAY_MERCHANT_KEY').value = data.WOWPAY_MERCHANT_KEY;
+                    document.getElementById('PAYMENT_INFO').value = data.PAYMENT_INFO;
+                    document.getElementById('PAYMENT_EMAIL').value = data.PAYMENT_EMAIL;
+                    document.getElementById('SALT_ROUNDS').value = data.SALT_ROUNDS;
+                    document.getElementById('APP_BASE_URL').value = data.APP_BASE_URL;
+                    document.getElementById('APP_NAME').value = data.APP_NAME;
+                    document.getElementById('DATABASE_HOST').value = data.DATABASE_HOST;
+                    document.getElementById('DATABASE_USER').value = data.DATABASE_USER;
+                    document.getElementById('DATABASE_PASSWORD').value = data.DATABASE_PASSWORD;
+                    document.getElementById('DATABASE_NAME').value = data.DATABASE_NAME;
+                    // document.getElementById('BONUS_MONEY_ON_REGISTER').value = data.BONUS_MONEY_ON_REGISTER;
+                    document.getElementById('ENABLE_BONUS_MONEY').value = data.ENABLE_BONUS_MONEY;
+                    document.getElementById('ENABLE_MAIN_WALLET_TRANSFER').value = data.ENABLE_MAIN_WALLET_TRANSFER;
+                    document.getElementById('MINIMUM_MONEY_USDT').value = data.MINIMUM_MONEY_USDT;
+                    document.getElementById('MINIMUM_MONEY_INR').value = data.MINIMUM_MONEY_INR;
+                    document.getElementById('MINIMUM_WITHDRAWAL_MONEY_USDT').value = data.MINIMUM_WITHDRAWAL_MONEY_USDT;
+                    document.getElementById('MINIMUM_WITHDRAWAL_MONEY_INR').value = data.MINIMUM_WITHDRAWAL_MONEY_INR;
+                    document.getElementById('FAST2SMS_API').value = data.FAST2SMS_API;
+                    document.getElementById('USDT_INR_EXCHANGE_RATE').value = data.USDT_INR_EXCHANGE_RATE;
+                    document.getElementById('JILI_AGENT_ID').value = data.JILI_AGENT_ID;
+                    document.getElementById('JILI_AGENT_KEY').value = data.JILI_AGENT_KEY;
+                    document.getElementById('JILI_GAME_BASE_URL').value = data.JILI_GAME_BASE_URL;
+                    document.getElementById('BYTE_FUSION_SECRET_KEY').value = data.BYTE_FUSION_SECRET_KEY;
+                    document.getElementById('JDB_AGENT_ID').value = data.JDB_AGENT_ID;
+                    document.getElementById('JDB_DC').value = data.JDB_DC;
+                    document.getElementById('JDB_API_URL').value = data.JDB_API_URL;
+                    document.getElementById('JDB_IV').value = data.JDB_IV;
+                    document.getElementById('JDB_KEY').value = data.JDB_KEY;
+                    document.getElementById('PARENT').value = data.PARENT;
+                    document.getElementById('TRON_API_KEY').value = data.TRON_API_KEY;
+                    document.getElementById('TRX_WINGO_GAME_TIME_SS').value = data.TRX_WINGO_GAME_TIME_SS;
+                    document.getElementById('RSPAY_MERCHANT_ID').value = data.RSPAY_MERCHANT_ID;
+                    document.getElementById('RSPAY_MERCHANT_KEY').value = data.RSPAY_MERCHANT_KEY;
+                    document.getElementById('AQUA_PAY_USERNAME').value = data.AQUA_PAY_USERNAME;
+                    document.getElementById('UPAY_API_URL').value = data.UPAY_API_URL;
+                    document.getElementById('UPAY_APP_ID').value = data.UPAY_APP_ID;
+                    document.getElementById('UPAY_APP_SECRET').value = data.UPAY_APP_SECRET;
+                });
+
+            // Handle form submission for updating .env values
+            document.getElementById('envForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData.entries());
+
+                fetch('/settings/env', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.text())
+                .then(message => {
+                    document.getElementById('message').innerText = message;
+                })
+                .catch(error => {
+                    document.getElementById('message').innerText = 'Failed to update .env data.';
+                    console.error('Error:', error);
+                });
+            });
+        });
+    </script>
+
+
+
+
+    <script>
+        $.ajax({
+            type: "POST",
+            url: "/admin/manager/settings/get",
+            data: "data",
+            dataType: "json",
+            success: function (response) {
+                let bank = response.datas[0];
+                let momo = response.momo;
+                $('#edit-momo-name_bank').val(momo.bank_name);
+                $('#edit-momo-name').val(momo.username);
+                $('#edit-momo-info').val(momo.upi_id);
+                $('#edit-momo-qr').val(momo.usdt_wallet_address);
+
+                $('#edit-banking-name_bank').val(bank.name_bank);
+                $('#edit-banking-name').val(bank.name_user);
+                $('#edit-banking-info').val(bank.stk);
+                // $('#edit-momo-qr').val(momo.qr_code_image);
+
+                $('#telegram').val(response.settings[0].telegram);
+                $('#cskh').val(response.settings[0].cskh);
+                $('#myapp_web').val(response.settings[0].app);
+
+                $('#app_name').val(response.settings[0].app_name);
+                $('#app_about').val(response.settings[0].app_about);
+                $('#app_notification').val(response.settings[0].app_notification);
+
+                
+                $('#notice1').val(response.settings[0].notice1);
+                $('#notice2').val(response.settings[0].notice2);
+                $('#notice3').val(response.settings[0].notice3);
+
+                $('#BONUS_MONEY_ON_REGISTER').val(response.settings[0].BONUS_MONEY_ON_REGISTER);
+                $('#INVITER_BONUS_MONEY_ON_REGISTER').val(response.settings[0].INVITER_BONUS_MONEY_ON_REGISTER);
+                $('#usr_rech_bonus').val(response.settings[0].usr_rech_bonus);
+                $('#inv_rech_bonus').val(response.settings[0].inv_rech_bonus);
+                $('#inv_rech_bonus').val(response.settings[0].inv_rech_bonus);
+                $('#inrusdtrate').val(response.settings[0].inrusdtrate);
+                $('#minfirstrech').val(response.settings[0].minfirstrech);
+                $('#safeinterest').val(response.settings[0].safeinterest);
+                $('#mininrdep').val(response.settings[0].mininrdep);
+                $('#minusdtdep').val(response.settings[0].minusdtdep);
+                $('#mininrwit').val(response.settings[0].mininrwit);
+                $('#minusdtwit').val(response.settings[0].minusdtwit);
+
+                
+            }
+        });
+    </script>
+    <script>
+        function sendRequest(params1, params2, typer) {
+            $.ajax({
+                type: "POST",
+                url: "/manage/admin/settings",
+                data: {
+                    params1: params1,
+                    params2: params2,
+                    typer: typer,
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.message == 1) {
+                        Swal.fire(
+                            'Good job!',
+                            'You clicked the button!',
+                            'success'
+                        )
+                    } else if (response.message == 2) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Phone number does not exist',
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'An unknown error !',
+                        })
+                    }
+                }
+            });
+        }
+
+        function sendRequestBank(name_bank = '', name = '', info = '', qr = '', typer = '') {
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/bank",
+                data: {
+                    name_bank: name_bank,
+                    name: name,
+                    info: info,
+                    qr: qr,
+                    typer: typer
+                },
+                dataType: "json",
+                success: function (response) {
+                    Swal.fire(
+                        'Good job!',
+                        'Updated Successfully!',
+                        'success'
+                    )
+                }
+            });
+        }
+        $('.buff-money').click(function (e) {
+            e.preventDefault();
+            const phone = $('#buff-phone').val();
+            const money = $('#buff-money').val();
+            const checkMoney = $.isNumeric(money);
+            if (phone && checkMoney) {
+                sendRequest(phone, money, "buff");
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Empty or Wrong Details',
+                })
+            }
+        });
+
+        const alertMessage = (text) => {
+            const msg = document.createElement('div');
+            msg.setAttribute('data-v-1dcba851', '');
+            msg.className = 'msg';
+
+            const msgContent = document.createElement('div');
+            msgContent.setAttribute('data-v-1dcba851', '');
+            msgContent.className = 'msg-content v-enter-active v-enter-to';
+            msgContent.style = '';
+            msgContent.textContent = text;
+
+            msg.appendChild(msgContent);
+            document.body.appendChild(msg);
+
+            setTimeout(() => {
+                msgContent.classList.remove('v-enter-active', 'v-enter-to');
+                msgContent.classList.add('v-leave-active', 'v-leave-to');
+
+                setTimeout(() => {
+                    document.body.removeChild(msg);
+                }, 100);
+            }, 1000);
+        }
+
+        $('.edit-momo').click(async (e) => {
+            try {
+                e.preventDefault();
+                const bank_name = $('#edit-momo-name_bank').val();
+                const username = $('#edit-momo-name').val();
+                const upi_id = $('#edit-momo-info').val();
+                const usdt_wallet_address = $('#edit-momo-qr').val();
+
+                const response = await axios.post("/admin/manager/settings/bank", {
+                    bank_name,
+                    username,
+                    upi_id,
+                    usdt_wallet_address,
+                    typer: 'momo'
+                })
+
+                if (response?.data?.status === true) {
+                    alertMessage(response?.data?.message)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        });
+        $('.edit-banking').click(function (e) {
+            e.preventDefault();
+            const name_bank = $('#edit-banking-name_bank').val();
+            const name = $('#edit-banking-name').val();
+            const info = $('#edit-banking-info').val();
+            sendRequestBank(name_bank, name, info, "bank");
+        });
+        $('.telegram').click(function (e) {
+            e.preventDefault();
+            const telegram = $('#telegram').val();
+            const cskh = $('#cskh').val();
+            const myapp_web = $('#myapp_web').val();
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/cskh",
+                data: {
+                    telegram: telegram,
+                    cskh: cskh,
+                    myapp_web: myapp_web,
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+        $('#buff-username').click(function (e) {
+            e.preventDefault();
+            let id_user = $('#buff-id').val().trim();
+            let buff_acc = $('#buff-acc').val().trim();
+            let money_value = $('#buff-money').val().trim();
+            if (id_user && buff_acc && money_value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/manager/settings/buff",
+                    data: {
+                        id_user: id_user,
+                        buff_acc: buff_acc,
+                        money_value: money_value,
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status == true) {
+                            Swal.fire(
+                                'Good job!',
+                                'Data Added Successfully!',
+                                'success'
+                            )
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'User ID does not exist',
+                            })
+                        }
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please enter complete information',
+                })
+            }
+        });
+
+
+
+        $('.banner').click(function(e) {
+    e.preventDefault();
+   
+    const formData = new FormData(); // Create a FormData object to handle file uploads
+    const banners = $('#bannerInput')[0].files; // Get the files from the input element (assuming it has the id 'bannerInput')
+
+    // Append the files to the FormData object
+    for (let i = 0; i < banners.length; i++) {
+        formData.append('banners', banners[i]);
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/admin/manager/uploadBbanner", // Update the URL to your endpoint for uploading banners
+        data: formData, // Use FormData instead of an object for file uploads
+        contentType: false, // Set contentType to false to prevent jQuery from automatically setting the Content-Type header
+        processData: false, // Set processData to false to prevent jQuery from processing the FormData object
+        dataType: "json",
+        success: function (response) {
+            if (response.status == true) {
+                Swal.fire(
+                    'Good job!',
+                    'Your Banner(s) Uploaded Successfully!',
+                    'success'
+                );
+                window.location.reload(true);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Upload Failed',
+                    text: 'Please try again later.',
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error uploading banners:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Upload Failed',
+                text: 'An error occurred while uploading the banner(s). Please try again later.',
+            });
+        }
+    });
+});
+
+
+
+
+$('.app_name').click(function(e) {
+            e.preventDefault();
+            const app_name = $('#app_name').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/app_name",
+                data: {
+                    app_name: app_name,                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+
+
+
+
+        $('.app_about').click(function(e) {
+            e.preventDefault();
+            const app_about = $('#app_about').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/app_about",
+                data: {
+                    app_about: app_about,                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+
+
+
+        $('.app_notification').click(function(e) {
+            e.preventDefault();
+            const app_notification = $('#app_notification').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/app_notification",
+                data: {
+                    app_notification: app_notification,                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+
+
+$('.notice1').click(function(e) {
+            e.preventDefault();
+            const notice1 = $('#notice1').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/notice1",
+                data: {
+                    notice1: notice1,                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+
+
+        
+$('.notice2').click(function(e) {
+            e.preventDefault();
+            const notice2 = $('#notice2').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/notice2",
+                data: {
+                    notice2: notice2,                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+
+
+
+        
+$('.notice3').click(function(e) {
+            e.preventDefault();
+            const notice3 = $('#notice3').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/notice3",
+                data: {
+                    notice3: notice3,                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+
+
+        $('.inv_rech_bonus').click(function (e) {
+    e.preventDefault();
+    const invRechBonus = $('#inv_rech_bonus').val();
+
+    // Validate input
+    if (!invRechBonus) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Input cannot be empty',
+            text: 'Please provide a valid value.',
+        });
+        return;
+    }
+
+    // AJAX request to submit data
+    $.ajax({
+        type: "POST",
+        url: "/admin/manager/settings/inv_rech_bonus",
+        data: {
+            inv_rech_bonus: invRechBonus
+        },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === true) {
+                Swal.fire(
+                    'Success',
+                    'Inviter Recharge Bonus updated successfully!',
+                    'success'
+                );
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Update Failed',
+                    text: 'Please check your input and try again.',
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Unexpected Error',
+                text: 'An error occurred while processing your request.',
+            });
+        }
+    });
+});
+
+
+        $('.usr_rech_bonus').click(function (e) {
+    e.preventDefault();
+
+    // Fetch the value from the input field
+    const usr_rech_bonus = $('#usr_rech_bonus').val();
+
+    // Check if the input is empty
+    if (!usr_rech_bonus) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Input cannot be empty',
+            text: 'Please provide a valid User Recharge Bonus value.',
+        });
+        return;
+    }
+
+    // AJAX request to update the User Recharge Bonus
+    $.ajax({
+        type: "POST",
+        url: "/admin/manager/settings/usr_rech_bonus",
+        data: {
+            usr_rech_bonus: usr_rech_bonus, // Send the correct value
+        },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === true) {
+                Swal.fire(
+                    'Success',
+                    'User Recharge Bonus Updated Successfully!',
+                    'success'
+                );
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Update Failed',
+                    text: response.message || 'An error occurred while updating. Please try again.',
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Request Error',
+                text: 'An unexpected error occurred. Please check your input and try again.',
+            });
+        }
+    });
+});
+
+
+        $('.BONUS_MONEY_ON_REGISTER').click(function (e) {
+            e.preventDefault();
+            const bonusMoney = $('#BONUS_MONEY_ON_REGISTER').val();
+            if (!bonusMoney) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Input cannot be empty',
+                });
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/BONUS_MONEY_ON_REGISTER",
+                data: {
+                    BONUS_MONEY_ON_REGISTER: bonusMoney
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status === true) {
+                        Swal.fire('Success', 'Updated successfully!', 'success');
+                    } else {
+                        Swal.fire('Error', 'Update failed. Check your input.', 'error');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX error:', error);
+                    Swal.fire('Error', 'An unexpected error occurred.', 'error');
+                }
+            });
+        });
+
+
+        $('.INVITER_BONUS_MONEY_ON_REGISTER').click(function(e) {
+    e.preventDefault();
+    const inviterBonus = $('#INVITER_BONUS_MONEY_ON_REGISTER').val(); // Correct variable name
+    
+    if (!inviterBonus) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Input cannot be empty',
+        });
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/admin/manager/settings/INVITER_BONUS_MONEY_ON_REGISTER",
+        data: {
+            INVITER_BONUS_MONEY_ON_REGISTER: inviterBonus // Correctly pass the value from the variable
+        },
+        dataType: "json",
+        success: function(response) {
+            if (response.status === true) {
+                Swal.fire(
+                    'Success',
+                    'Your Links Updated Successfully!',
+                    'success'
+                );
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Update Failed',
+                    text: 'Please check your input.',
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'An unexpected error occurred.',
+                text: 'Please try again later.',
+            });
+        }
+    });
+});
+
+
+
+
+$('.welcome').click(function(e) {
+            e.preventDefault();
+            const bonus = $('#welcome').val();
+            const first = $('#first').val();
+            const invite = $('#invite').val();
+            const rechbonususer = $('#rechbonususer').val();
+            const rechbonusinv = $('#rechbonusinv').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/welcomeBonus",
+                data: {
+                    bonus: bonus, 
+                    fr : first,
+                    ib: invite,
+                    rbu: rechbonususer,
+                    rbiv: rechbonusinv, 
+
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Bonus Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+        $('#buff-username').click(function (e) {
+            e.preventDefault();
+            let id_user = $('#buff-id').val().trim();
+            let buff_acc = $('#buff-acc').val().trim();
+            let money_value = $('#buff-money').val().trim();
+            if (id_user && buff_acc && money_value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/manager/settings/buff",
+                    data: {
+                        id_user: id_user,
+                        buff_acc: buff_acc,
+                        money_value: money_value,
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status == true) {
+                            Swal.fire(
+                                'Good job!',
+                                'Data Added Successfully!',
+                                'success'
+                            )
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'User ID does not exist',
+                            })
+                        }
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please enter complete information',
+                })
+            }
+        });  
+        
+        
+
+        $('.inrusdtrate').click(function (e) {
+    e.preventDefault();
+    const inrUsdRate = $('#inrusdtrate').val();
+    if (!inrUsdRate) {
+        Swal.fire({ icon: 'error', title: 'Input cannot be empty' });
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/admin/manager/settings/inrusdtrate",
+        data: { inrusdtrate: inrUsdRate },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === true) {
+                Swal.fire('Success', 'INR-USDT Rate updated successfully!', 'success');
+            } else {
+                Swal.fire('Error', 'Update failed. Check your input.', 'error');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX error:', error);
+            Swal.fire('Error', 'An unexpected error occurred.', 'error');
+        }
+    });
+});
+
+$('.minfirstrech').click(function (e) {
+    e.preventDefault();
+    const minFirstRech = $('#minfirstrech').val();
+    if (!minFirstRech) {
+        Swal.fire({ icon: 'error', title: 'Input cannot be empty' });
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/admin/manager/settings/minfirstrech",
+        data: { minfirstrech: minFirstRech },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === true) {
+                Swal.fire('Success', 'First Minimum Recharge updated successfully!', 'success');
+            } else {
+                Swal.fire('Error', 'Update failed. Check your input.', 'error');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX error:', error);
+            Swal.fire('Error', 'An unexpected error occurred.', 'error');
+        }
+    });
+});
+
+$('.safeinterest').click(function (e) {
+    e.preventDefault();
+    const safeInterest = $('#safeinterest').val();
+    if (!safeInterest) {
+        Swal.fire({ icon: 'error', title: 'Input cannot be empty' });
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/admin/manager/settings/safeinterest",
+        data: { safeinterest: safeInterest },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === true) {
+                Swal.fire('Success', 'Safe Interest updated successfully!', 'success');
+            } else {
+                Swal.fire('Error', 'Update failed. Check your input.', 'error');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX error:', error);
+            Swal.fire('Error', 'An unexpected error occurred.', 'error');
+        }
+    });
+});
+
+$('.mininrdep').click(function (e) {
+    e.preventDefault();
+    const minInrDep = $('#mininrdep').val();
+    if (!minInrDep) {
+        Swal.fire({ icon: 'error', title: 'Input cannot be empty' });
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/admin/manager/settings/mininrdep",
+        data: { mininrdep: minInrDep },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === true) {
+                Swal.fire('Success', 'Minimum INR Deposit updated successfully!', 'success');
+            } else {
+                Swal.fire('Error', 'Update failed. Check your input.', 'error');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX error:', error);
+            Swal.fire('Error', 'An unexpected error occurred.', 'error');
+        }
+    });
+});
+
+$('.minusdtdep').click(function (e) {
+    e.preventDefault();
+    const minUsdtDep = $('#minusdtdep').val();
+    if (!minUsdtDep) {
+        Swal.fire({ icon: 'error', title: 'Input cannot be empty' });
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/admin/manager/settings/minusdtdep",
+        data: { minusdtdep: minUsdtDep },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === true) {
+                Swal.fire('Success', 'Minimum USDT Deposit updated successfully!', 'success');
+            } else {
+                Swal.fire('Error', 'Update failed. Check your input.', 'error');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX error:', error);
+            Swal.fire('Error', 'An unexpected error occurred.', 'error');
+        }
+    });
+});
+
+$('.mininrwit').click(function (e) {
+    e.preventDefault();
+    const minInrWit = $('#mininrwit').val();
+    if (!minInrWit) {
+        Swal.fire({ icon: 'error', title: 'Input cannot be empty' });
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/admin/manager/settings/mininrwit",
+        data: { mininrwit: minInrWit },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === true) {
+                Swal.fire('Success', 'Minimum INR Withdrawal updated successfully!', 'success');
+            } else {
+                Swal.fire('Error', 'Update failed. Check your input.', 'error');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX error:', error);
+            Swal.fire('Error', 'An unexpected error occurred.', 'error');
+        }
+    });
+});
+
+$('.minusdtwit').click(function (e) {
+    e.preventDefault();
+    const minUsdtWit = $('#minusdtwit').val();
+    if (!minUsdtWit) {
+        Swal.fire({ icon: 'error', title: 'Input cannot be empty' });
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/admin/manager/settings/minusdtwit",
+        data: { minusdtwit: minUsdtWit },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === true) {
+                Swal.fire('Success', 'Minimum USDT Withdrawal updated successfully!', 'success');
+            } else {
+                Swal.fire('Error', 'Update failed. Check your input.', 'error');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX error:', error);
+            Swal.fire('Error', 'An unexpected error occurred.', 'error');
+        }
+    });
+});
+
+
+
+
+
+    </script>
+
+<script>
+    // Fetch banner data from the server
+    fetch('/admin/manager/getBanner')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Clear previous table content
+            document.querySelector('#bannerTable tbody').innerHTML = '';
+
+            // Populate the table with banner data
+            const container = document.querySelector('#bannerContainer'); // Main container
+
+data.filename.forEach((banner) => {
+    // Create a container for each image, filename, and delete button
+    const bannerContainer = document.createElement('div');
+    bannerContainer.style.display = 'flex';
+    bannerContainer.style.flexDirection = 'column';
+    bannerContainer.style.alignItems = 'center';
+    
+    bannerContainer.style.margin = '10px';
+    bannerContainer.style.width = '23%'; // Adjust to fit 4 containers per row (with margin)
+
+    // Create the image element
+    const image = document.createElement('img');
+    image.src = `/uploads/banners/${banner.filename}`; // Set image source
+    image.alt = 'Banner Image'; // Alt text for accessibility
+    image.style.width = '100%'; // Adjust image to fill container width
+
+    // Create the filename text element
+    const filenameText = document.createElement('div');
+    filenameText.textContent = banner.filename;
+    filenameText.style.textAlign = 'center'; // Center-align text
+
+    // Create the delete button
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.style.marginTop = '5px';
+deleteButton.style.marginBottom = '15px';
+deleteButton.style.background = '#0d6efd';
+deleteButton.style.color = 'white';
+deleteButton.style.border = '0px solid';
+deleteButton.style.padding = '5px 25px';
+deleteButton.style.borderRadius = '50px';
+
+    deleteButton.addEventListener('click', () => deleteBanner(banner.filename)); // Click event for delete
+
+    // Append image, filename, and delete button to the banner container
+    bannerContainer.appendChild(image);
+    bannerContainer.appendChild(filenameText);
+    bannerContainer.appendChild(deleteButton);
+
+    // Append the banner container to the main container
+    container.appendChild(bannerContainer);
+});
+
+        })
+        .catch(error => console.error('Error fetching banners:', error));
+
+
+function deleteBanner(filename) {
+if (confirm(`Are you sure you want to delete ${filename}?`)) {
+    $.ajax({
+        url: `/admin/manager/deleteBanner`,
+        type: 'POST', // Change the type to POST
+        dataType: 'json',
+        data : {filename:filename},
+        success: function() {
+            console.log('as');
+            // Refresh the page or update the banner list after successful deletion
+            window.location.reload(true); // Refresh the page
+        },
+        error: function(xhr, status, error) {
+            console.error('Error deleting banner:', error);
+        }
+    });
+}
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const dropArea = document.getElementById('dropArea');
+    const fileInput = document.getElementById('bannerInput');
+    const previewContainer = document.getElementById('previewContainer');
+
+    dropArea.addEventListener('click', () => fileInput.click());
+
+    // Drag and Drop Events
+    dropArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropArea.classList.add('drag-over');
+    });
+
+    dropArea.addEventListener('dragleave', () => {
+        dropArea.classList.remove('drag-over');
+    });
+
+    dropArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropArea.classList.remove('drag-over');
+        const files = e.dataTransfer.files;
+        fileInput.files = files;
+
+        displayPreviews(files);
+    });
+
+    fileInput.addEventListener('change', () => {
+        displayPreviews(fileInput.files);
+    });
+
+    // Function to display image previews
+    function displayPreviews(files) {
+        previewContainer.innerHTML = ''; // Clear previous previews
+
+        Array.from(files).forEach(file => {
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    previewContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Only image files are supported.');
+            }
+        });
+    }
+});
+
+
+
+    </script>
+
+
+<script>
+    // Upload Logo
+    document.querySelector('.logoUploadBtn').addEventListener('click', function () {
+      const logoInput = document.getElementById('logoUpload');
+      if (!logoInput.files[0]) {
+        alert('Please select a logo to upload.');
+        return;
+      }
+  
+      const formData = new FormData();
+      formData.append('logo', logoInput.files[0]);
+  
+      fetch('/admin/manager/upload-logo', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.message) {
+            alert(data.message);
+            document.getElementById('currentLogo').src = `/uploads/logo/logo.png?${new Date().getTime()}`;
+          }
+        })
+        .catch(error => {
+          alert('Failed to upload logo. Please try again.');
+          console.error('Error:', error);
+        });
+    });
+  
+    // Upload Favicon
+    document.querySelector('.faviconUploadBtn').addEventListener('click', function () {
+      const faviconInput = document.getElementById('faviconUpload');
+      if (!faviconInput.files[0]) {
+        alert('Please select a favicon to upload.');
+        return;
+      }
+  
+      const formData = new FormData();
+      formData.append('favicon', faviconInput.files[0]);
+  
+      fetch('/admin/manager/upload-favicon', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.message) {
+            alert(data.message);
+            document.getElementById('currentFavicon').src = `/uploads/favicon/favicon.png?${new Date().getTime()}`;
+          }
+        })
+        .catch(error => {
+          alert('Failed to upload favicon. Please try again.');
+          console.error('Error:', error);
+        });
+    });
+  </script>
+
+
+
+</body>
+
+</html>

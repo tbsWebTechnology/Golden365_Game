@@ -44,7 +44,7 @@
 
 .mian .check-box .check-header .txt[data-v-11ffe290] {
   background: -webkit-linear-gradient(top, #59b0ea 0%, #61a9ff 100%);
-  background: linear-gradient(180deg, #59b0ea 0%, #61a9ff 100%);
+  background: linear-gradient(180deg, #59b0ea 0%, #d9ac4f 100%);
   box-shadow: 0 0.10667rem 0.32rem #ffffff;
   border-radius: 0.8rem;
   height: 0.8rem;
@@ -78,7 +78,7 @@
   padding: 0.26667rem 0.4rem;
   margin-bottom: 0.26667rem;
   width: 31%;
-  background-color: #61a9ff;
+  background-color: var(--main-color);
   /*background:url(/images/k.webp) no-repeat 50%;background-size:cover;*/
   border-radius: 0.26667rem;
   overflow: hidden;

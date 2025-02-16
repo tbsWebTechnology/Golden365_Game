@@ -23,12 +23,30 @@
             margin-top: 20px;
             padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 0 5px #2ecc71;
+            background-color: white;
         }
 
         .form-group button {
             margin-top: 30px;
         }
+
+
+        @media only screen and (min-width: 600px) {
+            .myNotice{
+                display: block;
+                justify-content: space-between;
+}
+.myNotice .form-control {
+            text-align: center;
+        }
+
+       .myNotice .form-group {
+    padding: 20px 60px;
+}
+
+}
+
+
     </style>
 </head>
 
@@ -44,61 +62,40 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.container-fluid -->
+                  
                 </section>
 
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
                             <div style="padding: 10px 20px;margin-bottom: 200px;">
-                            <!--    <div class="form-group">
-                                    <div class="text-center">
-                                        <label for="quantity">Increase | Drecrease For Members</label>
-                                    </div>
-                                    <input type="text" class="form-control" oninput="value=value.replace(/\D/g,'')"
-                                        id="buff-id" placeholder="Enter account ID"><br>
-                                    <select class="form-select mb-4" id="buff-acc" aria-label="Default select example">
-                                        <option selected value="">----------- Select Function ----------</option>
-                                        <option value="1">Increase (+)</option>
-                                        <option value="2">Drecrease (-)</option>
-                                    </select>
-
-                                    <input type="text" class="form-control" oninput="value=value.replace(/\D/g,'')"
-                                        id="buff-money" placeholder="Enter Amount">
-                                    <button type="submit" class="btn btn-primary" id="buff-username"
-                                        style="width: 100%;">Submit</button>
-                                </div> -->
+                            
 
                                 <div class="form-group">
-                                   <!-- <div class="text-center">
-                                        <label for="quantity">Change Deposit Information</label>
-                                    </div>
-                                    <label for="quantity" style="color: #3498db;">BANKING</label>
-                                    <input type="text" class="form-control" placeholder="Rate"
-                                        id="edit-banking-name_bank" value=""><br>
-                                    <input type="text" class="form-control" placeholder="Enter Account Name"
-                                        id="edit-banking-name" value=""><br>
-                                    <input type="text" class="form-control" placeholder="Enter Account Number"
-                                        id="edit-banking-info" value=""><br>
-                                    <button type="submit" class="btn btn-primary edit-banking"
-                                        style="width: 100%;margin-bottom: 20px;">Submit</button>  -->
-                                    <!---------------------------------------------------------------->
+                                   
                                     <div class="text-center">
-                                        <label for="quantity">Manual Settings</label>
+                                        <label for="quantity">Manual Payment Settings</label>
                                     </div>
 
                                     <label for="edit-momo-name_bank" style="color: #3498db;">Rate</label>
                                     <input type="text" class="form-control" placeholder="Rate"
                                         id="edit-momo-name_bank" value=""><br>
+                                    <label for="edit-momo-name" style="color: #3498db;">Wallet Name</label>
                                     <input type="text" class="form-control" placeholder="Wallet Owner Name"
                                         id="edit-momo-name" value=""><br>
+                                    <label for="edit-momo-info" style="color: #3498db;">UPI Address</label>
                                     <input type="text" class="form-control" placeholder="UPI ID" id="edit-momo-info"
                                         value=""><br>
+                                    <label for="edit-momo-qr" style="color: #3498db;">USDT Wallet Address</label>
                                     <input type="text" class="form-control" placeholder="USDT Wallet Address"
                                         id="edit-momo-qr" value=""><br>
                                     <button type="submit" class="btn btn-primary edit-momo"
                                         style="width: 100%;">Submit</button>
                                 </div>
+
+
+
+
 
                                 <div class="form-group">
                                     <div class="text-center">
@@ -117,6 +114,20 @@
                                         style="width: 100%;">Submit</button>
                                 </div>
 
+                                
+                                
+                            
+                                <div id="message"></div>
+                               </div>
+
+
+
+
+
+
+                               
+                              
+
                             </div>
                         </div>
                     </div>
@@ -128,6 +139,113 @@
     <script src="/dist/js/adminlte.min.js"></script>
     <script src="/js/admin/admin.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function (event) {
+          event.preventDefault(); // Prevent the page from reloading
+      
+          const formData = new FormData();
+          const fileInput = document.getElementById('file');
+          formData.append('file', fileInput.files[0]);
+      
+          fetch('/upload-image', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('uploadMessage').innerText = data.message;
+          })
+          .catch(error => {
+            document.getElementById('uploadMessage').innerText = 'Failed to upload file';
+            console.error('Error uploading file:', error);
+          });
+        });
+      </script>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Fetch current .env values and populate the form
+            fetch('/settings/env')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('port').value = data.PORT;
+                    document.getElementById('accountBank').value = data.accountBank;
+                    document.getElementById('secret_key').value = data.secret_key;
+                    document.getElementById('JWT_ACCESS_TOKEN').value = data.JWT_ACCESS_TOKEN;
+                    document.getElementById('UPI_GATEWAY_PAYMENT_KEY').value = data.UPI_GATEWAY_PAYMENT_KEY;
+                    document.getElementById('WOWPAY_MERCHANT_ID').value = data.WOWPAY_MERCHANT_ID;
+                    document.getElementById('WOWPAY_MERCHANT_KEY').value = data.WOWPAY_MERCHANT_KEY;
+                    document.getElementById('PAYMENT_INFO').value = data.PAYMENT_INFO;
+                    document.getElementById('PAYMENT_EMAIL').value = data.PAYMENT_EMAIL;
+                    document.getElementById('SALT_ROUNDS').value = data.SALT_ROUNDS;
+                    document.getElementById('APP_BASE_URL').value = data.APP_BASE_URL;
+                    document.getElementById('APP_NAME').value = data.APP_NAME;
+                    document.getElementById('DATABASE_HOST').value = data.DATABASE_HOST;
+                    document.getElementById('DATABASE_USER').value = data.DATABASE_USER;
+                    document.getElementById('DATABASE_PASSWORD').value = data.DATABASE_PASSWORD;
+                    document.getElementById('DATABASE_NAME').value = data.DATABASE_NAME;
+                    document.getElementById('BONUS_MONEY_ON_REGISTER').value = data.BONUS_MONEY_ON_REGISTER;
+                    document.getElementById('ENABLE_BONUS_MONEY').value = data.ENABLE_BONUS_MONEY;
+                    document.getElementById('ENABLE_MAIN_WALLET_TRANSFER').value = data.ENABLE_MAIN_WALLET_TRANSFER;
+                    document.getElementById('MINIMUM_MONEY_USDT').value = data.MINIMUM_MONEY_USDT;
+                    document.getElementById('MINIMUM_MONEY_INR').value = data.MINIMUM_MONEY_INR;
+                    document.getElementById('MINIMUM_WITHDRAWAL_MONEY_USDT').value = data.MINIMUM_WITHDRAWAL_MONEY_USDT;
+                    document.getElementById('MINIMUM_WITHDRAWAL_MONEY_INR').value = data.MINIMUM_WITHDRAWAL_MONEY_INR;
+                    document.getElementById('FAST2SMS_API').value = data.FAST2SMS_API;
+                    document.getElementById('USDT_INR_EXCHANGE_RATE').value = data.USDT_INR_EXCHANGE_RATE;
+                    document.getElementById('JILI_AGENT_ID').value = data.JILI_AGENT_ID;
+                    document.getElementById('JILI_AGENT_KEY').value = data.JILI_AGENT_KEY;
+                    document.getElementById('JILI_GAME_BASE_URL').value = data.JILI_GAME_BASE_URL;
+                    document.getElementById('BYTE_FUSION_SECRET_KEY').value = data.BYTE_FUSION_SECRET_KEY;
+                    document.getElementById('JDB_AGENT_ID').value = data.JDB_AGENT_ID;
+                    document.getElementById('JDB_DC').value = data.JDB_DC;
+                    document.getElementById('JDB_API_URL').value = data.JDB_API_URL;
+                    document.getElementById('JDB_IV').value = data.JDB_IV;
+                    document.getElementById('JDB_KEY').value = data.JDB_KEY;
+                    document.getElementById('PARENT').value = data.PARENT;
+                    document.getElementById('TRON_API_KEY').value = data.TRON_API_KEY;
+                    document.getElementById('TRX_WINGO_GAME_TIME_SS').value = data.TRX_WINGO_GAME_TIME_SS;
+                    document.getElementById('RSPAY_MERCHANT_ID').value = data.RSPAY_MERCHANT_ID;
+                    document.getElementById('RSPAY_MERCHANT_KEY').value = data.RSPAY_MERCHANT_KEY;
+                    document.getElementById('AQUA_PAY_USERNAME').value = data.AQUA_PAY_USERNAME;
+                    document.getElementById('UPAY_API_URL').value = data.UPAY_API_URL;
+                    document.getElementById('UPAY_APP_ID').value = data.UPAY_APP_ID;
+                    document.getElementById('UPAY_APP_SECRET').value = data.UPAY_APP_SECRET;
+                });
+
+            // Handle form submission for updating .env values
+            document.getElementById('envForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData.entries());
+
+                fetch('/settings/env', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.text())
+                .then(message => {
+                    document.getElementById('message').innerText = message;
+                })
+                .catch(error => {
+                    document.getElementById('message').innerText = 'Failed to update .env data.';
+                    console.error('Error:', error);
+                });
+            });
+        });
+    </script>
+
+
+
+
     <script>
         $.ajax({
             type: "POST",
@@ -150,6 +268,15 @@
                 $('#telegram').val(response.settings[0].telegram);
                 $('#cskh').val(response.settings[0].cskh);
                 $('#myapp_web').val(response.settings[0].app);
+
+                $('#app_name').val(response.settings[0].app_name);
+                $('#app_about').val(response.settings[0].app_about);
+                $('#app_notification').val(response.settings[0].app_notification);
+
+                
+                $('#notice1').val(response.settings[0].notice1);
+                $('#notice2').val(response.settings[0].notice2);
+                $('#notice3').val(response.settings[0].notice3);
             }
         });
     </script>
@@ -344,6 +471,406 @@
                 })
             }
         });
+
+
+
+        $('.banner').click(function(e) {
+    e.preventDefault();
+   
+    const formData = new FormData(); // Create a FormData object to handle file uploads
+    const banners = $('#bannerInput')[0].files; // Get the files from the input element (assuming it has the id 'bannerInput')
+
+    // Append the files to the FormData object
+    for (let i = 0; i < banners.length; i++) {
+        formData.append('banners', banners[i]);
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/admin/manager/uploadBbanner", // Update the URL to your endpoint for uploading banners
+        data: formData, // Use FormData instead of an object for file uploads
+        contentType: false, // Set contentType to false to prevent jQuery from automatically setting the Content-Type header
+        processData: false, // Set processData to false to prevent jQuery from processing the FormData object
+        dataType: "json",
+        success: function (response) {
+            if (response.status == true) {
+                Swal.fire(
+                    'Good job!',
+                    'Your Banner(s) Uploaded Successfully!',
+                    'success'
+                );
+                window.location.reload(true);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Upload Failed',
+                    text: 'Please try again later.',
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error uploading banners:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Upload Failed',
+                text: 'An error occurred while uploading the banner(s). Please try again later.',
+            });
+        }
+    });
+});
+
+
+
+
+$('.app_name').click(function(e) {
+            e.preventDefault();
+            const app_name = $('#app_name').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/app_name",
+                data: {
+                    app_name: app_name,                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+
+
+
+
+        $('.app_about').click(function(e) {
+            e.preventDefault();
+            const app_about = $('#app_about').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/app_about",
+                data: {
+                    app_about: app_about,                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+
+
+
+        $('.app_notification').click(function(e) {
+            e.preventDefault();
+            const app_notification = $('#app_notification').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/app_notification",
+                data: {
+                    app_notification: app_notification,                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+
+
+$('.notice1').click(function(e) {
+            e.preventDefault();
+            const notice1 = $('#notice1').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/notice1",
+                data: {
+                    notice1: notice1,                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+
+
+        
+$('.notice2').click(function(e) {
+            e.preventDefault();
+            const notice2 = $('#notice2').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/notice2",
+                data: {
+                    notice2: notice2,                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+
+
+
+        
+$('.notice3').click(function(e) {
+            e.preventDefault();
+            const notice3 = $('#notice3').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/notice3",
+                data: {
+                    notice3: notice3,                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Your Links Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+
+$('.welcome').click(function(e) {
+            e.preventDefault();
+            const bonus = $('#welcome').val();
+            const first = $('#first').val();
+            const invite = $('#invite').val();
+            const rechbonususer = $('#rechbonususer').val();
+            const rechbonusinv = $('#rechbonusinv').val();
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/manager/settings/welcomeBonus",
+                data: {
+                    bonus: bonus, 
+                    fr : first,
+                    ib: invite,
+                    rbu: rechbonususer,
+                    rbiv: rechbonusinv, 
+
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire(
+                            'Good job!',
+                            'Bonus Updated Successfully!',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Empty or Wrong',
+                        })
+                    }
+                }
+            });
+        });
+
+
+        $('#buff-username').click(function (e) {
+            e.preventDefault();
+            let id_user = $('#buff-id').val().trim();
+            let buff_acc = $('#buff-acc').val().trim();
+            let money_value = $('#buff-money').val().trim();
+            if (id_user && buff_acc && money_value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/manager/settings/buff",
+                    data: {
+                        id_user: id_user,
+                        buff_acc: buff_acc,
+                        money_value: money_value,
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status == true) {
+                            Swal.fire(
+                                'Good job!',
+                                'Data Added Successfully!',
+                                'success'
+                            )
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'User ID does not exist',
+                            })
+                        }
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please enter complete information',
+                })
+            }
+        });        
+    </script>
+
+<script>
+    // Fetch banner data from the server
+    fetch('/admin/manager/getBanner')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Clear previous table content
+            document.querySelector('#bannerTable tbody').innerHTML = '';
+
+            // Populate the table with banner data
+            data.filename.forEach(banner => {
+                const row = document.createElement('tr');
+
+                // Create table cells for banner image and filename
+                const imageCell = document.createElement('td');
+                const image = document.createElement('img');
+                image.src = `/uploads/banners/${banner.filename}`; // Set the image source
+                image.alt = 'Banner Image'; // Set alt text for accessibility
+                image.style.width = '20%';
+                imageCell.appendChild(image); // Append image to cell
+
+                const filenameCell = document.createElement('td');
+                filenameCell.textContent = banner.filename;
+
+                // Create delete button cell
+                const deleteCell = document.createElement('td');
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.addEventListener('click', () => deleteBanner(banner.filename)); // Add click event listener for delete button
+                deleteCell.appendChild(deleteButton);
+
+                // Append cells to the table row
+                row.appendChild(imageCell);
+                row.appendChild(filenameCell);
+                row.appendChild(deleteCell);
+
+                // Append row to the table body
+                document.querySelector('#bannerTable tbody').appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching banners:', error));
+
+    // Function to delete a banner
+//         function deleteBanner(filename) {
+//     if (confirm(`Are you sure you want to delete ${filename}?`)) {
+//         fetch(`/admin/manager/deleteBanner/${filename}`, {
+//             method: 'DELETE'
+//         })
+//         .then(response => {
+//             console.log(response,'...')
+//             if (!response.ok) {
+//                 throw new Error('Network response was not ok');
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+        
+//             window.location.reload(true); // Refresh the page
+//         })
+//         .catch(error => console.error('Error deleting banner:', error));
+//     }
+// }
+function deleteBanner(filename) {
+if (confirm(`Are you sure you want to delete ${filename}?`)) {
+    $.ajax({
+        url: `/admin/manager/deleteBanner`,
+        type: 'POST', // Change the type to POST
+        dataType: 'json',
+        data : {filename:filename},
+        success: function() {
+            console.log('as');
+            // Refresh the page or update the banner list after successful deletion
+            window.location.reload(true); // Refresh the page
+        },
+        error: function(xhr, status, error) {
+            console.error('Error deleting banner:', error);
+        }
+    });
+}
+}
+
     </script>
 </body>
 
