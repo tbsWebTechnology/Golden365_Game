@@ -1023,7 +1023,7 @@
   position: absolute;
   width: 2.48rem;
   height: 1.17333rem;
-  color: #666;
+  color: var(--text_color_L2);
   text-align: center;
   line-height: 1.17333rem;
   background: var(--bg_color_L2);
@@ -1070,15 +1070,15 @@
   position: absolute;
   top: 100%;
   left: 0;
-  width: 8.61333rem;
+  width: 200px;
   font-size: 0.37333rem;
   height: 0.26667rem;
   text-align: start;
   opacity: 0;
-  border: 0.01333rem solid #2b3270;
-  border-radius: 0.13333rem;
+  border: 1px solid rgb(68, 68, 68);
+  border-radius: 5px;
   background-color: #fff;
-  box-shadow: 0 0.05333rem 0.21333rem #d0d0ed5c;
+  /* box-shadow: 0 0.05333rem 0.21333rem #d0d0ed5c; */
   overflow: hidden;
   z-index: 1;
   overflow-y: scroll;

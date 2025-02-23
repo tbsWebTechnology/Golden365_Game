@@ -75,6 +75,8 @@ function sleep(ms) {
 }
 
 function countDownTimer({ GAME_TYPE_ID }) {
+  console.log("CountDown Timer Started for GAME_TYPE_ID:", GAME_TYPE_ID); // Debugging Log
+
   const getTimeMSS = (countDownDate) => {
     var now = new Date().getTime();
     var distance = countDownDate - now;
@@ -88,8 +90,10 @@ function countDownTimer({ GAME_TYPE_ID }) {
 
   var countDownDate = new Date("2030-07-16T23:59:59.9999999+03:00").getTime();
 
+  // Timer to update countdown display
   countDownInterval1 = setInterval(function () {
     const { minute, seconds1, seconds2 } = getTimeMSS(countDownDate);
+
     if (GAME_TYPE_ID !== "1") {
       $(".TimeLeft__C-time div:eq(1)").text(minute);
     } else {
@@ -98,32 +102,81 @@ function countDownTimer({ GAME_TYPE_ID }) {
 
     $(".TimeLeft__C-time div:eq(3)").text(seconds1);
     $(".TimeLeft__C-time div:eq(4)").text(seconds2);
-  }, 0);
+  }, 1000);
 
+  // Timer to trigger win/loss popup at exactly 0 seconds
   countDownInterval2 = setInterval(() => {
     const { minute, seconds1, seconds2 } = getTimeMSS(countDownDate);
     const check_volume = localStorage.getItem("volume");
 
-    if (minute == 0 && seconds1 == 0 && seconds2 <= 9) {
-      if (clicked) {
-        if (check_volume == "on") {
-          playAudio1();
-        }
-      }
-    }
-    if (minute == 0 && seconds1 == 5 && seconds2 == 9) {
-      if (clicked) {
-        if (check_volume == "on") {
-          playAudio2();
-        }
-      }
+    console.log("Countdown Status:", { minute, seconds1, seconds2 }); // Debugging Log
+
+    // Play final countdown audio when seconds hit 0
+    if (minute == 0 && seconds1 == 0 && seconds2 === 0) {
+      console.log("Triggering Result Popup at 0 seconds for GAME_TYPE_ID:", GAME_TYPE_ID); // Debugging Log
+
+      $(".van-overlay").fadeOut();
+      $(".popup-join").fadeOut();
+      $(".Betting__C-mark").css("display", "flex");
+      $(".Betting__C-mark div:eq(0)").text(seconds1);
+      $(".Betting__C-mark div:eq(1)").text(seconds2);
+
+      // Fetch last game result and display popup
+      fetch("/api/webapi/trx_wingo/GetNoaverageEmerdList", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          typeid: GAME_TYPE_ID,
+          pageno: "0",
+          pageto: "10",
+          language: "vi",
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data?.data?.gameslist?.length > 0) {
+            const lastGame = data.data.gameslist[0];
+            console.log("Fetched Last Game Result:", lastGame); // Debugging Log
+
+            // Determine if the user won or lost
+            let status = STATUS_MAP.LOSS;
+            let amount = 0;
+
+            if (parseInt(lastGame.result) % 2 === 0) {
+              status = STATUS_MAP.WIN;
+              amount = lastGame.result * 10; // Example payout calculation
+            }
+
+            displayResultHandler({
+              status,
+              amount,
+              period: lastGame.period,
+              result: lastGame.result,
+            });
+
+            console.log("Popup Triggered with:", {
+              status,
+              amount,
+              period: lastGame.period,
+              result: lastGame.result,
+            });
+          } else {
+            console.warn("No game result found!");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching last game result:", error);
+        });
     }
   }, 1000);
 
+  // Timer to update UI for the final countdown
   countDownInterval3 = setInterval(function () {
     const { minute, seconds1, seconds2 } = getTimeMSS(countDownDate);
 
-    if (minute == 0 && seconds1 == 0 && seconds2 <= 9) {
+    if (minute == 0 && seconds1 == 0 && seconds2 === 0) {
       $(".van-overlay").fadeOut();
       $(".popup-join").fadeOut();
 
@@ -133,8 +186,10 @@ function countDownTimer({ GAME_TYPE_ID }) {
     } else {
       $(".Betting__C-mark").css("display", "none");
     }
-  }, 0);
+  }, 500);
 }
+
+
 
 $(document).ready(function () {
   countDownTimer({ GAME_TYPE_ID });
@@ -302,8 +357,8 @@ const displayResultHandler = ({ status, amount, period, result }) => {
     $("#popup_win_rupees_display").css("display", "block");
     $("#popup_win_symbol").css("display", "block");
     $("#popup_loss_symbol").css("display", "none");
-  } 
-  
+  }
+
   else if (status === STATUS_MAP.LOSS) {
     $("#popup_greeting_display").html(`Sorry`);
     $("#popup_background").addClass("isL");
@@ -312,13 +367,13 @@ const displayResultHandler = ({ status, amount, period, result }) => {
     $("#popup_win_symbol").css("display", "none");
     $("#popup_loss_symbol").css("display", "block");
   } else {
-     $(".modal-popup__title").text("Result")
-     $(".modal-popup__amount").text(`No Bets !`)
+    $(".modal-popup__title").text("Result")
+    $(".modal-popup__amount").text(`No Bets !`)
   }
 
   console.log("Setting popup for loss...");
-$("#popup_modal").css("display", "block");
-console.log("Popup modal display:", $("#popup_modal").css("display"));
+  $("#popup_modal").css("display", "block");
+  console.log("Popup modal display:", $("#popup_modal").css("display"));
 
 
   setTimeout(() => {
@@ -396,19 +451,18 @@ function showTrendData(list_orders) {
             <div data-v-d485a39d="" class="Trend__C-body2-Num">
                <canvas data-v-d485a39d="" canvas="" id="myCanvas${index}" class="line-canvas"></canvas>
                ${NumberList.map((number, index) => {
-                 return `<div data-v-d485a39d="" class="Trend__C-body2-Num-item ${order.result == number ? `action${number}` : ""}">${number}</div>`;
-               }).join(" ")}
+        return `<div data-v-d485a39d="" class="Trend__C-body2-Num-item ${order.result == number ? `action${number}` : ""}">${number}</div>`;
+      }).join(" ")}
                <div data-v-d485a39d="" class="Trend__C-body2-Num-BS ${isBig ? "isB" : ""}">${isBig ? "B" : "S"}</div>
             </div>
          </div>
-       ${
-         isLastOrder
-           ? ""
-           : `
+       ${isLastOrder
+          ? ""
+          : `
          <script>
             drawChartLineInCanvas(${order.result},${list_orders[index + 1].result}, "myCanvas${index}")
          </script>`
-       }
+        }
       </div>
    </div>`;
     })
@@ -496,45 +550,44 @@ function showMyBetsData(list_orders) {
                <div data-v-2faec5cb="" class="MyGameRecordList__C-item-m-top">${list_order.stage}</div>
                <div data-v-2faec5cb="" class="MyGameRecordList__C-item-m-bottom">${timerJoin(list_order.time)}</div>
             </div>
-            ${
-              list_order.status === 0
-                ? ""
-                : `<div data-v-2faec5cb="" class="MyGameRecordList__C-item-r ${list_order.status == 1 ? "success" : ""}">
+            ${list_order.status === 0
+          ? ""
+          : `<div data-v-2faec5cb="" class="MyGameRecordList__C-item-r ${list_order.status == 1 ? "success" : ""}">
                 <div data-v-2faec5cb="" class="${list_order.status === 1 ? "success" : ""}">${list_order.status == 1 ? "Success" : list_order.status == 2 ? "Failed" : ""}</div>
                 <span data-v-2faec5cb="">${
-                  // list_order.status == 1 && list_order.bet == 0
-                  //    ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 4.5 + " </span>"
-                  //    : list_order.status == 1 && list_order.bet == 5
-                  //      ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 4.5 + " </span>"
-                  //      : list_order.status == 1 && list_order.result == 0 && list_order.bet == "d"
-                  //        ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 1.5 + " </span>"
-                  //        : list_order.status == 1 && list_order.bet == "d"
-                  //          ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 2 + " </span>"
-                  //          : list_order.status == 1 && list_order.bet == "t"
-                  //            ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 4.5 + " </span>"
-                  //            : list_order.status == 1 && list_order.result == 5 && list_order.bet == "x"
-                  //              ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 1.5 + " </span>"
-                  //              : list_order.status == 1 && list_order.bet == "x"
-                  //                ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 2 + " </span>"
-                  //                : list_order.status == 1 && list_order.bet == "l"
-                  //                  ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 2 + " </span>"
-                  //                  : list_order.status == 1 && list_order.bet == "n"
-                  //                    ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 2 + " </span>"
-                  //                    : list_order.status == 1
-                  //                      ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 9 + " </span>"
-                  //                      : list_order.status == 2
-                  //                        ? '<span data-v-a9660e98="" class="fail"> - ₹' + list_order.money + ".00</span>"
-                  //                        : ""
-                  list_order.status === 1
-                    ? '<span data-v-a9660e98="" class="success"> + ₹ ' +
-                      parseFloat(list_order.get).toFixed(2) +
-                      " </span>"
-                    : '<span data-v-a9660e98="" class="fail"> - ₹ ' +
-                      parseFloat(list_order.money).toFixed(2) +
-                      "</span>"
-                }</span>
+          // list_order.status == 1 && list_order.bet == 0
+          //    ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 4.5 + " </span>"
+          //    : list_order.status == 1 && list_order.bet == 5
+          //      ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 4.5 + " </span>"
+          //      : list_order.status == 1 && list_order.result == 0 && list_order.bet == "d"
+          //        ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 1.5 + " </span>"
+          //        : list_order.status == 1 && list_order.bet == "d"
+          //          ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 2 + " </span>"
+          //          : list_order.status == 1 && list_order.bet == "t"
+          //            ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 4.5 + " </span>"
+          //            : list_order.status == 1 && list_order.result == 5 && list_order.bet == "x"
+          //              ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 1.5 + " </span>"
+          //              : list_order.status == 1 && list_order.bet == "x"
+          //                ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 2 + " </span>"
+          //                : list_order.status == 1 && list_order.bet == "l"
+          //                  ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 2 + " </span>"
+          //                  : list_order.status == 1 && list_order.bet == "n"
+          //                    ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 2 + " </span>"
+          //                    : list_order.status == 1
+          //                      ? '<span data-v-a9660e98="" class="success"> + ₹' + list_order.money * 9 + " </span>"
+          //                      : list_order.status == 2
+          //                        ? '<span data-v-a9660e98="" class="fail"> - ₹' + list_order.money + ".00</span>"
+          //                        : ""
+          list_order.status === 1
+            ? '<span data-v-a9660e98="" class="success"> + ₹ ' +
+            parseFloat(list_order.get).toFixed(2) +
+            " </span>"
+            : '<span data-v-a9660e98="" class="fail"> - ₹ ' +
+            parseFloat(list_order.money).toFixed(2) +
+            "</span>"
+          }</span>
                 </div>`
-            }
+        }
          </div>
  <div data-v-2faec5cb="" class="MyGameRecordList__C-detail details_box_${index}" style="display: none;">
                <div data-v-2faec5cb="" class="MyGameRecordList__C-detail-text">Details</div>
@@ -619,7 +672,7 @@ function initGameLogics({
     $("#popup_total_bet_money").text(total + "");
   }
 
-  const selectPopupXData = () => {};
+  const selectPopupXData = () => { };
   $(".van-overlay").fadeOut();
   $(".popup-join").fadeOut();
 

@@ -603,8 +603,9 @@ img {
 input {
   -webkit-user-select: text;
   user-select: text;
-  color: var(--text_color_L1);
+  /* color: var(--text_color_L1); */
 }
+
 input:focus {
   outline: 0.01333rem solid var(--Dividing-line_color);
   -webkit-user-select: text;

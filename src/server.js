@@ -44,11 +44,10 @@ socketIoController.sendMessageAdmin(io);
 
 // Create database connection
 const db = mysql.createConnection({
-  host: 'localhost',  
-  user: 'root',       
-  password: '',       
-  database: 'diuwin', 
-
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'diuwin',
 });
 
 // Fetch app details from the database

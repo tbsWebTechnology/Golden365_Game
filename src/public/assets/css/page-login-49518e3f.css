@@ -1704,7 +1704,7 @@ html:lang(ar) .phoneInput__container-input input[data-v-50aa8bb0] {
 }
 .login__container-heading[data-v-47f4cc84] {
   min-height: 2.66667rem;
-  background: var(--light-main_gradient-color, var(--bg_color_L2));
+  background: var(--bg_color_L2);
   padding: 0 0.53333rem;
 }
 .login__container-heading__title[data-v-47f4cc84] {

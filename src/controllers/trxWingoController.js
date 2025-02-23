@@ -163,225 +163,97 @@ const betTrxWingo = async (req, res) => {
     let { typeid, join, x, money } = req.body;
     let auth = req.cookies.auth;
 
-    if (typeid != 1 && typeid != 3 && typeid != 5 && typeid != 10) {
+    console.log(`Received Bet Request: typeid=${typeid}, join=${join}, x=${x}, money=${money}`);
+
+    // Ensure typeid is valid
+    const gameTypeKeys = { 1: "MIN_1", 3: "MIN_3", 5: "MIN_5", 10: "MIN_10" };
+
+    if (!gameTypeKeys[typeid]) {
+      console.error("Invalid game type received:", typeid);
+      return res.status(400).json({ message: "Error! Invalid game type", status: false });
+    }
+
+    let gameJoin = TRX_WINGO_GAME_TYPE_MAP[gameTypeKeys[typeid]];
+
+    console.log(`Fetching active period for game: ${gameJoin}`);
+    const [trxWingoNow] = await connection.query(
+      `SELECT period FROM trx_wingo_game WHERE status = 0 AND game = ? ORDER BY id DESC LIMIT 1`,
+      [gameJoin]
+    );
+
+    if (!trxWingoNow[0]) {
+      console.log("No active period found! Creating new period...");
+      let timeNow = Date.now();
+      let period = moment(timeNow).format("YYYYMMDDHHmmss");
+
+      await connection.query(
+        `INSERT INTO trx_wingo_game (period, result, game, status, block_id, block_time, hash, time)
+         VALUES (?, 0, ?, 0, 0, '', '', ?)`,
+        [period, gameJoin, timeNow]
+      );
+
       return res.status(200).json({
-        message: "Error!",
-        status: true,
+        message: "Error! No active period. New period created, try again.",
+        status: false
       });
     }
 
-    let gameJoin = "";
-    if (typeid == 1) gameJoin = "trx_wingo";
-    if (typeid == 3) gameJoin = "trx_wingo3";
-    if (typeid == 5) gameJoin = "trx_wingo5";
-    if (typeid == 10) gameJoin = "trx_wingo10";
-    const [trxWingoNow] = await connection.query(
-      `SELECT period FROM trx_wingo_game WHERE status = 0 AND game = ? ORDER BY id DESC LIMIT 1 `,
-      [gameJoin],
-    );
+    console.log("Active Period Found:", trxWingoNow[0].period);
     const [user] = await connection.query(
-      "SELECT `phone`, `code`, `invite`, `level`, `money` FROM users WHERE token = ? AND veri = 1  LIMIT 1 ",
-      [auth],
+      "SELECT `phone`, `code`, `invite`, `level`, `money` FROM users WHERE token = ? AND veri = 1 LIMIT 1",
+      [auth]
     );
-    if (!trxWingoNow[0] || !user[0] || !isNumber(x) || !isNumber(money)) {
-      return res.status(200).json({
-        message: "Error!",
-        status: true,
-      });
+
+    if (!user[0]) {
+      console.log("User not found!");
+      return res.status(400).json({ message: "Error! User not found", status: false });
+    }
+
+    console.log("User Balance:", user[0].money);
+    if (!isNumber(x) || !isNumber(money)) {
+      return res.status(400).json({ message: "Error! Invalid bet amount", status: false });
     }
 
     let userInfo = user[0];
     let period = trxWingoNow[0].period;
     let fee = x * money * 0.02;
     let total = x * money - fee;
+
+    if (userInfo.money < total) {
+      return res.status(400).json({ message: "Error! Insufficient funds", status: false });
+    }
+
+    let betId = `${moment().format("YYYYMMDDHHmmss")}${Math.floor(Math.random() * 100000)}`;
     let timeNow = Date.now();
-    let check = userInfo.money - total;
 
-    let date = new Date();
-    let years = formateT(date.getFullYear());
-    let months = formateT(date.getMonth() + 1);
-    let days = formateT(date.getDate());
-    let id_product =
-      years + months + days + Math.floor(Math.random() * 1000000000000000);
+    await connection.query(
+      `INSERT INTO trx_wingo_bets (id_product, phone, code, invite, stage, level, money, amount, fee, game, bet, status, time)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?)`,
+      [betId, userInfo.phone, userInfo.code, userInfo.invite, period, userInfo.level, total, x, fee, gameJoin, join, timeNow]
+    );
 
-    let formatTime = timerJoin();
+    await connection.query("UPDATE users SET money = money - ? WHERE token = ?", [money * x, auth]);
 
-    let color = "";
-    if (join == "l") {
-      color = "big";
-    } else if (join == "n") {
-      color = "small";
-    } else if (join == "t") {
-      color = "violet";
-    } else if (join == "d") {
-      color = "red";
-    } else if (join == "x") {
-      color = "green";
-    } else if (join == "0") {
-      color = "red-violet";
-    } else if (join == "5") {
-      color = "green-violet";
-    } else if (join % 2 == 0) {
-      color = "red";
-    } else if (join % 2 != 0) {
-      color = "green";
-    }
+    const [updatedUser] = await connection.query(
+      "SELECT money FROM users WHERE token = ? AND veri = 1 LIMIT 1",
+      [auth]
+    );
 
-    let checkJoin = "";
-
-    if ((!isNumber(join) && join == "l") || join == "n") {
-      checkJoin = `
-        <div data-v-a9660e98="" class="van-image" style="width: 30px; height: 30px;">
-            <img src="/images/${join == "n" ? "small" : "big"}.png" class="van-image__img">
-        </div>
-        `;
-    } else {
-      checkJoin = `
-        <span data-v-a9660e98="">${isNumber(join) ? join : ""}</span>
-        `;
-    }
-
-    let result = `
-    <div data-v-a9660e98="" issuenumber="${period}" addtime="${formatTime}" rowid="1" class="hb">
-        <div data-v-a9660e98="" class="item c-row">
-            <div data-v-a9660e98="" class="result">
-                <div data-v-a9660e98="" class="select select-${color}">
-                    ${checkJoin}
-                </div>
-            </div>
-            <div data-v-a9660e98="" class="c-row c-row-between info">
-                <div data-v-a9660e98="">
-                    <div data-v-a9660e98="" class="issueName">
-                        ${period}
-                    </div>
-                    <div data-v-a9660e98="" class="tiem">${formatTime}</div>
-                </div>
-            </div>
-        </div>
-        <!---->
-    </div>
-    `;
-
-    function timerJoin(params = "", addHours = 0) {
-      let date = "";
-      if (params) {
-        date = new Date(Number(params));
-      } else {
-        date = new Date();
-      }
-
-      date.setHours(date.getHours() + addHours);
-
-      let years = formateT(date.getFullYear());
-      let months = formateT(date.getMonth() + 1);
-      let days = formateT(date.getDate());
-
-      let hours = date.getHours() % 12;
-      hours = hours === 0 ? 12 : hours;
-      let ampm = date.getHours() < 12 ? "AM" : "PM";
-
-      let minutes = formateT(date.getMinutes());
-      let seconds = formateT(date.getSeconds());
-
-      return (
-        years +
-        "-" +
-        months +
-        "-" +
-        days +
-        " " +
-        hours +
-        ":" +
-        minutes +
-        ":" +
-        seconds +
-        " " +
-        ampm
-      );
-    }
-    let checkTime = timerJoin(date.getTime());
-
-    if (check >= 0) {
-      const sql = `INSERT INTO trx_wingo_bets SET 
-            id_product = ?,
-            phone = ?,
-            code = ?,
-            invite = ?,
-            stage = ?,
-            level = ?,
-            money = ?,
-            amount = ?,
-            fee = ?,
-            get = ?,
-            game = ?,
-            bet = ?,
-            status = ?,
-            today = ?,
-            time = ?`;
-      await connection.query(sql, [
-        id_product,
-        userInfo.phone,
-        userInfo.code,
-        userInfo.invite,
-        period,
-        userInfo.level,
-        total,
-        x,
-        fee,
-        0,
-        gameJoin,
-        join,
-        0,
-        checkTime,
-        timeNow,
-      ]);
-      await connection.query(
-        "UPDATE `users` SET `money` = `money` - ? WHERE `token` = ? ",
-        [money * x, auth],
-      );
-      const [users] = await connection.query(
-        "SELECT `money`, `level` FROM users WHERE token = ? AND veri = 1  LIMIT 1 ",
-        [auth],
-      );
-      await rosesPlus(auth, money * x);
-      // const [level] = await connection.query('SELECT * FROM level ');
-      // let level0 = level[0];
-      // const sql2 = `INSERT INTO roses SET
-      // phone = ?,
-      // code = ?,
-      // invite = ?,
-      // f1 = ?,
-      // f2 = ?,
-      // f3 = ?,
-      // f4 = ?,
-      // time = ?`;
-      // let total_m = money * x;
-      // let f1 = (total_m / 100) * level0.f1;
-      // let f2 = (total_m / 100) * level0.f2;
-      // let f3 = (total_m / 100) * level0.f3;
-      // let f4 = (total_m / 100) * level0.f4;
-      // await connection.query(sql2, [userInfo.phone, userInfo.code, userInfo.invite, f1, f2, f3, f4, timeNow]);
-      // console.log(level);
-      return res.status(200).json({
-        message: "Successful bet",
-        status: true,
-        data: result,
-        change: users[0].level,
-        money: users[0].money,
-      });
-    } else {
-      return res.status(200).json({
-        message: "The amount is not enough",
-        status: false,
-      });
-    }
-  } catch (error) {
     return res.status(200).json({
-      message: "Error!",
-      status: false,
+      message: "Successful bet",
+      status: true,
+      period: period,
+      money: updatedUser[0].money
     });
+
+  } catch (error) {
+    console.error("Error in betTrxWingo:", error);
+    return res.status(500).json({ message: "Error!", status: false });
   }
 };
+
+
+
 
 const listOrderOld = async (req, res) => {
   let { typeid, pageno, pageto } = req.body;
@@ -581,111 +453,31 @@ function getNthMinuteSinceDayStart() {
 
 const addTrxWingo = async (game) => {
   try {
-    let join = "";
-    if (game == 1) join = TRX_WINGO_GAME_TYPE_MAP.MIN_1;
-    if (game == 3) join = TRX_WINGO_GAME_TYPE_MAP.MIN_3;
-    if (game == 5) join = TRX_WINGO_GAME_TYPE_MAP.MIN_5;
-    if (game == 10) join = TRX_WINGO_GAME_TYPE_MAP.MIN_10;
+    let gameJoin = TRX_WINGO_GAME_TYPE_MAP[`MIN_${game}`];
 
-    // console.log(join)
+    console.log(`Ensuring Active Period Exists for: ${gameJoin}`);
 
     const [trxWingoNow] = await connection.query(
       "SELECT period FROM trx_wingo_game WHERE status = 0 AND game = ? ORDER BY id DESC LIMIT 1",
-      [join],
+      [gameJoin]
     );
 
-    const isPendingGame = trxWingoNow.length;
-    const PendingGamePeriod = trxWingoNow?.[0]?.period
-      ? parseInt(trxWingoNow?.[0]?.period)
-      : 0;
+    if (trxWingoNow.length === 0) {
+      console.log("No Active Period Found! Creating New Game Period...");
+      let timeNow = Date.now();
+      let period = moment(timeNow).format("YYYYMMDDHHmmss");
 
-    if (isPendingGame) {
-      // console.log("TRX WINGO GAME PENDING GAME INSERTIONS Start")
-      const isAdminManipulatedResult = false;
+      await connection.query(
+        "INSERT INTO trx_wingo_game SET period = ?, result = 0, game = ?, status = 0, block_id = 0, block_time = '', hash = '', time = ?",
+        [period, gameJoin, timeNow]
+      );
 
-      if (isAdminManipulatedResult) {
-      } else {
-        let response = await axios({
-          method: "GET",
-          url: "https://apilist.tronscanapi.com/api/block?sort=-balance&start=0&limit=20&producer=&number=&start_timestamp=&end_timestamp=",
-          headers: {
-            "TRON-PRO-API-KEY": process.env.TRON_API_KEY,
-          },
-        });
-
-        const NextBlock = response.data.data
-          .map((item) => {
-            return {
-              id: item.number,
-              hash: item.hash,
-              blockTime: item.timestamp,
-              timeSS: moment(item.timestamp).format("ss"),
-            };
-          })
-          .find((item) => item.timeSS === "54");
-
-        if (NextBlock === undefined) {
-          throw new Error("NextBlock is undefined");
-        }
-
-        const BlockId = NextBlock.id;
-        const BlockTime = NextBlock.blockTime;
-        const Hash = NextBlock.hash;
-
-        let Result = generateResultByHash(Hash);
-
-        // console.log({
-        //    BlockId,
-        //    BlockTime: moment(BlockTime).format("HH:mm:ss"),
-        //    Hash,
-        //    Result,
-        // })
-
-        await connection.query(
-          `
-               UPDATE trx_wingo_game
-               SET result = ?, status = ?, block_id = ?, block_time = ?, hash = ?, release_status = 1
-               WHERE period = ? AND game = ?
-               `,
-          [
-            Result,
-            TRX_WINGO_GAME_STATUS_MAP.COMPLETED,
-            BlockId,
-            BlockTime,
-            Hash,
-            PendingGamePeriod,
-            join,
-          ],
-        );
-
-        // console.log("TRX WINGO GAME PENDING GAME INSERTIONS Successfully")
-      }
+      console.log("New Game Period Created Successfully!");
+    } else {
+      console.log("Active Game Period Found:", trxWingoNow[0].period);
     }
-
-    let gameRepresentationId = GameRepresentationIds.TRXWINGO[game];
-    let NewGamePeriod = generatePeriod(gameRepresentationId);
-
-    let timeNow = Date.now();
-
-    const [trxWinGoTest] = await connection.query(
-      "SELECT period FROM trx_wingo_game WHERE period = ? AND game = ?",
-      [NewGamePeriod, join],
-    );
-
-    if (trxWinGoTest.length > 0) {
-      return;
-    }
-
-    await connection.query(
-      "INSERT INTO trx_wingo_game SET period = ?, result = 0, game = ?, status = 0, block_id = 0, block_time = '', hash = '', time = ?",
-      [NewGamePeriod, join, timeNow],
-    );
-    // console.log("TRX WINGO GAME INSERT SUCCESSFULLY")
   } catch (error) {
-    if (error?.response?.status === 403) {
-      console.log("API Quota Exceeded for 30 seconds");
-      console.log(error.response.data.Error);
-    } else console.log(error);
+    console.error("Error in addTrxWingo:", error);
   }
 };
 

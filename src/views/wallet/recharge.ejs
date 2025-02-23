@@ -1,17 +1,17 @@
 <html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 37px;">
 
 <head>
-    
+    <script src="/app.config.js?v=1718968461132"></script>
 
     <meta charset="UTF-8">
-    <link rel="icon" type="image/svg+xml" href="/uploads/favicon/favicon.png" />
+    <link rel="icon" type="image/svg+xml"
+        href="/favicon.png">
     <meta name="google" content="notranslate">
     <meta name="robots" content="noindex,nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    
-    <title id="app-title"></title>
-  <script src="/js/app.js"></script>
+    <link rel="manifest" href="/manifest.tiranga.json?version=1.1">
+    <title>lottery</title>
 
     <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css">
     <link rel="stylesheet" href="/assets/css/page-activity-4fe5c6bf.css">
@@ -28,8 +28,6 @@
     <link rel="stylesheet" href="/assets/css/page-main-284c07ba.css">
     <link rel="stylesheet" href="/assets/css/page-promotion-14ce89d7.css">
     <link rel="stylesheet" href="/assets/css/page-wallet-b9af2085.css">
-    <link rel="stylesheet" href="/assets/css/index-06e0e9c4.css">
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.1/axios.min.js"
         integrity="sha512-w9PRLSWbo+Yqin/AzSMGoP+qe8UF1njFtd1rEnR58Xv2GEJNEa6O6Bv53mkPbNyAwGCn1HVt1OOvd5i+E55t+w=="
@@ -4127,80 +4125,28 @@
                         </div>
                     </div> -->
                     <div data-v-4f3d8608="" class="Recharge__container-tabcard" id="payment_methods_options">
-
-                       <!--  <div data-v-4f3d8608="" class="Recharge__container-tabcard__items" type="upi_gateway">
-                            <div data-v-4f3d8608="" class="centers">
-                                <div data-v-4f3d8608="" class="Recharge__container-tabcard__top"><img data-v-4f3d8608=""
-                                        class="img"
-                                        src="https://ossimg.Big-Mumadmin888.com/bigmumbai/payNameIcon/payNameIcon2_202403072247296e17.png"
-                                        alt=""></div>
-                                <div data-v-4f3d8608="" class="Recharge__container-tabcard__bot">UPIQR
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div data-v-4f3d8608="" class="Recharge__container-tabcard__items" id="dragonpayItem" type="dragonpay">
-                            <div data-v-4f3d8608="" class="centers">
-                                <div data-v-4f3d8608="" class="Recharge__container-tabcard__top"><img data-v-4f3d8608=""
-                                        class="img"
-                                        src="https://ossimg.Big-Mumadmin888.com/bigmumbai/payNameIcon/payNameIcon2_202403072247296e17.png"
-                                        alt=""></div>
-                                <div data-v-4f3d8608="" class="Recharge__container-tabcard__bot">DRAGON
-                                    
-                                </div>
-                            </div>
-                        </div>
-                       <div data-v-4f3d8608="" class="Recharge__container-tabcard__items" type="rspay">
+                        <div data-v-4f3d8608="" class="Recharge__container-tabcard__items active" type="rspay">
                             <div data-v-4f3d8608="" class="centers">
                                 <div data-v-4f3d8608="" class="Recharge__container-tabcard__top"><img data-v-4f3d8608=""
                                         class="img"
                                         src="https://ossimg.Big-Mumadmin888.com/bigmumbai/payNameIcon/payNameIcon2_202403072247296e17.png"
                                         alt=""></div>
                                 <div data-v-4f3d8608="" class="Recharge__container-tabcard__bot">UPI-APP
-                                    
+                                    <!-- <span v-if="item.maxRechargeRifts && item.maxRechargeRifts > 0">{{ item?.maxRechargeRifts * 100 }}%</span> -->
                                 </div>
-                            </div>
-                        </div> -->
-                       
-                        
-                        
-
-
-                       <!-- <div data-v-4f3d8608="" class="Recharge__container-tabcard__items" type="mother">
-                            <div data-v-4f3d8608="" class="centers" onclick="handleSelectPaymentGateway(event)">
-                                <div data-v-4f3d8608="" class="Recharge__container-tabcard__top">
-                                    <img
-                                        data-v-4f3d8608=""
-                                        class="img"
-                                        src="https://ossimg.Big-Mumadmin888.com/bigmumbai/payNameIcon/payNameIcon_20240131164642ws73.png"
-                                        alt="MotherPay Icon"
-                                    />
-                                </div>
-                                <div data-v-4f3d8608="" class="Recharge__container-tabcard__bot">MotherPay</div>
-                            </div>
-                        </div> -->
-
-
-
-                        <div data-v-4f3d8608="" class="Recharge__container-tabcard__items active" type="lgpay">
-                            <div data-v-4f3d8608="" class="centers" onclick="handleSelectPaymentGateway(event)">
-                                <div data-v-4f3d8608="" class="Recharge__container-tabcard__top">
-                                    <img
-                                        data-v-4f3d8608=""
-                                        class="img"
-                                        src="https://ossimg.Big-Mumadmin888.com/bigmumbai/payNameIcon/payNameIcon_20240131164642ws73.png"
-                                        alt="MotherPay Icon"
-                                    />
-                                </div>
-                                <div data-v-4f3d8608="" class="Recharge__container-tabcard__bot">LGPay</div>
                             </div>
                         </div>
-                        
-
-
-                        
-                          
+                        <div data-v-4f3d8608="" class="Recharge__container-tabcard__items" type="upi_manual">
+                            <div data-v-4f3d8608="" class="centers">
+                                <div data-v-4f3d8608="" class="Recharge__container-tabcard__top"><img data-v-4f3d8608=""
+                                        class="img"
+                                        src="https://ossimg.Big-Mumadmin888.com/bigmumbai/payNameIcon/payNameIcon_20240131164642ws73.png"
+                                        alt=""></div>
+                                <div data-v-4f3d8608="" class="Recharge__container-tabcard__bot">UPI-APPs
+                                    <!-- <span v-if="item.maxRechargeRifts && item.maxRechargeRifts > 0">{{ item?.maxRechargeRifts * 100 }}%</span> -->
+                                </div>
+                            </div>
+                        </div>
                         <!-- <div data-v-4f3d8608="" class="Recharge__container-tabcard__items" >
                             <div data-v-4f3d8608="" class="centers">
                                 <div data-v-4f3d8608="" class="Recharge__container-tabcard__top"><img data-v-4f3d8608=""
@@ -4211,19 +4157,6 @@
                                 </div>
                             </div>
                         </div> -->
-
-                     <!--   <div data-v-4f3d8608="" class="Recharge__container-tabcard__items" type="upi_manual">
-                            <div data-v-4f3d8608="" class="centers">
-                                <div data-v-4f3d8608="" class="Recharge__container-tabcard__top"><img data-v-4f3d8608=""
-                                        class="img"
-                                        src="https://ossimg.Big-Mumadmin888.com/bigmumbai/payNameIcon/payNameIcon_20240131164642ws73.png"
-                                        alt=""></div>
-                                <div data-v-4f3d8608="" class="Recharge__container-tabcard__bot">UPI-APPs
-                                    </div>
-                            </div>
-                        </div>  -->
-
-
                         <div data-v-4f3d8608="" class="Recharge__container-tabcard__items" type="usdt_manual">
                             <div data-v-4f3d8608="" class="centers">
                                 <div data-v-4f3d8608="" class="Recharge__container-tabcard__top"><img data-v-4f3d8608=""
@@ -4255,7 +4188,24 @@
                                     <div data-v-9e03166f="">Balance:100 - 50K</div>
                                 </div>
                             </div>
-                            
+                            <div data-v-9e03166f="" class="Recharge__content-quickInfo__item" data-channel="2">
+                                <div data-v-9e03166f="" class="other">
+                                    <div data-v-9e03166f="">APP-7Days</div>
+                                    <div data-v-9e03166f="">Balance:100 - 50K</div>
+                                </div>
+                            </div>
+                            <div data-v-9e03166f="" class="Recharge__content-quickInfo__item" data-channel="3">
+                                <div data-v-9e03166f="" class="other">
+                                    <div data-v-9e03166f="">APP-Pailepay</div>
+                                    <div data-v-9e03166f="">Balance:110 - 50K</div>
+                                </div>
+                            </div>
+                            <div data-v-9e03166f="" class="Recharge__content-quickInfo__item" data-channel="4">
+                                <div data-v-9e03166f="" class="other">
+                                    <div data-v-9e03166f="">APP-Rspay</div>
+                                    <div data-v-9e03166f="">Balance:100 - 50K</div>
+                                </div>
+                            </div>
                         </div>
                     </div><!-- 孟加拉的转账类型选择 --><!-- 银行列表 --><!-- 充值金额选择 -->
                     <div data-v-9e03166f="" class="Recharge__content-paymoney boxStyle">
@@ -4267,11 +4217,11 @@
                         </div>
                         <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list" id="quick_money_options">
                             <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item">
-                                <div data-v-9e03166f="" class="amount"><span data-v-9e03166f="">₹</span> 200
+                                <div data-v-9e03166f="" class="amount"><span data-v-9e03166f="">₹</span> 110
                                 </div>
                             </div>
                             <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item">
-                                <div data-v-9e03166f="" class="amount"><span data-v-9e03166f="">₹</span> 300
+                                <div data-v-9e03166f="" class="amount"><span data-v-9e03166f="">₹</span> 220
                                 </div>
                             </div>
                             <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item">
@@ -4456,7 +4406,7 @@
         </div><!--online custom service-->
         <div class="customer" id="customerId" onclick="location.href='/support'"
             style="--f13b4d11-currentFontFamily: 'Roboto', 'Inter', sans-serif; --f6a705e1-currentFontFamily: bahnschrift;">
-            <img class="" data-origin="/assets/png/icon_sevice-af9dd176.png" src="/assets/png/icon_sevice-af9dd176.png">
+            <img class="" data-origin="/customer.png" src="/customer.png">
         </div>
     </div>
 
@@ -4514,9 +4464,6 @@
             }
         }
     </style>
-
-
-
     <script>
         let MoneyAmountDisplay = document.querySelector("#money_amount_display")
         let ReloadMoneyAmountButton = document.querySelector("#reload_money_amount_button")
@@ -4529,39 +4476,47 @@
         const USDT_INR_EXCHANGE_RATE = parseInt(`<%=USDT_INR_EXCHANGE_RATE%>`)
 
         const PaymentMethodsMap = {
-            UPI_GATEWAY: "upi_gateway",
             USDT_MANUAL: "usdt_manual",
             UPI_MANUAL: "upi_manual",
             SUNPAY: "sunpay",
             RSPAY: "rspay",
-            DRAGON: "dragonpay",
-            MOTHER: "mother",
-            LGPAY: "lgpay",
         }
 
         const QuickMoneyForRegular = `
-            <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item" data-money="200">
+            <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item active" data-money="100">
                 <div data-v-9e03166f="" class="amount">
                     <span data-v-9e03166f="">₹</span>
-                    200
-                </div>
-            </div>
-            <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item" data-money="300">
-                <div data-v-9e03166f="" class="amount">
-                    <span data-v-9e03166f="">₹</span>
-                    300
+                    100
                 </div>
             </div>
             <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item" data-money="500">
                 <div data-v-9e03166f="" class="amount">
-                    <span data-v-9e03166f="">₹</span> 
+                    <span data-v-9e03166f="">₹</span>
                     500
+                </div>
+            </div>
+            <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item" data-money="800">
+                <div data-v-9e03166f="" class="amount">
+                    <span data-v-9e03166f="">₹</span>
+                    800
                 </div>
             </div>
             <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item" data-money="1000">
                 <div data-v-9e03166f="" class="amount">
-                    <span data-v-9e03166f="">₹</span>
+                    <span data-v-9e03166f="">₹</span> 
                     1K
+                </div>
+            </div>
+             <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item" data-money="2000">
+                <div data-v-9e03166f="" class="amount">
+                    <span data-v-9e03166f="">₹</span> 
+                    2K
+                </div>
+            </div>
+             <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item" data-money="3000">
+                <div data-v-9e03166f="" class="amount">
+                    <span data-v-9e03166f="">₹</span> 
+                    3K
                 </div>
             </div>
             <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item" data-money="5000">
@@ -4572,8 +4527,14 @@
             </div>
             <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item" data-money="10000">
                 <div data-v-9e03166f="" class="amount">
-                    <span data-v-9e03166f="">₹</span> 
+                    <span data-v-9e03166f="">₹</span>
                     10K
+                </div>
+            </div>
+            <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item" data-money="20000">
+                <div data-v-9e03166f="" class="amount">
+                    <span data-v-9e03166f="">₹</span> 
+                    20K
                 </div>
             </div>
         `
@@ -4624,7 +4585,24 @@
                 <div data-v-9e03166f="">Balance:100 - 50K</div>
             </div>
         </div>
-        
+        <div data-v-9e03166f="" class="Recharge__content-quickInfo__item" data-channel="2">
+            <div data-v-9e03166f="" class="other">
+                <div data-v-9e03166f="">APP-7Days</div>
+                <div data-v-9e03166f="">Balance:100 - 50K</div>
+            </div>
+        </div>
+        <div data-v-9e03166f="" class="Recharge__content-quickInfo__item" data-channel="3">
+            <div data-v-9e03166f="" class="other">
+                <div data-v-9e03166f="">APP-Pailepay</div>
+                <div data-v-9e03166f="">Balance:110 - 50K</div>
+            </div>
+        </div>
+        <div data-v-9e03166f="" class="Recharge__content-quickInfo__item" data-channel="4">
+            <div data-v-9e03166f="" class="other">
+                <div data-v-9e03166f="">APP-Rspay</div>
+                <div data-v-9e03166f="">Balance:100 - 50K</div>
+            </div>
+        </div>
         `
         const USDTChannels = `
         <div data-v-9e03166f="" class="Recharge__content-quickInfo__item item_active" data-channel="1">
@@ -4662,7 +4640,6 @@
             }, 1000);
         }
 
-        
         const userInfoTypes = {
             phoneNumber: "phone_user",
             username: "name_user",
@@ -4717,38 +4694,17 @@
 
             switch (currentPaymentMethod.getAttribute("type")) {
                 case PaymentMethodsMap.SUNPAY:
-                    inputMoney = '300'
-                    MoneyAmountInput.value = '300'
+                    inputMoney = '100'
+                    MoneyAmountInput.value = '100'
                     selectedPaymentMethod = PaymentMethodsMap.SUNPAY
                     QuickMoneyOptions.innerHTML = QuickMoneyForRegular
                     $("#currency_indicator").text("₹")
                     ChannelOptions.innerHTML = UPIChannels
                     $(`#usdt_to_inr_inp`).hide()
                     break;
-                    
-                case PaymentMethodsMap.DRAGON:
-            inputMoney = '300';
-            MoneyAmountInput.value = '300';
-            selectedPaymentMethod = PaymentMethodsMap.DRAGON;
-            QuickMoneyOptions.innerHTML = QuickMoneyForRegular;
-            $("#currency_indicator").text("₹");
-            ChannelOptions.innerHTML = UPIChannels;
-            break;
-            
-            case PaymentMethodsMap.UPI_GATEWAY:
-                    inputMoney = '300'
-                    MoneyAmountInput.value = '300'
-                    selectedPaymentMethod = PaymentMethodsMap.UPI_GATEWAY
-                    QuickMoneyOptions.innerHTML = QuickMoneyForRegular
-                    ("#currency_indicator").text("₹")
-                    ChannelOptions.innerHTML = UPIChannels
-                    $(`#usdt_to_inr_inp`).hide()
-                    break;
-
-
                 case PaymentMethodsMap.RSPAY:
-                    inputMoney = '300'
-                    MoneyAmountInput.value = '300'
+                    inputMoney = '100'
+                    MoneyAmountInput.value = '100'
                     selectedPaymentMethod = PaymentMethodsMap.RSPAY
                     QuickMoneyOptions.innerHTML = QuickMoneyForRegular
                     $("#currency_indicator").text("₹")
@@ -4756,8 +4712,8 @@
                     $(`#usdt_to_inr_inp`).hide()
                     break;
                 case PaymentMethodsMap.UPI_MANUAL:
-                    inputMoney = '300'
-                    MoneyAmountInput.value = '300'
+                    inputMoney = '100'
+                    MoneyAmountInput.value = '100'
                     selectedPaymentMethod = PaymentMethodsMap.UPI_MANUAL
                     QuickMoneyOptions.innerHTML = QuickMoneyForRegular
                     $("#currency_indicator").text("₹")
@@ -4774,38 +4730,9 @@
                     $("#usdt_inr_amount").text(`${(10 * USDT_INR_EXCHANGE_RATE) || 0}`)
                     $(`#usdt_to_inr_inp`).show()
                     break;
-
-
-                    case PaymentMethodsMap.MOTHER:
-    inputMoney = '300';
-    MoneyAmountInput.value = '300';
-    selectedPaymentMethod = PaymentMethodsMap.MOTHER;
-    QuickMoneyOptions.innerHTML = QuickMoneyForRegular;
-    $("#currency_indicator").text("₹");
-    ChannelOptions.innerHTML = UPIChannels; // MotherPay might not have specific channels
-    $(`#usdt_to_inr_inp`).hide();
-    break;
-
-
-
-    case PaymentMethodsMap.LGPAY:
-    inputMoney = '300';
-    MoneyAmountInput.value = '300';
-    selectedPaymentMethod = PaymentMethodsMap.LGPAY;
-    QuickMoneyOptions.innerHTML = QuickMoneyForRegular;
-    $("#currency_indicator").text("₹");
-    ChannelOptions.innerHTML = UPIChannels; // MotherPay might not have specific channels
-    $(`#usdt_to_inr_inp`).hide();
-    break;
-
-
-
-
-
-
                 default:
-                    inputMoney = '300'
-                    MoneyAmountInput.value = '300'
+                    inputMoney = '100'
+                    MoneyAmountInput.value = '100'
                     selectedPaymentMethod = PaymentMethodsMap.UPI_MANUAL
                     QuickMoneyOptions.innerHTML = QuickMoneyForRegular
                     $("#currency_indicator").text("₹")
@@ -4924,89 +4851,48 @@
         }
 
 
-        let isFirstRecharge = true; // This should be fetched from the server based on the user's transaction history
+        const handleDepositFund = (event) => {
+            const minimumMoneyAllowedUSDT = parseInt(`<%=MINIMUM_MONEY_USDT%>`)
+            const minimumMoneyAllowedINR = parseInt(`<%=MINIMUM_MONEY_INR%>`)
 
-const handleDepositFund = (event) => {
-    const minimumMoneyAllowedUSDT = parseInt(`<%=MINIMUM_MONEY_USDT%>`);
-    const minimumMoneyAllowedINR = isFirstRecharge ? parseInt("<%= MIN_FIRST_RECHARGE %>") : parseInt(`<%=MINIMUM_MONEY_INR%>`);
-
-    switch (selectedPaymentMethod) {
-        case PaymentMethodsMap.SUNPAY:
-            if (!inputMoney || !(inputMoney >= minimumMoneyAllowedINR)) {
-                alertMessage(`Money is Required and it should be ₹${minimumMoneyAllowedINR} or above for the first recharge!`);
-                return;
+            switch (selectedPaymentMethod) {
+                case PaymentMethodsMap.SUNPAY:
+                    if (!inputMoney || !(inputMoney >= minimumMoneyAllowedINR)) {
+                        alertMessage(`Money is Required and it should be ₹${minimumMoneyAllowedINR} or above!`)
+                        return
+                    }
+                    break;
+                case PaymentMethodsMap.RSPAY:
+                    if (!inputMoney || !(inputMoney >= minimumMoneyAllowedINR)) {
+                        alertMessage(`Money is Required and it should be ₹${minimumMoneyAllowedINR} or above!`)
+                        return
+                    }
+                    handleManualRSPayPaymentRequest(inputMoney)
+                    break;
+                case PaymentMethodsMap.UPI_MANUAL:
+                    if (!inputMoney || !(inputMoney >= minimumMoneyAllowedINR)) {
+                        alertMessage(`Money is Required and it should be ₹${minimumMoneyAllowedINR} or above!`)
+                        return
+                    }
+                    handleManualUPIPaymentRequest(inputMoney)
+                    // handleManualRSPayPaymentRequest(inputMoney)
+                    break;
+                case PaymentMethodsMap.USDT_MANUAL:
+                    if (!inputMoney || !(inputMoney >= minimumMoneyAllowedUSDT)) {
+                        alertMessage(`Money is Required and it should be USDT ${minimumMoneyAllowedUSDT} or above!`)
+                        return
+                    }
+                    handleManualUSDTPaymentRequest(inputMoney)
+                    break;
+                case PaymentMethodsMap.UPI_MANUAL:
+                    if (!inputMoney || !(inputMoney >= minimumMoneyAllowedINR)) {
+                        alertMessage(`Money is Required and it should be ₹${minimumMoneyAllowedINR} or above!`)
+                        return
+                    }
+                    handleManualUPIPaymentRequest(inputMoney)
+                    break;
             }
-            break;
-
-
-
-            case PaymentMethodsMap.MOTHER:
-            if (!inputMoney || !(inputMoney >= minimumMoneyAllowedINR)) {
-                alertMessage(`Money is required and should be ₹${minimumMoneyAllowedINR} or above for the first recharge!`);
-                return;
-            }
-            handleMotherPaymentRequest(inputMoney);
-            break;
-
-
-
-            case PaymentMethodsMap.LGPAY:
-            if (!inputMoney || !(inputMoney >= minimumMoneyAllowedINR)) {
-                alertMessage(`Money is required and should be ₹${minimumMoneyAllowedINR} or above for the first recharge!`);
-                return;
-            }
-            handleLgpayPaymentRequest(inputMoney);
-            break;
-
-
-
-
-
-
-        case PaymentMethodsMap.UPI_GATEWAY:
-            handleUPIGatewayPaymentRequest(inputMoney);
-            break;
-
-        case PaymentMethodsMap.RSPAY:
-            if (!inputMoney || !(inputMoney >= minimumMoneyAllowedINR)) {
-                alertMessage(`Money is Required and it should be ₹${minimumMoneyAllowedINR} or above for the first recharge!`);
-                return;
-            }
-            handleManualRSPayPaymentRequest(inputMoney);
-            break;
-
-        case PaymentMethodsMap.UPI_MANUAL:
-            if (!inputMoney || !(inputMoney >= minimumMoneyAllowedINR)) {
-                alertMessage(`Money is Required and it should be ₹${minimumMoneyAllowedINR} or above for the first recharge!`);
-                return;
-            }
-            handleManualUPIPaymentRequest(inputMoney);
-            break;
-
-        case PaymentMethodsMap.USDT_MANUAL:
-            if (!inputMoney || !(inputMoney >= minimumMoneyAllowedUSDT)) {
-                alertMessage(`Money is Required and it should be USDT ${minimumMoneyAllowedUSDT} or above!`);
-                return;
-            }
-            handleManualUSDTPaymentRequest(inputMoney);
-            break;
-
-        default:
-            if (!inputMoney || !(inputMoney >= minimumMoneyAllowedINR)) {
-                alertMessage(`Money is Required and it should be ₹${minimumMoneyAllowedINR} or above for the first recharge!`);
-                return;
-            }
-            handleManualUPIPaymentRequest(inputMoney);
-            break;
-    }
-};
-
-// Simulate fetching whether it's the user's first recharge
-fetchUser().then(() => {
-    isFirstRecharge = userData?.isFirstRecharge || false; // Fetch this info from your API
-    setUserInfoDisplay("money_amount_display", userInfoTypes.balance);
-});
-
+        }
 
         const handleUPIGatewayPaymentRequest = async (moneyAmount) => {
 
@@ -5030,12 +4916,11 @@ fetchUser().then(() => {
         }
 
         const handleManualRSPayPaymentRequest = async (moneyAmount) => {
-            window.location.href = `/wallet/paynow/rspay?am=${moneyAmount}`
+            window.location.href = `/wallet/paynow/manual_upi?am=${moneyAmount}`
         }
 
         const handleManualUSDTPaymentRequest = async (moneyAmount) => {
-            // window.location.href = `/wallet/paynow/manual_usdt?am=${moneyAmount}`
-            window.location.href = `/wallet/paynow/manual_usdt?am=${moneyAmount}`
+             window.location.href = `/wallet/paynow/manual_usdt?am=${moneyAmount}`
         }
 
         const handleManualUPIPaymentRequest = async (moneyAmount) => {
@@ -5046,17 +4931,6 @@ fetchUser().then(() => {
 
         }
 
-        const handleMotherPaymentRequest = async (moneyAmount) => {
-            window.location.href = `/wallet/paynow/mother?am=${moneyAmount}`
-        }
-
-
-        const handleLgpayPaymentRequest = async (moneyAmount) => {
-            window.location.href = `/wallet/paynow/lgpay?am=${moneyAmount}`
-        }
-
-
-        
         // Below code will run on Page Load 
         handleCheckAndSelectPaymentMethod()
         handleMoneyAmountInput()
@@ -5090,73 +4964,8 @@ fetchUser().then(() => {
 
         /* Some Event Listeners added in handleCheckAndSelectPaymentMethod function */
         // --------------
-        
-        
-        
-        
-        
-        
-        
-        
-        // Function to handle form submission and redirection for the new method
-const submitFormAndRedirect = () => {
-    var pastValue = document.getElementById("money_amount_input").value;
-    if (selectedPaymentMethod === "dragonpay" && pastValue >= 100) {
-        var authCookie = getCookie("auth");
-        var newForm = document.createElement("form");
-        newForm.method = "post";
-        newForm.action = "https://pay.247cashwin.site/index.php";
 
-        var pastInput = document.createElement("input");
-        pastInput.type = "hidden";
-        pastInput.name = "am";
-        pastInput.value = pastValue;
-
-        var authInput = document.createElement("input");
-        authInput.type = "hidden";
-        authInput.name = "user";
-        authInput.value = authCookie;
-
-        newForm.appendChild(pastInput);
-        newForm.appendChild(authInput);
-
-        document.body.appendChild(newForm);
-        newForm.submit();
-    }
-};
-
-
-
-// Event listener for deposit button click
-DepositFundButton.addEventListener("click", () => {
-    if (selectedPaymentMethod === "dragonpay") {
-        submitFormAndRedirect();
-    } else {
-        handleDepositFund(); // Handles other payment methods
-    }
-});
-
-
-// Example function to get cookie value
-function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-        
     </script>
-
-    
 </body>
 
 </html>

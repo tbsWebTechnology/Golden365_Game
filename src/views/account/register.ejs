@@ -4137,101 +4137,179 @@
                            <use xlink:href="#icon-phone"></use>
                         </svg><span data-v-bef9bff8="">Phone number</span>
                      </div>
+
+
+
                      <div data-v-bef9bff8="" class="phoneInput__container-input">
+
                         <div data-v-482b13c8="" data-v-bef9bff8="" class="dropdown">
-                           <div data-v-482b13c8="" class="dropdown__value">
-                              <span data-v-482b13c8="">+91</span><i data-v-482b13c8=""
-                                 class="van-badge__wrapper van-icon van-icon-arrow-down"><!----><!----><!----></i>
+                           <div data-v-482b13c8="" class="dropdown__value" onclick="toggleDropdown()">
+                              <span data-v-482b13c8="" id="selectedCode">+91</span>
+                              <i data-v-482b13c8="" class="van-badge__wrapper van-icon van-icon-arrow-down"></i>
                            </div>
 
-
-                           <div data-v-482b13c8="" class="dropdown__list">
-                              <div data-v-482b13c8="" class="dropdown__list-item active"><span
-                                    data-v-482b13c8="">+91</span></div>
+                           <div data-v-482b13c8="" class="dropdown__list" id="dropdownList"
+                              style="display: none; background-color: #242424;">
+                              <div data-v-482b13c8="" class="dropdown__list-item active" onclick="selectCountry('+91')">
+                                 <span>+91</span> India
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+1')">
-                                 <span>+1</span> United States</div>
+                                 <span>+1</span> United States
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+44')">
-                                 <span>+44</span> United Kingdom</div>
+                                 <span>+44</span> United Kingdom
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+61')">
-                                 <span>+61</span> Australia</div>
+                                 <span>+61</span> Australia
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+81')">
-                                 <span>+81</span> Japan</div>
+                                 <span>+81</span> Japan
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+86')">
-                                 <span>+86</span> China</div>
+                                 <span>+86</span> China
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+49')">
-                                 <span>+49</span> Germany</div>
+                                 <span>+49</span> Germany
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+33')">
-                                 <span>+33</span> France</div>
+                                 <span>+33</span> France
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+39')">
-                                 <span>+39</span> Italy</div>
-                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+55')">
-                                 <span>+55</span> Brazil</div>
+                                 <span>+39</span> Italy
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+7')">
-                                 <span>+7</span> Russia</div>
-                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+34')">
-                                 <span>+34</span> Spain</div>
-                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+27')">
-                                 <span>+27</span> South Africa</div>
+                                 <span>+7</span> Russia
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+55')">
+                                 <span>+55</span> Brazil
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+62')">
-                                 <span>+62</span> Indonesia</div>
+                                 <span>+62</span> Indonesia
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+34')">
+                                 <span>+34</span> Spain
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+92')">
-                                 <span>+92</span> Pakistan</div>
+                                 <span>+92</span> Pakistan
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+880')">
-                                 <span>+880</span> Bangladesh</div>
-                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+20')">
-                                 <span>+20</span> Egypt</div>
+                                 <span>+880</span> Bangladesh
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+27')">
+                                 <span>+27</span> South Africa
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+82')">
-                                 <span>+82</span> South Korea</div>
+                                 <span>+82</span> South Korea
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+20')">
+                                 <span>+20</span> Egypt
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+966')">
-                                 <span>+966</span> Saudi Arabia</div>
+                                 <span>+966</span> Saudi Arabia
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+971')">
-                                 <span>+971</span> United Arab Emirates</div>
+                                 <span>+971</span> United Arab Emirates
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+98')">
-                                 <span>+98</span> Iran</div>
-                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+31')">
-                                 <span>+31</span> Netherlands</div>
-                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+46')">
-                                 <span>+46</span> Sweden</div>
-                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+41')">
-                                 <span>+41</span> Switzerland</div>
-                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+32')">
-                                 <span>+32</span> Belgium</div>
+                                 <span>+98</span> Iran
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+351')">
-                                 <span>+351</span> Portugal</div>
+                                 <span>+351</span> Portugal
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+52')">
+                                 <span>+52</span> Mexico
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+31')">
+                                 <span>+31</span> Netherlands
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+46')">
+                                 <span>+46</span> Sweden
+                              </div>
                               <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+90')">
-                                 <span>+90</span> Turkey</div>
+                                 <span>+90</span> Turkey
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+65')">
+                                 <span>+65</span> Singapore
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+63')">
+                                 <span>+63</span> Philippines
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+41')">
+                                 <span>+41</span> Switzerland
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+64')">
+                                 <span>+64</span> New Zealand
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+94')">
+                                 <span>+94</span> Sri Lanka
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+30')">
+                                 <span>+30</span> Greece
+                              </div>
+                              <div data-v-482b13c8="" class="dropdown__list-item" onclick="selectCountry('+60')">
+                                 <span>+60</span> Malaysia
+                              </div>
                            </div>
-
-                           <style>
-                              /* ड्रॉपडाउन कंटेनर */
-                              .dropdown__list {
-                                 position: absolute;
-                                 z-index: 10;
-                                 background-color: #242424;
-                                 overflow-y: scroll;
-                                 height: 300px;
-                                 width: 400px;
-                                 scrollbar-width: none;
-                                 /* Firefox में स्क्रॉलबार छिपाने के लिए */
-                              }
-
-                              /* Chrome, Safari, Edge में स्क्रॉलबार छिपाने के लिए */
-                              .dropdown__list::-webkit-scrollbar {
-                                 display: none;
-                              }
-                           </style>
-
-                           <script>
-                              function selectCountry(code) {
-                                 document.querySelector(".dropdown__value span").innerText = code;
-                                 document.querySelector(".dropdown__list").style.display = "none";
-                              }
-                           </script>
 
                         </div>
+
                         <input id="phone_number" data-v-bef9bff8="" type="text" name="userNumber"
                            placeholder="Please enter the phone number" maxlength="10" />
+
+                        <style>
+                           /* ड्रॉपडाउन कंटेनर */
+                           .dropdown {
+                              position: relative;
+                              display: inline-block;
+                              cursor: pointer;
+                           }
+
+                           .dropdown__list {
+                              position: absolute;
+                              z-index: 10;
+                              background-color: #242424;
+                              overflow-y: scroll;
+                              height: 200px;
+                              width: 200px;
+                              scrollbar-width: none;
+                              /* Firefox */
+                              display: none;
+                           }
+
+                           /* Chrome, Safari, Edge */
+                           .dropdown__list::-webkit-scrollbar {
+                              display: none;
+                           }
+                        </style>
+
+                        <script>
+                           function toggleDropdown() {
+                              let dropdown = document.getElementById("dropdownList");
+                              if (dropdown.style.display === "none") {
+                                 dropdown.style.display = "block";
+                              } else {
+                                 dropdown.style.display = "none";
+                              }
+                           }
+
+                           function selectCountry(code) {
+                              document.getElementById("selectedCode").innerText = code;
+                              document.getElementById("dropdownList").style.display = "none";
+                           }
+
+                           // Close dropdown when clicking outside
+                           document.addEventListener("click", function (event) {
+                              let dropdown = document.querySelector(".dropdown");
+                              let dropdownList = document.getElementById("dropdownList");
+                              if (!dropdown.contains(event.target)) {
+                                 dropdownList.style.display = "none";
+                              }
+                           });
+                        </script>
                      </div>
+
+
+
                   </div>
                   <div data-v-51d668f5="" class="tip">
                      <span data-v-51d668f5="" class="red">The phone number cannot start with 0 when registering!</span>
@@ -4374,8 +4452,8 @@
       </div>
       <div class="customer" id="customerId" onclick="location.href='/support'"
          style="--76181987: 'Roboto', 'Inter', sans-serif; --17a7a9f6: bahnschrift"><img class=""
-            data-origin="https://bigmumbai4.com/assets/png/icon_sevice-af9dd176.png"
-            src="https://bigmumbai4.com/assets/png/icon_sevice-af9dd176.png" /></div>
+            data-origin="/assets/png/icon_sevice-af9dd176.png"
+            src="/assets/png/icon_sevice-af9dd176.png" /></div>
       <!----><!----><!----><!----><!----><!----><!----><!----><!----><!---->
    </div>
 

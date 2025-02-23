@@ -8676,19 +8676,11 @@
                 </div>
                 <div data-v-50aa8bb0="" class="phoneInput__container-input">
                   <div data-v-5067ef5e="" data-v-50aa8bb0="" class="dropdown">
-                    <div
-                      data-v-5067ef5e=""
-                      class="dropdown__value"
-                      onclick="toggleDropdown()"
-                    >
-                      <span data-v-5067ef5e="" id="selectedCountryCode"
-                        >+91</span
-                      >
-                      <i
-                        data-v-5067ef5e=""
-                        class="van-badge__wrapper van-icon van-icon-arrow-down"
-                      ></i>
+                    <div   data-v-5067ef5e=""   class="dropdown__value"   onclick="toggleDropdown()" >
+                      <span data-v-5067ef5e="" id="selectedCountryCode"  >+91</span>
+                      <i  data-v-5067ef5e=""  class="van-badge__wrapper van-icon van-icon-arrow-down"></i>
                     </div>
+
                     <div
                       id="countryDropdown"
                       class="dropdown__list"
@@ -8697,9 +8689,13 @@
                         position: absolute;
                         z-index: 10;
                         background-color: #242424;
-                        overflow-y: scroll;
+                        overflow-y: auto;
                         height: 200px;
                         width: 200px;
+                        border-radius: 5px;
+                        border: 1px solid #444;
+                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                        padding: 5px;
                       "
                     >
                       <div
@@ -8884,6 +8880,7 @@
                       }
                     </style>
                   </div>
+                  
                   <input
                     maxlength="10"
                     id="phone_number_inp"
@@ -8981,7 +8978,7 @@
                 <div
                   data-v-33f88764=""
                   class="forgetcon"
-                  onclick="location.href='/forgot_reset'"
+                  onclick="location.href='/support'"
                 >
                   <div data-v-33f88764="" class="forgetbg">
                     <svg

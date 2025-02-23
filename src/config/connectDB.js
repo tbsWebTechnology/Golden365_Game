@@ -5,7 +5,7 @@ const connection = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'diuwin', 
+  database: 'diuwin',
   waitForConnections: true, // Waits for a connection before throwing an error
   connectionLimit: 10, // Limits the number of concurrent connections
   queueLimit: 0, // No queue limit

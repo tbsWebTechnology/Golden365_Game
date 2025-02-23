@@ -855,7 +855,7 @@
   width: 2.48rem;
   height: 1.17333rem;
   color: var(--text_color_L2);
-  text-align: center;
+  /* text-align: center; */
   line-height: 1.17333rem;
   background: var(--bg_color_L2);
   outline: none;
